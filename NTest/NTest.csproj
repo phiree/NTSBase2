@@ -262,7 +262,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ImageOrganizerTest\" />
     <Folder Include="TestFiles\NBizTest\MakeThumbnail\thumbnail\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

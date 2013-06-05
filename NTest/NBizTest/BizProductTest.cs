@@ -14,11 +14,11 @@ namespace NTest.NBizTest
         [Test]
         public void GetListByProvidedModelNumberSupplierNameListTest()
         { 
-            string list=@"brighthome	BP-811
-brighthome	BP-823
-brighthome	BP-852
-brighthome	BP-227
-brighthome	BP-BC32
+            string list= @"brighthome---BP-811
+brighthome---BP-823
+brighthome---BP-852
+brighthome---BP-227
+brighthome---BP-BC32
 ";
             string msg;
             IList<Product> products = bizProduct.GetListByProvidedModelNumberSupplierNameList(list, out msg);

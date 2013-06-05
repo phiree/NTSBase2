@@ -84,10 +84,16 @@ namespace NTest.NBizTest
         public void ReadProductErpEnglishFromExcel()
         {
             string filePath = Environment.CurrentDirectory + @"\TestFiles\英文——2013-3-26家具（brighthome）数据表.XLS";
-            IList<Product> products = bizProduct.ReadListFromExcel(new System.IO.FileStream(filePath, System.IO.FileMode.Open)
-                , out errMsg);
-
-            Assert.AreEqual(153, products.Count);
+            try
+            {
+                IList<Product> products = bizProduct.ReadListFromExcel(new System.IO.FileStream(filePath, System.IO.FileMode.Open)
+                    , out errMsg);
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("", ex.Message);
+                
+            }
             //Assert.AreEqual("01.001", products[0].CategoryCode);
 
         }
