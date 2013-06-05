@@ -98,10 +98,11 @@ namespace NBiz
                 }
 
                 //读取型号名称
-                string modelNumber = Path.GetFileNameWithoutExtension(imageFile.Name).Replace("＄","$");
+                string modelNumber =StringHelper.ToSBC(Path.GetFileNameWithoutExtension(imageFile.Name).Trim());
 
                 Product p = null;//=  dalProduct.GetOneByModelNumberAndSupplier(modelNumber, dirSupplier.Name);
-                IList<Product> productSupplierAndModel = ProductsOfSupplier.Where(x =>  x.ModelNumber.Trim() == modelNumber.Trim()).ToList();
+                IList<Product> productSupplierAndModel = ProductsOfSupplier.Where(
+                    x => StringHelper.ToSBC(x.ModelNumber.Replace("\n","")) == modelNumber).ToList();
                 if (productSupplierAndModel.Count == 0)
                 {
 

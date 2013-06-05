@@ -69,13 +69,8 @@ namespace NLibrary
 
         /// <returns>全角字符串</returns>
 
-        ///<remarks>
-
-        ///全角空格为12288，半角空格为32
-
-        ///其他字符半角(33-126)与全角(65281-65374)的对应关系是：均相差65248
-
-        ///</remarks>
+       ///<remarks>
+       ///</remarks>
 
         public  static string ToSBC(string input)
 
