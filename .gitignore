@@ -1,0 +1,9 @@
+config/
+bin
+Bin
+obj
+*.suo
+packages/
+PrecompiledWeb/
+*.csproj.user
+*Thumbs.db
