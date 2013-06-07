@@ -104,10 +104,6 @@ namespace NLibrary
 
         }
 
-
-
-
-
         /// <summary> 转半角的函数(DBC case) </summary>
 
         /// <param name="input">任意字符串</param>
