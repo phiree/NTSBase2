@@ -34,7 +34,7 @@ namespace NTest
                                                   .With(x => x.Name = "佛山市南海承标金属制品有限公司").Build());
 
         
-            
+
             DateTime beginInvockTest = DateTime.Now;
 
 
@@ -63,6 +63,17 @@ namespace NTest
           // NModel.Product p= bizProduct.GetOne(new Guid("92832d2d-b28d-422c-89e5-a1aa01216ec5"));
           // Assert.AreEqual(4, p.ProductImageUrls.Count);
             
+        }
+        public void ImportTest_supplierNameHasSpace()
+        {
+            NBiz.ProductImageImporter oer = new NBiz.ProductImageImporter();
+            string msg;
+            var list = oer.ImportImage(Environment.CurrentDirectory + "\\TestFiles\\ProductImages2\\"
+               , @"d:\original\", out msg);
+
+            Console.Write(msg);
+            Assert.AreEqual(1, list.Count);
+
         }
     }
 }
