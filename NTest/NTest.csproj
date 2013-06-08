@@ -73,7 +73,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="NBizTest\ProductImageImportorTest.cs" />
-    <Compile Include="NBizTest\BizProductTagTest.cs" />
     <Compile Include="NBizTest\ImportFromExcelTest.cs" />
     <Compile Include="NBizTest\MakeThumbnailTest.cs" />
     <Compile Include="NBizTest\SupplierTest.cs" />
