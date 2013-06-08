@@ -102,12 +102,10 @@ namespace NModel
             this.CategoryCode = newProduct.CategoryCode;
             this.LastUpdateTime = DateTime.Now;
           this.ImageState = newProduct.ImageState;
-            this.ImportOperationLog = newProduct.ImportOperationLog;
             this.Memo = newProduct.Memo;
             this.ModelNumber = newProduct.ModelNumber;
             this.MoneyType = newProduct.MoneyType;
             this.Name = newProduct.Name;
-            this.NTSCode = newProduct.NTSCode;
             this.OrderAmountMin = newProduct.OrderAmountMin;
             this.PlaceOfDelivery = newProduct.PlaceOfDelivery;
             this.PlaceOfOrigin = newProduct.PlaceOfOrigin;
@@ -115,7 +113,6 @@ namespace NModel
             this.PriceOfFactory = newProduct.PriceOfFactory;
             this.PriceValidPeriod = newProduct.PriceValidPeriod;
             this.ProductDescription = newProduct.ProductDescription;
-            this.ProductImageUrls = newProduct.ProductImageUrls;
             this.ProductionCycle = newProduct.ProductionCycle;
             this.ProductParameters = newProduct.ProductParameters;
             this.State = newProduct.State;

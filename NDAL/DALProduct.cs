@@ -8,20 +8,24 @@ namespace NDAL
 {
     public class DALProduct : DalBase<NModel.Product>
     {
-
+        public string SaveMsg { get; private set; }
         public override void Save(NModel.Product o)
         {
-            var q = session.QueryOver<Product>().Where(x => x.SupplierName == o.SupplierCode)
+            
+            var q = session.QueryOver<Product>().Where(x => x.SupplierCode == o.SupplierCode)
                 .And(x => x.ModelNumber == o.ModelNumber)
-
                 .List();
 
             if (q.Count > 0)
             {      //如果只有一个 则 更新
                 if (q.Count == 1)
                 {
-                    o.CopyFrom(q[0]);
-                    base.Update(o);
+                    Product existedOne = q[0];
+                    SaveMsg = string.Format("存在同厂同型产品,已更新.名称:{0};型号:{1};供应商:{2}",q[0].Name,q[0].ModelNumber,q[0].SupplierName);
+                    existedOne.CopyFrom(o);
+                    existedOne.NTSCode = o.NTSCode;
+                    base.Update(existedOne);
+                    o = existedOne;
                 }
                 else
                 {
@@ -132,8 +136,10 @@ namespace NDAL
             //    query += " and p.SupplierCode in (" + whereSupplier + ")";
 
             //}
-
-            return GetList(query, pageIndex, pageSize, out totalRecord);
+            string orderColumns = " p.LastUpdateTime ";
+            bool desc = true;
+                
+            return GetList(query,orderColumns,desc,  pageIndex, pageSize, out totalRecord);
         }
 
         /// <summary>
@@ -162,5 +168,23 @@ namespace NDAL
             return GetList(queryover);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="beginDate">哪一天之后导入的.</param>
+        /// <returns></returns>
+        public IList<Product> GetProducts_English(DateTime beginDate)
+        {
+            string query = "select p from Product p where p.Language='en' and lastupdatetime>'" + beginDate+ "'";
+            int totalRecord;
+            return GetList(query,"NTSCode",false,0,99999,out totalRecord );
+        }
+
+        public IList<Product> GetProductsNoImages()
+        {
+            string query = "select p from Product p where  p.ProductImageUrls.size=0";
+            int totalRecord;
+            return GetList(query, "SupplierCode", false, 0, 99999, out totalRecord);
+        }
     }
 }
