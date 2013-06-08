@@ -49,7 +49,7 @@ namespace NBiz
         {
             Dictionary<string, string> columnsEasyToSpellWrong = new Dictionary<string, string>();
             columnsEasyToSpellWrong.Add("生产周期", ".*生产周期.*");
-            columnsEasyToSpellWrong.Add("最小起订量", ".*最小起订量.*");
+            columnsEasyToSpellWrong.Add("最小起订量", ".*最小起订量.*|最小起定量");
             columnsEasyToSpellWrong.Add("规格参数", ".*规格.*参数.*");
             columnsEasyToSpellWrong.Add("产地", "产地|开票地");
             //英文列名匹配
