@@ -3,6 +3,11 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
+<asp:Content ContentPlaceHolderID="pageDesc" runat="server">
+将Excel表单导入系统.支持两种格式: <a href="/Content/files/产品导入Excel示例_报价单.xls">报价单</a> 和 
+<a href="/Content/files/产品导入Excel示例_ERP导入格式表.xls">
+   ERP数据表</a>
+</asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <h3>选择产品报价单:</h3>
     <p>
