@@ -1,0 +1,8 @@
+﻿2013.06.07  这是一个阴天. 我打开mysql workbench,准备清除本地数据库,做集成测试.
+           熟练地敲下了下面两句代码,优雅地点击了 执行 .
+		   当 rows affected 的数字出现在output窗口时,我猛地抬头,看见当前所在的服务器是
+		   火辣辣的六个字母: S   E  R  V  E   R. 应该是 L O C A L 啊, 我草我草 我草草草
+
+
+	  11:07:30	delete from productimageurls	10573 row(s) affected	0.125 sec
+	  11:07:33	delete from product	14930 row(s) affected	0.313 sec
