@@ -46,7 +46,7 @@ namespace NDAL
             supplierName = supplierName.Trim();
             NHibernate.IQueryOver<NModel.Supplier> iqueryOver = session.QueryOver<NModel.Supplier>()
                 .Where(x => (supplierName!=string.Empty)&&(x.EnglishName==supplierName|| x.Name == supplierName));
-            string query =string.Format( "select s  from Supplier s where s.EnglishName.trim()='{0}' or s.Name.trim()='{0}'",supplierName);
+            string query =string.Format( "select s  from Supplier s where trim(s.EnglishName)='{0}' or trim(s.Name)='{0}'",supplierName);
             //GetOneByQuery(query);
             return GetOneByQuery(query);
         }
