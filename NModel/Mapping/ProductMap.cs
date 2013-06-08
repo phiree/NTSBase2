@@ -12,7 +12,6 @@ namespace NModel.Mapping
             Id(x=>x.Id);
             Map(x => x.CategoryCode);
             Map(x => x.CreateTime);
-            Map(x => x.EnglishName);
             Map(x => x.LastUpdateTime);
             Map(x => x.Memo);
             Map(x => x.ModelNumber).UniqueKey("UN_Product");
@@ -35,6 +34,7 @@ namespace NModel.Mapping
             Map(x => x.PriceValidPeriod);
             Map(x => x.MoneyType);
             Map(x => x.ImageState);
+            Map(x => x.LanguageType).CustomType<int>().UniqueKey("UN_Product");
             References<ImportOperationLog>(x => x.ImportOperationLog);
         }
     }

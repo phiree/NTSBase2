@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NModel.Enums;
+using System.IO;
 using System.ComponentModel;
 namespace NModel
 {
@@ -15,12 +16,9 @@ namespace NModel
             CreateTime = LastUpdateTime = DateTime.Now;
             ProductImageUrls = new List<string>();
         }
-        private IList<MultiLanguageItem> ValuesOfMultiLanguage { get; set; }
-
 
         public virtual Guid Id { get; set; }
         public virtual string NTSCode { get; set; }
-        public virtual string EnglishName { get; set; }
         /// <summary>
         /// 供应商代码
         /// </summary>
@@ -85,23 +83,11 @@ namespace NModel
 
         public virtual IList<string> ProductImageUrls { get; set; }
 
+        public virtual LanguageType LanguageType { get; set; }
         /// <summary>
         /// 导入日志
         /// </summary>
         public virtual ImportOperationLog ImportOperationLog { get; set; }
-        public virtual string GetName(LanguageType lt)
-        {
-            IList<MultiLanguageItem> items = ValuesOfMultiLanguage.Where(x => x.ClassType == ClassType.Product
-                 && x.ItemId == this.Id.ToString() && x.Language == lt && x.PropertyType == PropertyType.ProductName).ToList();
-            if (items.Count == 1)
-            {
-                return items[0].ItemValue;
-            }
-            else
-            {
-                return string.Empty;
-            }
-        }
         /// <summary>
         /// 为图片生成对应名称
         /// </summary>
@@ -115,8 +101,7 @@ namespace NModel
         {
             this.CategoryCode = newProduct.CategoryCode;
             this.LastUpdateTime = DateTime.Now;
-            this.EnglishName = newProduct.EnglishName;
-            this.ImageState = newProduct.ImageState;
+          this.ImageState = newProduct.ImageState;
             this.ImportOperationLog = newProduct.ImportOperationLog;
             this.Memo = newProduct.Memo;
             this.ModelNumber = newProduct.ModelNumber;
@@ -138,8 +123,48 @@ namespace NModel
             this.SupplierName = newProduct.SupplierName;
             this.TaxRate = newProduct.TaxRate;
             this.Unit = newProduct.Unit;
-            this.ValuesOfMultiLanguage = newProduct.ValuesOfMultiLanguage;
             
+        }
+
+        /// <summary>
+        /// 为导出的图片生成路径(目前只支持一张图片)
+        /// </summary>
+        /// <param name="rootPath"></param>
+        /// <param name="imageOutPutStratage"></param>
+        /// <returns> 
+        ///  key:原图片名称
+        ///  value: 每一级文件夹名称.+ 目标文件名称
+        /// </returns>
+        public virtual Stack<string> BuildImageOutputName(Enums.ImageOutPutStratage imageOutPutStratage)
+        {
+            Stack<string> imagesToExport = new Stack<string>();
+            string imageUrl = string.Empty;
+            int imageCount = ProductImageUrls.Count;
+            if (imageCount == 0) return imagesToExport;
+
+            imageUrl = ProductImageUrls[0];
+
+            string imageExtension = Path.GetExtension(imageUrl);
+
+            string targetFileName = string.Empty;
+            switch (imageOutPutStratage)
+            {
+                case ImageOutPutStratage.Category_NTsCode:
+                    string nameee = NTSCode;
+                    if (string.IsNullOrEmpty(NTSCode))
+                        nameee = Guid.NewGuid().ToString();
+                    imagesToExport.Push(nameee + imageExtension);//文件名称
+                    imagesToExport.Push(CategoryCode);
+
+                    break;
+                case ImageOutPutStratage.SupplierName_ModelNumber:
+                    imagesToExport.Push(ModelNumber + imageExtension);//文件名称
+                    imagesToExport.Push(SupplierName);
+                    break;
+                default: throw new Exception("No Such Stratage");
+            }
+            return imagesToExport;
+
         }
     }
 
