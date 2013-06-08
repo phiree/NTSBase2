@@ -44,7 +44,7 @@ namespace NBiz
         public override IList<Category> SaveList(IList<Category> list, out string errMsg)
         {
             errMsg = string.Empty;
-            base.SaveList(list);
+            DalCategory.SaveList(list);
             return list;
             
         }
