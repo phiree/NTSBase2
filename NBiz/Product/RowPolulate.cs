@@ -46,8 +46,10 @@ namespace NBiz
                 throw new Exception(errmsg);
             }
             p.CategoryCode = categoryCode;
-            //产品型号:
+            //产品型号:特殊符号用美元符号代替
             string modelNumber = row["产品型号"].ToString();
+            modelNumber = StringHelper.ReplaceInvalidChaInFileName(modelNumber,"$");
+
             p.ModelNumber = modelNumber;
             p.ProductParameters = row["规格参数"].ToString();
             p.Unit = row["单位"].ToString();
@@ -118,11 +120,17 @@ namespace NBiz
 
        public Product PopulateFromRow(DataRow row)
        {
-           Product p = new Product();
+           return PopulateFromRowWithLanguage(row, NModel.Enums.LanguageType.Chinese);
+       }
+
+
+       public Product PopulateFromRowWithLanguage(DataRow row, NModel.Enums.LanguageType lang)
+       {
+             Product p = new Product();
            p.PlaceOfOrigin = row["备注"].ToString();
           // p.PlaceOfDelivery = row["交货地"].ToString();
            p.Name = row["名称"].ToString();
-
+           p.LanguageType = lang;
            string categoryCode = StringHelper.ReplaceSpace(row["代码"].ToString());
 
            if (string.IsNullOrEmpty(p.PlaceOfOrigin) && string.IsNullOrEmpty(p.Name)
@@ -198,12 +206,6 @@ namespace NBiz
            }
            p.OrderAmountMin = 最小订货量;
            return p;
-       }
-
-
-       public Product PopulateFromRowWithLanguage(DataRow row, NModel.Enums.LanguageType lang)
-       {
-           throw new NotImplementedException();
        }
    }
    public interface IRowPopulate
