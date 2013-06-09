@@ -201,7 +201,7 @@ namespace NBiz
             {
                 DateTime beginCheckDbExists = DateTime.Now;
               
-                validItems = BizProduct.CheckDB(
+                validItems = BizProduct.CheckSupplierExisted(
                     products, out productsExistedInDB);
                 Console.WriteLine("Time Cost CheckDB:" + (DateTime.Now - beginCheckDbExists).TotalSeconds);
                 sbMsg.AppendLine(productsExistedInDB.Count + ":已存在");

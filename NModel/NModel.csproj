@@ -62,8 +62,12 @@
     <Compile Include="Mapping\ProductTagMap.cs" />
     <Compile Include="Mapping\ProductTag_ProductMap.cs" />
     <Compile Include="Mapping\NTSMemberMap.cs" />
+    <Compile Include="Mapping\ProductLanguageMap.cs" />
+    <Compile Include="Mapping\ProductImageMap.cs" />
     <Compile Include="MultiLanguageItem.cs" />
     <Compile Include="NTSMember.cs" />
+    <Compile Include="ProductImage.cs" />
+    <Compile Include="ProductLanguage.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="ProductTag.cs" />
     <Compile Include="ProductTag_Product.cs" />
@@ -76,6 +80,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Enums\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NLibrary\NLibrary.csproj">
+      <Project>{B63398DF-8B0D-4BF6-AD17-71003F9BFC13}</Project>
+      <Name>NLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

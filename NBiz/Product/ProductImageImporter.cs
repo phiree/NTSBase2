@@ -120,7 +120,7 @@ namespace NBiz
                 }
                 //拷贝图片 到 对应文件夹
                 p = productSupplierAndModel[0];
-                string newImageName = (p.Name + p.SupplierName + modelNumber).GetHashCode().ToString() + imageFile.Extension;
+                string newImageName = p.BuildImageName( imageFile.Extension);
                 System.IO.File.Copy(imageFile.FullName, targetPath + "\\" + newImageName, true);
 
                 if (!p.ProductImageUrls.Contains(newImageName))

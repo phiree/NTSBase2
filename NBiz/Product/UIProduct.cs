@@ -9,69 +9,22 @@ using System.Data;
 namespace NBiz
 {
     /// <summary>
-    /// 产品业务类.
+    /// 专为ui调用
     /// </summary>
-    public class BizProduct : BLLBase<NModel.Product>
+    public class UIProduct
     {
-        //NTS编码维护类.
-        FormatSerialNoUnit serialNoUnit;
-        public FormatSerialNoUnit SerialNoUnit
-        {
-            get
-            {
-                if (serialNoUnit == null)
-                {
-                    serialNoUnit = new FormatSerialNoUnit(new DALFormatSerialNo());
-                }
-                return serialNoUnit;
-            }
-        }
+        BizProduct bizProduct = new BizProduct();
 
-        DALSupplier _dalSupplier;
-        public DALSupplier DalSupplier
-        {
-            get
-            {
-                if (_dalSupplier == null)
-                {
-                    _dalSupplier = new DALSupplier();
-                }
-                return _dalSupplier;
-
-            }
-            set
-            {
-                _dalSupplier = value;
-            }
-        }
-        DALProduct dalProduct = new DALProduct();
-        public DALProduct DalProduct
-        {
-            get
-            {
-                if (dalProduct == null) dalProduct = new DALProduct();
-                return dalProduct;
-            }
-            set
-            {
-                dalProduct = value;
-            }
-        }
-
-        public string ImportMsg { get; set; }
-        /// <summary> 导入excel产品列表
-
-        /// </summary>
-        /// <param name="stream">excel流</param>
-        /// <param name="errMsg"></param>
         public void ImportProductFromExcel(System.IO.Stream stream, out string errMsg)
         {
-            IDataTableConverter<Product> productReader = new ProductDataTableConverter();
-            ImportToDatabaseFromExcel<Product> importor = new ImportToDatabaseFromExcel<Product>(productReader, this);
+            IDataTableConverter<Product> productReader
+                = new ProductDataTableConverter();
+            ImportToDatabaseFromExcel<Product> importor 
+                = new ImportToDatabaseFromExcel<Product>(productReader, bizProduct);
             importor.ImportXslData(stream, out  errMsg);
         }
-        /// <summary> 从excel文件中读取产品信息
-        ///
+        /// <summary>
+        /// 从excel文件中读取产品信息
         /// </summary>
         /// <param name="stream"></param>
         /// <param name="errMsg"></param>
@@ -107,7 +60,7 @@ namespace NBiz
             StringBuilder sbMsg = new StringBuilder();
             sbMsg.AppendLine("-----开始保存.产品数量:" + list.Count + "<br/>");
             IList<Product> existedItems;
-            var listToBeSaved = CheckSupplierExisted(list, out existedItems);
+            var listToBeSaved = CheckDB(list, out existedItems);
             //排除已有产品 之前是在dal层实现,应该转移到bll层, 因为nts编码生成也与此相关.
             //已经提取出来的supplier直接获取 不再从数据源提取
             sbMsg.AppendLine("---------可导入/待导入数量:" + listToBeSaved.Count + "/" + list.Count + "<br/>");
@@ -128,6 +81,8 @@ namespace NBiz
             return listToBeSaved;
 
         }
+
+
         /// <summary>
         ///   该产品是否已经存在,更新供应商Code
         /// </summary>
@@ -135,24 +90,24 @@ namespace NBiz
         /// <param name="invalidItems">不合格数据</param>
         /// <param name="outErrMsg">错误信息</param>
         /// <returns>合格数据,可以直接导入</returns>
-        public IList<Product> CheckSupplierExisted(IList<Product> list, out IList<Product> existedItems)
+        public IList<Product> CheckDB(IList<Product> list, out IList<Product> existedItems)
         {
             existedItems = new List<Product>();
             IList<Product> ValidItems = new List<Product>();//没有重复的产品
 
             foreach (Product o in list)
             {
-                Supplier s = DalSupplier.GetOneByCode(o.SupplierCode);
+                Supplier s = DalSupplier.GetOneByName(o.SupplierName);
                 if (s == null)
                 {
-                    throw new Exception("供应商不存在:" + o.SupplierCode + ",请检查Excel的供应商列.");
+                    throw new Exception("供应商不存在:" + o.SupplierName + ",请检查Excel的供应商列.");
                 }
+                o.SupplierCode = s.Code;
                 var p = DalProduct.GetOneByModelNumberAndSupplierCode(o.ModelNumber, s.Code);
                 if (p != null)
                 {
-                    p.UpdateByNewVersion(o);
-                    ValidItems.Add(p);
                     existedItems.Add(o);
+                    ValidItems.Add(p);
                     continue;
                 }
 
@@ -160,6 +115,7 @@ namespace NBiz
             }
             return ValidItems;
         }
+
         public IList<Product> Search(string supplierName, string model, bool? hasPhoto,
             string name, string categorycode,
             string ntsCode,
@@ -216,12 +172,11 @@ namespace NBiz
         {
             return DalProduct.GetProducts_English(begindate);
         }
+
         public IList<Product> GetProductsNoImages()
         {
             return DalProduct.GetProductsNoImages();
         }
-
-
 
 
     }

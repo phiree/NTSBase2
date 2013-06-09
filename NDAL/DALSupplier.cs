@@ -58,6 +58,13 @@ namespace NDAL
                           ||(!string.IsNullOrEmpty(englishName)&&x.EnglishName==englishName)  );
             return GetOneByQuery(iqueryOver);
         }
+        public NModel.Supplier GetOneByCode(string supplierCode)
+        {
+            NHibernate.IQueryOver<NModel.Supplier> iqueryOver =
+                session.QueryOver<NModel.Supplier>()
+                .Where(x => (!string.IsNullOrEmpty(supplierCode) && x.Code == supplierCode));
+            return GetOneByQuery(iqueryOver);
+        }
 
         public IList<NModel.Supplier> Search(string supplierName, int pageIndex, int pageSize, out int recordCount)
         {

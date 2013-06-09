@@ -84,7 +84,7 @@ namespace NBiz
                 }
                 //2 检查数据是否已经导入  && 更新产品的供应商信息
                 IList<Product> productsExisted;
-                ProductsPassedDBCheck = bizProduct.CheckDB(ProductsHasImage, out productsExisted);
+                ProductsPassedDBCheck = bizProduct.CheckSupplierExisted(ProductsHasImage, out productsExisted);
                 ProductsExistedInDB = productsExisted;
                 foreach (Product productExist in ProductsExistedInDB)
                 {

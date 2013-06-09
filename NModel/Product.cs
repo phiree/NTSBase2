@@ -14,15 +14,11 @@ namespace NModel
             State = ProductState.Normal;
             Id = Guid.NewGuid();
             CreateTime = LastUpdateTime = DateTime.Now;
-            ProductImageUrls = new List<string>();
+            ProductImageList = new List<ProductImage>();
+            ProductMultiLangues = new List<ProductLanguage>();
         }
-
         public virtual Guid Id { get; set; }
         public virtual string NTSCode { get; set; }
-        /// <summary>
-        /// 供应商代码
-        /// </summary>
-        /// 
         public virtual string SupplierCode { get; set; }
         [Description("图片")]
         public virtual string ImageState { get; set; }
@@ -30,25 +26,11 @@ namespace NModel
         public virtual string PriceDate { get; set; }
         [Description("报价有效期")]
         public virtual string PriceValidPeriod { get; set; }
-
-        [Description("供应商名称")]
-        public virtual string SupplierName { get; set; }
         [Description("产品型号")]
         public virtual string ModelNumber { get; set; }
-        [Description("产品名称")]
-        public virtual string Name { get; set; }
-        [Description("单位")]
-        public virtual string Unit { get; set; }
+
         [Description("分类编码")]
         public virtual string CategoryCode { get; set; }
-        [Description("规格参数")]
-        public virtual string ProductParameters { get; set; }
-
-        [Description("产地")]
-        public virtual string PlaceOfOrigin { get; set; }
-        [Description("交货地")]
-        public virtual string PlaceOfDelivery { get; set; }
-
 
         [Description("出厂价")]
         public virtual string PriceOfFactory { get; set; }
@@ -60,11 +42,6 @@ namespace NModel
         public virtual decimal OrderAmountMin { get; set; }
         [Description("生产周期")]
         public virtual decimal ProductionCycle { get; set; }
-
-        [Description("产品描述")]
-        public virtual string ProductDescription { get; set; }
-        [Description("备注")]
-        public virtual string Memo { get; set; }
         /// <summary>
         /// 产品状态
         /// </summary>
@@ -80,66 +57,30 @@ namespace NModel
         /// <summary>
         /// 币种
         /// </summary>
-
-        public virtual IList<string> ProductImageUrls { get; set; }
-
-        public virtual LanguageType LanguageType { get; set; }
+        public virtual IList<ProductImage> ProductImageList{ get; set; }
         /// <summary>
         /// 导入日志
         /// </summary>
         public virtual ImportOperationLog ImportOperationLog { get; set; }
-        /// <summary>
-        /// 为图片生成对应名称
-        /// </summary>
-        /// <param name="extensionWithDot">后缀名(带.)</param>
-        /// <returns></returns>
-        public virtual string BuildImageNameNoExtension(string extensionWithDot)
+
+        public IList<ProductLanguage> ProductMultiLangues { get; set; }
+        //产品图片的名称.
+        public virtual string BuildImageName(string extensionWithDot)
         {
-            return (Name + SupplierName + ModelNumber).GetHashCode().ToString()+extensionWithDot;
-        }
-        public virtual void CopyFrom(Product newProduct)
-        {
-            this.CategoryCode = newProduct.CategoryCode;
-            this.LastUpdateTime = DateTime.Now;
-          this.ImageState = newProduct.ImageState;
-            this.Memo = newProduct.Memo;
-            this.ModelNumber = newProduct.ModelNumber;
-            this.MoneyType = newProduct.MoneyType;
-            this.Name = newProduct.Name;
-            this.OrderAmountMin = newProduct.OrderAmountMin;
-            this.PlaceOfDelivery = newProduct.PlaceOfDelivery;
-            this.PlaceOfOrigin = newProduct.PlaceOfOrigin;
-            this.PriceDate = newProduct.PriceDate;
-            this.PriceOfFactory = newProduct.PriceOfFactory;
-            this.PriceValidPeriod = newProduct.PriceValidPeriod;
-            this.ProductDescription = newProduct.ProductDescription;
-            this.ProductionCycle = newProduct.ProductionCycle;
-            this.ProductParameters = newProduct.ProductParameters;
-            this.State = newProduct.State;
-            this.SupplierCode = newProduct.SupplierCode;
-            this.SupplierName = newProduct.SupplierName;
-            this.TaxRate = newProduct.TaxRate;
-            this.Unit = newProduct.Unit;
-            
+            string imageName = ModelNumber + "__" + SupplierCode;
+            imageName = NLibrary.StringHelper.ReplaceInvalidChaInFileName(imageName, "$");
+            imageName = imageName + "__" + Guid.NewGuid().ToString();
+            return imageName + extensionWithDot;
         }
 
-        /// <summary>
-        /// 为导出的图片生成路径(目前只支持一张图片)
-        /// </summary>
-        /// <param name="rootPath"></param>
-        /// <param name="imageOutPutStratage"></param>
-        /// <returns> 
-        ///  key:原图片名称
-        ///  value: 每一级文件夹名称.+ 目标文件名称
-        /// </returns>
         public virtual Stack<string> BuildImageOutputName(Enums.ImageOutPutStratage imageOutPutStratage)
         {
             Stack<string> imagesToExport = new Stack<string>();
             string imageUrl = string.Empty;
-            int imageCount = ProductImageUrls.Count;
+            int imageCount = this.ProductImageList.Count;
             if (imageCount == 0) return imagesToExport;
 
-            imageUrl = ProductImageUrls[0];
+            imageUrl = this.ProductImageList[0].ImageName;
 
             string imageExtension = Path.GetExtension(imageUrl);
 
@@ -147,22 +88,60 @@ namespace NModel
             switch (imageOutPutStratage)
             {
                 case ImageOutPutStratage.Category_NTsCode:
-                    string nameee = NTSCode;
-                    if (string.IsNullOrEmpty(NTSCode))
+                    string nameee = this.NTSCode;
+                    if (string.IsNullOrEmpty(nameee))
                         nameee = Guid.NewGuid().ToString();
                     imagesToExport.Push(nameee + imageExtension);//文件名称
-                    imagesToExport.Push(CategoryCode);
+                    imagesToExport.Push(this.CategoryCode);
 
                     break;
                 case ImageOutPutStratage.SupplierName_ModelNumber:
-                    imagesToExport.Push(ModelNumber + imageExtension);//文件名称
-                    imagesToExport.Push(SupplierName);
+                    imagesToExport.Push(this.ModelNumber + imageExtension);//文件名称
+                    imagesToExport.Push(this.SupplierCode);
                     break;
                 default: throw new Exception("No Such Stratage");
             }
             return imagesToExport;
 
         }
-    }
 
+        /// <summary>
+        /// 更新现有product. 
+        /// 基础资料和 多语言
+        /// </summary>
+        /// <param name="newPro"></param>
+        public virtual void UpdateByNewVersion(Product newPro)
+        { 
+             //基础资料
+            //如果这两者变了,那需要重新生成NTSCode
+            if (newPro.CategoryCode != this.CategoryCode)
+            {
+                this.CategoryCode = newPro.CategoryCode;
+                this.NTSCode = null; }
+            if( newPro.SupplierCode != this.SupplierCode)
+            {
+                this.SupplierCode = newPro.SupplierCode;
+                this.NTSCode = null;
+            }
+            this.ImageState = newPro.ImageState;
+            this.PriceDate = newPro.PriceDate;
+            this.PriceOfFactory = newPro.PriceOfFactory;
+            this.PriceValidPeriod = newPro.PriceValidPeriod;
+            this.ProductionCycle = newPro.ProductionCycle;
+            this.TaxRate = newPro.TaxRate;
+            foreach (ProductLanguage piNew in newPro.ProductMultiLangues)
+            {   
+                //如果该语言不存在 则增加
+
+                if (ProductMultiLangues.Where(x => x.Language == piNew.Language).ToList().Count == 0)
+                {
+                    ProductMultiLangues.Add(piNew);
+                }
+                else //更新
+                {
+                    piNew.UpdateByNewVersion(newPro.ProductMultiLangues[0]);
+                }
+            }
+        }
+    }
 }

@@ -11,9 +11,9 @@ using NLibrary;
 namespace NBiz
 {
     /// <summary>
-    /// 应该是 DataTable转成 IList<T>
+    /// DataTable转换成IList<T>
     /// </summary>
-   
+
     public class ProductDataTableConverter : IDataTableConverter<Product>
     {
         //如果出错,则抛出异常.
@@ -29,17 +29,18 @@ namespace NBiz
             string supplierName = string.Empty;
             foreach (DataRow row in dt.Rows)
             {
-               
-                    Product p = irp.PopulateFromRow(row);
-                    supplierName = p.SupplierName;
-                    if (productList.Where(x => x.SupplierName == p.SupplierName&&p.ModelNumber==x.ModelNumber).ToArray().Length > 0)
-                    {
-                        throw new Exception("错误: 供应商名称 和 型号均相同:"+p.SupplierName+","+p.ModelNumber);
-                    }
-                    productList.Add(p);
-               
+
+                Product p = irp.PopulateFromRow(row);
+                IList<Product> listp = productList.Where(x => x.SupplierCode == p.SupplierCode && x.ModelNumber == p.ModelNumber).ToArray();
+                if (listp.Count > 0)
+                {
+                    //读取Excel时不允许重复
+                    throw new Exception("错误: 有" + listp.Count + "条 供应商 和 型号相同的数据" + p.SupplierCode + "," + p.ModelNumber);
+                }
+                productList.Add(p);
+
             }
-          
+
             return productList;
         }
         /// <summary>

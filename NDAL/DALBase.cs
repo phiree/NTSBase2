@@ -19,20 +19,21 @@ namespace NDAL
         }
         public virtual void Save(T o)
         {
-           session.Save(o);
+            session.Save(o);
             session.Flush();
         }
-        
+
         public virtual void SaveList(IList<T> list)
         {
-            
-            foreach (T t in list)
+            using (var trans = session.BeginTransaction())
             {
 
-                Save(t);
-                
+                foreach (T t in list)
+                {
+                    SaveOrUpdate(t);
+                }
+                trans.Commit();
             }
-           
         }
         public virtual void Update(T o)
         {
@@ -75,7 +76,7 @@ namespace NDAL
 
                 NLibrary.NLogger.Logger.Error(errmsg);
                 return listT[0];
-               // throw new Exception(errmsg);
+                // throw new Exception(errmsg);
             }
         }
 
@@ -109,20 +110,20 @@ namespace NDAL
         /// <param name="pageSize"></param>
         /// <param name="totalRecords"></param>
         /// <returns></returns>
-        public IList<T> GetList(string query,string orderColumns,bool orderDesc, int pageIndex, int pageSize, out int totalRecords)
+        public IList<T> GetList(string query, string orderColumns, bool orderDesc, int pageIndex, int pageSize, out int totalRecords)
         {
             string strOrder = string.Empty;
             if (!string.IsNullOrEmpty(orderColumns))
             {
-                strOrder =  " order by " + orderColumns;
+                strOrder = " order by " + orderColumns;
                 if (orderDesc)
                     strOrder += " desc ";
             }
-            IQuery qry = session.CreateQuery(query+strOrder);
+            IQuery qry = session.CreateQuery(query + strOrder);
             string queryCount = NLibrary.StringHelper.BuildCountQuery(query);
             IQuery qryCount = session.CreateQuery(queryCount);
             totalRecords = (int)qryCount.UniqueResult<long>();
-            
+
             var returnList = qry.SetFirstResult((pageIndex - 1) * pageSize).SetMaxResults(pageSize).Future<T>().ToList();
             return returnList;
         }

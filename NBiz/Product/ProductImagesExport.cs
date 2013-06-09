@@ -22,7 +22,7 @@ namespace NBiz
             foreach (Product p in products)
             {
              
-                if (p.ProductImageUrls.Count == 0)
+                if (p.ProductImageList.Count == 0)
                 {
                     NLogger.Logger.Debug(string.Format( "skip,({0})对应图片数量为0",p.NTSCode));
                     continue; }

@@ -17,21 +17,20 @@ namespace NBiz
     /// 读取excel,保存到数据库,泛型类,不太适合产品导入,因为需要图片
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class ImportToDatabaseFromExcel<T>
+    public class ImportToDatabaseFromExcel2<T>
     {
+
+        public Stream XslSream { get; set; }
+        
+        //将datatable 转换成 ilist<T>
         IDataTableConverter<T> datatableConverter;
+        //保存的方法不能统一..因为每种类型保存时需要做的判断不一样.因此---
         BLLBase<T> bll;
-        public ImportToDatabaseFromExcel(IDataTableConverter<T> datatableConverter, BLLBase<T> bll)
+        public ImportToDatabaseFromExcel2(IDataTableConverter<T> datatableConverter, BLLBase<T> bll)
         {
             this.datatableConverter = datatableConverter;
             this.bll = bll;
         }
-        /// <summary>
-        /// 从excel中读取对应的对象列表.
-        /// </summary>
-        /// <param name="stream"></param>
-        /// <param name="msg"></param>
-        /// <returns></returns>
         public IList<T> ReadList(Stream stream, out string msg)
         {
 
@@ -39,14 +38,8 @@ namespace NBiz
             DataTable dt = excelToDatatableReader.Read(out msg);
             IList<T> list = datatableConverter.Convert(dt);
             return list;
+
         }
-        /// <summary>
-        /// 读取对象列表的同时 读取图片信息
-        /// </summary>
-        /// <param name="stream"></param>
-        /// <param name="msg"></param>
-        /// <param name="allPictures"></param>
-        /// <returns></returns>
         public IList<T> ReadListWithAllPictures(Stream stream, out string msg, out IList allPictures)
         {
 

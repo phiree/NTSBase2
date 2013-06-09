@@ -149,5 +149,19 @@ namespace NLibrary
         }
 
         #endregion
+
+       /// <summary>
+       /// 用正则判断字符串属于哪种语言.
+       /// </summary>
+       /// <param name="input"></param>
+       /// <returns></returns>
+        public static string LanguageTypeDetermine(string input)
+        {
+            if (Regex.IsMatch(input, "[\u4e00-\u9fa5]"))
+            {
+                return "zh";
+            }
+            return "en";
+        }
     }
 }

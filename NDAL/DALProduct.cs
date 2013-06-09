@@ -6,9 +6,13 @@ using NModel;
 using NLibrary;
 namespace NDAL
 {
+    /// <summary>
+    /// 数据库层 不要做任何逻辑判断~!~~~~~~~~~~~~
+    /// </summary>
     public class DALProduct : DalBase<NModel.Product>
     {
         public string SaveMsg { get; private set; }
+        /*
         public override void Save(NModel.Product o)
         {
             
@@ -17,7 +21,7 @@ namespace NDAL
                 .List();
 
             if (q.Count > 0)
-            {      //如果只有一个 则 更新
+            {    
                 if (q.Count == 1)
                 {
                     Product existedOne = q[0];
@@ -39,7 +43,7 @@ namespace NDAL
             {
                 base.Save(o);
             }
-        }
+        }*/
         public virtual Product GetOneByModelNumberAndSupplierCode(string modelNumber, string supplierCode)
         {
             NHibernate.IQueryOver<Product> iqueryover = session.QueryOver<Product>().Where(x => x.SupplierCode == supplierCode)
@@ -58,6 +62,7 @@ namespace NDAL
             }
             // return GetOneByQuery(iqueryover);
         }
+        /*
         public virtual Product GetOneByModelNumberAndSupplierName(string modelNumber, string suppliername, string supplierEnglishName)
         {
             NHibernate.IQueryOver<Product> iqueryover = session.QueryOver<Product>().Where(x => x.ModelNumber == modelNumber)
@@ -75,7 +80,7 @@ namespace NDAL
                 throw new Exception(ex.Message + "Data:modelnumber:" + modelNumber + "--supplierName:" + suppliername);
             }
         }
-
+        */
         /// <summary>
         /// 通用搜索.
         /// </summary>
@@ -147,10 +152,10 @@ namespace NDAL
         /// </summary>
         /// <param name="supplierName"></param>
         /// <returns></returns>
-        public IList<Product> GetListBySupplier(string supplierName, string englishName)
+        public IList<Product> GetListBySupplier(string supplierCode)
         {
             NHibernate.IQueryOver<Product, Product> queryover = session.QueryOver<Product>()
-                .Where(x => x.SupplierName == supplierName || x.SupplierName == englishName)
+                .Where(x => x.SupplierCode == supplierCode)
 
                 ;
             return GetList(queryover);
