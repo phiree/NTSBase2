@@ -21,6 +21,7 @@
                 <a href="/">返回产品中心</a></h3>
             <hr />
         </div>
+       
         <div class="clear span-24 " id="adminBody">
             <div class="span-4 colborder" id="leftMenu">
                 <ul>
@@ -37,6 +38,11 @@
                 </ul>
             </div>
             <div class="span-19 last" id="mainContent">
+             <div class="info">
+        <asp:ContentPlaceHolder ID="pageDesc" runat="server">
+        
+        </asp:ContentPlaceHolder>
+        </div>
                 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                 </asp:ContentPlaceHolder>
             </div>
