@@ -58,11 +58,11 @@ namespace NDAL
                           ||(!string.IsNullOrEmpty(englishName)&&x.EnglishName==englishName)  );
             return GetOneByQuery(iqueryOver);
         }
-        public NModel.Supplier GetOneByCode(string supplierCode)
+        public virtual NModel.Supplier GetOneByCode(string supplierCode)
         {
             NHibernate.IQueryOver<NModel.Supplier> iqueryOver =
                 session.QueryOver<NModel.Supplier>()
-                .Where(x => (!string.IsNullOrEmpty(supplierCode) && x.Code == supplierCode));
+                .Where(x =>  x.Code == supplierCode);
             return GetOneByQuery(iqueryOver);
         }
 
@@ -71,10 +71,10 @@ namespace NDAL
             string query = "select s from Supplier s  where 1=1 ";
             if (!string.IsNullOrEmpty(supplierName))
             {
-                query += "  and s.Name like '%" + supplierName + "%' or s.EnglishName like '%"+supplierName+"%'";
+                query += "  and s.Code like '%"+supplierName+"%' or s.Name like '%" + supplierName + "%' or s.EnglishName like '%"+supplierName+"%'";
 
             }
-            return GetList(query,pageIndex,pageSize, out recordCount);
+            return GetList( query,"Code",true, pageIndex,pageSize, out recordCount);
         }
 
     }

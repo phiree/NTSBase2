@@ -52,4 +52,8 @@ public partial class Suppliers_Default : System.Web.UI.Page
         dgSupplier.DataSource = product.OrderByDescending(x => x.Code); ;
         dgSupplier.DataBind();
     }
+    protected void dg_SupplierRowCreated(object sender, GridViewRowEventArgs e)
+    {
+        e.Row.Cells[0].Visible = false;
+    }
 }

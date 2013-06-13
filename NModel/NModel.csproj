@@ -58,7 +58,6 @@
     <Compile Include="Mapping\CategoryMap.cs" />
     <Compile Include="Mapping\SupplierMap.cs" />
     <Compile Include="Mapping\FormatSerialNo.cs" />
-    <Compile Include="Mapping\MultiLanguageItemMap.cs" />
     <Compile Include="Mapping\ImportOperationLogMap.cs" />
     <Compile Include="Mapping\ProductTagMap.cs" />
     <Compile Include="Mapping\ProductTag_ProductMap.cs" />

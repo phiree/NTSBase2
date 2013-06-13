@@ -13,7 +13,6 @@ namespace NModel
         public Product()
         {
             State = ProductState.Normal;
-            Id = Guid.NewGuid();
             CreateTime = LastUpdateTime = DateTime.Now;
             ProductImageList = new List<ProductImage>();
             ProductMultiLangues = new List<ProductLanguage>();
@@ -77,7 +76,7 @@ namespace NModel
         /// </summary>
         public virtual ImportOperationLog ImportOperationLog { get; set; }
 
-        public IList<ProductLanguage> ProductMultiLangues { get; set; }
+        public virtual IList<ProductLanguage> ProductMultiLangues { get; set; }
         //产品图片的名称.
         public virtual string BuildImageName(string extensionWithDot)
         {
@@ -147,14 +146,21 @@ namespace NModel
             foreach (ProductLanguage piNew in newPro.ProductMultiLangues)
             {
                 //如果该语言不存在 则增加
-
-                if (ProductMultiLangues.Where(x => x.Language == piNew.Language).ToList().Count == 0)
+                var pll=ProductMultiLangues.Where(x => x.Language == piNew.Language).ToList();
+                if ( pll.Count == 0)
                 {
                     ProductMultiLangues.Add(piNew);
                 }
-                else //更新
+                else  //更新
                 {
-                    piNew.UpdateByNewVersion(newPro.ProductMultiLangues[0]);
+                    if (pll.Count == 1)
+                    {
+                        ProductMultiLangues[0].UpdateByNewVersion(piNew);
+                    }
+                    else
+                    {
+                        throw new Exception("同一种产品出现多条同种语言的信息.型号:"+this.ModelNumber+",供应商编码:"+this.SupplierCode);
+                    }
                 }
             }
         }

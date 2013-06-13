@@ -32,28 +32,28 @@ namespace NBiz
 
         public Supplier GetByCode(string supplierCode)
         {
-            string query = "from Supplier s where s.Code='" + supplierCode + "'";
-            return GetOneByQuery(query);
+            
+            return DalSupplier.GetOneByCode(supplierCode);
         }
         public Supplier GetByName(string supplierName)
         {
             return DalSupplier.GetOneByName(supplierName);
         }
-        public IList<Supplier> GetListByNameList(IList<string> supplierNameList,out IList<string>  supplierNameListNotExists )
+        public IList<Supplier> GetListByCodeList(IList<string> supplierCodeList,out IList<string>  supplierCodeListNotExists )
         {
-            supplierNameListNotExists = new List<string>();
+            supplierCodeListNotExists = new List<string>();
             IList<Supplier> existsSupplierList = new List<Supplier>();
-            foreach (string supplierCode in supplierNameList)
+            foreach (string supplierCode in supplierCodeList)
             {
                 //如果返回为空
-                Supplier supplier = GetByName(supplierCode);
+                Supplier supplier = GetByCode(supplierCode);
                 if (supplier != null)
                 {
                     existsSupplierList.Add(supplier);
                 }
                 else
                 {
-                    supplierNameListNotExists.Add(supplierCode);
+                    supplierCodeListNotExists.Add(supplierCode);
                 }
                 
             }
@@ -74,5 +74,7 @@ namespace NBiz
             return DalSupplier.Search(name, pageIndex, pageSize, out recordCount);
         }
 
+
+        public List<string> supplierCodeListNotExists { get; set; }
     }
 }

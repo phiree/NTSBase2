@@ -63,8 +63,8 @@
             <span>供应商名:</span>
             <asp:TextBox CssClass="text" Width="150" runat="server" ID="tbxSupplierName"></asp:TextBox>
             <span>产品型号:</span><asp:TextBox CssClass="text" Width="150" runat="server" ID="tbxModel"></asp:TextBox>
-            <asp:DropDownList runat="server" ID="ddlHasPhoto">
-            <asp:ListItem Selected="True" Value="all">-产品图片-</asp:ListItem>
+            <span>产品图片:</span>  <asp:DropDownList runat="server" ID="ddlHasPhoto">
+            <asp:ListItem Selected="True" Value="all">不限</asp:ListItem>
              <asp:ListItem  Value="yes">有图</asp:ListItem>
               <asp:ListItem  Value="no">无图</asp:ListItem>
             </asp:DropDownList>
@@ -85,9 +85,9 @@
    "/ImageHandler.ashx?imagename=<%# Container.DataItem.ToString()%>&width=50&height=50&tt=2" 
    "/ProductImages/thumbnails/1742381668_100-100.JPG"
    -->
-                            <a href="/ProductImages/original/<%# Container.DataItem.ToString()%>" title="点击查看原图"
+                            <a href='/ProductImages/original/<%# Eval("ImageName")%>' title="点击查看原图"
                                 target="_blank">
-                                <img src="/ImageHandler.ashx?imagename=<%# Container.DataItem.ToString()%>&width=50&height=50&tt=2" />
+                                <img src='/ImageHandler.ashx?imagename=<%# Eval("ImageName")%>&width=50&height=50&tt=2' />
                             </a>
                         </ItemTemplate>
                         <FooterTemplate>
@@ -100,7 +100,7 @@
                 DataNavigateUrlFormatString="/products/productdetail.aspx?id={0}" />
             <asp:BoundField HeaderText="型号" DataField="ModelNumber" />
             <asp:BoundField HeaderText="NTS编码" DataField="NTSCode" />
-            <asp:BoundField HeaderText="供应商名称" DataField="SupplierName" />
+            <asp:BoundField HeaderText="供应商名称" DataField="SupplierCode" />
         </Columns>
         <EmptyDataTemplate>
             <div class="notice">

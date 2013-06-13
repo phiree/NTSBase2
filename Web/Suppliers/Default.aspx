@@ -8,7 +8,7 @@
         <fieldset>
             <legend>搜索</legend>
             <div>
-                <span>供应商名称:</span>
+                <span>供应商名称 或 编码</span>
                 <asp:TextBox runat="server"  Width="400" ID="tbxName"></asp:TextBox><asp:Button runat="server"
                     ID="btnSearch" OnClick="btnSearch_Click" Text="搜索" />
             </div>
@@ -16,7 +16,7 @@
     </div>
     <uc:AspNetPager runat="server" ID="AspNetPager1" CloneFrom="pager">
     </uc:AspNetPager>
-    <asp:GridView runat="server" ID="dgSupplier">
+    <asp:GridView runat="server" ID="dgSupplier"   OnRowCreated="dg_SupplierRowCreated">
         <EmptyDataTemplate>
             <div class="notice">
                 没有相关信息

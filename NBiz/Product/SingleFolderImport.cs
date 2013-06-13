@@ -66,15 +66,15 @@ namespace NBiz
             if (NeedCheckWithDB)
             {
                 //1 检查 供应商是否存在
-                IList<string> supplierNameList = GetSupplierNameList(ProductsInExcel,bizSupplier);
-                IList<string> supplierNameList_NotExists;
-                IList<Supplier> supplierList = bizSupplier.GetListByNameList(supplierNameList, out supplierNameList_NotExists);
+                IList<string> supplierCodeList = GetSupplierCodeList(ProductsInExcel,bizSupplier);
+                IList<string> supplierCodeList_NotExists;
+                IList<Supplier> supplierList = bizSupplier.GetListByCodeList(supplierCodeList, out supplierCodeList_NotExists);
 
-                if (supplierNameList_NotExists.Count > 0)
+                if (supplierCodeList_NotExists.Count > 0)
                 {
-                    foreach (string supplierName in supplierNameList_NotExists)
+                    foreach (string supplierCode in supplierCodeList_NotExists)
                     {
-                        sbImportMsg.AppendLine("不存在该供应商:" + supplierName);
+                        sbImportMsg.AppendLine("不存在该供应商:" + supplierCode);
                     }
                     return;
                 }
@@ -125,19 +125,19 @@ namespace NBiz
             return products;
         }
 
-        private IList<string> GetSupplierNameList(IList<Product> products,BizSupplier bizSupplier)
+        private IList<string> GetSupplierCodeList(IList<Product> products,BizSupplier bizSupplier)
         {
             
-            IList<string> supplierNameList = new List<string>();
+            IList<string> supplierCodeList = new List<string>();
             foreach (Product p in products)
             {
-                string supplierName = bizSupplier.GetByCode(p.SupplierCode).Name;
-                if (!supplierNameList.Contains(supplierName))
+              
+                if (!supplierCodeList.Contains(p.SupplierCode))
                 {
-                    supplierNameList.Add(supplierName);
+                    supplierCodeList.Add(p.SupplierCode);
                 }
             }
-            return supplierNameList;
+            return supplierCodeList;
         }
 
         //产品与excel的对应性.

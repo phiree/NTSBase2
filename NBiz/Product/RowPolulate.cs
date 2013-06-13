@@ -128,6 +128,7 @@ namespace NBiz
         {
             Product p = new Product();
             ProductLanguage pl = new ProductLanguage();
+            p.ProductMultiLangues.Add(pl);
             pl.PlaceOfOrigin = row["备注"].ToString();
             // p.PlaceOfDelivery = row["交货地"].ToString();
             pl.Name = row["名称"].ToString();

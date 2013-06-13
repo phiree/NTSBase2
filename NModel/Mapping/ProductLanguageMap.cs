@@ -18,8 +18,8 @@ namespace NModel.Mapping
             Map(x => x.Name);
             Map(x => x.PlaceOfDelivery);
             Map(x => x.PlaceOfOrigin);
-            Map(x => x.ProductDescription);
-            Map(x => x.ProductParameters);
+            Map(x => x.ProductDescription).Length(4000);
+            Map(x => x.ProductParameters).Length(4000);
             Map(x => x.Unit);
             Map(x => x.Language).UniqueKey("UQ_PL");
         }

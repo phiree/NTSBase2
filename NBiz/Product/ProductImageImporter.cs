@@ -122,6 +122,7 @@ namespace NBiz
                 p = productSupplierAndModel[0];
                 string newImageName = p.BuildImageName( imageFile.Extension);
                 p.UpdateImageList(imageFile.FullName, targetPath + "\\");
+                DalProduct.Update(p);
                 ImageInfo ii = new ImageInfo();
                 ii.ImagePath = imageFile.FullName;
                 ii.ModelNumber = modelNumber;
