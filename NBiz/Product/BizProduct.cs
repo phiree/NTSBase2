@@ -180,9 +180,9 @@ namespace NBiz
             return DalProduct.GetOneByModelNumberAndSupplierCode(modelNumber, supplierCode);
         }
         /// <summary>
-        /// 
+        /// 从字符串提取产品关键信息,进而从数据库中提取相关信息
         /// </summary>
-        /// <param name="providedList"></param>
+        /// <param name="providedList">字符串要求 型号---供应商编码</param>
         /// <param name="inValidRows">无法从这些信息中获取产品信息</param>
         /// <returns></returns>
         public IList<Product> GetListByProvidedModelNumberSupplierNameList(string providedList, out string msg)
@@ -201,7 +201,7 @@ namespace NBiz
                 }
                 else
                 {
-                    msg += row + Environment.NewLine;
+                    msg +="无法获取相关信息:"+ row + Environment.NewLine;
                 }
             }
             return products;
