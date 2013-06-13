@@ -21,21 +21,21 @@ namespace NTest.NBizTest
         {
 
             var dalProduct = MockRepository.GenerateMock<NDAL.DALProduct>();
-            dalProduct.Expect(x => x.GetOneByModelNumberAndSupplierCode("BP-811","00130"))
+            dalProduct.Expect(x => x.GetOneByModelNumberAndSupplierCode("BP-811", "008"))
            .Return(Builder<Product>.CreateNew().Build());
             var dalSupplier = MockRepository.GenerateMock<NDAL.DALSupplier>();
-            dalSupplier.Expect(x => x.GetOneByName("brighthome"))
+            dalSupplier.Expect(x => x.GetOneByCode("008"))
            .Return(Builder<Supplier>.CreateNew().With(x=>x.Name="百好").With(x=>x.EnglishName="brighthome"). Build());
 
 
 
             bizProduct.DalProduct = dalProduct;
             bizProduct.DalSupplier = dalSupplier;
-            string list= @"brighthome---BP-811
-brighthome---BP-823
-brighthome---BP-852
-brighthome---BP-227
-brighthome---BP-BC32
+            string list= @"008---BP-811
+008---BP-823
+008---BP-852
+008---BP-227
+008---BP-BC32
 ";
             string msg;
             IList<Product> products = bizProduct.GetListByProvidedModelNumberSupplierNameList(list, out msg);

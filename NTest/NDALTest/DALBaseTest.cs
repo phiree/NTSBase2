@@ -6,10 +6,10 @@ using NUnit.Framework;
 using NModel;
 namespace NTest.NDALTest
 {
-    [TestFixture]
+    
     public class DALBaseTest
     {
-        [Test]
+       
         public void SaveTest()
         {
             var finfo = new System.IO.FileInfo(Environment.CurrentDirectory + (@"\config\log4net.config"));
@@ -18,7 +18,7 @@ namespace NTest.NDALTest
             Product p = new Product();
             p.SupplierCode = "00013";// "开平市祥云卫浴制品有限公司";
             p.ModelNumber = "XY-3918";
-            p.NTSCode = "01.012.0000400012";
+            p.NTSCode = "01.012.0000400013";
             dal.Save(p);
 
             Product p2 = dal.GetOne(p.Id);

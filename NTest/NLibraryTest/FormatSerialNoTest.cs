@@ -8,8 +8,10 @@ using NUnit.Mocks;
 using Rhino.Mocks;
 namespace NTest.NLibraryTest
 {
+    [TestFixture]
     public class FormatSerialNoTest
     {
+        [Test]
         public void GetSerialNoTest()
         {
             //IFormatSerialNoPersistent persisten=

@@ -26,6 +26,9 @@ namespace NTest.NBizTest
                 ,out errMsg);
 
             Assert.AreEqual(19,products.Count);
+            Assert.AreEqual("zh", products[0].ProductMultiLangues[0].Language);
+            Assert.AreEqual("en", products[0].ProductMultiLangues[1].Language);
+            Assert.AreEqual("zh", products[1].ProductMultiLangues[0].Language);
 
         }
         [Test]
@@ -49,7 +52,7 @@ namespace NTest.NBizTest
         {
 
             string filePath = Environment.CurrentDirectory + @"\TestFiles\图片提取20130306.xls";
-            string savePath = @"d:\saveimages\";
+            string savePath = Environment.CurrentDirectory + @"\TestFiles\图片提取20130306\";
             ImageExtractor ie = new ImageExtractor();
             ie.Excute(filePath, savePath);
             Assert.AreEqual(3, System.IO.Directory.GetFiles(savePath).Length);
