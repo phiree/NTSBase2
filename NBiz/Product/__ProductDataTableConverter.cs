@@ -19,14 +19,15 @@ namespace NBiz
         //如果出错,则抛出异常.
         public IList<Product> Convert(DataTable dt)
         {
-            StringBuilder sb = new System.Text.StringBuilder();
-            IRowPopulate irp = RowPopulateFactory.CreatePopulator(dt);
+             IRowPopulate irp = RowPopulateFactory.CreatePopulator(dt);
             foreach (DataColumn col in dt.Columns)
             {
                 ColumnNameMatch(dt, col.ColumnName);
             }
             List<Product> productList = new List<Product>();
             string supplierName = string.Empty;
+            StringBuilder sbError = new StringBuilder();
+            bool isError = false;
             foreach (DataRow row in dt.Rows)
             {
 
@@ -34,11 +35,38 @@ namespace NBiz
                 IList<Product> listp = productList.Where(x => x.SupplierCode == p.SupplierCode && x.ModelNumber == p.ModelNumber).ToArray();
                 if (listp.Count > 0)
                 {
+                    
+                    if (listp.Count == 1)
+                    {
+                        //如果已经存在该语言的信息,则是异常数据
+                        Product existedP = listp[0];
+
+                        foreach (ProductLanguage pl in p.ProductMultiLangues)
+                        {
+                            if (existedP.ProductMultiLangues.Where (x => x.Language == pl.Language).Count()>0)
+                            {
+                                isError = true;
+                                sbError.AppendLine("该产品的已经有这种语言的信息:名称"+pl.Name+",语言:"+pl.Language);
+                            }
+                        }
+
+                        existedP.UpdateByNewVersion(p);
+                    }
+                    else
+                    { 
+                     isError = true;
                     //读取Excel时不允许重复
-                    throw new Exception("错误: 有" + listp.Count + "条 供应商 和 型号相同的数据" + p.SupplierCode + "," + p.ModelNumber);
+                     sbError.AppendLine("错误: 有" + listp.Count + "条 供应商 和 型号相同的数据" + p.SupplierCode + "," + p.ModelNumber);
+                    }
+                   
+                   continue;
                 }
                 productList.Add(p);
 
+            }
+            if (isError)
+            {
+                throw new Exception(sbError.ToString());
             }
 
             return productList;
