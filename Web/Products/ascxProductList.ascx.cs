@@ -27,7 +27,7 @@ public partial class Products_ascxProductList : System.Web.UI.UserControl
         {
             NModel.Product p = e.Row.DataItem as NModel.Product;
             Repeater rptImages = e.Row.FindControl("rptImages") as Repeater;
-            rptImages.DataSource = p.ProductImageUrls;
+            rptImages.DataSource = p.ProductImageList;
             rptImages.DataBind();
 
         }

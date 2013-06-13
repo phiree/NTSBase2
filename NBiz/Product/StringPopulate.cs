@@ -33,7 +33,7 @@ namespace NBiz
                 throw new Exception("格式有误:" + strProperties);
             }
 
-            Product p = bizProduct.GetOneBySupplierNameModelNumber(pros[0].Trim(), pros[1].Trim());
+            Product p = bizProduct.GetOneBy_SupplierCode_ModelNumber(pros[0].Trim(), pros[1].Trim());
             return p;
 
         }

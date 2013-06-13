@@ -16,7 +16,7 @@ namespace NTest.NDALTest
             log4net.Config.XmlConfigurator.Configure(finfo);
             NDAL.DalBase<Product> dal = new NDAL.DALProduct();
             Product p = new Product();
-            p.SupplierName = "开平市祥云卫浴制品有限公司";
+            p.SupplierCode = "00013";// "开平市祥云卫浴制品有限公司";
             p.ModelNumber = "XY-3918";
             p.NTSCode = "01.012.0000400012";
             dal.Save(p);

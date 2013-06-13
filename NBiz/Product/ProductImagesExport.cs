@@ -15,27 +15,29 @@ namespace NBiz
     public class ProductImagesExport
     {
         BizCategory bizCate = new BizCategory();
-        public void Export(IList<Product> products, string rootPathExport,string rootPathOriginal,  NModel.Enums.ImageOutPutStratage stratage)
+        public void Export(IList<Product> products, string rootPathExport, string rootPathOriginal, NModel.Enums.ImageOutPutStratage stratage)
         {
 
             List<ImageExportModel> images = new List<ImageExportModel>();
             foreach (Product p in products)
             {
-             
+
                 if (p.ProductImageList.Count == 0)
                 {
-                    NLogger.Logger.Debug(string.Format( "skip,({0})对应图片数量为0",p.NTSCode));
-                    continue; }
-              
+                    NLogger.Logger.Debug(string.Format("skip,({0})对应图片数量为0", p.NTSCode));
+                    continue;
+                }
+
                 Stack<string> pathStacks = p.BuildImageOutputName(stratage);
-                if (pathStacks.Count == 0) {
+                if (pathStacks.Count == 0)
+                {
                     NLogger.Logger.Debug(string.Format("(skip,{0})生成路径节点为0", p.NTSCode));
 
                     continue;
                 }
                 string pathFromStack = string.Empty;//根据stack中的节点值 构建路径.
-              
-               switch (stratage)
+
+                switch (stratage)
                 {
                     case NModel.Enums.ImageOutPutStratage.Category_NTsCode:
                         //获取分类的名称
@@ -50,14 +52,19 @@ namespace NBiz
                 }
                 string imageFileNew = pathStacks.Pop();
                 string fullPath = rootPathExport + pathFromStack + "\\" + imageFileNew;
-               
-             
-                ImageExportModel iem =
-                    new ImageExportModel 
-                    {
-                        ImageName =rootPathOriginal+ p.ProductImageUrls[0]
-                        , TargetImageFullName = fullPath };
-                images.Add(iem);
+
+                foreach (ProductImage pi in p.ProductImageList)
+                {
+
+                    ImageExportModel iem =
+                        new ImageExportModel
+                        {
+                            ImageName = rootPathOriginal + pi.ImageName
+                            ,
+                            TargetImageFullName = fullPath
+                        };
+                    images.Add(iem);
+                }
             }
             NLibrary.NLogger.Logger.Debug("待拷贝图片数量" + images.Count);
             foreach (ImageExportModel iem in images)
@@ -65,10 +72,10 @@ namespace NBiz
                 IOHelper.EnsureFileDirectory(iem.TargetImageFullName);
                 System.IO.File.Copy(iem.ImageName, iem.TargetImageFullName, true);
             }
-            
+
         }
 
-        
+
     }
     public class ImageExportModel
     {

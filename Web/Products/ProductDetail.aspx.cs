@@ -44,7 +44,7 @@ public partial class Products_ProductDetail : System.Web.UI.Page
     {
         Product p = dv.DataItem as Product;
         Repeater rpt= dv.FindControl("rptImages") as Repeater;
-        rpt.DataSource = p.ProductImageUrls;
+        rpt.DataSource = p.ProductImageList;
         rpt.DataBind();
     }
 }

@@ -5,6 +5,7 @@ using System.Text;
 using NModel.Enums;
 using System.IO;
 using System.ComponentModel;
+using NLibrary;
 namespace NModel
 {
     public class Product
@@ -18,6 +19,19 @@ namespace NModel
             ProductMultiLangues = new List<ProductLanguage>();
         }
         public virtual Guid Id { get; set; }
+        public virtual string Name
+        {
+            get
+            {
+                string name = string.Empty;
+                foreach (ProductLanguage pl in ProductMultiLangues)
+                {
+                    name += pl.Language + "_" + pl.Name + "|";
+                }
+                return name.TrimEnd('|');
+            }
+            
+        }
         public virtual string NTSCode { get; set; }
         public virtual string SupplierCode { get; set; }
         [Description("图片")]
@@ -57,7 +71,7 @@ namespace NModel
         /// <summary>
         /// 币种
         /// </summary>
-        public virtual IList<ProductImage> ProductImageList{ get; set; }
+        public virtual IList<ProductImage> ProductImageList { get; set; }
         /// <summary>
         /// 导入日志
         /// </summary>
@@ -111,14 +125,15 @@ namespace NModel
         /// </summary>
         /// <param name="newPro"></param>
         public virtual void UpdateByNewVersion(Product newPro)
-        { 
-             //基础资料
+        {
+            //基础资料
             //如果这两者变了,那需要重新生成NTSCode
             if (newPro.CategoryCode != this.CategoryCode)
             {
                 this.CategoryCode = newPro.CategoryCode;
-                this.NTSCode = null; }
-            if( newPro.SupplierCode != this.SupplierCode)
+                this.NTSCode = null;
+            }
+            if (newPro.SupplierCode != this.SupplierCode)
             {
                 this.SupplierCode = newPro.SupplierCode;
                 this.NTSCode = null;
@@ -130,7 +145,7 @@ namespace NModel
             this.ProductionCycle = newPro.ProductionCycle;
             this.TaxRate = newPro.TaxRate;
             foreach (ProductLanguage piNew in newPro.ProductMultiLangues)
-            {   
+            {
                 //如果该语言不存在 则增加
 
                 if (ProductMultiLangues.Where(x => x.Language == piNew.Language).ToList().Count == 0)
@@ -142,6 +157,31 @@ namespace NModel
                     piNew.UpdateByNewVersion(newPro.ProductMultiLangues[0]);
                 }
             }
+        }
+        /// <summary>
+        /// 增加新图片
+        /// </summary>
+        /// <param name="newImagePath"></param>
+        /// <returns>是否已包含</returns>
+        public virtual bool UpdateImageList(string newImagePath, string imageSavePath)
+        {
+
+            bool isAllDiff = true;
+
+            foreach (ProductImage pi in ProductImageList)
+            {
+                bool isSame = ImageCompare.CompareMemCmp(newImagePath, imageSavePath + pi.ImageName);
+                isAllDiff = !isSame && isAllDiff;
+
+            }
+            if (isAllDiff)
+            {
+                string imageNewName = BuildImageName(Path.GetExtension(newImagePath));
+                ProductImage piNew = new ProductImage { ImageName = imageNewName, Tag = string.Empty };
+                System.IO.File.Copy(newImagePath, imageSavePath + imageNewName, true);
+                ProductImageList.Add(piNew);
+            }
+            return !isAllDiff;
         }
     }
 }

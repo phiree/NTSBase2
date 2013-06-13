@@ -171,13 +171,13 @@ namespace NBiz
                pageSize, pageIndex, out totalRecord);
         }
 
-        public Product GetOneBySupplierNameModelNumber(string supplierName, string modelNumber)
+        public Product GetOneBy_SupplierCode_ModelNumber(string supplierCode, string modelNumber)
         {
-            Supplier s = DalSupplier.GetOneByName(supplierName);
+            Supplier s = DalSupplier.GetOneByCode(supplierCode);
             if (s == null)
                 return null;
 
-            return DalProduct.GetOneByModelNumberAndSupplierName(modelNumber, s.Name, s.EnglishName);
+            return DalProduct.GetOneByModelNumberAndSupplierCode(modelNumber, supplierCode);
         }
         /// <summary>
         /// 

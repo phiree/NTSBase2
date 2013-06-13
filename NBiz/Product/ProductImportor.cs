@@ -34,6 +34,21 @@ namespace NBiz
                 bizProduct = value;
             }
         }
+        BizSupplier bizSupplier;
+        public BizSupplier BizSupplier
+        {
+            get
+            {
+                if (bizSupplier == null)
+                {
+                    bizSupplier = new BizSupplier();
+                }
+                return bizSupplier;
+            }
+            set {
+                bizSupplier = value;
+            }
+        }
         public bool CheckWithDatabase { get; set; }
         /// <summary>
         /// 由excel文件创建的流
@@ -133,9 +148,9 @@ namespace NBiz
             //结果保存到文件夹
             DateTime beginSaveResultToDisk = DateTime.Now;
             string supplierName = string.Empty;
-            if (productsExistedInDB.Count > 0) supplierName = productsExistedInDB[0].SupplierName;
-            else if (productsHasPicture.Count > 0) supplierName = productsHasPicture[0].SupplierName;
-            else if (productsNotHasPicture.Count > 0) supplierName = productsNotHasPicture[0].SupplierName;
+            if (productsExistedInDB.Count > 0) supplierName =BizSupplier.GetByCode(  productsExistedInDB[0].SupplierCode).Name;
+            else if (productsHasPicture.Count > 0) supplierName = BizSupplier.GetByCode(productsHasPicture[0].SupplierCode).Name;
+            else if (productsNotHasPicture.Count > 0) supplierName = BizSupplier.GetByCode(productsNotHasPicture[0].SupplierCode).Name;
             else
             {
                 return;
@@ -207,7 +222,7 @@ namespace NBiz
                 sbMsg.AppendLine(productsExistedInDB.Count + ":已存在");
                 foreach (Product pi in productsExistedInDB)
                 {
-                    sbMsg.AppendLine("     名称:" + pi.Name + "型号:" + pi.ModelNumber + "供应商名称:" + pi.SupplierName);
+                    sbMsg.AppendLine("     名称:" + pi.Name + "型号:" + pi.ModelNumber + "供应商名称:" +BizSupplier.GetByCode( pi.SupplierCode).Name);
                 }
             }
             //
@@ -220,7 +235,7 @@ namespace NBiz
             sbMsg.AppendLine(productsNotHasPicture.Count + ":无图片");
             foreach (Product pnopic in productsNotHasPicture)
             {
-                sbMsg.AppendLine("     名称:" + pnopic.Name + "型号:" + pnopic.ModelNumber + "供应商名称:" + pnopic.SupplierName);
+                sbMsg.AppendLine("     名称:" + pnopic.Name + "型号:" + pnopic.ModelNumber + "供应商名称:" +BizSupplier.GetByCode(  pnopic.SupplierCode).Name);
 
             }
 
@@ -251,11 +266,11 @@ namespace NBiz
                 {
                     string imageName = StringHelper.ReplaceSpace(Path.GetFileNameWithoutExtension(image.Name));
                     Console.Write("imageName:" + imageName);
-                    if (imageName
-                        .Equals(StringHelper.ReplaceSpace(p.ModelNumber), StringComparison.OrdinalIgnoreCase))
+                    if (imageName.Equals(StringHelper.ReplaceSpace(p.ModelNumber), StringComparison.OrdinalIgnoreCase))
                     {
-                        string newImageName = (p.Name + p.SupplierName + p.ModelNumber).GetHashCode().ToString() + image.Extension;
-                        p.ProductImageUrls.Add(newImageName);
+                        //找到型号相同的图片
+
+                        p.UpdateImageList(image.FullName, WebProductImagesPath);                      
                         productsHasPicture.Add(p);
                         imagesHasProduct.Add(image);
                         productHasImage = true;
@@ -324,13 +339,7 @@ namespace NBiz
                         FileInfo imageFile = imagesHasProduct.Single(x => StringHelper.ReplaceSpace(Path.GetFileNameWithoutExtension(x.Name))
                           .Equals(StringHelper.ReplaceSpace(product.ModelNumber), StringComparison.OrdinalIgnoreCase));
                         File.Copy(imageFile.FullName, dirSupplierQuanlified.FullName + supplierName + "\\" + imageFile.Name, true);
-                        //同时拷贝到网站图片路径
-                        if (!string.IsNullOrEmpty(WebProductImagesPath) && outputFolder != WebProductImagesPath)
-                        {
-                            string newImageName = (product.Name + product.SupplierName + product.ModelNumber).GetHashCode().ToString() + imageFile.Extension;
-
-                            File.Copy(imageFile.FullName, WebProductImagesPath + newImageName, true);
-                        }
+                       
                     }
                     catch (Exception ex)
                     {

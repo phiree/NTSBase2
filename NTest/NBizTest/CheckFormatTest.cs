@@ -137,8 +137,8 @@ namespace NTest.NBizTest
             DateTime beginSaveResult = DateTime.Now;
             string saveFolder = Environment.CurrentDirectory + "\\TestFiles\\FormatCheck\\检测结果\\";
             string saveFolderOfSupplier;
-            if (productsHasPicture.Count > 0) saveFolderOfSupplier = productsHasPicture[0].SupplierName;
-            else if (productsNotHasPicture.Count > 0) saveFolderOfSupplier = productsNotHasPicture[0].SupplierName;
+            if (productsHasPicture.Count > 0) saveFolderOfSupplier = productsHasPicture[0].SupplierCode;
+            else if (productsNotHasPicture.Count > 0) saveFolderOfSupplier = productsNotHasPicture[0].SupplierCode;
             else throw new Exception();
 
             DirectoryInfo dirOfSavedSupplier = new DirectoryInfo(saveFolder + "合格数据\\" + saveFolderOfSupplier + "\\");
@@ -147,9 +147,9 @@ namespace NTest.NBizTest
                 dirOfSavedSupplier.Delete(true);
             }
             string supplierName = string.Empty;
-            if (productsExistedInDB.Count > 0) supplierName = productsExistedInDB[0].SupplierName;
-            else if (productsHasPicture.Count > 0) supplierName = productsHasPicture[0].SupplierName;
-            else if (productsNotHasPicture.Count > 0) supplierName = productsNotHasPicture[0].SupplierName;
+            if (productsExistedInDB.Count > 0) supplierName = checker.BizSupplier.GetByCode(productsExistedInDB[0].SupplierCode).Name;
+            else if (productsHasPicture.Count > 0) supplierName = checker.BizSupplier.GetByCode(productsHasPicture[0].SupplierCode).Name;
+            else if (productsNotHasPicture.Count > 0) supplierName = checker.BizSupplier.GetByCode(productsNotHasPicture[0].SupplierCode).Name;
             else
             {
                 return;
@@ -211,8 +211,8 @@ namespace NTest.NBizTest
             DateTime beginSaveResult = DateTime.Now;
             string saveFolder = Environment.CurrentDirectory + "\\TestFiles\\FormatCheck\\检测结果\\";
             string saveFolderOfSupplier;
-            if (productsHasPicture.Count > 0) saveFolderOfSupplier = productsHasPicture[0].SupplierName;
-            else if (productsNotHasPicture.Count > 0) saveFolderOfSupplier = productsNotHasPicture[0].SupplierName;
+            if (productsHasPicture.Count > 0) saveFolderOfSupplier = bizS.GetByCode(productsHasPicture[0].SupplierCode).Name;
+            else if (productsNotHasPicture.Count > 0) saveFolderOfSupplier = bizS.GetByCode(productsNotHasPicture[0].SupplierCode).Name;
             else throw new Exception();
 
             DirectoryInfo dirOfSavedSupplier = new DirectoryInfo(saveFolder + "合格数据\\" + saveFolderOfSupplier + "\\");
@@ -221,9 +221,9 @@ namespace NTest.NBizTest
                 dirOfSavedSupplier.Delete(true);
             }
             string supplierName = string.Empty;
-            if (productsExistedInDB.Count > 0) supplierName = productsExistedInDB[0].SupplierName;
-            else if (productsHasPicture.Count > 0) supplierName = productsHasPicture[0].SupplierName;
-            else if (productsNotHasPicture.Count > 0) supplierName = productsNotHasPicture[0].SupplierName;
+            if (productsExistedInDB.Count > 0) supplierName = bizS.GetByCode(productsExistedInDB[0].SupplierCode).Name;
+            else if (productsHasPicture.Count > 0) supplierName = bizS.GetByCode(productsHasPicture[0].SupplierCode).Name;
+            else if (productsNotHasPicture.Count > 0) supplierName = bizS.GetByCode(productsNotHasPicture[0].SupplierCode).Name;
             else
             {
                 return;

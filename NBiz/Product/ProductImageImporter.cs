@@ -121,14 +121,7 @@ namespace NBiz
                 //拷贝图片 到 对应文件夹
                 p = productSupplierAndModel[0];
                 string newImageName = p.BuildImageName( imageFile.Extension);
-                System.IO.File.Copy(imageFile.FullName, targetPath + "\\" + newImageName, true);
-
-                if (!p.ProductImageUrls.Contains(newImageName))
-                {
-                    p.ProductImageUrls.Add(newImageName);
-
-                    DalProduct.Update(p);
-                }
+                p.UpdateImageList(imageFile.FullName, targetPath + "\\");
                 ImageInfo ii = new ImageInfo();
                 ii.ImagePath = imageFile.FullName;
                 ii.ModelNumber = modelNumber;

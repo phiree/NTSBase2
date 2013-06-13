@@ -21,7 +21,7 @@ namespace NTest.NBizTest
         {
 
             var dalProduct = MockRepository.GenerateMock<NDAL.DALProduct>();
-            dalProduct.Expect(x => x.GetOneByModelNumberAndSupplierName("BP-811","百好","brighthome"))
+            dalProduct.Expect(x => x.GetOneByModelNumberAndSupplierCode("BP-811","00130"))
            .Return(Builder<Product>.CreateNew().Build());
             var dalSupplier = MockRepository.GenerateMock<NDAL.DALSupplier>();
             dalSupplier.Expect(x => x.GetOneByName("brighthome"))

@@ -66,7 +66,7 @@ namespace NBiz
             if (NeedCheckWithDB)
             {
                 //1 检查 供应商是否存在
-                IList<string> supplierNameList = GetSupplierNameList(ProductsInExcel);
+                IList<string> supplierNameList = GetSupplierNameList(ProductsInExcel,bizSupplier);
                 IList<string> supplierNameList_NotExists;
                 IList<Supplier> supplierList = bizSupplier.GetListByNameList(supplierNameList, out supplierNameList_NotExists);
 
@@ -78,17 +78,14 @@ namespace NBiz
                     }
                     return;
                 }
-                else
-                { 
-                    
-                }
+               
                 //2 检查数据是否已经导入  && 更新产品的供应商信息
                 IList<Product> productsExisted;
                 ProductsPassedDBCheck = bizProduct.CheckSupplierExisted(ProductsHasImage, out productsExisted);
                 ProductsExistedInDB = productsExisted;
                 foreach (Product productExist in ProductsExistedInDB)
                 {
-                    sbImportMsg.AppendLine("已存在该产品.供应商/型号:"+productExist.SupplierName+"/"+productExist.ModelNumber);
+                    sbImportMsg.AppendLine("已存在该产品.供应商/型号:"+bizSupplier.GetByCode(productExist. SupplierCode).Name+"/"+productExist.ModelNumber);
                 }
             }
             //数据保存到数据库-- 分配NTS编码
@@ -128,14 +125,16 @@ namespace NBiz
             return products;
         }
 
-        private IList<string> GetSupplierNameList(IList<Product> products)
+        private IList<string> GetSupplierNameList(IList<Product> products,BizSupplier bizSupplier)
         {
+            
             IList<string> supplierNameList = new List<string>();
             foreach (Product p in products)
             {
-                if (!supplierNameList.Contains(p.SupplierName))
+                string supplierName = bizSupplier.GetByCode(p.SupplierCode).Name;
+                if (!supplierNameList.Contains(supplierName))
                 {
-                    supplierNameList.Add(p.SupplierName);
+                    supplierNameList.Add(supplierName);
                 }
             }
             return supplierNameList;
@@ -159,8 +158,7 @@ namespace NBiz
                     if (imageName
                         .Equals(StringHelper.ReplaceSpace(p.ModelNumber), StringComparison.OrdinalIgnoreCase))
                     {
-                        string newImageName = (p.Name + p.SupplierName + p.ModelNumber).GetHashCode().ToString() + image.Extension;
-                        p.ProductImageUrls.Add(newImageName);
+                        p.UpdateImageList(image.FullName, ImageSaveAsPath);
                         ProductsHasImage.Add(p);
                         ImagesHasProduct.Add(image);
                         productHasImage = true;
@@ -212,13 +210,7 @@ namespace NBiz
                         FileInfo imageFile = ImagesHasProduct.Single(x => StringHelper.ReplaceSpace(Path.GetFileNameWithoutExtension(x.Name))
                           .Equals(StringHelper.ReplaceSpace(product.ModelNumber), StringComparison.OrdinalIgnoreCase));
                         File.Copy(imageFile.FullName, dirSupplierQuanlified.FullName + supplierName + "\\" + imageFile.Name, true);
-                        //同时拷贝到网站图片路径
-                        if (!string.IsNullOrEmpty(WebProductImagesPath) && outputFolder != WebProductImagesPath)
-                        {
-                            string newImageName = (product.Name + product.SupplierName + product.ModelNumber).GetHashCode().ToString() + imageFile.Extension;
-
-                            File.Copy(imageFile.FullName, WebProductImagesPath + newImageName, true);
-                        }
+                      
                     }
                     catch (Exception ex)
                     {
