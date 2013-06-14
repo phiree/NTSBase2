@@ -100,7 +100,12 @@
                 DataNavigateUrlFormatString="/products/productdetail.aspx?id={0}" />
             <asp:BoundField HeaderText="型号" DataField="ModelNumber" />
             <asp:BoundField HeaderText="NTS编码" DataField="NTSCode" />
-            <asp:BoundField HeaderText="供应商名称" DataField="SupplierCode" />
+            <asp:BoundField HeaderText="供应商代码"  HeaderStyle-Wrap="false" DataField="SupplierCode" />
+            <asp:TemplateField HeaderText="供应商名称">
+            <ItemTemplate>
+            <asp:Literal runat="server" ID="liSupplierName"></asp:Literal>
+            </ItemTemplate>
+            </asp:TemplateField>
         </Columns>
         <EmptyDataTemplate>
             <div class="notice">
@@ -108,9 +113,9 @@
             </div>
         </EmptyDataTemplate>
     </asp:GridView>
-    <uc:AspNetPager runat="server" ID="pager" UrlPaging="true" CssClass="paginator" CustomInfoHTML="总计:&lt;b&gt;%RecordCount%&lt;/b&gt; 页码: %CurrentPageIndex% / %PageCount%"
+    <uc:AspNetPager runat="server" ID="pager" UrlPaging="true" CssClass="paginator" CustomInfoHTML="总计:&lt;b&gt;%RecordCount%&lt;/b&gt;"
         EnableTheming="True" ShowCustomInfoSection="Left" ShowNavigationToolTip="True"
         CustomInfoSectionWidth="" FirstPageText="第一页" LastPageText="最后一页" NextPageText="下一页"
-        PrevPageText="上一页">
+        PrevPageText="上一页" AlwaysShow="True" AlwaysShowFirstLastPageNumber="True">
     </uc:AspNetPager>
 </asp:Content>

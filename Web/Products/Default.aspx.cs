@@ -9,7 +9,7 @@ using NDAL;
 public partial class Products_Default : System.Web.UI.Page
 {
     BizProduct bizProduct = new NBiz.BizProduct();
-   
+  protected  BizSupplier bizSupplier = new BizSupplier();
     protected void Page_Load(object sender, EventArgs e)
     {
 
@@ -87,6 +87,11 @@ public partial class Products_Default : System.Web.UI.Page
             Repeater rptImages = e.Row.FindControl("rptImages") as Repeater;
             rptImages.DataSource = p.ProductImageList;
             rptImages.DataBind();
+
+            //供应商
+             NModel.Supplier supplier= bizSupplier.GetByCode(p.SupplierCode);
+             Literal liSupplierName = e.Row.FindControl("liSupplierName") as Literal;
+             liSupplierName.Text = supplier.Name + "<br/>" + supplier.EnglishName;
 
         }
     }
