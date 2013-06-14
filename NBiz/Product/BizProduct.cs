@@ -124,7 +124,7 @@ namespace NBiz
             SerialNoUnit.Save();
             sbMsg.AppendLine("---------NTS编码已生成----:" + listToBeSaved.Count + "<br/>");
             sbMsg.AppendLine("--数据导入结束----:" + listToBeSaved.Count + "<br/>");
-            ImportMsg = sbMsg.ToString();
+            totalErrMsg=ImportMsg = sbMsg.ToString();
             return listToBeSaved;
 
         }
