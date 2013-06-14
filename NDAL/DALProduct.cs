@@ -95,15 +95,21 @@ namespace NDAL
             int pageSize, int pageIndex, out int totalRecord)
         {
 
-            string query = "select p from Product p  where 1=1 ";
+            //string query = "select p from Product as  p join p.ProductMultiLangues as pl where ";
+            string query = "select p from Product as  p join p.ProductMultiLangues as pl  where ";
+            if (!string.IsNullOrEmpty(supplierName))
+            {
+                query += "  p.SupplierCode in (select s.Code from Supplier as s where s.EnglishName like '%"+supplierName+"%' or  s.Name like '%" + supplierName + "%') ";
+            }
+            else
+            {
+                query += " 1=1  ";
+            }
             if (!string.IsNullOrEmpty(ntsCode))
             {
                 query += " and p.NTSCode like '%" + ntsCode + "%'";
             }
-            if (!string.IsNullOrEmpty(supplierName))
-            {
-                query += " and p.SupplierName like '%" + supplierName + "%'";
-            }
+           
             if (!string.IsNullOrEmpty(model))
             {
                 query += "and p.ModelNumber like '%" + model + "%'";
@@ -112,16 +118,16 @@ namespace NDAL
             {
                 if (hasphoto.Value == true)
                 {
-                    query += "and p.ProductImageUrls.size>0";
+                    query += "and p.ProductImageList.size>0";
                 }
                 else
                 {
-                    query += "and p.ProductImageUrls.size=0";
+                    query += "and p.ProductImageList.size=0";
                 }
             }
             if (!string.IsNullOrEmpty(name))
             {
-                query += string.Format(" and (p.Name like '%{0}%'  or p.EnglishName like '%{0}%')", name);
+                query += string.Format(" and  pl.Name like '%{0}%'", name);
             }
             if (!string.IsNullOrEmpty(categorycode))
             {
