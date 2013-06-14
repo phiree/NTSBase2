@@ -5,59 +5,60 @@ using System.Text;
 using System.Text.RegularExpressions;
 namespace NLibrary
 {
-   public class StringHelper
+    public class StringHelper
     {
-       public static string ReplaceSpace(string input)
-       {
-           string patern = @"\s*";
-           return Regex.Replace(input, patern, string.Empty);
-       }
-       public static string ReplaceInvalidChaInFileName(string input,string replacement)
-       {
-           string partern = @"[\\\/\:\'\?\*\<\>\|\n]";
-           return Regex.Replace(input, partern, replacement);
-       }
-       public static string ReplaceInvalidChaInFileName(string input)
-       {
-           return ReplaceInvalidChaInFileName(input, string.Empty);
-       }
-       public static bool ReplaceSpaceAndCompare(string s1, string s2)
-       {
-           s1 = ReplaceSpace(s1);
-           s2 = ReplaceSpace(s2);
-           return s1 == s2;
-       }
-       /// <summary>
-       /// 保证字符串的字符数量
-       /// </summary>
-       /// <param name="input"></param>
-       /// <param name="exceptLenth">希望的长度</param>
-       /// <param name="fillChar"> 填充字符 </param>
-       /// <returns></returns>
-       public static string EnsureStringLength(string input, int exceptLenth, char fillChar)
-       {
-           throw new NotImplementedException();
-       }
+        public static string ReplaceSpace(string input)
+        {
+            string patern = @"\s*";
+            return Regex.Replace(input, patern, string.Empty);
+        }
+        public static string ReplaceInvalidChaInFileName(string input, string replacement)
+        {
+            string partern = @"[\\\/\:\'\?\*\<\>\|\n]";
+            return Regex.Replace(input, partern, replacement);
+        }
+        public static string ReplaceInvalidChaInFileName(string input)
+        {
+            return ReplaceInvalidChaInFileName(input, string.Empty);
+        }
+        public static bool ReplaceSpaceAndCompare(string s1, string s2)
+        {
+            s1 = ReplaceSpace(s1);
+            s2 = ReplaceSpace(s2);
+            return s1 == s2;
+        }
+        /// <summary>
+        /// 保证字符串的字符数量
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="exceptLenth">希望的长度</param>
+        /// <param name="fillChar"> 填充字符 </param>
+        /// <returns></returns>
+        public static string EnsureStringLength(string input, int exceptLenth, char fillChar)
+        {
+            throw new NotImplementedException();
+        }
 
-       public static string[] Split(string original, char s)
-       {
-           return original.Split(s);
-       }
-       /// <summary>
-       /// 通过普通的Query hql语句 获取 count* 语句
-       /// </summary>
-       /// <param name="query"></param>
-       /// <returns></returns>
-       public static string BuildCountQuery(string query)
-       { 
+        public static string[] Split(string original, char s)
+        {
+            return original.Split(s);
+        }
+        /// <summary>
+        /// 通过普通的Query hql语句 获取 count* 语句
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        public static string BuildCountQuery(string query)
+        {
             ////"select s from supplier from supplier d where 1=1   "
-           
-           string regex = "(?<=select).*(?=from)";
 
-          string result= Regex.Replace(query, regex, " count(*) ");
-          return result;
-       }
-       #region 全角半角转换
+
+            Regex reg = new Regex("(?<=select).*?(?=from)");
+
+            string result = reg.Replace(query, " count(*) ", 1);
+            return result;
+        }
+        #region 全角半角转换
 
         /// <summary>
 
@@ -69,34 +70,31 @@ namespace NLibrary
 
         /// <returns>全角字符串</returns>
 
-       ///<remarks>
-       ///</remarks>
+        ///<remarks>
+        ///</remarks>
 
-        public  static string ToSBC(string input)
-
+        public static string ToSBC(string input)
         {
 
             //半角转全角：
 
-            char[] c=input.ToCharArray();
+            char[] c = input.ToCharArray();
 
             for (int i = 0; i < c.Length; i++)
-
             {
 
-                if (c[i]==32)
-
+                if (c[i] == 32)
                 {
 
-                    c[i]=(char)12288;
+                    c[i] = (char)12288;
 
                     continue;
 
                 }
 
-                if (c[i]<127)
+                if (c[i] < 127)
 
-                    c[i]=(char)(c[i]+65248);
+                    c[i] = (char)(c[i] + 65248);
 
             }
 
@@ -119,28 +117,25 @@ namespace NLibrary
         ///</remarks>
 
         public static string ToDBC(string input)
-
         {
 
-            char[] c=input.ToCharArray();
+            char[] c = input.ToCharArray();
 
             for (int i = 0; i < c.Length; i++)
-
             {
 
-                if (c[i]==12288)
-
+                if (c[i] == 12288)
                 {
 
-                    c[i]= (char)32;
+                    c[i] = (char)32;
 
                     continue;
 
                 }
 
-                if (c[i]>65280 && c[i]<65375)
+                if (c[i] > 65280 && c[i] < 65375)
 
-                    c[i]=(char)(c[i]-65248);
+                    c[i] = (char)(c[i] - 65248);
 
             }
 
@@ -150,11 +145,11 @@ namespace NLibrary
 
         #endregion
 
-       /// <summary>
-       /// 用正则判断字符串属于哪种语言.
-       /// </summary>
-       /// <param name="input"></param>
-       /// <returns></returns>
+        /// <summary>
+        /// 用正则判断字符串属于哪种语言.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public static string LanguageTypeDetermine(string input)
         {
             if (Regex.IsMatch(input, "[\u4e00-\u9fa5]"))

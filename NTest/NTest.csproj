@@ -81,6 +81,7 @@
     <Compile Include="NDALTest\DALBaseTest.cs" />
     <Compile Include="NDALTest\ProductDALTest.cs" />
     <Compile Include="NLibraryTest\FormatSerialNoTest.cs" />
+    <Compile Include="NLibraryTest\StringHelperTest.cs" />
     <Compile Include="NMock3\NMockTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
