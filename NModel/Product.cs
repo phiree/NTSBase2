@@ -146,7 +146,7 @@ namespace NModel
             foreach (ProductLanguage piNew in newPro.ProductMultiLangues)
             {
                 //如果该语言不存在 则增加
-                var pll=ProductMultiLangues.Where(x => x.Language == piNew.Language).ToList();
+                var pll = ProductMultiLangues.Where(x => x.Language == piNew.Language).ToList();
                 if ( pll.Count == 0)
                 {
                     ProductMultiLangues.Add(piNew);
@@ -155,7 +155,7 @@ namespace NModel
                 {
                     if (pll.Count == 1)
                     {
-                        ProductMultiLangues[0].UpdateByNewVersion(piNew);
+                       pll[0].UpdateByNewVersion(piNew);
                     }
                     else
                     {
