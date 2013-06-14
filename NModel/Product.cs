@@ -22,15 +22,114 @@ namespace NModel
         {
             get
             {
+                if (ProductMultiLangues.Count == 1)
+                    return ProductMultiLangues[0].Name;
                 string name = string.Empty;
                 foreach (ProductLanguage pl in ProductMultiLangues)
                 {
-                    name += pl.Language + "_" + pl.Name + "|";
+                    name += "(" + pl.Language + ")" + pl.Name + "<br/>";
                 }
-                return name.TrimEnd('|');
+                return name.TrimEnd("<br/>".ToCharArray());
             }
-            
+           protected internal  set { }
         }
+        public virtual string Unit
+        {
+            get
+            {
+                if (ProductMultiLangues.Count == 1)
+                    return ProductMultiLangues[0].Unit;
+                string name = string.Empty;
+                foreach (ProductLanguage pl in ProductMultiLangues)
+                {
+                    name += "(" + pl.Language + ")" + pl.Unit + "<br/>";
+                }
+                return name.TrimEnd("<br/>".ToCharArray());
+            }
+            protected internal  set { }
+
+        }
+        public virtual string ProductParameters
+        {
+            get
+            {
+                if (ProductMultiLangues.Count == 1)
+                    return ProductMultiLangues[0].ProductParameters;
+                string name = string.Empty;
+                foreach (ProductLanguage pl in ProductMultiLangues)
+                {
+                    name += "(" + pl.Language + ")" + pl.ProductParameters + "<br/>";
+                }
+                return name.TrimEnd("<br/>".ToCharArray());
+            }
+            protected internal  set { }
+
+        }
+        public virtual string PlaceOfOrigin
+        {
+            get
+            {
+                if (ProductMultiLangues.Count == 1)
+                    return ProductMultiLangues[0].PlaceOfOrigin;
+                string name = string.Empty;
+                foreach (ProductLanguage pl in ProductMultiLangues)
+                {
+                    name += "(" + pl.Language + ")" + pl.PlaceOfOrigin + "<br/>";
+                }
+                return name.TrimEnd("<br/>".ToCharArray());
+            }
+            protected internal  set { }
+
+        }
+        public virtual string PlaceOfDelivery
+        {
+            get
+            {
+                if (ProductMultiLangues.Count == 1)
+                    return ProductMultiLangues[0].PlaceOfDelivery;
+                string name = string.Empty;
+                foreach (ProductLanguage pl in ProductMultiLangues)
+                {
+                    name += "(" + pl.Language + ")" + pl.PlaceOfDelivery + "<br/>";
+                }
+                return name.TrimEnd("<br/>".ToCharArray());
+            }
+            protected internal  set { }
+
+        }
+        public virtual string ProductDescription
+        {
+            get
+            {
+                if (ProductMultiLangues.Count == 1)
+                    return ProductMultiLangues[0].ProductDescription;
+                string name = string.Empty;
+                foreach (ProductLanguage pl in ProductMultiLangues)
+                {
+                    name += "(" + pl.Language + ")" + pl.ProductDescription + "<br/>";
+                }
+                return name.TrimEnd("<br/>".ToCharArray());
+            }
+            protected internal  set { }
+
+        }
+        public virtual string Memo
+        {
+            get
+            {
+                if (ProductMultiLangues.Count == 1)
+                    return ProductMultiLangues[0].Memo;
+                string name = string.Empty;
+                foreach (ProductLanguage pl in ProductMultiLangues)
+                {
+                    name +="("+pl.Language+")" +pl.Memo + "<br/>";
+                }
+                return name.TrimEnd("<br/>".ToCharArray());
+            }
+           // protected internal virtual set { }
+
+        }
+            
         public virtual string NTSCode { get; set; }
         public virtual string SupplierCode { get; set; }
         [Description("图片")]
