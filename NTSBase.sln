@@ -41,6 +41,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{2CF8815D-7D5B-484C-B814-2C5289533EAA}"
 	ProjectSection(SolutionItems) = preProject
 		somescripts.sql = somescripts.sql
+		docs\sql.sql = docs\sql.sql
 	EndProjectSection
 EndProject
 Global

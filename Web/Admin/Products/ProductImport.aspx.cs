@@ -8,15 +8,19 @@ using NBiz;
 public partial class Admin_Products_ProductImport : System.Web.UI.Page
 {
     BizProduct bizProduct = new BizProduct();
+    BizImportLog bizLog = new BizImportLog();
     protected void Page_Load(object sender, EventArgs e)
     {
         lblMsg.InnerHtml = string.Empty;
     }
+    
     protected void btnImport_Click(object sender, EventArgs e)
     {
         try
         {
             string errMsg;
+            NModel.ImportOperationLog importLog = new NModel.ImportOperationLog();
+            
             bizProduct.ImportProductFromExcel(fuProduct.PostedFile.InputStream,out errMsg);
            
             lblMsg.Attributes["class"] = "success";

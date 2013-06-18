@@ -46,7 +46,7 @@ namespace NBiz
                             if (existedP.ProductMultiLangues.Where (x => x.Language == pl.Language).Count()>0)
                             {
                                 isError = true;
-                                sbError.AppendLine("该产品的已经有这种语言的信息:名称"+pl.Name+",语言:"+pl.Language);
+                                sbError.AppendLine("该产品已经有这种语言的信息:型号_"+p.ModelNumber+",语言:"+pl.Language);
                             }
                         }
 
