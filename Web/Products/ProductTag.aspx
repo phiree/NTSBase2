@@ -38,8 +38,8 @@
             </HeaderTemplate>
             <ItemTemplate>
                 <li><a runat="server" id="hrefCateAmount">
-                    <%#Eval("Cate") %>
-                </a>(<%#((IList<NModel.Product>)Eval("Products")).Count %>) </li>
+                    <%#Eval("CateP") %>
+                </a>(<%#((IList<NModel.Product>)Eval("CatePList")).Count%>) </li>
             </ItemTemplate>
             <FooterTemplate>
                 </ul></FooterTemplate>

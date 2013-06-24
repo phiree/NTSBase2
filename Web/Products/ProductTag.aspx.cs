@@ -79,17 +79,17 @@ public partial class Products_ProductTag : System.Web.UI.Page
             dynamic data = e.Item.DataItem;
             if (string.IsNullOrEmpty(Request["cate"]))
             {
-                href.HRef = Request.Url + "&cate=" + data.Cate;
+                href.HRef = Request.Url + "&cate=" + data.CateP;
             }
             else
             {
                 var nameValues = HttpUtility.ParseQueryString(Request.QueryString.ToString());
-                nameValues.Set("cate", data.Cate);
+                nameValues.Set("cate", data.CateP);
                 string url = Request.Url.AbsolutePath;
                 string updatedQueryString = "?" + nameValues.ToString();
                 href.HRef = url + updatedQueryString;
             }
-            href.InnerText = bizCate.GetCateName(data.Cate);
+            href.InnerText = bizCate.GetCateName(data.CateP);
           
            
         }
