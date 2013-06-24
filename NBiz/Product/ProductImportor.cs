@@ -49,6 +49,9 @@ namespace NBiz
                 bizSupplier = value;
             }
         }
+
+        public FormatSerialNoUnit FSU = new FormatSerialNoUnit(new NDAL.DALFormatSerialNo());
+
         public bool CheckWithDatabase { get; set; }
         /// <summary>
         /// 由excel文件创建的流
@@ -143,7 +146,16 @@ namespace NBiz
                 , out imagesHasNotProduct);
 
             //将结果保存到数据库
+            //给产品编码
+            foreach (Product p in productsHasPicture)
+            {
+                if (string.IsNullOrEmpty(p.NTSCode))
+                {
+                    p.NTSCode = FSU.GetFormatedSerialNo(p.CategoryCode + "." + p.SupplierCode);
+                }
+            }
             BizProduct.SaveList(productsHasPicture);
+            FSU.Save();
             sbMsg.AppendLine(productsHasPicture.Count + ":已导入");
             //结果保存到文件夹
             DateTime beginSaveResultToDisk = DateTime.Now;
