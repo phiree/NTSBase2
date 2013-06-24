@@ -242,6 +242,7 @@ namespace NModel
             this.PriceValidPeriod = newPro.PriceValidPeriod;
             this.ProductionCycle = newPro.ProductionCycle;
             this.TaxRate = newPro.TaxRate;
+            this.LastUpdateTime = DateTime.Now;
             foreach (ProductLanguage piNew in newPro.ProductMultiLangues)
             {
                 //如果该语言不存在 则增加
@@ -268,25 +269,27 @@ namespace NModel
         /// </summary>
         /// <param name="newImagePath"></param>
         /// <returns>是否已包含</returns>
-        public virtual bool UpdateImageList(string newImagePath, string imageSavePath)
+        public virtual void UpdateImageList(string newImagePath, string imageSavePath)
         {
 
-            bool isAllDiff = true;
+            //通过判断图片是否相同来决定是 增加图片 还是 更新.
+            //bool isAllDiff = true;
 
-            foreach (ProductImage pi in ProductImageList)
-            {
-                bool isSame = ImageCompare.CompareMemCmp(newImagePath, imageSavePath + pi.ImageName);
-                isAllDiff = !isSame && isAllDiff;
+            //foreach (ProductImage pi in ProductImageList)
+            //{
+            //    bool isSame = true;// ImageCompare.CompareMemCmp(newImagePath, imageSavePath + pi.ImageName);
+            //    isAllDiff = !isSame && isAllDiff;
 
-            }
-            if (isAllDiff)
+            //}
+            
+            if (ProductImageList.Count==0)// isAllDiff)
             {
                 string imageNewName = BuildImageName(Path.GetExtension(newImagePath));
                 ProductImage piNew = new ProductImage { ImageName = imageNewName, Tag = string.Empty };
                 System.IO.File.Copy(newImagePath, imageSavePath + imageNewName, true);
                 ProductImageList.Add(piNew);
             }
-            return !isAllDiff;
+           // return !isAllDiff;
         }
     }
 }
