@@ -120,7 +120,6 @@ namespace NBiz
                 }
                 //拷贝图片 到 对应文件夹
                 p = productSupplierAndModel[0];
-                string newImageName = p.BuildImageName( imageFile.Extension);
                 p.UpdateImageList(imageFile.FullName, targetPath + "\\");
                 DalProduct.Update(p);
                 ImageInfo ii = new ImageInfo();
