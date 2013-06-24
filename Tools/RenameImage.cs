@@ -28,7 +28,7 @@ namespace Tools
 
         private void btnGo_Click(object sender, EventArgs e)
         {
-            string organized = @"E:\workspace\code\resources\导入资料\datafiles\已整理好图片\";
+            string organized = @"D:\已整理好图片\";
             DirectoryInfo folder = new DirectoryInfo(textBox1.Text);
             foreach (DirectoryInfo dir1 in folder.GetDirectories())
             {
