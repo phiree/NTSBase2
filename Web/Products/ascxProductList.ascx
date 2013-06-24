@@ -34,7 +34,11 @@
                 DataNavigateUrlFormatString="/products/productdetail.aspx?id={0}" />
             <asp:BoundField HeaderText="型号" DataField="ModelNumber" />
             <asp:BoundField HeaderText="NTS编码" DataField="NTSCode" />
-            <asp:BoundField HeaderText="供应商名称" DataField="SupplierName" />
+            <asp:TemplateField HeaderText="供应商名称">
+            <ItemTemplate>
+            <asp:Literal runat="server" ID="liSupplierName"></asp:Literal>
+            </ItemTemplate>
+            </asp:TemplateField>
         </Columns>
         <EmptyDataTemplate>
             <div class="notice">

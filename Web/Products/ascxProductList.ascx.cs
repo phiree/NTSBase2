@@ -11,6 +11,7 @@ public partial class Products_ascxProductList : System.Web.UI.UserControl
     public IList<Product> ProductList { private get; set; }
     public int RecordCount { private get; set; }
     public int PageSize { get; set; }
+    NBiz.BizSupplier bizSupplier = new NBiz.BizSupplier();
     protected void Page_Load(object sender, EventArgs e)
     {
         pager.PageSize = PageSize;
@@ -29,6 +30,10 @@ public partial class Products_ascxProductList : System.Web.UI.UserControl
             Repeater rptImages = e.Row.FindControl("rptImages") as Repeater;
             rptImages.DataSource = p.ProductImageList;
             rptImages.DataBind();
+
+            NModel.Supplier supplier = bizSupplier.GetByCode(p.SupplierCode);
+            Literal liSupplierName = e.Row.FindControl("liSupplierName") as Literal;
+            liSupplierName.Text = supplier.Name + "<br/>" + supplier.EnglishName;
 
         }
     }
