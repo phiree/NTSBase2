@@ -34,8 +34,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NLibrary", "NLibrary\NLibra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NTest", "NTest\NTest.csproj", "{066391FF-A4C9-45E6-888A-A2028B214E00}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductImageOrganizer", "ProductImageOrganizer\ProductImageOrganizer.csproj", "{AF819B1F-0652-4A91-9797-010584C8BE45}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tools", "Tools\Tools.csproj", "{890BCD8A-B2DB-4DCD-8ED6-E2426B1F95E9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{2CF8815D-7D5B-484C-B814-2C5289533EAA}"
@@ -114,16 +112,6 @@ Global
 		{066391FF-A4C9-45E6-888A-A2028B214E00}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{066391FF-A4C9-45E6-888A-A2028B214E00}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{066391FF-A4C9-45E6-888A-A2028B214E00}.Release|x86.ActiveCfg = Release|Any CPU
-		{AF819B1F-0652-4A91-9797-010584C8BE45}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{AF819B1F-0652-4A91-9797-010584C8BE45}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{AF819B1F-0652-4A91-9797-010584C8BE45}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{AF819B1F-0652-4A91-9797-010584C8BE45}.Debug|x86.ActiveCfg = Debug|x86
-		{AF819B1F-0652-4A91-9797-010584C8BE45}.Debug|x86.Build.0 = Debug|x86
-		{AF819B1F-0652-4A91-9797-010584C8BE45}.Release|Any CPU.ActiveCfg = Release|x86
-		{AF819B1F-0652-4A91-9797-010584C8BE45}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{AF819B1F-0652-4A91-9797-010584C8BE45}.Release|Mixed Platforms.Build.0 = Release|x86
-		{AF819B1F-0652-4A91-9797-010584C8BE45}.Release|x86.ActiveCfg = Release|x86
-		{AF819B1F-0652-4A91-9797-010584C8BE45}.Release|x86.Build.0 = Release|x86
 		{890BCD8A-B2DB-4DCD-8ED6-E2426B1F95E9}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{890BCD8A-B2DB-4DCD-8ED6-E2426B1F95E9}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
 		{890BCD8A-B2DB-4DCD-8ED6-E2426B1F95E9}.Debug|Mixed Platforms.Build.0 = Debug|x86
