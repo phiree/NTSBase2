@@ -96,7 +96,7 @@ namespace NDAL
         {
 
             //string query = "select p from Product as  p join p.ProductMultiLangues as pl where ";
-            string query = "select p from Product as  p join p.ProductMultiLangues as pl  where ";
+            string query = "select distinct p from Product as  p join p.ProductMultiLangues as pl  where ";
             if (!string.IsNullOrEmpty(supplierName))
             {
                 query += "  p.SupplierCode in (select s.Code from Supplier as s where s.EnglishName like '%"+supplierName+"%' or  s.Name like '%" + supplierName + "%') ";
