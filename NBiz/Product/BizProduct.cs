@@ -151,6 +151,7 @@ namespace NBiz
                 if (p != null)
                 {
                     p.UpdateByNewVersion(o);
+                    //---------------------------新上传的数据 可以覆盖旧数据-------------------------
                     ValidItems.Add(p);
                     existedItems.Add(o);
                     continue;
