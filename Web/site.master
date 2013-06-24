@@ -16,28 +16,26 @@
 <body>
     <form id="form1" runat="server">
     <div class="container showgrid">
-        <div class="span-24 last" id="adminHead">
+        <div class="span-24 last"  id="adminHead">
             <h1 class="span-12">
                 NTS产品信息中心</h1>
-            <div class="span-12 last">
-                <asp:LoginView runat="server">
-                    <AnonymousTemplate>
-                        <a href="/member/register.aspx">注册</a></AnonymousTemplate>
-                </asp:LoginView>
+            <div class="span-12 last loginstatus">
+               
                 <asp:LoginName runat="server" />
-                <asp:LoginStatus runat="server" />
+                <asp:LoginStatus  LoginImageUrl="~/Content/images/login.jpg" runat="server" />
               
             </div>
         </div>
         <div class="clear span-24 last" id="adminBody">
         <div class="span-4" id="leftMenu">
-                <ul>
-                    <li><a href="/products/">产品列表</a></li>
-                    <li><a href="/products/ProductTag.aspx">产品集</a></li>
-                    <li><a href="/suppliers/">供应商列表</a></li>
-                </ul>
+               
+                <asp:ContentPlaceHolder  runat="server" ID="cph_leftMenu"></asp:ContentPlaceHolder>
+                   
+                
             </div>
+            <div class="span-20 last" id="mainContent">
             <asp:ContentPlaceHolder runat="server" ID="cph_MainBody">
+            </div>
             </asp:ContentPlaceHolder>
         </div>
         <div class="clear span-24 last" id="adminFoot">
