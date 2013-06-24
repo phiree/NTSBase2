@@ -19,8 +19,12 @@ namespace NDAL
         }
         public virtual void Save(T o)
         {
-            session.Save(o);
-            session.Flush();
+            using (var t = session.BeginTransaction())
+            {
+                session.Save(o);
+                session.Flush();
+                t.Commit();
+            }
         }
 
         public virtual void SaveList(IList<T> list)
