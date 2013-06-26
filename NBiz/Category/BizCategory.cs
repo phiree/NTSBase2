@@ -65,8 +65,17 @@ namespace NBiz
             }
             string cateCode=cates[1];
             string parentCode = cates[0];
-            string name = GetOneByCodes(cateCode, parentCode).Name;
-            string parentName = GetOneByCode(parentCode).Name;
+             string name = "None";
+            
+            Category childCate = GetOneByCodes(cateCode, parentCode);
+            if (childCate != null) name = childCate.Name;
+
+           
+
+            Category parentCate = GetOneByCode(parentCode);
+            string parentName = "None";
+            if (parentCate != null)
+                parentName = parentCate.Name;
             return parentName + "." + name;
         }
     }
