@@ -34,7 +34,7 @@ namespace NBiz
             pl.PlaceOfOrigin = row["产地"].ToString();
             pl.PlaceOfDelivery = row["交货地"].ToString();
             p.ImageState = row["图片"].ToString();
-            //p.Memo = row["备注"].ToString();
+            pl.Memo = row["备注"].ToString();
             p.PriceDate = row["报价日期"].ToString();
             p.PriceValidPeriod = row["报价有效期"].ToString();
 
@@ -114,6 +114,7 @@ namespace NBiz
                 }
             }
             p.OrderAmountMin = 最小订货量;
+          
             p.ProductMultiLangues.Add(pl);
             return p;
         }
