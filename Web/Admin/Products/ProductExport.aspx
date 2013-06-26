@@ -9,19 +9,29 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <fieldset>
         <legend>英文产品资料</legend>
-        <div>  导出<asp:TextBox runat="server" ID="tbxBeginDate"></asp:TextBox>之后的产品
-        
+        <div>
+            导出<asp:TextBox runat="server" ID="tbxBeginDate"></asp:TextBox>之后的产品
             <uc:ButtonExt runat="server" ID="btnExportExcel" Text="导出Excel" OnClick="btnExportExcel_Click" />
             <uc:ButtonExt runat="server" ID="btnExportImage" Text="导出图片" OnClick="btnExportImage_Click" />
         </div>
     </fieldset>
-
-     <fieldset>
+    <fieldset>
         <legend>没有图片的产品</legend>
         <div>
-           <uc:ButtonExt runat="server" ID="btnExport_NoImage" Text="导出Excel" OnClick="btnExport_NoImage_Click" />
-          </div>
+            <uc:ButtonExt runat="server" ID="btnExport_NoImage" Text="导出Excel" OnClick="btnExport_NoImage_Click" />
+        </div>
     </fieldset>
-
+    <fieldset>
+        <legend>导出自定义产品</legend>
+        <div>
+            导出Excel的文件名:<asp:TextBox runat="server" ID="tbxExportName"></asp:TextBox>
+            需要导出的数据列表(格式:供应商名称(代码)---型号):
+            <asp:TextBox runat="server" TextMode="MultiLine" ID="tbxPs"></asp:TextBox>
+        </div>
+        <div>
+            <uc:ButtonExt runat="server" ID="btnCustomListExcel" Text="导出Excel" OnClick="btnCustomListExcel_Click" />
+            <uc:ButtonExt runat="server" ID="btnCustomListImage" Text="导出图片" OnClick="btnCustomListImage_Click" />
+        </div>
+    </fieldset>
     <asp:Label runat="server" CssClass="info" ID="lblMsg"></asp:Label>
 </asp:Content>
