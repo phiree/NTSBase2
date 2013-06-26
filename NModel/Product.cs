@@ -18,6 +18,7 @@ namespace NModel
             ProductMultiLangues = new List<ProductLanguage>();
         }
         public virtual Guid Id { get; set; }
+         [Description("产品名称")]
         public virtual string Name
         {
             get
@@ -33,6 +34,7 @@ namespace NModel
             }
            protected internal  set { }
         }
+           [Description("单位")]
         public virtual string Unit
         {
             get
@@ -49,6 +51,7 @@ namespace NModel
             protected internal  set { }
 
         }
+           [Description("产品参数")]
         public virtual string ProductParameters
         {
             get
@@ -65,6 +68,7 @@ namespace NModel
             protected internal  set { }
 
         }
+           [Description("产地")]
         public virtual string PlaceOfOrigin
         {
             get
@@ -81,6 +85,7 @@ namespace NModel
             protected internal  set { }
 
         }
+         [Description("发货地")]
         public virtual string PlaceOfDelivery
         {
             get
@@ -97,6 +102,7 @@ namespace NModel
             protected internal  set { }
 
         }
+        [Description("产品描述")]
         public virtual string ProductDescription
         {
             get
@@ -113,6 +119,7 @@ namespace NModel
             protected internal  set { }
 
         }
+         [Description("备注")]
         public virtual string Memo
         {
             get
@@ -129,8 +136,10 @@ namespace NModel
            // protected internal virtual set { }
 
         }
-            
+        [Description("NTS编码")]
         public virtual string NTSCode { get; set; }
+          [Description("供应商编码")]
+ 
         public virtual string SupplierCode { get; set; }
         [Description("图片")]
         public virtual string ImageState { get; set; }
@@ -154,6 +163,8 @@ namespace NModel
         public virtual decimal OrderAmountMin { get; set; }
         [Description("生产周期")]
         public virtual decimal ProductionCycle { get; set; }
+
+
         /// <summary>
         /// 产品状态
         /// </summary>
@@ -167,7 +178,7 @@ namespace NModel
         /// </summary>
         public virtual DateTime LastUpdateTime { get; set; }
         /// <summary>
-        /// 币种
+        /// 图片列表
         /// </summary>
         public virtual IList<ProductImage> ProductImageList { get; set; }
         /// <summary>
