@@ -188,7 +188,7 @@ namespace NBiz
         /// <returns></returns>
         public IList<Product> GetListByProvidedModelNumberSupplierNameList(string providedList, out string msg)
         {
-            string[] rows = providedList.Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            string[] rows = providedList.Split(new string[]{ Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries);
             IStringPopulate strPopulate = StringPopulateFactory.CreateInstance("sm");
 
             IList<Product> products = new List<Product>();
