@@ -101,8 +101,9 @@ namespace NBiz
                 string modelNumber =StringHelper.ToDBC(Path.GetFileNameWithoutExtension(imageFile.Name).Trim());
 
                 Product p = null;//=  dalProduct.GetOneByModelNumberAndSupplier(modelNumber, dirSupplier.Name);
+                
                 IList<Product> productSupplierAndModel = ProductsOfSupplier.Where(
-                    x => StringHelper.ToDBC(x.ModelNumber.Replace("\n", "")) == modelNumber).ToList();
+                    x => StringHelper.ToDBC(x.ModelNumber.Trim().Replace("\n", "")).ToLower() == modelNumber.ToLower()).ToList();
                 if (productSupplierAndModel.Count == 0)
                 {
 
