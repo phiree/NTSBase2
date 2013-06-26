@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+<asp:Content ID="Content2" ContentPlaceHolderID="cph_maincontent" Runat="Server">
  <asp:DetailsView  ID="dv" AutoGenerateRows="false" runat="server" 
         ondatabound="dv_DataBound" onitemcreated="dv_ItemCreated" 
         onload="dv_Load"   >
@@ -12,7 +12,6 @@
  <asp:BoundField  HeaderStyle-Wrap="false" ItemStyle-Font-Bold="true"  HeaderText="出厂价" DataField="PriceOfFactory"/>
 <asp:BoundField   HeaderStyle-Wrap="false"  HeaderText="NTS编码" DataField="NTSCode"/>
 <asp:BoundField   HeaderStyle-Wrap="false"  HeaderText="分类编码" DataField="CategoryCode"/> 
-<asp:BoundField   HeaderStyle-Wrap="false"  HeaderText="产品型号" DataField="ModelNumber"/>
 <asp:BoundField   HeaderStyle-Wrap="false"  HeaderText="税率" DataField="TaxRate"/>
 <asp:BoundField   HeaderStyle-Wrap="false"  HeaderText="起定量" DataField="OrderAmountMin"/>
 <asp:BoundField   HeaderStyle-Wrap="false"  HeaderText="生产周期" DataField="ProductionCycle"/>

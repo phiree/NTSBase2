@@ -17,7 +17,7 @@
         }
 </style>
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+<asp:Content ID="Content2" ContentPlaceHolderID="cph_maincontent" runat="Server">
     <div id="main_leftmenu">
         <div>标签:</div>
         <asp:Repeater runat="server" ID="rptTags">

@@ -3,7 +3,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+<asp:Content ID="Content2" ContentPlaceHolderID="cph_maincontent" runat="Server">
     <div>
         <fieldset>
             <legend>搜索</legend>
@@ -16,7 +16,14 @@
     </div>
     <uc:AspNetPager runat="server" ID="AspNetPager1" CloneFrom="pager">
     </uc:AspNetPager>
-    <asp:GridView runat="server" ID="dgSupplier"   OnRowCreated="dg_SupplierRowCreated">
+    <asp:GridView runat="server" ID="dgSupplier"   AutoGenerateColumns="false" OnRowCreated="dg_SupplierRowCreated">
+    <Columns>
+    <asp:HyperLinkField HeaderText="中文名称"  Target="_blank"  DataTextField="Name" DataNavigateUrlFields="Name"
+     DataNavigateUrlFormatString="/products/?sname={0}" />
+     <asp:BoundField DataField="EnglishName" HeaderText="英文名称" />
+     <asp:BoundField DataField="Code" HeaderText="供应商编码" />
+     
+    </Columns>
         <EmptyDataTemplate>
             <div class="notice">
                 没有相关信息

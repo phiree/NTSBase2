@@ -48,7 +48,7 @@
     });
 </script>
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+<asp:Content ID="Content2" ContentPlaceHolderID="cph_maincontent" runat="Server">
     <fieldset>
         <legend>搜索</legend>
         <div>

@@ -1,54 +1,4 @@
-﻿body
-{
-     background-color:#ddd;
-    }
-.container
-{
-   
-    border: solid 1px #4277A9;
-    padding: 1px;
-    width: 948px;
-}
-#adminBody
-{
-    background-color: #fff;
-}
-#adminHead
-{
-    margin: 2px 0;
-    width: 946px;
-    border: solid 1px #2693C9;
-    text-align: center;
-    background-color: #9AD4EC;
-    background: url(../images/headerbg.jpg) repeat-x top left;
-}
-#adminBody
-{
-     
-    padding:5px;
-    
-}
-#adminHead h1
-{
-    padding: 15px 0;
-    margin: 0;
-    color: White;
-    font-weight: 900;
-}
-.loginstatus
-{
-    padding: 15px 0;
-    text-align: right;
-    color: White;
-    font-size: large;
-    font-weight: bold;
-}
-.loginBtn
-{
-    float: right;
-}
-
-#leftMenu ul
+﻿#leftMenu ul
 {
     list-style-type: none;
     padding: 0;
@@ -76,6 +26,3 @@
 {
     color: #fff !important;
 }
-#mainContent
-{
-    }

@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="cph_MainBody" Runat="Server">
+<asp:Content ID="Content2" ContentPlaceHolderID="cph_body" Runat="Server">
 <asp:CreateUserWizard runat="server" RequireEmail="false"></asp:CreateUserWizard>
 </asp:Content>
 

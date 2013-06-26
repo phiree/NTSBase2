@@ -9,26 +9,20 @@
     padding: 1px;
     width: 948px;
 }
-#adminBody
+
+#header
 {
-    background-color: #fff;
-}
-#adminHead
-{
+    /*
     margin: 2px 0;
     width: 946px;
     border: solid 1px #2693C9;
+*/
+margin-bottom:5px;
     text-align: center;
     background-color: #9AD4EC;
     background: url(../images/headerbg.jpg) repeat-x top left;
 }
-#adminBody
-{
-     
-    padding:5px;
-    
-}
-#adminHead h1
+#header h1
 {
     padding: 15px 0;
     margin: 0;
@@ -47,35 +41,12 @@
 {
     float: right;
 }
-
-#leftMenu ul
+#body
 {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
+    background-color: #fff;
 }
 
-#leftMenu ul li
+#footer
 {
-    padding: 5px 0 5px 10px;
-    font-size: 13px;
-    font-weight: bold;
-    border-bottom: solid 1px #DADADA;
-    background-color: #FAFAFA;
-}
-#leftMenu ul li a, #leftMenu ul li a:hover, #leftMenu ul li a:link, #leftMenu ul li a:visited, #leftMenu ul li a:active
-{
-    color: #666;
-    text-decoration: none;
-}
-.leftmenu_on
-{
-     background:url(../images/leftmenu_on.jpg);
-    }
-.leftmenu_on, .leftmenu_on a:hover, .leftmenu_on a:link, .leftmenu_on a:visited, .leftmenu_on a:active
-{
-    color: #fff !important;
-}
-#mainContent
-{
+     text-align:center;
     }
