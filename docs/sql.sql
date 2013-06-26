@@ -1,24 +1,12 @@
-select modelnumber, replace(
-					replace(
-					replace(
- replace(
-					replace(
-					replace(
- replace(
-					replace(
-					replace(
-						modelnumber,'\\','$')
-								   ,'/','$')
-								   ,'<','$') 
-									 ,'>','$')
-									 ,'?','$')
-									 ,'*','$')
-									 ,'"','$')
-									 ,':','$')
-									 ,'|','$')
-as cc
-
- from product;
+select * from product where modelnumber like '%\\%'
+or modelnumber like '%/%'
+or modelnumber like '%<%'
+or modelnumber like '%>%'
+or modelnumber like '%?%'
+or modelnumber like '%*%'
+or modelnumber like '%"%'
+or modelnumber like '%:%'
+or modelnumber like '%|%'
 
 update product set modelnumber=replace(
 					replace(
@@ -30,6 +18,7 @@ update product set modelnumber=replace(
 					replace(
 					replace(
 						modelnumber,'\\','$')
+
 								   ,'/','$')
 								   ,'<','$') 
 									 ,'>','$')

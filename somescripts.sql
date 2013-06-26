@@ -2,16 +2,18 @@
 /*没有图片的产品*/
 
 
-select  p.supplierName,s.name,p.modelnumber,p.name 
-from ntsbase.product p
-inner join ntsbase.supplier s
-on p.suppliername=s.name or p.suppliername=s.englishname
+
+select  p.suppliercode,s.name,p.modelnumber,p.ntscode 
+from product p
+inner join supplier s
+on p.suppliercode =s.code 
  left outer join
-ntsbase.productimageurls i
+productimage i
 on p.id=i.product_id
 where i.product_id is null
-order by suppliername,modelnumber
+order by s.name,modelnumber
 
+/*不知道干嘛的脚本 */
 select p.suppliername ,s.name,s.englishname
 from product p 
 right outer join 
@@ -19,7 +21,7 @@ supplier s
 on p.suppliername=s.name or p.suppliername=s.englishname
 where p.suppliername is null
 
-/*重复的产品信息*/
+/*(失效)重复的产品信息*/
 
 create table tempcc
 (
