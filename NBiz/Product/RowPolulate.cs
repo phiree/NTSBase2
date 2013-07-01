@@ -72,7 +72,16 @@ namespace NBiz
             strRate = strRate.Replace("%", "");
             if (!string.IsNullOrEmpty(strRate))
             {
-                p.TaxRate = Convert.ToDecimal(strRate);
+                try
+                {
+                    p.TaxRate = Convert.ToDecimal(strRate);
+                }
+                catch
+                {
+                    throw new Exception(string.Format("税率 数据格式有误.供应商:{0},产品型号:{1}",
+                                        p.SupplierCode, p.ModelNumber
+                                )); 
+                }
             }
 
             //出厂价
