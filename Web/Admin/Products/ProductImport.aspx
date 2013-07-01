@@ -12,6 +12,9 @@
     <h3>选择产品报价单:</h3>
     <p>
         <asp:FileUpload runat="server" ID="fuProduct" />
+        文件来源:<asp:TextBox runat="server" ID="tbxSource"></asp:TextBox>
+        完成时间:<asp:TextBox runat="server" ID="tbxFinishTime"></asp:TextBox>
+        操作员:<asp:TextBox runat="server" ID="tbxOperator">数据部</asp:TextBox>
         <asp:Button runat="server" ID="btnImport" OnClick="btnImport_Click" Text="导入" />
     </p>
     <p>

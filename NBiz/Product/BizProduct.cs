@@ -64,11 +64,11 @@ namespace NBiz
         /// </summary>
         /// <param name="stream">excel流</param>
         /// <param name="errMsg"></param>
-        public void ImportProductFromExcel(System.IO.Stream stream, out string errMsg)
+        public IList<Product> ImportProductFromExcel(System.IO.Stream stream, out string errMsg)
         {
             IDataTableConverter<Product> productReader = new ProductDataTableConverter();
             ImportToDatabaseFromExcel<Product> importor = new ImportToDatabaseFromExcel<Product>(productReader, this);
-            importor.ImportXslData(stream, out  errMsg);
+            return importor.ImportXslData(stream, out  errMsg);
         }
         /// <summary> 从excel文件中读取产品信息
         ///
