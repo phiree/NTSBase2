@@ -18,26 +18,26 @@
                     url: "/services/supplierlist.ashx",
                     dataType: "json",
                     data: {
-                        
+
                         style: "full",
                         maxRows: 12,
                         name_startsWith: request.term
                     },
                     success: function (data) {
-                       
+
                         response($.map(data, function (item) {
-                        
+
                             var o = {
                                 label: item.Name,
-                                value: item.Name+"-英文名称:"+item.EnglishName
+                                value: item.Name + "-英文名称:" + item.EnglishName
                             }
-                        return o;
+                            return o;
                         }));
                     }
                 });
             },
             minLength: 2,
-           
+
             open: function () {
                 $(this).removeClass("ui-corner-all").addClass("ui-corner-top");
             },
@@ -45,6 +45,18 @@
                 $(this).removeClass("ui-corner-top").addClass("ui-corner-all");
             }
         });
+        //搜索框内回车事件的处理
+        $("fieldset input").keydown(
+        function (e) {
+
+            if (e.which == 13) {
+                $("#<%=btnSearch.ClientID %>").click();
+                return false;
+            }
+            
+        }
+        );
+
     });
 </script>
 </asp:Content>
