@@ -96,61 +96,54 @@ namespace NDAL
         {
 
             //string query = "select p from Product as  p join p.ProductMultiLangues as pl where ";
-            string query = "select distinct p from Product as  p join p.ProductMultiLangues as pl  where ";
+            string select = "select distinct p ";
+            string selectCount="select count(distinct p) ";
+            string from = " from Product as p join p.ProductMultiLangues as pl ";
+            string where = " where ";
+           
             if (!string.IsNullOrEmpty(supplierName))
             {
-                query += "  p.SupplierCode in (select s.Code from Supplier as s where s.EnglishName like '%"+supplierName+"%' or  s.Name like '%" + supplierName + "%') ";
+                where += "  p.SupplierCode in (select s.Code from Supplier as s where s.EnglishName like '%" + supplierName + "%' or  s.Name like '%" + supplierName + "%') ";
             }
             else
             {
-                query += " 1=1  ";
+                where += " 1=1  ";
             }
             if (!string.IsNullOrEmpty(ntsCode))
             {
-                query += " and p.NTSCode like '%" + ntsCode + "%'";
+                where += " and p.NTSCode like '%" + ntsCode + "%'";
             }
            
             if (!string.IsNullOrEmpty(model))
             {
-                query += "and p.ModelNumber like '%" + model + "%'";
+                where += "and p.ModelNumber like '%" + model + "%'";
             }
             if ( hasphoto.HasValue)
             {
                 if (hasphoto.Value == true)
                 {
-                    query += "and p.ProductImageList.size>0";
+                    where += "and p.ProductImageList.size>0";
                 }
                 else
                 {
-                    query += "and p.ProductImageList.size=0";
+                    where += "and p.ProductImageList.size=0";
                 }
             }
             if (!string.IsNullOrEmpty(name))
             {
-                query += string.Format(" and  pl.Name like '%{0}%'", name);
+                where += string.Format(" and  pl.Name like '%{0}%'", name);
             }
             if (!string.IsNullOrEmpty(categorycode))
             {
                 //02 或者 02.001
-                query += string.Format(" and (p.CategoryCode='{0}' or substring(p.CategoryCode,1,2)='{0}')", categorycode);
+                where += string.Format(" and (p.CategoryCode='{0}' or substring(p.CategoryCode,1,2)='{0}')", categorycode);
             }
-            //if (supplierCodes.Length > 0)
-            //{
-            //    foreach (string su in supplierCodes)
-            //    {
-            //        whereSupplier += "'" + su + "',";
-            //    }
-            //    if (!string.IsNullOrEmpty(whereSupplier))
-            //    {
-            //        whereSupplier = whereSupplier.TrimEnd(',');
-            //    }
-            //    query += " and p.SupplierCode in (" + whereSupplier + ")";
-
-            //}
+            string query = select + from + where;
+            string queryCount = selectCount + from + where;
             string orderColumns = " p.LastUpdateTime ";
             bool desc = true;
                 
-            return GetList(query,orderColumns,desc,  pageIndex, pageSize, out totalRecord);
+            return GetList(query,orderColumns,desc,  pageIndex, pageSize, out totalRecord,queryCount);
         }
 
         /// <summary>
@@ -188,14 +181,14 @@ namespace NDAL
         {
             string query = "select p from Product p where p.Language='en' and lastupdatetime>'" + beginDate+ "'";
             int totalRecord;
-            return GetList(query,"NTSCode",false,0,99999,out totalRecord );
+            return GetList(query, "NTSCode", false, 0, 99999, out totalRecord, string.Empty);
         }
 
         public IList<Product> GetProductsNoImages()
         {
             string query = "select p from Product p where  p.ProductImageUrls.size=0";
             int totalRecord;
-            return GetList(query, "SupplierCode", false, 0, 99999, out totalRecord);
+            return GetList(query, "SupplierCode", false, 0, 99999, out totalRecord,string.Empty);
         }
     }
 }

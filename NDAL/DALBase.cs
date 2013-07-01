@@ -102,7 +102,7 @@ namespace NDAL
 
         public IList<T> GetList(string query, int pageIndex, int pageSize, out int totalRecords)
         {
-            return GetList(query, string.Empty, false, pageIndex, pageSize, out totalRecords);
+            return GetList(query, string.Empty, false, pageIndex, pageSize, out totalRecords,string.Empty);
         }
         /// <summary>
         /// 从数据库获取对象列表
@@ -114,7 +114,7 @@ namespace NDAL
         /// <param name="pageSize"></param>
         /// <param name="totalRecords"></param>
         /// <returns></returns>
-        public IList<T> GetList(string query, string orderColumns, bool orderDesc, int pageIndex, int pageSize, out int totalRecords)
+        public IList<T> GetList(string query, string orderColumns, bool orderDesc, int pageIndex, int pageSize, out int totalRecords,string query_count)
         {
             string strOrder = string.Empty;
             if (!string.IsNullOrEmpty(orderColumns))
@@ -124,7 +124,11 @@ namespace NDAL
                     strOrder += " desc ";
             }
             IQuery qry = session.CreateQuery(query + strOrder);
-            string queryCount = NLibrary.StringHelper.BuildCountQuery(query);
+
+            string queryCount = query_count;
+            if (string.IsNullOrEmpty(queryCount))
+            { queryCount = NLibrary.StringHelper.BuildCountQuery(query); }
+
             IQuery qryCount = session.CreateQuery(queryCount);
             totalRecords = (int)qryCount.UniqueResult<long>();
 

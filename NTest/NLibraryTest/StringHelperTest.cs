@@ -18,8 +18,14 @@ namespace NTest.NLibraryTest
                 "select p from Product p where p.SupplierCode in (select s.Code from Supplier s where s.Name like '%深圳%')";
 
             Assert.AreEqual(
-                "select count(*) from Product p where p.SupplierCode in (select s.Code from Supplier s where s.Name like '%深圳%')",
+                "select  count(*) from Product p where p.SupplierCode in (select s.Code from Supplier s where s.Name like '%深圳%')",
                 StringHelper.BuildCountQuery(query));
+
+            Assert.AreEqual(
+               "select count(distinct p) from Product p where p.SupplierCode in (select s.Code from Supplier s where s.Name like '%深圳%')",
+               StringHelper.BuildCountQuery(@"select distinct p from Product p where p.SupplierCode in (select s.Code from Supplier s where s.Name like '%深圳%')
+            "));
+
         }
     }
 }

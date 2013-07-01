@@ -74,7 +74,7 @@ namespace NDAL
                 query += "  and s.Code like '%"+supplierName+"%' or s.Name like '%" + supplierName + "%' or s.EnglishName like '%"+supplierName+"%'";
 
             }
-            return GetList( query,"Code",true, pageIndex,pageSize, out recordCount);
+            return GetList( query,"Code",true, pageIndex,pageSize, out recordCount,string.Empty);
         }
 
     }

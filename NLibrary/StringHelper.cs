@@ -53,7 +53,9 @@ namespace NLibrary
             ////"select s from supplier from supplier d where 1=1   "
 
 
-            Regex reg = new Regex("(?<=select).*?(?=from)");
+            Regex reg = new Regex(@"(?<=select\s+(distinct)?).*?(?=from)");
+
+            Match m = reg.Match(query);
 
             string result = reg.Replace(query, " count(*) ", 1);
             return result;
