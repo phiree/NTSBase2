@@ -6,8 +6,8 @@
 {
    
     border: solid 1px #4277A9;
-    padding: 1px;
-    width: 948px;
+   
+   
 }
 
 #header
@@ -42,7 +42,7 @@ margin-bottom:5px;
     float: right;
 }
 #body
-{
+{ 
     background-color: #fff;
 }
 

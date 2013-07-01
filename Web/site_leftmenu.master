@@ -16,7 +16,7 @@
     </script>
 </asp:Content>
 <asp:Content ContentPlaceHolderID="cph_body" runat="server">
-    <div class="span-4" id="leftMenu">
+    <div class="span-4 last" id="leftMenu">
         <ul >
             <li class="leftmenu_on"><a href="/products/">产品列表</a></li>
           <%--  <li><a href="/products/ProductTag.aspx">产品集</a></li>--%>
@@ -24,7 +24,8 @@
         </ul>
     </div>
     <div class="span-20 last" id="maincontent">
+   <div style="padding-left:10px; padding-top:10px;">
         <asp:ContentPlaceHolder ID="cph_maincontent" runat="server">
-        </asp:ContentPlaceHolder>
+        </asp:ContentPlaceHolder></div>
     </div>
 </asp:Content>

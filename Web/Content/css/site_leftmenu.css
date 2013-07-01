@@ -1,4 +1,14 @@
-﻿#leftMenu ul
+﻿#maincontent
+{
+  border-left:solid 1px #ccc;
+  position:relative;
+  left:-1px;
+    }
+    #leftMenu
+    {
+        border-right:solid 1px #ccc;
+        }
+#leftMenu ul
 {
     list-style-type: none;
     padding: 0;
