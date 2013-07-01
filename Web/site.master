@@ -20,8 +20,10 @@
             <h1 class="span-12">
                 NTS产品信息中心</h1>
             <div class="span-12 last loginstatus">
+            <!--
                 <asp:LoginName runat="server" />
-                <asp:LoginStatus LoginImageUrl="~/Content/images/login.jpg" runat="server" />
+                <asp:LoginStatus  TabIndex="999"  LoginImageUrl="~/Content/images/login.jpg" runat="server" />
+                -->
             </div>
         </div>
         <div class="clear span-24 last" id="body">
