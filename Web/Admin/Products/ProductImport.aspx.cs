@@ -29,7 +29,7 @@ public partial class Admin_Products_ProductImport : System.Web.UI.Page
            importLog.ImportMember = tbxOperator.Text.Trim();
            importLog.ImportResult = errMsg;
            importLog.ImportTime = DateTime.Now;
-           bizLog.Save(importLog);
+          // bizLog.Save(importLog);
             lblMsg.Attributes["class"] = "success";
             lblMsg.InnerHtml = errMsg;
         }
