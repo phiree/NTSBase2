@@ -32,6 +32,23 @@ namespace NTest.NBizTest
 
         }
         [Test]
+        public void ReadProductFromExcelTest2()
+        {
+            /*
+             文件末尾有空白行
+             */
+            string filePath = Environment.CurrentDirectory + @"\TestFiles\英文版——NTS产品报价单 佛山富丰西厨具制造厂.xls";
+
+            IList<Product> products = bizProduct.ReadListFromExcel(new System.IO.FileStream(filePath, System.IO.FileMode.Open)
+                , out errMsg);
+
+            Assert.AreEqual(127, products.Count);
+            Assert.AreEqual("en", products[0].ProductMultiLangues[0].Language);
+            Assert.AreEqual("en", products[0].ProductMultiLangues[0].Language);
+            Assert.AreEqual("en", products[1].ProductMultiLangues[0].Language);
+
+        }
+        [Test]
         public void ReadSupplierFromExcelTest()
         {
 

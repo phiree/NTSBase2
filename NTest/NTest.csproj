@@ -174,6 +174,9 @@
     <None Include="TestFiles\英文——2013-3-26家具（brighthome）数据表.XLS">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="TestFiles\英文版——NTS产品报价单 佛山富丰西厨具制造厂.xls">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="TestFiles\FormatCheck\巴非\图片\BM503A.tif">
