@@ -8,9 +8,9 @@
         <fieldset>
             <legend>搜索</legend>
             <div>
-                <span>供应商名称 或 编码</span>
-                <asp:TextBox runat="server"  Width="400" ID="tbxName"></asp:TextBox><asp:Button runat="server"
-                    ID="btnSearch" OnClick="btnSearch_Click" Text="搜索" />
+                <span >供应商名称 或 编码</span>
+                <asp:TextBox runat="server" CssClass="text"  Width="400" ID="tbxName"></asp:TextBox><asp:Button runat="server"
+                    ID="btnSearch" OnClick="btnSearch_Click"  Text="搜索" />
             </div>
         </fieldset>
     </div>
