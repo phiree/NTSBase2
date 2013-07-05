@@ -43,9 +43,23 @@ namespace NBiz
         }
         public override IList<Category> SaveList(IList<Category> list, out string errMsg)
         {
+            List<Category> cateList_CheckedByDb = new List<Category>();
+            foreach (Category cate in list)
+            {
+                Category cateInDb = GetOneByCodes(cate.Code, cate.ParentCode);
+                if (cateInDb != null)
+                {
+                    cateList_CheckedByDb.Add(cateInDb);
+                }
+                else
+                {
+                    cateList_CheckedByDb.Add(cate);
+                }
+            }
+
             errMsg = string.Empty;
-            DalCategory.SaveList(list);
-            return list;
+            DalCategory.SaveList(cateList_CheckedByDb);
+            return cateList_CheckedByDb;
             
         }
         public Category GetOneByCode(string code)
