@@ -62,7 +62,21 @@ namespace NBiz
         public override IList<Supplier> SaveList(IList<Supplier> list, out string errMsg)
         {
             errMsg = string.Empty;
-            DalSupplier.SaveList(list);
+            var validItems = new List<Supplier>();
+
+            foreach (Supplier s in list)
+            {
+                Supplier ss = GetByCode(s.Code);
+                if (ss != null)
+                {
+                    ss.UpdateByNewVersion(s);
+                    validItems.Add(ss);
+                }
+                else
+                    validItems.Add(s);
+            }
+
+            DalSupplier.SaveList(validItems);
             return list;
         }
         public IList<Supplier> GetListAllPaged(int pageIndex, int pageSize, out int totalRerord)

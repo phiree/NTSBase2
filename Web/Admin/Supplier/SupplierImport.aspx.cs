@@ -24,8 +24,15 @@ public partial class Admin_Supplier_SupplierImport : System.Web.UI.Page
         }
         catch (Exception ex)
         {
+            
             lblMsg.Attributes["class"] = "error";
+
+
             lblMsg.InnerHtml = ex.Message;
+            if (ex.InnerException != null)
+            {
+                lblMsg.InnerHtml += " " + ex.InnerException.Message;
+            }
         }
 
 

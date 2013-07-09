@@ -30,6 +30,13 @@ namespace NModel
        /// </summary>
        public virtual string Phone{ get; set; }
 
-      
+       public virtual void UpdateByNewVersion(Supplier newSupplier)
+       {
+           this.Name = newSupplier.Name;
+           this.Phone = newSupplier.Phone;
+           this.Address = newSupplier.Address;
+           this.ContactPerson = newSupplier.ContactPerson;
+           this.EnglishName = newSupplier.EnglishName;
+       }
     }
 }

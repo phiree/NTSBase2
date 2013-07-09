@@ -22,6 +22,8 @@
      DataNavigateUrlFormatString="/products/?sname={0}" />
      <asp:BoundField DataField="EnglishName" HeaderText="英文名称" />
      <asp:BoundField DataField="Code" HeaderText="供应商编码" />
+     <asp:BoundField DataField="ContactPerson" HeaderText="联系人" />
+     <asp:BoundField DataField="Phone" HeaderText="电话" />
      
     </Columns>
         <EmptyDataTemplate>

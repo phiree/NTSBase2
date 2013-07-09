@@ -52,13 +52,13 @@ namespace NTest.NBizTest
         public void ReadSupplierFromExcelTest()
         {
 
-            string filePathSupplier = Environment.CurrentDirectory + @"\TestFiles\供应商104.xls";
+            string filePathSupplier = Environment.CurrentDirectory + @"\TestFiles\供应商193.xls";
        
             IList<Supplier> Supplier = bizSupplier.ReadSupplierListFromExcel(new System.IO.FileStream(filePathSupplier, System.IO.FileMode.Open)
                 ,out errMsg
                 );
 
-            Assert.AreEqual(104, Supplier.Count);
+            Assert.AreEqual(193, Supplier.Count);
         }
 
         /// <summary>
