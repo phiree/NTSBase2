@@ -68,9 +68,10 @@
     <Compile Include="Product\ProductImageImporter.cs" />
     <Compile Include="ImportLog\BizImportLog.cs" />
     <Compile Include="Product\BizProduct.cs" />
-    <Compile Include="BLLBase.cs" />
+    <Compile Include="TourRoleProvider.cs" />
+    <Compile Include="_BLLBase.cs" />
     <Compile Include="ImageExtractor.cs" />
-    <Compile Include="ImportFromExcel.cs" />
+    <Compile Include="_ImportFromExcel.cs" />
     <Compile Include="Product\RowPolulate.cs" />
     <Compile Include="Product\SingleFolderImport.cs" />
     <Compile Include="Product\BizProductTag.cs" />
