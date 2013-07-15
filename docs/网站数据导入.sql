@@ -1,14 +1,14 @@
 INSERT INTO  magento17.data_import 
-        (sku, 
-	NAME, 
-	specification, 
-	price, 
-	special_price, 
-	manufacturer, 
-	model, 
+        (sku, -- 1
+NAME,            -- 2
+	specification,-- 3 
+	price,  -- 4
+	special_price, -- 5 
+	manufacturer, -- 6
+	model,   -- 7 
 	category_ids, 
 	short_description, 
-	description, 
+	 description, 
 	meta_title, 
 	meta_keyword, 
 	meta_description, 
@@ -26,45 +26,51 @@ INSERT INTO  magento17.data_import
 	websites, 
 	TYPE, 
 	attribute_set, 
-	weight)
-
-SELECT p.ntscode AS sku
-,l.name -- 2
-,l.ProductParameters   -- 3
+	weight,
+	parameter)
+	
+	
+SELECT DISTINCT p.ntscode AS sku
+,pa.NameForWeb  -- 2
+ ,CONCAT(pa.Specification,'<br/>', pa.ProductDescription) -- specification
 ,REPLACE(REPLACE(p.PriceOfFactory,'гд',''),',','')  -- 4
 ,p.PriceOfFactory
 ,s.englishname
 ,p.modelnumber
  ,CONCAT('42,',m2.cateid_website,',',m1.cateid_website)
 , l.ProductDescription
-, l.ProductDescription
+, ''         -- description
 ,'' -- seo
 ,''
 ,''
-,CONCAT('/',i.ImageName)
-,CONCAT('/',i.ImageName)
+,CONCAT('/', i.ImageName)
+,CONCAT('/', i.ImageName)
 ,CONCAT('/',i.ImageName)
 
 ,1,10000,1,0,'Catalog,Search'
-,CONCAT('/',i.ImageName)
+,CONCAT('/', i.ImageName)
 ,255
 ,'default'
 ,'asia'
 ,'simple'
 ,'default'
 ,0
+ ,CONCAT( pa.Parameter,';',pa.Material)  -- 3
 FROM   ntsbase2.product p 
-      ,ntsbase2.productlanguage l
-      ,CategoryMap m1
-      ,CategoryMap m2
-      ,ntsbase2.supplier s
-      ,ntsbase2.productimage i
-WHERE  l.language="en"
-	AND l.product_id=p.id
-
-	AND  p.categorycode=m1.cateid_ntsbase
-	AND LEFT(p.categorycode,2)=m2.cateid_ntsbase
-        AND p.suppliercode=s.code
-        AND p.id=i.product_id
-	ORDER BY p.id 
-		
+  INNER JOIN  ntsbase2.product_asia pa
+	ON pa.NTSCODE=p.NTSCode
+	
+   INNER JOIN  ntsbase2.productlanguage l
+	ON p.Id=l.Product_id  AND l.language='en'
+   INNER JOIN CategoryMap m1
+        ON p.categorycode=m1.cateid_ntsbase
+ INNER JOIN CategoryMap m2
+        ON LEFT(p.categorycode,2)=m2.cateid_ntsbase
+    
+   INNER JOIN ntsbase2.supplier s
+      ON p.suppliercode=s.code
+      
+    INNER JOIN ntsbase2.productimage i
+        ON p.id=i.product_id
+        
+       
