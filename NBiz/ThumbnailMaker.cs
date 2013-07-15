@@ -13,10 +13,15 @@ namespace NBiz
         
         public static string Make(string sourcedir,string targetdir, string originalName,int width,int height,ThumbnailType type)
         {
+            if (!File.Exists(sourcedir + originalName))
+            {
+                return string.Empty;
+            }
             string thumbnailName = Path.GetFileNameWithoutExtension(originalName) + "_" + width + "-" + height + Path.GetExtension(originalName);
             string thumbnailPath = targetdir +  width + "_" + height + "\\";
             string thumbnailFullName = thumbnailPath + thumbnailName;
             NLibrary.IOHelper.EnsureFileDirectory(thumbnailPath);
+            
             if (!File.Exists(thumbnailFullName))
             {
                 MakeThumbnail(sourcedir + originalName, thumbnailFullName, type, width, height);
