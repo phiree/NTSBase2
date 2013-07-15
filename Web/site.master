@@ -4,12 +4,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>NTS产品信息中心</title>
+    <script src="/Scripts/jquery-1.6.4.min.js" type="text/javascript"></script>
+       <script src="/Scripts/json2.min.js" type="text/javascript"></script>
+    <script src="/Scripts/jquery-ui-1.10.3.min.js" type="text/javascript"></script>
+    <script src="/Scripts/jquery.cookie.js" type="text/javascript"></script>
+    <script src="/Scripts/Cart.js" type="text/javascript"></script>
+    <script src="/Scripts/pages/master_site.js" type="text/javascript"></script>
     <!-- Framework CSS -->
     <link rel="stylesheet" href="/Content/blueprint/screen.css" type="text/css" media="screen, projection" />
     <link rel="stylesheet" href="/Content/blueprint/print.css" type="text/css" media="print" />
     <!--[if lt IE 8]><link rel="stylesheet" href="/Content/blueprint/ie.css" type="text/css" media="screen, projection"/><![endif]-->
     <link href="/Content/css/pager.css" rel="stylesheet" type="text/css" />
     <link href="/Content/css/site.css" rel="stylesheet" type="text/css" />
+    
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -24,14 +31,12 @@
                 <asp:LoginName runat="server" />
                 <asp:LoginStatus  TabIndex="999"  LoginImageUrl="~/Content/images/login.jpg" runat="server" />
                 -->
+                <div><span>共<span id="sumCart"></span>件</span><a href="/products/cart.aspx">查看全部</a></div>
             </div>
         </div>
         <div class="clear span-24 last" id="body">
-            
                 <asp:ContentPlaceHolder runat="server" ID="cph_body">
                 </asp:ContentPlaceHolder>
-           
-           
         </div>
         <div class="clear span-24 last" id="footer">
             NTS
