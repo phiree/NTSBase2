@@ -62,6 +62,23 @@ namespace NDAL
             }
             // return GetOneByQuery(iqueryover);
         }
+        public virtual Product GetOneByNTSCode(string ntscode)
+        {
+            NHibernate.IQueryOver<Product> iqueryover = session.QueryOver<Product>().Where(x => x.NTSCode == ntscode)
+              ;
+            //string query = string.Format("from Product p where p.SupplierName='{0}' and p.ModelNumber='{1}'",
+            //    supplierName,modelNumber);
+            try
+            {
+                Product p = GetOneByQuery(iqueryover);
+
+                return p;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message + "数据不存在. Data:NTSCode:" + ntscode);
+            }
+        }
         /*
         public virtual Product GetOneByModelNumberAndSupplierName(string modelNumber, string suppliername, string supplierEnglishName)
         {
@@ -97,10 +114,10 @@ namespace NDAL
 
             //string query = "select p from Product as  p join p.ProductMultiLangues as pl where ";
             string select = "select distinct p ";
-            string selectCount="select count(distinct p) ";
+            string selectCount = "select count(distinct p) ";
             string from = " from Product as p join p.ProductMultiLangues as pl ";
             string where = " where ";
-           
+
             if (!string.IsNullOrEmpty(supplierName))
             {
                 where += "  p.SupplierCode in (select s.Code from Supplier as s where s.EnglishName like '%" + supplierName + "%' or  s.Name like '%" + supplierName + "%') ";
@@ -113,12 +130,12 @@ namespace NDAL
             {
                 where += " and p.NTSCode like '%" + ntsCode + "%'";
             }
-           
+
             if (!string.IsNullOrEmpty(model))
             {
                 where += "and p.ModelNumber like '%" + model + "%'";
             }
-            if ( hasphoto.HasValue)
+            if (hasphoto.HasValue)
             {
                 if (hasphoto.Value == true)
                 {
@@ -142,8 +159,8 @@ namespace NDAL
             string queryCount = selectCount + from + where;
             string orderColumns = " p.LastUpdateTime ";
             bool desc = true;
-                
-            return GetList(query,orderColumns,desc,  pageIndex, pageSize, out totalRecord,queryCount);
+
+            return GetList(query, orderColumns, desc, pageIndex, pageSize, out totalRecord, queryCount);
         }
 
         /// <summary>
@@ -164,10 +181,10 @@ namespace NDAL
         {
             NHibernate.IQueryOver<Product, Product> queryover = session.QueryOver<Product>()
                 .Where(x => x.SupplierCode == supplierCode);
-           //var list= session.QueryOver<Product>().Where(x => x.SupplierCode == supplierCode);
+            //var list= session.QueryOver<Product>().Where(x => x.SupplierCode == supplierCode);
 
-           //string qry = "select p from Product p where p.SupplierCode='" + supplierCode + "'";
-           //return GetList(qry);
+            //string qry = "select p from Product p where p.SupplierCode='" + supplierCode + "'";
+            //return GetList(qry);
 
             return GetList(queryover);
         }
@@ -179,7 +196,7 @@ namespace NDAL
         /// <returns></returns>
         public IList<Product> GetProducts_English(DateTime beginDate)
         {
-            string query = "select p from Product p where p.Language='en' and lastupdatetime>'" + beginDate+ "'";
+            string query = "select p from Product p where p.Language='en' and lastupdatetime>'" + beginDate + "'";
             int totalRecord;
             return GetList(query, "NTSCode", false, 0, 99999, out totalRecord, string.Empty);
         }
@@ -188,7 +205,7 @@ namespace NDAL
         {
             string query = "select p from Product p where  p.ProductImageList.size=0";
             int totalRecord;
-            return GetList(query, "SupplierCode", false, 0, 99999, out totalRecord,string.Empty);
+            return GetList(query, "SupplierCode", false, 0, 99999, out totalRecord, string.Empty);
         }
     }
 }

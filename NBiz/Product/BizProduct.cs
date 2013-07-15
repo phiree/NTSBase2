@@ -180,6 +180,12 @@ namespace NBiz
 
             return DalProduct.GetOneByModelNumberAndSupplierCode(modelNumber, supplierCode);
         }
+
+        public Product GetOneBy_NtsCode(string  ntscode)
+        {
+           return DalProduct.GetOneByNTSCode(ntscode);
+        }
+
         /// <summary>
         /// 从字符串提取产品关键信息,进而从数据库中提取相关信息
         /// </summary>

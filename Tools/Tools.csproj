@@ -71,6 +71,12 @@
     <Compile Include="FrmExtractImage.Designer.cs">
       <DependentUpon>FrmExtractImage.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmRenameImage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmRenameImage.Designer.cs">
+      <DependentUpon>FrmRenameImage.cs</DependentUpon>
+    </Compile>
     <Compile Include="ProductUploader.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -96,6 +102,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmExtractImage.resx">
       <DependentUpon>FrmExtractImage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmRenameImage.resx">
+      <DependentUpon>FrmRenameImage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ProductUploader.resx">
       <DependentUpon>ProductUploader.cs</DependentUpon>
