@@ -14,7 +14,7 @@ public partial class Products_ascxProductList : System.Web.UI.UserControl
     NBiz.BizSupplier bizSupplier = new NBiz.BizSupplier();
     protected void Page_Load(object sender, EventArgs e)
     {
-        pager.PageSize = PageSize;
+       if(PageSize>0) pager.PageSize = PageSize;
         if (!IsPostBack)
         {
             pager.RecordCount = RecordCount;
@@ -24,6 +24,8 @@ public partial class Products_ascxProductList : System.Web.UI.UserControl
     }
     protected void dgProduct_RowDataBound(object sender, GridViewRowEventArgs e)
     {
+
+
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
             NModel.Product p = e.Row.DataItem as NModel.Product;

@@ -1,11 +1,12 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/site_leftmenu.master" AutoEventWireup="true"
     CodeFile="Default.aspx.cs" Inherits="Products_Default" %>
-
+<%@ Register Src="~/Products/ascxProductList.ascx" TagName="ProList" TagPrefix="UC" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <script src="/Scripts/pages/products_default.js" type="text/javascript"></script>
     <link href="/Content/themes/base/jquery.ui.all.css" rel="stylesheet" type="text/css" />
     <link href="/Content/themes/base/minified/jquery.ui.autocomplete.min.css" rel="stylesheet"
         type="text/css" />
+    <link href="/Content/css/productdefault.css" rel="stylesheet" type="text/css" />
 <script language="javascript" type="text/javascript">
 
 
@@ -38,9 +39,17 @@
     </fieldset>
     <uc:AspNetPager runat="server" ID="AspNetPager1" CloneFrom="pager">
     </uc:AspNetPager>
-    <asp:GridView AutoGenerateColumns="false" RowStyle-BorderWidth=1 runat="server" ID="dgProduct" OnRowDataBound="dgProduct_RowDataBound"
+    <asp:GridView AutoGenerateColumns="false" RowStyle-BorderWidth=1 RowStyle-BorderColor="#cccccc" runat="server" ID="dgProduct" OnRowDataBound="dgProduct_RowDataBound"
         RowStyle-Height="60">
         <Columns>
+         <asp:TemplateField>
+           <HeaderTemplate>
+           <label for="cbxSelAll">全选</label><input type="checkbox" id="cbxSelAll" /> 
+           </HeaderTemplate>
+              <ItemTemplate>
+                    <input style="height:40px;width:40px;" type="checkbox" class="cbxp"  pid='<%#Eval("id") %>' />
+                    </ItemTemplate>
+           </asp:TemplateField>
             <asp:TemplateField HeaderText="图片">
                 <ItemTemplate>
                     <asp:Repeater runat="server" ID="rptImages" OnItemDataBound="rptImages_ItemDataBound">
@@ -73,13 +82,7 @@
 
             
             </asp:TemplateField>
-             <asp:TemplateField HeaderText="">
-            <ItemTemplate>
-            <input type="button"  pid='<%#Eval("Id")%>'   class="btnAddToCart" value="加入选单" />
-            </ItemTemplate>
-
-            
-            </asp:TemplateField>
+           
         </Columns>
         <EmptyDataTemplate>
             <div class="notice">

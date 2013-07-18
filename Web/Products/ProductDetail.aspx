@@ -8,6 +8,11 @@
         onload="dv_Load"   >
  <Fields>
  <asp:BoundField  HeaderStyle-Wrap="false"  ItemStyle-Font-Size="Medium"  ItemStyle-Font-Bold="true"  HtmlEncode="false"  HeaderText="名称" DataField="Name"/>
+ <asp:TemplateField >
+ <ItemTemplate>
+ <input type="button" id="btnAddToCart" value="加入选单" pid='<%#Eval("id") %>' />
+ </ItemTemplate>
+ </asp:TemplateField>
 <asp:BoundField  HeaderStyle-Wrap="false"  HeaderText="型号" DataField="ModelNumber"/>
  <asp:BoundField  HeaderStyle-Wrap="false" ItemStyle-Font-Bold="true"  HeaderText="出厂价" DataField="PriceOfFactory"/>
 <asp:BoundField   HeaderStyle-Wrap="false"  HeaderText="NTS编码" DataField="NTSCode"/>

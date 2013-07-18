@@ -18,8 +18,12 @@
     </uc:AspNetPager>
     <asp:GridView runat="server" ID="dgSupplier"   AutoGenerateColumns="false" OnRowCreated="dg_SupplierRowCreated">
     <Columns>
-    <asp:HyperLinkField HeaderText="中文名称"  Target="_blank"  DataTextField="Name" DataNavigateUrlFields="Name"
-     DataNavigateUrlFormatString="/products/?sname={0}" />
+    
+     <asp:TemplateField  HeaderText="中文名称" >
+     <ItemTemplate>
+     <a href='/products/?sname=<%# Server.UrlEncode(Eval("Name").ToString()) %>'> <%#Eval("Name")%></a>
+     </ItemTemplate>
+     </asp:TemplateField>
      <asp:BoundField DataField="EnglishName" HeaderText="英文名称" />
      <asp:BoundField DataField="Code" HeaderText="供应商编码" />
      <asp:BoundField DataField="ContactPerson" HeaderText="联系人" />

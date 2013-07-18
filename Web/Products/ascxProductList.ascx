@@ -1,14 +1,11 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="ascxProductList.ascx.cs" Inherits="Products_ascxProductList" %>
+<script src="/Scripts/pages/ascxProductList.js" type="text/javascript"></script>
 <uc:AspNetPager runat="server" ID="AspNetPager1" CloneFrom="pager">
     </uc:AspNetPager>
     <asp:GridView AutoGenerateColumns="false" runat="server" ID="dgProduct" OnRowDataBound="dgProduct_RowDataBound"
         RowStyle-Height="60">
         <Columns>
-           <asp:TemplateField>
-              <ItemTemplate>
-                    <%#Container.DataItemIndex+1 %>
-                    </ItemTemplate>
-           </asp:TemplateField>
+          
             <asp:TemplateField HeaderText="图片">
                 <ItemTemplate>
                     <asp:Repeater runat="server" ID="rptImages" OnItemDataBound="rptImages_ItemDataBound">
@@ -30,13 +27,18 @@
                     </asp:Repeater>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:HyperLinkField HeaderText="名称" DataTextField="Name" Target="_blank" DataNavigateUrlFields="Id"
+            <asp:HyperLinkField HeaderText="名称" ControlStyle-CssClass="proname" DataTextField="Name" Target="_blank" DataNavigateUrlFields="Id"
                 DataNavigateUrlFormatString="/products/productdetail.aspx?id={0}" />
             <asp:BoundField HeaderText="型号" DataField="ModelNumber" />
             <asp:BoundField HeaderText="NTS编码" DataField="NTSCode" />
             <asp:TemplateField HeaderText="供应商名称">
             <ItemTemplate>
             <asp:Literal runat="server" ID="liSupplierName"></asp:Literal>
+            </ItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField>
+            <ItemTemplate>
+            <input type="button" value="删除"  class="btnDeleteCart"  pid='<%#Eval("id") %>'/>
             </ItemTemplate>
             </asp:TemplateField>
         </Columns>
