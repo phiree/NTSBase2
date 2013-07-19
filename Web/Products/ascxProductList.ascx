@@ -16,9 +16,9 @@
    "/ImageHandler.ashx?imagename=<%# Container.DataItem.ToString()%>&width=50&height=50&tt=2" 
    "/ProductImages/thumbnails/1742381668_100-100.JPG"
    -->
-                            <a href="/ProductImages/original/<%# Container.DataItem.ToString()%>" title="点击查看原图"
+                             <a href='/ProductImages/original/<%# Eval("ImageName")%>' title="点击查看原图"
                                 target="_blank">
-                                <img src="/ImageHandler.ashx?imagename=<%# Container.DataItem.ToString()%>&width=50&height=50&tt=2" />
+                                <img src='/ImageHandler.ashx?imagename=<%# Eval("ImageName")%>&width=50&height=50&tt=2' />
                             </a>
                         </ItemTemplate>
                         <FooterTemplate>

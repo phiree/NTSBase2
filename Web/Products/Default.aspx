@@ -47,7 +47,7 @@
            <label for="cbxSelAll">全选</label><input type="checkbox" id="cbxSelAll" /> 
            </HeaderTemplate>
               <ItemTemplate>
-                    <input style="height:40px;width:40px;" type="checkbox" class="cbxp"  pid='<%#Eval("id") %>' />
+                    <input style="height:30px;width:30px;" type="checkbox" class="cbxp"  pid='<%#Eval("id") %>' />
                     </ItemTemplate>
            </asp:TemplateField>
             <asp:TemplateField HeaderText="图片">
