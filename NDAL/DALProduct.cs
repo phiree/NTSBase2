@@ -109,6 +109,7 @@ namespace NDAL
         public IList<Product> Search(string supplierName, string model, bool? hasphoto,
             string name, string categorycode,
             string ntsCode,
+            string imageQuality,
             int pageSize, int pageIndex, out int totalRecord)
         {
 
@@ -125,6 +126,10 @@ namespace NDAL
             else
             {
                 where += " 1=1  ";
+            }
+            if (!string.IsNullOrEmpty(imageQuality))
+            {
+                where += " and p.ImageState='" + imageQuality + "'";
             }
             if (!string.IsNullOrEmpty(ntsCode))
             {

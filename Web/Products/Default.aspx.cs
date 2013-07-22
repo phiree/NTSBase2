@@ -31,6 +31,7 @@ public partial class Products_Default : System.Web.UI.Page
         tbxCode.Text =Server.UrlDecode( Request["categoryCode"]);
         tbxName.Text = Request["name"];
         tbxNTSCode.Text = Request["ntscode"];
+        ddlImageQuanlity.SelectedValue = Request["imagequality"];
     }
     private int GetPageIndex()
     {
@@ -44,13 +45,14 @@ public partial class Products_Default : System.Web.UI.Page
     }
     protected void btnSearch_Click(object sender, EventArgs e)
     {
-        string targetUrl =string.Format( "Default.aspx?sname={0}&model={1}&hasphoto={2}&name={3}&categorycode={4}&ntscode={5}"
+        string targetUrl =string.Format( "Default.aspx?sname={0}&model={1}&hasphoto={2}&name={3}&categorycode={4}&ntscode={5}&imagequality={6}"
             , Server.UrlEncode(tbxSupplierName.Text)
             ,Server.UrlDecode(tbxModel.Text)
             ,ddlHasPhoto.SelectedValue
             ,tbxName.Text.Trim()
             ,tbxCode.Text.Trim()
             ,tbxNTSCode.Text.Trim()
+            ,ddlImageQuanlity.SelectedValue
             );
         Response.Redirect(targetUrl, true);
        // BindProduct();
@@ -61,8 +63,9 @@ public partial class Products_Default : System.Web.UI.Page
         string strHasPhotoValue = ddlHasPhoto.SelectedValue;
         if (strHasPhotoValue == "yes") hasPhoto = true;
         else if(strHasPhotoValue=="no") hasPhoto = false;
-        
-        
+
+        string imageQuality = ddlImageQuanlity.SelectedValue;
+       
         int pageIndex = GetPageIndex();
         int totalRecords;
         var product = bizProduct.Search(tbxSupplierName.Text.Trim()
@@ -71,6 +74,7 @@ public partial class Products_Default : System.Web.UI.Page
             ,tbxName.Text.Trim()
             ,tbxCode.Text.Trim()
             ,tbxNTSCode.Text.Trim()
+            ,imageQuality
             , pager.PageSize
             , pageIndex, out totalRecords)
             .OrderBy(x=>x.CategoryCode);  // bizProduct.GetAll<NModel.Product>();

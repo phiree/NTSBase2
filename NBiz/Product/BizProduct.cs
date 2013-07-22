@@ -164,11 +164,13 @@ namespace NBiz
         public IList<Product> Search(string supplierName, string model, bool? hasPhoto,
             string name, string categorycode,
             string ntsCode,
+            string imageQuality,
             int pageSize, int pageIndex, out int totalRecord)
         {
             return DalProduct.Search(supplierName, model, hasPhoto,
                name, categorycode,
                ntsCode,
+               imageQuality,
                pageSize, pageIndex, out totalRecord);
         }
 

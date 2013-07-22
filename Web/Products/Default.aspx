@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/site_leftmenu.master" AutoEventWireup="true"
     CodeFile="Default.aspx.cs" Inherits="Products_Default" %>
+
 <%@ Register Src="~/Products/ascxProductList.ascx" TagName="ProList" TagPrefix="UC" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <script src="/Scripts/pages/products_default.js" type="text/javascript"></script>
@@ -7,21 +8,21 @@
     <link href="/Content/themes/base/minified/jquery.ui.autocomplete.min.css" rel="stylesheet"
         type="text/css" />
     <link href="/Content/css/productdefault.css" rel="stylesheet" type="text/css" />
-<script language="javascript" type="text/javascript">
+    <script language="javascript" type="text/javascript">
 
 
   
-</script>
-
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cph_maincontent" runat="Server">
     <fieldset>
         <legend>搜索</legend>
         <div>
-        <span>类别</span><div></div>
+            <span>类别</span><div>
+            </div>
             <span>产品名称:</span>
             <asp:TextBox CssClass="text" Width="150" runat="server" ID="tbxName"></asp:TextBox>
-             <span>NTS编码:</span>
+            <span>NTS编码:</span>
             <asp:TextBox CssClass="text" Width="150" runat="server" ID="tbxNTSCode"></asp:TextBox>
             <span>分类编码:</span>
             <asp:TextBox CssClass="text" Width="150" runat="server" ID="tbxCode"></asp:TextBox>
@@ -29,29 +30,38 @@
             <span>供应商名:</span>
             <asp:TextBox CssClass="text" Width="150" runat="server" ID="tbxSupplierName"></asp:TextBox>
             <span>产品型号:</span><asp:TextBox CssClass="text" Width="150" runat="server" ID="tbxModel"></asp:TextBox>
-            <span>产品图片:</span>  <asp:DropDownList runat="server" ID="ddlHasPhoto">
-            <asp:ListItem Selected="True" Value="all">不限</asp:ListItem>
-             <asp:ListItem  Value="yes">有图</asp:ListItem>
-              <asp:ListItem  Value="no">无图</asp:ListItem>
+            <span>产品图片:</span>
+            <asp:DropDownList runat="server" ID="ddlHasPhoto">
+                <asp:ListItem Selected="True" Value="all">不限</asp:ListItem>
+                <asp:ListItem Value="yes">有图</asp:ListItem>
+                <asp:ListItem Value="no">无图</asp:ListItem>
             </asp:DropDownList>
-            <uc:ButtonExt runat="server" ID="btnSearch" OnClick="btnSearch_Click" Text="搜索" />
+            <span>图片质量:</span>
+            <asp:DropDownList runat="server" ID="ddlImageQuanlity">
+                <asp:ListItem Selected="True" Value="">不限</asp:ListItem>
+                <asp:ListItem Value="a">A</asp:ListItem>
+                <asp:ListItem Value="b">B</asp:ListItem>
+            </asp:DropDownList>
+            <UC:ButtonExt runat="server" ID="btnSearch" OnClick="btnSearch_Click" Text="搜索" />
         </div>
     </fieldset>
-    <uc:AspNetPager runat="server" ID="AspNetPager1" CloneFrom="pager">
-    </uc:AspNetPager>
-    <asp:GridView AutoGenerateColumns="false" RowStyle-BorderWidth=1 RowStyle-BorderColor="#cccccc" runat="server" ID="dgProduct" OnRowDataBound="dgProduct_RowDataBound"
-        RowStyle-Height="60">
+    <UC:AspNetPager runat="server" ID="AspNetPager1" CloneFrom="pager">
+    </UC:AspNetPager>
+    <asp:GridView AutoGenerateColumns="false" RowStyle-BorderWidth="1" RowStyle-BorderColor="#cccccc"
+        runat="server" ID="dgProduct" OnRowDataBound="dgProduct_RowDataBound" RowStyle-Height="60">
         <Columns>
-         <asp:TemplateField>
-           <HeaderTemplate>
-           <label for="cbxSelAll">全选</label><input type="checkbox" id="cbxSelAll" /> 
-           </HeaderTemplate>
-              <ItemTemplate>
-                    <input style="height:30px;width:30px;" type="checkbox" class="cbxp"  pid='<%#Eval("id") %>' />
-                    </ItemTemplate>
-           </asp:TemplateField>
+            <asp:TemplateField>
+                <HeaderTemplate>
+                    <label for="cbxSelAll">
+                        全选</label><input type="checkbox" id="cbxSelAll" />
+                </HeaderTemplate>
+                <ItemTemplate>
+                    <input style="height: 30px; width: 30px;" type="checkbox" class="cbxp" pid='<%#Eval("id") %>' />
+                </ItemTemplate>
+            </asp:TemplateField>
             <asp:TemplateField HeaderText="图片">
                 <ItemTemplate>
+                <span><%#Eval("ImageState") %></span>  
                     <asp:Repeater runat="server" ID="rptImages" OnItemDataBound="rptImages_ItemDataBound">
                         <ItemTemplate>
                             <%-- <img style="width:200px" src='/ProductImages/<%# Container.DataItem.ToString()%>'  alt=""/>--%>
@@ -59,8 +69,7 @@
    "/ImageHandler.ashx?imagename=<%# Container.DataItem.ToString()%>&width=50&height=50&tt=2" 
    "/ProductImages/thumbnails/1742381668_100-100.JPG"
    -->
-                            <a href='/ProductImages/original/<%# Eval("ImageName")%>' title="点击查看原图"
-                                target="_blank">
+                          <a href='/ProductImages/original/<%# Eval("ImageName")%>' title="点击查看原图" target="_blank">
                                 <img src='/ImageHandler.ashx?imagename=<%# Eval("ImageName")%>&width=50&height=50&tt=2' />
                             </a>
                         </ItemTemplate>
@@ -74,15 +83,12 @@
                 DataNavigateUrlFormatString="/products/productdetail.aspx?id={0}" />
             <asp:BoundField HeaderText="型号" DataField="ModelNumber" />
             <asp:BoundField HeaderText="NTS编码" DataField="NTSCode" />
-            <asp:BoundField HeaderText="供应商代码"  HeaderStyle-Wrap="false" DataField="SupplierCode" />
+            <asp:BoundField HeaderText="供应商代码" HeaderStyle-Wrap="false" DataField="SupplierCode" />
             <asp:TemplateField HeaderText="供应商名称">
-            <ItemTemplate>
-            <asp:Literal runat="server" ID="liSupplierName"></asp:Literal>
-            </ItemTemplate>
-
-            
+                <ItemTemplate>
+                    <asp:Literal runat="server" ID="liSupplierName"></asp:Literal>
+                </ItemTemplate>
             </asp:TemplateField>
-           
         </Columns>
         <EmptyDataTemplate>
             <div class="notice">
@@ -90,9 +96,9 @@
             </div>
         </EmptyDataTemplate>
     </asp:GridView>
-    <uc:AspNetPager runat="server" ID="pager" UrlPaging="true" CssClass="paginator" CustomInfoHTML="总计:&lt;b&gt;%RecordCount%&lt;/b&gt;"
+    <UC:AspNetPager runat="server" ID="pager" UrlPaging="true" CssClass="paginator" CustomInfoHTML="总计:&lt;b&gt;%RecordCount%&lt;/b&gt;"
         EnableTheming="True" ShowCustomInfoSection="Left" ShowNavigationToolTip="True"
         CustomInfoSectionWidth="" FirstPageText="第一页" LastPageText="最后一页" NextPageText="下一页"
         PrevPageText="上一页" AlwaysShow="True" AlwaysShowFirstLastPageNumber="True">
-    </uc:AspNetPager>
+    </UC:AspNetPager>
 </asp:Content>

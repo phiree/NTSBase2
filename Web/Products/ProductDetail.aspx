@@ -27,6 +27,7 @@
 
 <asp:BoundField   HeaderStyle-Wrap="false"  HeaderText="规格参数" DataField="ProductParameters" HtmlEncode="false"/>
 <asp:BoundField   HeaderStyle-Wrap="false"  HeaderText="产品描述" DataField="ProductDescription" HtmlEncode="false"/>
+<asp:BoundField   HeaderStyle-Wrap="false"  HeaderText="图片质量" DataField="ImageState" HtmlEncode="false"/>
 <asp:TemplateField HeaderStyle-Wrap="false"  HeaderText="图片">
   <ItemTemplate>
     <asp:Repeater runat="server" ID="rptImages">
