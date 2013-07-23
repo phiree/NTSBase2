@@ -12,15 +12,32 @@ select * from t_tabledescription where   fdescription like '%销售报价%'
 --select * from ictransactiontype where ftrantype=2 --产品入库单
 --出入库单据 ftablename='t_RP_SystemProfile'
 select * from ICStockBillentry
+
+alter table icstockbill
+disable trigger ICStockBill_DEL
+
 delete from icstockbill
+
+alter table icstockbill
+enable trigger ICStockBill_DEL
+
+
 delete from icstockbillentry
 --收料通知单
 select * from  POInStock
+alter table POInStock
+disable trigger POInStock_DEL
 delete from  POInStock
+alter table POInStock
+enable trigger POInStock_DEL
 delete from  POInStockentry
 --采购订单
 select * from POOrder
+alter table poorder 
+disable trigger poorder_del
 delete from poorder
+alter table poorder 
+enable trigger poorder_del
 delete from poorderentry
 --发货通知单
 select * from SEOutStock
@@ -28,11 +45,19 @@ delete from SEOutStock
 delete from SEOutStockentry
 --销售订单
 select * from SEOrder
+alter table seorder 
+disable trigger seorder_del
 delete from seorder
+alter table seorder 
+enable trigger seorder_del
 delete from seorderentry
 --采购申请
 select * from PORequest
+alter table PORequest 
+disable trigger PORequest_del
 delete from PORequest
+alter table PORequest 
+enable trigger PORequest_del
 delete from PORequestentry
 --合同
 select * from t_RPContractentry
