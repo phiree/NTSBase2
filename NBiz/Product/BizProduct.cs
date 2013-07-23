@@ -187,6 +187,10 @@ namespace NBiz
         {
            return DalProduct.GetOneByNTSCode(ntscode);
         }
+        public IList<Product> GetListBySupplierCode(string supplierCode)
+        {
+            return DalProduct.GetListBySupplierCode(supplierCode);
+        }
 
         /// <summary>
         /// 从字符串提取产品关键信息,进而从数据库中提取相关信息

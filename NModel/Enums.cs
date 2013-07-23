@@ -57,5 +57,6 @@ namespace NModel.Enums
     {
         SupplierName_ModelNumber,// 供应商/型号.扩展名
         Category_NTsCode,//分类/ntscode.扩展名
+        Supplier_OriginalName// 供应商/原始文件名
     }
 }

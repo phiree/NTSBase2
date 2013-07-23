@@ -222,6 +222,10 @@ namespace NModel
                     imagesToExport.Push(this.ModelNumber + imageExtension);//文件名称
                     imagesToExport.Push(this.SupplierCode);
                     break;
+                case  ImageOutPutStratage.Supplier_OriginalName:
+                     imagesToExport.Push(imageUrl);//文件名称
+                    imagesToExport.Push(this.SupplierCode);
+                    break;
                 default: throw new Exception("No Such Stratage");
             }
             return imagesToExport;

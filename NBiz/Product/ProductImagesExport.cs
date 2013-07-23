@@ -46,6 +46,7 @@ namespace NBiz
 
                         break;
                     case NModel.Enums.ImageOutPutStratage.SupplierName_ModelNumber:
+                    case NModel.Enums.ImageOutPutStratage.Supplier_OriginalName:
                         pathFromStack = pathStacks.Pop();
                         break;
                     default: throw new Exception("No Such Stratage");

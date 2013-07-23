@@ -12,6 +12,7 @@ public partial class Admin_Products_ProductExport : System.Web.UI.Page
     ProductImagesExport imageExporter = new ProductImagesExport();
     BizProduct bizProduct = new BizProduct();
     IList<Product> productToExport;
+    
     string message;
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -46,6 +47,22 @@ public partial class Admin_Products_ProductExport : System.Web.UI.Page
                 (tbxPs.Text,out message);
 
             return productToExport;
+        }
+    }
+    private IList<Product> SupplierProducts
+    {
+        get {
+            if (productToExport != null) return productToExport;
+            productToExport = new List<Product>();
+            string[] supplierCodes = tbxSupplierNames.Text.Split(new string[]{ Environment.NewLine},StringSplitOptions.RemoveEmptyEntries);
+
+            foreach (string s in supplierCodes)
+            {
+               IList<Product> pos=  bizProduct.GetListBySupplierCode(s);
+               productToExport = productToExport.Union(pos).ToList();
+            }
+            return productToExport.Where(x => x.ProductImageList.Count > 0).ToList();
+
         }
     }
     protected void btnExportExcel_Click(object sender, EventArgs e)
@@ -94,5 +111,24 @@ public partial class Admin_Products_ProductExport : System.Web.UI.Page
         export.ExportProductExcel(ProductsNoImages);
         lblMsg.Text = "操作完成";
        
+    }
+
+    protected void btnSupplierExportExcel_Click(object sender, EventArgs e)
+    {
+        ExcelExport export = new ExcelExport("供应商产品" + DateTime.Now.ToString("yyyyMMdd-HHmmss"));
+        export.ExportProductExcel(SupplierProducts);
+        lblMsg.Text = "操作完成";
+    }
+    protected void btnSupplierExportImage_Click(object sender, EventArgs e)
+    {
+
+        NLogger.Logger.Debug("--开始导出图片--产品数量" + SupplierProducts.Count);
+
+        imageExporter.Export(SupplierProducts, Server.MapPath("/productImagesExport/") + DateTime.Now.ToString("yyyyMMdd-HHmmss") + "\\",
+
+      Server.MapPath("/ProductImages/original/"), NModel.Enums.ImageOutPutStratage.Supplier_OriginalName);
+
+        lblMsg.Text = "操作完成. 产品图片已保存于 \\192.168.1.44\\导出图片\\ ";
+        NLogger.Logger.Debug("--导出结束--");
     }
 }

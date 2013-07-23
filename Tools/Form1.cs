@@ -24,7 +24,7 @@ namespace Tools
         private void btnCheck_Click(object sender, EventArgs e)
         {
             
-                new FrmRenameImage().Show();
+                new FrmCheckFormat().Show();
            
         }
 
