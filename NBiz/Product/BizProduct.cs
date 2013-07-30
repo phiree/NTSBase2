@@ -165,12 +165,16 @@ namespace NBiz
             string name, string categorycode,
             string ntsCode,
             string imageQuality,
+            string delivery,
+            string original,
             int pageSize, int pageIndex, out int totalRecord)
         {
             return DalProduct.Search(supplierName, model, hasPhoto,
                name, categorycode,
                ntsCode,
                imageQuality,
+               delivery,
+               original,
                pageSize, pageIndex, out totalRecord);
         }
 

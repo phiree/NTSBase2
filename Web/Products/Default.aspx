@@ -3,30 +3,53 @@
 
 <%@ Register Src="~/Products/ascxProductList.ascx" TagName="ProList" TagPrefix="UC" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
-    <script src="/Scripts/pages/products_default.js" type="text/javascript"></script>
+      <script src="/Scripts/InlineTip.js" type="text/javascript"></script>
+  <script src="/Scripts/pages/products_default.js" type="text/javascript"></script>
     <link href="/Content/themes/base/jquery.ui.all.css" rel="stylesheet" type="text/css" />
     <link href="/Content/themes/base/minified/jquery.ui.autocomplete.min.css" rel="stylesheet"
         type="text/css" />
     <link href="/Content/css/productdefault.css" rel="stylesheet" type="text/css" />
     <script language="javascript" type="text/javascript">
 
+    var tip = "输入 名称 规格参数 描述备注,用空格隔开";
+    $(function () {
 
+        var initValue = $("#<%=tbxName.ClientID%>").val();
+        if (initValue == "") {
+            $("#<%=tbxName.ClientID%>").InlineTip({ "tip": tip });
+        }
+        $("#<%=btnSearch.ClientID%>").click(
+            function () {
+                var that = this;
+                var keyword = $("#<%=tbxName.ClientID%>").val();
+                if (keyword == "" || keyword == tip) {
+                    $("#<%=tbxName.ClientID%>").val("");
+                }
+            }
+            );
+    });
   
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cph_maincontent" runat="Server">
     <fieldset>
         <legend>搜索</legend>
-        <div>
-            <span>类别</span><div>
+        <div><div>
+            <span>关 键 字:</span>
+            <asp:TextBox CssClass="text" Width="380" runat="server" ID="tbxName"></asp:TextBox>  
             </div>
-            <span>产品名称:</span>
-            <asp:TextBox CssClass="text" Width="150" runat="server" ID="tbxName"></asp:TextBox>
+          <div>
             <span>NTS编码:</span>
             <asp:TextBox CssClass="text" Width="150" runat="server" ID="tbxNTSCode"></asp:TextBox>
             <span>分类编码:</span>
             <asp:TextBox CssClass="text" Width="150" runat="server" ID="tbxCode"></asp:TextBox>
-            <br />
+        
+            <span>产地:</span>
+            <asp:TextBox CssClass="text" Width="80" runat="server" ID="tbxOriginal"></asp:TextBox>
+            <span>发货地:</span>
+            <asp:TextBox CssClass="text" Width="80" runat="server" ID="tbxDelivery"></asp:TextBox>
+           </div>
+           <div>
             <span>供应商名:</span>
             <asp:TextBox CssClass="text" Width="150" runat="server" ID="tbxSupplierName"></asp:TextBox>
             <span>产品型号:</span><asp:TextBox CssClass="text" Width="150" runat="server" ID="tbxModel"></asp:TextBox>
@@ -42,7 +65,7 @@
                 <asp:ListItem Value="a">A</asp:ListItem>
                 <asp:ListItem Value="b">B</asp:ListItem>
             </asp:DropDownList>
-            <UC:ButtonExt runat="server" ID="btnSearch" OnClick="btnSearch_Click" Text="搜索" />
+            <UC:ButtonExt runat="server" ID="btnSearch" OnClick="btnSearch_Click" Text="搜索" /></div>
         </div>
     </fieldset>
     <UC:AspNetPager runat="server" ID="AspNetPager1" CloneFrom="pager">
@@ -83,7 +106,8 @@
                 DataNavigateUrlFormatString="/products/productdetail.aspx?id={0}" />
             <asp:BoundField HeaderText="型号" DataField="ModelNumber" />
             <asp:BoundField HeaderText="NTS编码" DataField="NTSCode" />
-             <asp:BoundField HeaderText="出厂价" DataField="PriceOfFactory" />
+            <asp:BoundField HeaderText="出厂价" DataField="PriceOfFactory" />
+             <asp:BoundField HeaderText="币别" DataField="MoneyType" />
             <asp:BoundField HeaderText="供应商代码" HeaderStyle-Wrap="false" DataField="SupplierCode" />
             <asp:TemplateField HeaderText="供应商名称">
                 <ItemTemplate>

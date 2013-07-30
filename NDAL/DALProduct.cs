@@ -110,9 +110,11 @@ namespace NDAL
             string name, string categorycode,
             string ntsCode,
             string imageQuality,
+            string delivery,
+            string original,
             int pageSize, int pageIndex, out int totalRecord)
         {
-
+            
             //string query = "select p from Product as  p join p.ProductMultiLangues as pl where ";
             string select = "select distinct p ";
             string selectCount = "select count(distinct p) ";
@@ -126,6 +128,16 @@ namespace NDAL
             else
             {
                 where += " 1=1  ";
+            }
+
+            
+            if (!string.IsNullOrEmpty(delivery))
+            {
+                where += " and pl.PlaceOfDelivery like '%" + delivery + "%'";
+            }
+            if (!string.IsNullOrEmpty(original))
+            {
+                where += " and pl.PlaceOfOrigin like '%" + original + "%'";
             }
             if (!string.IsNullOrEmpty(imageQuality))
             {
@@ -153,7 +165,20 @@ namespace NDAL
             }
             if (!string.IsNullOrEmpty(name))
             {
-                where += string.Format(" and  pl.Name like '%{0}%'", name);
+                string[] searchItems = name.Split(new string[]{" "}, StringSplitOptions.RemoveEmptyEntries);
+
+                foreach (string item in searchItems)
+                { 
+                    where += string.Format(@" and ( pl.Name like '%{0}%' 
+                                             or pl.ProductParameters like '%{0}%'
+                                             or pl.ProductDescription like '%{0}%'
+                                             or pl.Memo like '%{0}%'
+                                               )"
+                              , item);
+                }
+
+
+              
             }
             if (!string.IsNullOrEmpty(categorycode))
             {

@@ -31,6 +31,8 @@ public partial class Products_Default : System.Web.UI.Page
         tbxCode.Text =Server.UrlDecode( Request["categoryCode"]);
         tbxName.Text = Request["name"];
         tbxNTSCode.Text = Request["ntscode"];
+        tbxDelivery.Text = Request["delivery"];
+        tbxOriginal.Text = Request["original"];
         ddlImageQuanlity.SelectedValue = Request["imagequality"];
     }
     private int GetPageIndex()
@@ -45,7 +47,7 @@ public partial class Products_Default : System.Web.UI.Page
     }
     protected void btnSearch_Click(object sender, EventArgs e)
     {
-        string targetUrl =string.Format( "Default.aspx?sname={0}&model={1}&hasphoto={2}&name={3}&categorycode={4}&ntscode={5}&imagequality={6}"
+        string targetUrl =string.Format( "Default.aspx?sname={0}&model={1}&hasphoto={2}&name={3}&categorycode={4}&ntscode={5}&imagequality={6}&original={7}&delivery={8}"
             , Server.UrlEncode(tbxSupplierName.Text)
             ,Server.UrlDecode(tbxModel.Text)
             ,ddlHasPhoto.SelectedValue
@@ -53,6 +55,8 @@ public partial class Products_Default : System.Web.UI.Page
             ,tbxCode.Text.Trim()
             ,tbxNTSCode.Text.Trim()
             ,ddlImageQuanlity.SelectedValue
+            ,tbxOriginal.Text.Trim()
+            ,tbxDelivery.Text.Trim()
             );
         Response.Redirect(targetUrl, true);
        // BindProduct();
@@ -75,6 +79,8 @@ public partial class Products_Default : System.Web.UI.Page
             ,tbxCode.Text.Trim()
             ,tbxNTSCode.Text.Trim()
             ,imageQuality
+            ,tbxDelivery.Text.Trim()
+            ,tbxOriginal.Text.Trim()
             , pager.PageSize
             , pageIndex, out totalRecords)
             .OrderBy(x=>x.CategoryCode);  // bizProduct.GetAll<NModel.Product>();

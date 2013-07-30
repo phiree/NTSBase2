@@ -124,6 +124,7 @@ namespace NDAL
                     strOrder += " desc ";
             }
             IQuery qry = session.CreateQuery(query + strOrder);
+            
 
             string queryCount = query_count;
             if (string.IsNullOrEmpty(queryCount))
