@@ -83,6 +83,7 @@
                 DataNavigateUrlFormatString="/products/productdetail.aspx?id={0}" />
             <asp:BoundField HeaderText="型号" DataField="ModelNumber" />
             <asp:BoundField HeaderText="NTS编码" DataField="NTSCode" />
+             <asp:BoundField HeaderText="出厂价" DataField="PriceOfFactory" />
             <asp:BoundField HeaderText="供应商代码" HeaderStyle-Wrap="false" DataField="SupplierCode" />
             <asp:TemplateField HeaderText="供应商名称">
                 <ItemTemplate>

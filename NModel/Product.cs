@@ -18,6 +18,7 @@ namespace NModel
             ProductMultiLangues = new List<ProductLanguage>();
         }
         public virtual Guid Id { get; set; }
+        private string name;
          [Description("产品名称")]
         public virtual string Name
         {
@@ -25,15 +26,16 @@ namespace NModel
             {
                 if (ProductMultiLangues.Count == 1)
                     return ProductMultiLangues[0].Name;
-                string name = string.Empty;
+
                 foreach (ProductLanguage pl in ProductMultiLangues)
                 {
                     name += "(" + pl.Language + ")" + pl.Name + "<br/>";
                 }
                 return name.TrimEnd("<br/>".ToCharArray());
             }
-           protected internal  set { }
+            protected internal set { name = value; }
         }
+         private string unit;
            [Description("单位")]
         public virtual string Unit
         {
@@ -41,33 +43,34 @@ namespace NModel
             {
                 if (ProductMultiLangues.Count == 1)
                     return ProductMultiLangues[0].Unit;
-                string name = string.Empty;
+               
                 foreach (ProductLanguage pl in ProductMultiLangues)
                 {
-                    name += "(" + pl.Language + ")" + pl.Unit + "<br/>";
+                    unit += "(" + pl.Language + ")" + pl.Unit + "<br/>";
                 }
-                return name.TrimEnd("<br/>".ToCharArray());
+                return unit.TrimEnd("<br/>".ToCharArray());
             }
-            protected internal  set { }
+            protected internal set { unit = value; }
 
         }
-           [Description("产品参数")]
+           private string productParameters;
+           [Description("规格参数")]
         public virtual string ProductParameters
         {
             get
             {
                 if (ProductMultiLangues.Count == 1)
                     return ProductMultiLangues[0].ProductParameters;
-                string name = string.Empty;
                 foreach (ProductLanguage pl in ProductMultiLangues)
                 {
-                    name += "(" + pl.Language + ")" + pl.ProductParameters + "<br/>";
+                    productParameters += "(" + pl.Language + ")" + pl.ProductParameters + "<br/>";
                 }
-                return name.TrimEnd("<br/>".ToCharArray());
+                return productParameters.TrimEnd("<br/>".ToCharArray());
             }
-            protected internal  set { }
+            protected internal set { productParameters = value; }
 
         }
+           private string placeOfOrigin;
            [Description("产地")]
         public virtual string PlaceOfOrigin
         {
@@ -75,33 +78,34 @@ namespace NModel
             {
                 if (ProductMultiLangues.Count == 1)
                     return ProductMultiLangues[0].PlaceOfOrigin;
-                string name = string.Empty;
+               
                 foreach (ProductLanguage pl in ProductMultiLangues)
                 {
-                    name += "(" + pl.Language + ")" + pl.PlaceOfOrigin + "<br/>";
+                    placeOfOrigin += "(" + pl.Language + ")" + pl.PlaceOfOrigin + "<br/>";
                 }
-                return name.TrimEnd("<br/>".ToCharArray());
+                return placeOfOrigin.TrimEnd("<br/>".ToCharArray());
             }
-            protected internal  set { }
+            protected internal set { placeOfOrigin = value; }
 
         }
-         [Description("发货地")]
+           private string placeOfDelivery;
+         [Description("交货地")]
         public virtual string PlaceOfDelivery
         {
             get
             {
                 if (ProductMultiLangues.Count == 1)
                     return ProductMultiLangues[0].PlaceOfDelivery;
-                string name = string.Empty;
                 foreach (ProductLanguage pl in ProductMultiLangues)
                 {
-                    name += "(" + pl.Language + ")" + pl.PlaceOfDelivery + "<br/>";
+                    placeOfDelivery += "(" + pl.Language + ")" + pl.PlaceOfDelivery + "<br/>";
                 }
-                return name.TrimEnd("<br/>".ToCharArray());
+                return placeOfDelivery.TrimEnd("<br/>".ToCharArray());
             }
-            protected internal  set { }
+            protected internal set { placeOfDelivery = value; }
 
         }
+         private string productDescription;
         [Description("产品描述")]
         public virtual string ProductDescription
         {
@@ -109,16 +113,16 @@ namespace NModel
             {
                 if (ProductMultiLangues.Count == 1)
                     return ProductMultiLangues[0].ProductDescription;
-                string name = string.Empty;
                 foreach (ProductLanguage pl in ProductMultiLangues)
                 {
-                    name += "(" + pl.Language + ")" + pl.ProductDescription + "<br/>";
+                    productDescription += "(" + pl.Language + ")" + pl.ProductDescription + "<br/>";
                 }
-                return name.TrimEnd("<br/>".ToCharArray());
+                return productDescription.TrimEnd("<br/>".ToCharArray());
             }
-            protected internal  set { }
+            protected internal set { productDescription = value; }
 
         }
+        private string memo=string.Empty;
          [Description("备注")]
         public virtual string Memo
         {
@@ -126,14 +130,13 @@ namespace NModel
             {
                 if (ProductMultiLangues.Count == 1)
                     return ProductMultiLangues[0].Memo;
-                string name = string.Empty;
-                foreach (ProductLanguage pl in ProductMultiLangues)
+               foreach (ProductLanguage pl in ProductMultiLangues)
                 {
-                    name +="("+pl.Language+")" +pl.Memo + "<br/>";
+                    memo += "(" + pl.Language + ")" + pl.Memo + "<br/>";
                 }
-                return name.TrimEnd("<br/>".ToCharArray());
+                return memo.TrimEnd("<br/>".ToCharArray());
             }
-           // protected internal virtual set { }
+            protected internal set { memo = value; }
 
         }
         [Description("NTS编码")]
@@ -159,7 +162,7 @@ namespace NModel
         public virtual string MoneyType { get; set; }
         [Description("税率")]
         public virtual decimal TaxRate { get; set; }
-        [Description("最小起定量")]
+        [Description("最小起订量")]
         public virtual decimal OrderAmountMin { get; set; }
         [Description("生产周期")]
         public virtual decimal ProductionCycle { get; set; }
@@ -187,7 +190,50 @@ namespace NModel
         public virtual ImportOperationLog ImportOperationLog { get; set; }
 
         public virtual IList<ProductLanguage> ProductMultiLangues { get; set; }
-        //产品图片的名称.
+        //获取某种
+        public virtual Product GetProductOfSpecialLanguage(string language)
+        {
+            var pl= ProductMultiLangues.Where(x => x.Language.Equals(language, StringComparison.OrdinalIgnoreCase));
+          int languageVersionCount=pl.Count();
+            if (languageVersionCount>1)
+            {
+                throw new Exception("产品信息的多语言版本有误:"+this.NTSCode+" 的"+language+" 版本有 " +languageVersionCount+" 种");
+            }
+            else if (languageVersionCount == 0)
+            {
+                return null;
+            }
+            Product p = new Product();
+            ProductLanguage plOfThis = pl.ToArray()[0];
+            p.Memo = plOfThis.Memo ?? string.Empty;
+            p.Name = plOfThis.Name; 
+          p.PlaceOfDelivery=   plOfThis.PlaceOfDelivery ;
+          p.PlaceOfOrigin=  plOfThis.PlaceOfOrigin ;
+          p.ProductDescription = plOfThis.ProductDescription;
+          p.ProductParameters = plOfThis.ProductParameters;
+          p.Unit = plOfThis.Unit;
+
+
+          p.CategoryCode = this.CategoryCode;
+          p.CreateTime = this.CreateTime;
+          p.Id = this.Id;
+          p.ImageState = this.ImageState;
+          p.ModelNumber = this.ModelNumber;
+          p.MoneyType = this.MoneyType;
+          p.NTSCode = this.NTSCode;
+          p.OrderAmountMin = this.OrderAmountMin;
+          p.PriceDate = this.PriceDate;
+          p.PriceOfFactory = this.PriceOfFactory;
+          p.PriceValidPeriod = this.PriceValidPeriod;
+          p.ProductImageList = this.ProductImageList;
+          p.State = this.State;
+          p.ProductionCycle = this.ProductionCycle;
+          p.SupplierCode = this.SupplierCode;
+          p.TaxRate = this.TaxRate;
+            
+            return p;
+        }
+        //导入图片时,图片文件的命名规则. 产品图片的名称.
         public virtual string BuildImageName(string extensionWithDot)
         {
             string imageName = ModelNumber + "__" + SupplierCode;
@@ -196,6 +242,7 @@ namespace NModel
             return imageName + extensionWithDot;
         }
 
+        //导出时,图片的命名命名规则
         public virtual Stack<string> BuildImageOutputName(Enums.ImageOutPutStratage imageOutPutStratage)
         {
             Stack<string> imagesToExport = new Stack<string>();

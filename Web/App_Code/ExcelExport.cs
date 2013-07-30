@@ -18,15 +18,59 @@ public class ExcelExport
 	{
         this.saveFileName=saveFileName;
 	}
+    string[] languages = {"zh","en"};
+    private IList<Product> BuildProductsByLanguage(IList<Product> originalProductList)
+    {
+        List<Product> products = new List<Product>();
+
+        Dictionary<string, IList<Product>> ds_Products = new Dictionary<string, IList<Product>>();
+
+        foreach (Product p in originalProductList)
+        {
+            foreach (string lan in languages)
+            {
+                Product pInLang = p.GetProductOfSpecialLanguage(lan);
+                if (pInLang != null)
+                {
+                    products.Add(pInLang);
+                }
+            }
+        }
+        return products;
+    }
+    private Dictionary<string, IList<Product>> BuildProductsDictByLanguage(IList<Product> originalProductList)
+    {
+        Dictionary<string, IList<Product>> ds_Products = new Dictionary<string, IList<Product>>();
+        foreach (Product p in originalProductList)
+        {
+            foreach (string lan in languages)
+            {
+                Product pInLang = p.GetProductOfSpecialLanguage(lan);
+                if (pInLang != null)
+                {
+                    if (ds_Products.Keys.Contains(lan))
+                    {
+                        ds_Products[lan].Add(pInLang);
+                    }
+                    else
+                    {
+                        ds_Products.Add(lan,new List<Product>(){pInLang});
+                    }
+                }
+            }
+        }
+        return ds_Products;
+    }
     public void ExportProductExcel(IList<Product> products)
     {
-        DataTable dt = ObjectConvertor.ToDataTable<Product>(products);
-        ExportProductExcel(dt);
+     //   DataTable dt = ObjectConvertor.ToDataTable<Product>(BuildProductsByLanguage(products));
+        DataSet ds_products = ObjectConvertor.ToDataSet<Product>(BuildProductsDictByLanguage(products));
+        ExportProductExcel(ds_products);
     }
-    public void ExportProductExcel(DataTable dt)
+    private void ExportProductExcel(DataSet ds)
     {
         TransferInDatatable tt = new TransferInDatatable();
-        HSSFWorkbook book = tt.CreateXslWorkBookFromDataTable(dt);
+        HSSFWorkbook book = tt.CreateXslWorkBookFromDataSet(ds);
         DownLoadXslFile(book);
     }
     private void DownLoadXslFile(HSSFWorkbook workbook)
@@ -36,12 +80,12 @@ public class ExcelExport
         {
             HttpResponse Response = HttpContext.Current.Response;
             workbook.Write(exportData);
-            Response.ContentType = "application/vnd.ms-excel";
-            Response.ContentEncoding = System.Text.Encoding.UTF8;
+            Response.ContentType = "application/octet-stream";
+            Response.ContentEncoding = System.Text.Encoding.Default;
             Response.AddHeader("Content-Disposition", string.Format("attachment;filename={0}", saveFileName));
-            //Response.Clear();
+            Response.Clear();
             Response.BinaryWrite(exportData.GetBuffer());
-           // Response.End();
+            Response.End();
         }
     }
 }

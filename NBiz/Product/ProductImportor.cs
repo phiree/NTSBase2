@@ -247,7 +247,7 @@ namespace NBiz
             sbMsg.AppendLine(productsNotHasPicture.Count + ":无图片");
             foreach (Product pnopic in productsNotHasPicture)
             {
-                sbMsg.AppendLine("     名称:" + pnopic.Name + "型号:" + pnopic.ModelNumber + "供应商名称:" +BizSupplier.GetByCode(  pnopic.SupplierCode).Name);
+                sbMsg.AppendLine("     名称:" + pnopic.Name + "型号:" + pnopic.ModelNumber + "供应商编码:" + pnopic.SupplierCode);
 
             }
 

@@ -168,20 +168,7 @@ namespace NDAL
             return GetList(query, orderColumns, desc, pageIndex, pageSize, out totalRecord, queryCount);
         }
 
-        /// <summary>
-        /// 精确获取供应商的产品
-        /// </summary>
-        /// <param name="supplierName"></param>
-        /// <returns></returns>
-        public IList<Product> GetListBySupplier(string supplierCode)
-        {
-            NHibernate.IQueryOver<Product, Product> queryover = session.QueryOver<Product>()
-                .Where(x => x.SupplierCode == supplierCode)
-
-                ;
-            return GetList(queryover);
-        }
-
+       
         public virtual IList<Product> GetListBySupplierCode(string supplierCode)
         {
             NHibernate.IQueryOver<Product, Product> queryover = session.QueryOver<Product>()
@@ -193,7 +180,17 @@ namespace NDAL
 
             return GetList(queryover);
         }
+        public virtual IList<Product> GetListBySupplierCode(string supplierCode,string language)
+        {
+            NHibernate.IQueryOver<Product, Product> queryover = session.QueryOver<Product>()
+                .Where(x => x.SupplierCode == supplierCode);
+            //var list= session.QueryOver<Product>().Where(x => x.SupplierCode == supplierCode);
 
+            //string qry = "select p from Product p where p.SupplierCode='" + supplierCode + "'";
+            //return GetList(qry);
+
+            return GetList(queryover);
+        }
         /// <summary>
         /// 
         /// </summary>
@@ -212,5 +209,19 @@ namespace NDAL
             int totalRecord;
             return GetList(query, "SupplierCode", false, 0, 99999, out totalRecord, string.Empty);
         }
+        /// <summary>
+        /// 精确获取供应商的产品
+        /// </summary>
+        /// <param name="supplierName"></param>
+        /// <returns></returns>
+        public IList<Product> GetListBySupplier(string supplierCode)
+        {
+            NHibernate.IQueryOver<Product, Product> queryover = session.QueryOver<Product>()
+                .Where(x => x.SupplierCode == supplierCode)
+
+                ;
+            return GetList(queryover);
+        }
+
     }
 }

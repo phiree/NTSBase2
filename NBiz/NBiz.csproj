@@ -62,6 +62,7 @@
     <Compile Include="Category\BizCategory.cs" />
     <Compile Include="Category\CategoryExcelReader.cs" />
     <Compile Include="NTSMemberShip\NTSMembershipProvider.cs" />
+    <Compile Include="Product\ProductExport.cs" />
     <Compile Include="Product\ProductImagesExport.cs" />
     <Compile Include="Product\ProductImportor.cs" />
     <Compile Include="IDataTableConverter.cs" />
