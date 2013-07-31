@@ -50,6 +50,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{2CF8815D-7
 		docs\网站数据导入.sql = docs\网站数据导入.sql
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ERP", "ERP", "{44F1298A-1331-449B-A429-3B7C58B1FF49}"
+	ProjectSection(SolutionItems) = preProject
+		docs\ERP\erp帐套单据数据清理脚本.sql = docs\ERP\erp帐套单据数据清理脚本.sql
+		docs\ERP\供应商导出脚本.sql = docs\ERP\供应商导出脚本.sql
+		docs\ERP\物料导出脚本.sql = docs\ERP\物料导出脚本.sql
+		docs\ERP\物料导出脚本_主干.sql = docs\ERP\物料导出脚本_主干.sql
+		docs\ERP\触发器.sql = docs\ERP\触发器.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -133,5 +142,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{44F1298A-1331-449B-A429-3B7C58B1FF49} = {2CF8815D-7D5B-484C-B814-2C5289533EAA}
 	EndGlobalSection
 EndGlobal

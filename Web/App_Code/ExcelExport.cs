@@ -80,12 +80,12 @@ public class ExcelExport
         {
             HttpResponse Response = HttpContext.Current.Response;
             workbook.Write(exportData);
-            Response.ContentType = "application/octet-stream";
+            Response.ContentType = "application/vnd.ms-excel";
             Response.ContentEncoding = System.Text.Encoding.Default;
-            Response.AddHeader("Content-Disposition", string.Format("attachment;filename={0}", saveFileName));
-            Response.Clear();
+            Response.AddHeader("Content-Disposition", string.Format("attachment;filename={0}",HttpUtility.UrlEncode(saveFileName) ));
+            //Response.Clear();
             Response.BinaryWrite(exportData.GetBuffer());
-            Response.End();
+           // Response.End();
         }
     }
 }
