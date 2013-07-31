@@ -207,10 +207,10 @@ namespace NModel
             ProductLanguage plOfThis = pl.ToArray()[0];
             p.Memo = plOfThis.Memo ?? string.Empty;
             p.Name = plOfThis.Name; 
-          p.PlaceOfDelivery=   plOfThis.PlaceOfDelivery??string.Empty;
-          p.PlaceOfOrigin = plOfThis.PlaceOfOrigin ?? string.Empty;
-          p.ProductDescription = plOfThis.ProductDescription ?? string.Empty;
-          p.ProductParameters = plOfThis.ProductParameters ?? string.Empty;
+          p.PlaceOfDelivery=   plOfThis.PlaceOfDelivery ;
+          p.PlaceOfOrigin=  plOfThis.PlaceOfOrigin ;
+          p.ProductDescription = plOfThis.ProductDescription;
+          p.ProductParameters = plOfThis.ProductParameters;
           p.Unit = plOfThis.Unit;
 
 
