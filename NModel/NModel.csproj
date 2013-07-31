@@ -67,8 +67,6 @@
     <Compile Include="Mapping\ProductImageMap.cs" />
     <Compile Include="MultiLanguageItem.cs" />
     <Compile Include="NTSMember.cs" />
-    <Compile Include="ProductCollection.cs" />
-    <Compile Include="ProductCollectionItem.cs" />
     <Compile Include="ProductImage.cs" />
     <Compile Include="ProductLanguage.cs" />
     <Compile Include="Product.cs" />

@@ -122,9 +122,6 @@
     </None>
     <None Include="NMock3\NMock3 Cheat Sheet.pdf" />
     <None Include="packages.config" />
-    <None Include="TestFiles\FormatCheck\佛山市顺德区正旭家具有限公司\没有图片的数据_佛山市顺德区正旭家具有限公司.xls">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="TestFiles\FormatCheck\巴非\巴菲 报价单.xls">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -156,9 +153,6 @@
     <None Include="TestFiles\供应商119%28WithEnglishNames%29  2013-5-7.xls">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="TestFiles\供应商193.xls">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="TestFiles\分类表.xls">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -185,58 +179,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="TestFiles\FormatCheck\佛山市顺德区正旭家具有限公司\多余图片_佛山市顺德区正旭家具有限公司\0122.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestFiles\FormatCheck\佛山市顺德区正旭家具有限公司\多余图片_佛山市顺德区正旭家具有限公司\0144.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestFiles\FormatCheck\佛山市顺德区正旭家具有限公司\多余图片_佛山市顺德区正旭家具有限公司\0147.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestFiles\FormatCheck\佛山市顺德区正旭家具有限公司\多余图片_佛山市顺德区正旭家具有限公司\002.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="TestFiles\FormatCheck\巴非\图片\BM503A.tif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="TestFiles\FormatCheck\巴非\图片\DSCF5244.JPG">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestFiles\FormatCheck\恒铵\B-005.tif">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestFiles\FormatCheck\恒铵\B-007.tif">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestFiles\FormatCheck\恒铵\B-008.JPG">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestFiles\FormatCheck\恒铵\B-009.JPG">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestFiles\FormatCheck\恒铵\B-010.JPG">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestFiles\FormatCheck\恒铵\DSCF5243.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestFiles\FormatCheck\恒铵\DSCF5244.JPG">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestFiles\FormatCheck\恒铵\HA001.JPG">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestFiles\FormatCheck\恒铵\HA002.JPG">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestFiles\FormatCheck\恒铵\HA003.JPG">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestFiles\FormatCheck\恒铵\HA004.JPG">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestFiles\FormatCheck\恒铵\HA005.JPG">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="TestFiles\FormatCheck\恒铵\IMG-0282.jpg">
