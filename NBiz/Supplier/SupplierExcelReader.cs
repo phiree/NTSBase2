@@ -16,6 +16,7 @@ namespace NBiz
             {
                 Supplier p = new Supplier();
                 p.Name = row["供应商名称"].ToString();
+                p.NickName = row["别称"].ToString();
                 p.Code = row["供应商编码"].ToString();
                 p.EnglishName = row["供应商英文名称"].ToString();
                 p.ContactPerson = row["联系人"].ToString();

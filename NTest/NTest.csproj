@@ -147,10 +147,7 @@
     <None Include="TestFiles\NTS产品报价单1756.xls">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="TestFiles\供应商104.xls">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="TestFiles\供应商119%28WithEnglishNames%29  2013-5-7.xls">
+    <None Include="TestFiles\供应商196.xls">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="TestFiles\分类表.xls">

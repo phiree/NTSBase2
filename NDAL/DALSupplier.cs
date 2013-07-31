@@ -32,9 +32,9 @@ namespace NDAL
                     NLibrary.NLogger.Logger.Error(errmsg
                         );
                     throw new Exception(errmsg);
-                
+
                 }
-                
+
             }
             else
             {
@@ -45,24 +45,24 @@ namespace NDAL
         {
             supplierName = supplierName.Trim();
             NHibernate.IQueryOver<NModel.Supplier> iqueryOver = session.QueryOver<NModel.Supplier>()
-                .Where(x => (supplierName!=string.Empty)&&(x.EnglishName==supplierName|| x.Name == supplierName));
-            string query =string.Format( "select s  from Supplier s where trim(s.EnglishName)='{0}' or trim(s.Name)='{0}'",supplierName);
+                .Where(x => (supplierName != string.Empty) && (x.EnglishName == supplierName || x.Name == supplierName));
+            string query = string.Format("select s  from Supplier s where trim(s.EnglishName)='{0}' or trim(s.Name)='{0}'", supplierName);
             //GetOneByQuery(query);
             return GetOneByQuery(query);
         }
         public NModel.Supplier GetOneByName(string chinesename, string englishName)
         {
-            NHibernate.IQueryOver<NModel.Supplier> iqueryOver = 
+            NHibernate.IQueryOver<NModel.Supplier> iqueryOver =
                 session.QueryOver<NModel.Supplier>()
-                .Where(x =>( !string.IsNullOrEmpty(chinesename)&& x.Name == chinesename)
-                          ||(!string.IsNullOrEmpty(englishName)&&x.EnglishName==englishName)  );
+                .Where(x => (!string.IsNullOrEmpty(chinesename) && x.Name == chinesename)
+                          || (!string.IsNullOrEmpty(englishName) && x.EnglishName == englishName));
             return GetOneByQuery(iqueryOver);
         }
         public virtual NModel.Supplier GetOneByCode(string supplierCode)
         {
             NHibernate.IQueryOver<NModel.Supplier> iqueryOver =
                 session.QueryOver<NModel.Supplier>()
-                .Where(x =>  x.Code == supplierCode);
+                .Where(x => x.Code == supplierCode);
             return GetOneByQuery(iqueryOver);
         }
 
@@ -71,10 +71,13 @@ namespace NDAL
             string query = "select s from Supplier s  where 1=1 ";
             if (!string.IsNullOrEmpty(supplierName))
             {
-                query += "  and s.Code like '%"+supplierName+"%' or s.Name like '%" + supplierName + "%' or s.EnglishName like '%"+supplierName+"%'";
-
+                query += "  and s.Code like '%" + supplierName
+                        + "%' or s.Name like '%" + supplierName
+                        + "%' or s.EnglishName like '%" + supplierName
+                        + "%' or s.NickName like '%" + supplierName
+                ;
             }
-            return GetList( query,"Code",true, pageIndex,pageSize, out recordCount,string.Empty);
+            return GetList(query, "Code", true, pageIndex, pageSize, out recordCount, string.Empty);
         }
 
     }

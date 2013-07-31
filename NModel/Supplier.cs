@@ -13,6 +13,8 @@ namespace NModel
        /// </summary>
        public virtual string Name { get; set; }
        public virtual string EnglishName { get; set; }
+       //别名,昵称.
+       public virtual string NickName { get; set; }
        /// <summary>
        /// 代码
        /// </summary>

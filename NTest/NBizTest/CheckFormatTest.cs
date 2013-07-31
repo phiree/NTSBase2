@@ -94,13 +94,7 @@ namespace NTest.NBizTest
 
 
         }
- [Test]
-        public void CheckFormat_PureDigitalModelNumberCantMatch()
-        {
-            CheckSingleFolderTest("佛山市顺德区正旭家具有限公司",4, 0, 0, 0, false, null, null);
-
-
-        }
+        
 
         /// <summary>
         /// 

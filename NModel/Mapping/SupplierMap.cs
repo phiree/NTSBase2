@@ -10,7 +10,7 @@ namespace NModel.Mapping
         public SupplierMap()
         {
             Id(x=>x.Id);
-          
+            Map(x => x.NickName);
             Map(x => x.Address);
             Map(x => x.Code).Unique();
             Map(x => x.EnglishName);

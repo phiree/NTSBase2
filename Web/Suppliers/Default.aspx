@@ -8,7 +8,7 @@
         <fieldset>
             <legend>搜索</legend>
             <div>
-                <span >供应商名称 或 编码</span>
+                <span>供应商名称 ,别称, 编码</span>
                 <asp:TextBox runat="server" CssClass="text"  Width="400" ID="tbxName"></asp:TextBox><asp:Button runat="server"
                     ID="btnSearch" OnClick="btnSearch_Click"  Text="搜索" />
             </div>
@@ -24,6 +24,7 @@
      <a href='/products/?sname=<%# Server.UrlEncode(Eval("Name").ToString()) %>'> <%#Eval("Name")%></a>
      </ItemTemplate>
      </asp:TemplateField>
+      <asp:BoundField DataField="NickName" HeaderText="别称" />
      <asp:BoundField DataField="EnglishName" HeaderText="英文名称" />
      <asp:BoundField DataField="Code" HeaderText="供应商编码" />
      <asp:BoundField DataField="ContactPerson" HeaderText="联系人" />
