@@ -54,7 +54,6 @@ namespace NModel
             this.ProductDescription = pl.ProductDescription;
             this.ProductParameters = pl.ProductParameters;
             this.Unit = pl.Unit;
-            
         }
     }
 

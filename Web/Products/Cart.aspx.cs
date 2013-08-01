@@ -17,7 +17,7 @@ public partial class Products_Cart : System.Web.UI.Page
     }
     private IList<Product> GetFromCookies()
     {
-        IList<CartItem> items = new ProductCollection().GetCartFromCookies();
+        IList<CartItem> items = new ProductCart().GetCartFromCookies();
         List<Product> productList = new List<Product>();
         foreach (CartItem item in items)
         {

@@ -7,7 +7,7 @@ using System.Web;
 /// <summary>
 /// 产品集合
 /// </summary>
-public class ProductCollection
+public class ProductCart
 {
 
     public IList<CartItem> GetCartFromCookies()
