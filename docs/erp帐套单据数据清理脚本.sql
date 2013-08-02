@@ -1,5 +1,5 @@
 DECLARE  @RunScript varchar(50);
-SET @RunScript ='';
+SET @RunScript ='我要清空单据数据';
 IF @RunScript != '我要清空单据数据'
 BEGIN
 --RAISERROR ('Raise Error does not stop processing, so we will call GOTO to skip over the script', 1, 1);
@@ -12,15 +12,26 @@ select * from t_tabledescription where   fdescription like '%销售报价%'
 --select * from ictransactiontype where ftrantype=2 --产品入库单
 --出入库单据 ftablename='t_RP_SystemProfile'
 select * from ICStockBillentry
+alter table ICStockBill disable trigger ICStockBill_DEL
 delete from icstockbill
+alter table ICStockBill enable trigger ICStockBill_DEL
 delete from icstockbillentry
 --收料通知单
+
 select * from  POInStock
+alter table POInStock disable trigger POInStock_DEL
+
 delete from  POInStock
+alter table POInStock enable trigger POInStock_DEL
+
 delete from  POInStockentry
 --采购订单
 select * from POOrder
+alter table poorder disable trigger POOrder_DEL
+
 delete from poorder
+alter table poorder enable trigger POOrder_DEL
+
 delete from poorderentry
 --发货通知单
 select * from SEOutStock
@@ -28,11 +39,16 @@ delete from SEOutStock
 delete from SEOutStockentry
 --销售订单
 select * from SEOrder
+alter table seorder disable trigger SEOrder_DEL
 delete from seorder
+alter table seorder enable trigger SEOrder_DEL
 delete from seorderentry
 --采购申请
 select * from PORequest
+alter table PORequest disable trigger PORequest_Del
 delete from PORequest
+alter table PORequest enable trigger PORequest_Del
+
 delete from PORequestentry
 --合同
 select * from t_RPContractentry

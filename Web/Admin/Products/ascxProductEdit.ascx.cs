@@ -11,7 +11,8 @@ public partial class Admin_Products_ascxProductEdit : System.Web.UI.UserControl
 {
     public Product CurrentProduct { get; set; }
     BizProduct bizProduct = new BizProduct();
-
+    BizSupplier bizSupplier = new BizSupplier();
+    BizCategory bizCate = new BizCategory();
     private bool isNew = false;
     private string paramId = string.Empty;
     private Guid productId;
@@ -62,8 +63,7 @@ public partial class Admin_Products_ascxProductEdit : System.Web.UI.UserControl
             pl.ProductDescription= ((TextBox)item.FindControl("tbxDescription")).Text;
             pl.ProductParameters= ((TextBox)item.FindControl("tbxParameters")).Text;
             pl.Unit= ((TextBox)item.FindControl("tbxUnit")).Text;
-            bizPL.SaveOrUpdate(pl);
-            
+            bizPL.SaveOrUpdate(pl);          
         }
 
     }
@@ -71,15 +71,37 @@ public partial class Admin_Products_ascxProductEdit : System.Web.UI.UserControl
     private void LoadForm()
     {
         lblNtsCode.Text = CurrentProduct.NTSCode;
+        Supplier s = bizSupplier.GetByCode(CurrentProduct.SupplierCode);
+        if(s!=null)
+        {
+        lblSupplierName.Text =string.Format("({2}){0} {1} ",s.Name,s.EnglishName,s.Code);
+        }
+        tbxModelNumber.Text = CurrentProduct.ModelNumber;
+       lblCategoryCode.Text = bizCate.GetCateName(CurrentProduct.CategoryCode);
+       tbxMoneyType.Text = CurrentProduct.MoneyType;
+       tbxMinOrder.Text = CurrentProduct.OrderAmountMin.ToString();
+       tbxPrice.Text = CurrentProduct.PriceOfFactory.ToString();
+       tbxProductCycle.Text = CurrentProduct.ProductionCycle.ToString();
+       tbxTax.Text = CurrentProduct.TaxRate.ToString();
         rptProductLanguages.DataSource = CurrentProduct.ProductMultiLangues;
         rptProductLanguages.DataBind();
 
-        rptLang.DataSource = CurrentProduct.ProductMultiLangues.Select(x => x.Language);
-        rptLang.DataBind();
+      
     }
     public void Save()
     {
         UpdateForm();
+        
         bizProduct.SaveOrUpdate(CurrentProduct);
+        if (isNew)
+        {
+            NLibrary.Notification.Show(this.Page, "", "保存成功",
+                "/admin/product/productedit.aspx?id=" + CurrentProduct.Id);
+
+        }
+        else
+        {
+            NLibrary.Notification.Show(this.Page, "", "保存成功", "");
+        }
     }
 }

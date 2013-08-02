@@ -1,6 +1,5 @@
 ﻿$(function () {
 
-
     var theCart = new Cart();
     $(".btnDeleteCart").click(function () {
         var that = this;
@@ -12,7 +11,6 @@
         var pid = $(that).attr("pid");
         theCart.Delete(pid);
         $("#sumCart").text(new Cart().TotalQty);
-
         $(that).parent().parent().remove();
     });
 
