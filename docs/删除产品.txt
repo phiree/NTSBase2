@@ -1,33 +1,12 @@
+DELETE
+-- select
+pl  FROM productlanguage pl, product p
+WHERE p.id=pl.product_id
+AND p.suppliercode='00134' 
+AND p.modelnumber LIKE '%$%'
 
-SELECT *
-FROM product  WHERE ntscode  IN 
-(
-'06.002.0016600055',
-'06.002.0016600053',
-'06.002.0016600054'
-)
-
-DELETE 
--- select *
-FROM productimage WHERE product_id IN 
-(
-'2bc8a147-964b-470e-b1fd-a20c00b8bc72',
-'7a493c48-d8b5-4124-b6b3-a20c00b8bc77',
-'938cc64d-33e2-4443-956a-a20c00b8bc77'
-)
-DELETE 
--- select *
-FROM productlanguage WHERE product_id IN 
-(
-'2bc8a147-964b-470e-b1fd-a20c00b8bc72',
-'7a493c48-d8b5-4124-b6b3-a20c00b8bc77',
-'938cc64d-33e2-4443-956a-a20c00b8bc77'
-)
-DELETE 
--- select *
-FROM product WHERE id IN 
-(
-'2bc8a147-964b-470e-b1fd-a20c00b8bc72',
-'7a493c48-d8b5-4124-b6b3-a20c00b8bc77',
-'938cc64d-33e2-4443-956a-a20c00b8bc77'
-)
+DELETE
+-- select
+p  FROM  product p
+WHERE p.suppliercode='00134' 
+AND p.modelnumber LIKE '%$%'

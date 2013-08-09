@@ -63,7 +63,7 @@
                                 名称
                             </th>
                             <td>
-                                <asp:TextBox class="pName" runat="server" Text='<%#Eval("Name") %>'
+                                <asp:TextBox   CssClass ="pName" runat="server" Text='<%#Eval("Name") %>'
                                     ID="tbxName"></asp:TextBox>
                                 <asp:HiddenField runat="server" ID="hiddenLanguageId" Value='<%#Eval("Id") %>' />
                             </td>
@@ -73,7 +73,7 @@
                                 单位
                             </th>
                             <td>
-                                <asp:TextBox runat="server"  class="pUnit" Text='<%#Eval("Unit") %>' ID="tbxUnit"></asp:TextBox>
+                                <asp:TextBox runat="server"  CssClass="pUnit" Text='<%#Eval("Unit") %>' ID="tbxUnit"></asp:TextBox>
                             </td>
                         </tr>
                         <tr>

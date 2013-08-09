@@ -29,6 +29,8 @@
 <asp:BoundField   HeaderStyle-Wrap="false"  HeaderText="规格参数" DataField="ProductParameters" HtmlEncode="false"/>
 <asp:BoundField   HeaderStyle-Wrap="false"  HeaderText="产品描述" DataField="ProductDescription" HtmlEncode="false"/>
 <asp:BoundField   HeaderStyle-Wrap="false"  HeaderText="图片质量" DataField="ImageState" HtmlEncode="false"/>
+<asp:BoundField   HeaderStyle-Wrap="false"  HeaderText="备注" DataField="Memo" HtmlEncode="false"/>
+
 <asp:TemplateField HeaderStyle-Wrap="false"  HeaderText="图片">
   <ItemTemplate>
     <asp:Repeater runat="server" ID="rptImages">
@@ -40,7 +42,7 @@
    -->
  <a href='/ProductImages/original/<%# Eval("ImageName")%>' title="点击查看原图"
                                 target="_blank">
-                                <img src='/ImageHandler.ashx?imagename=<%# Eval("ImageName")%>&width=500&height=500&tt=2' />
+                                <img src='/ImageHandler.ashx?imagename=<%#Server.UrlEncode(Eval("ImageName").ToString())%>&width=500&height=500&tt=2' />
                             </a>
     </ItemTemplate>
     </asp:Repeater>

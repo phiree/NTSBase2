@@ -66,15 +66,15 @@ namespace NDAL
             return GetOneByQuery(iqueryOver);
         }
 
-        public IList<NModel.Supplier> Search(string supplierName, int pageIndex, int pageSize, out int recordCount)
+        public IList<NModel.Supplier> Search(string keyword, int pageIndex, int pageSize, out int recordCount)
         {
             string query = "select s from Supplier s  where 1=1 ";
-            if (!string.IsNullOrEmpty(supplierName))
+            if (!string.IsNullOrEmpty(keyword))
             {
-                query += "  and s.Code like '%" + supplierName
-                        + "%' or s.Name like '%" + supplierName
-                        + "%' or s.EnglishName like '%" + supplierName
-                        + "%' or s.NickName like '%" + supplierName
+                query += "  and s.Code like '%" + keyword
+                        + "%' or s.Name like '%" + keyword
+                        + "%' or s.EnglishName like '%" + keyword
+                        + "%' or s.NickName like '%" + keyword+"%'"
                 ;
             }
             return GetList(query, "Code", true, pageIndex, pageSize, out recordCount, string.Empty);

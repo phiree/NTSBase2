@@ -1,0 +1,18 @@
+="INSERT INTO tempMN (modelnumber) VALUES('"&I52&"');"
+
+
+CREATE TABLE tempMN
+(
+ colindex INT AUTO_INCREMENT ,
+ modelnumber VARCHAR(50),
+ PRIMARY KEY (colindex)
+);
+
+
+
+SELECT p.modelnumber, p.ntscode 
+FROM product p
+RIGHT JOIN tempMN t
+ON t.modelnumber=p.modelnumber
+AND p.suppliercode='00143'
+ORDER BY t.colindex
