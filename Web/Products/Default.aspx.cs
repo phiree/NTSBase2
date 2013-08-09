@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.Security;
 using NBiz;
 using NDAL;
 public partial class Products_Default : System.Web.UI.Page
@@ -12,13 +13,18 @@ public partial class Products_Default : System.Web.UI.Page
   protected  BizSupplier bizSupplier = new BizSupplier();
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        
         if (!IsPostBack)
         {
             LoadParameters();
+            if (Membership.GetUser() != null)
+            {
+                dgProduct.Columns[9].Visible = true;
+            }    
             BindProduct();
-            
+           
         }
+        
     }
     //搜索关键字回显
     private void LoadParameters()

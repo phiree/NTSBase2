@@ -115,7 +115,7 @@ namespace NBiz
                 }
                 else if (productSupplierAndModel.Count > 1)
                 {
-                    string errmsg = "该图片对应两条产品信息:" + supplierNameOfFolder + "," + imageFile.Name;
+                    string errmsg = "该图片对应多条产品信息,:" + supplierNameOfFolder + "," + imageFile.Name;
                     NLibrary.NLogger.Logger.Debug(errmsg);
                     sb.AppendLine(errmsg);
                 }

@@ -39,7 +39,6 @@ namespace NLibrary
             string injectedScript = BuildInjectScript(title, content,type, returnUrl,autoClose,autoCloseDuaratio);
             page.ClientScript.RegisterClientScriptBlock(page.GetType(), "_nf", injectedScript, true);
         }
-        
         private static string BuildInjectScript(string title, string content,
             NotificationType type, string returnUrl
             , bool autoClose

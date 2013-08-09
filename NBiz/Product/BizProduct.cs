@@ -237,9 +237,5 @@ namespace NBiz
         {
             return DalProduct.GetProductsNoImages();
         }
-
-
-
-
     }
 }

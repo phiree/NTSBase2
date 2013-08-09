@@ -114,6 +114,9 @@
                     <asp:Literal runat="server" ID="liSupplierName"></asp:Literal>
                 </ItemTemplate>
             </asp:TemplateField>
+            <asp:HyperLinkField DataNavigateUrlFields="id" DataNavigateUrlFormatString="/admin/products/productedit.aspx?id={0}" 
+              Text="修改" Visible="false"
+            />
         </Columns>
         <EmptyDataTemplate>
             <div class="notice">
