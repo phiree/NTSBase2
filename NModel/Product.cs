@@ -281,7 +281,7 @@ namespace NModel
 
         /// <summary>
         /// 更新现有product. 
-        /// 基础资料和 多语言
+        /// 基础资料和 多语言  
         /// </summary>
         /// <param name="newPro"></param>
         public virtual void UpdateByNewVersion(Product newPro)
