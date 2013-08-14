@@ -4,13 +4,13 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cph_maincontent" Runat="Server">
  <asp:DetailsView  ID="dv" AutoGenerateRows="false" runat="server" 
-        ondatabound="dv_DataBound" onitemcreated="dv_ItemCreated" 
+        OnDataBound="dv_DataBound" OnItemCreated="dv_ItemCreated" 
         onload="dv_Load"   >
  <Fields>
  <asp:BoundField  HeaderStyle-Wrap="false"  ItemStyle-Font-Size="Medium"  ItemStyle-Font-Bold="true"  HtmlEncode="false"  HeaderText="名称" DataField="Name"/>
  <asp:TemplateField >
  <ItemTemplate>
- <input type="button" id="btnAddToCart" value="加入选单" pid='<%#Eval("id") %>' />
+ <!--<input type="button" id="btnAddToCart" value="加入选单" pid='<%#Eval("id") %>' /> -->
  </ItemTemplate>
  </asp:TemplateField>
 <asp:BoundField  HeaderStyle-Wrap="false"  HeaderText="型号" DataField="ModelNumber"/>
@@ -18,6 +18,11 @@
  <asp:BoundField  HeaderStyle-Wrap="false" ItemStyle-Font-Bold="true"  HeaderText="币别" DataField="MoneyType"/>
 <asp:BoundField   HeaderStyle-Wrap="false"  HeaderText="NTS编码" DataField="NTSCode"/>
 <asp:BoundField   HeaderStyle-Wrap="false"  HeaderText="分类编码" DataField="CategoryCode"/> 
+<asp:TemplateField HeaderStyle-Wrap="false"  HeaderText="供应商">
+<ItemTemplate>
+<asp:Label runat="server" ID="lblSupplierName"></asp:Label>
+</ItemTemplate>
+</asp:TemplateField>
 <asp:BoundField   HeaderStyle-Wrap="false"  HeaderText="税率" DataField="TaxRate"/>
 <asp:BoundField   HeaderStyle-Wrap="false"  HeaderText="起定量" DataField="OrderAmountMin"/>
 <asp:BoundField   HeaderStyle-Wrap="false"  HeaderText="生产周期" DataField="ProductionCycle"/>

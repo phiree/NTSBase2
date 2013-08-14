@@ -8,6 +8,7 @@ using NModel;
 using NBiz;
 public partial class Products_ProductDetail : System.Web.UI.Page
 {
+    BizSupplier bizSupplier = new BizSupplier();
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -46,5 +47,14 @@ public partial class Products_ProductDetail : System.Web.UI.Page
         Repeater rpt= dv.FindControl("rptImages") as Repeater;
         rpt.DataSource = p.ProductImageList;
         rpt.DataBind();
+
+        Supplier supplier = bizSupplier.GetByCode(p.SupplierCode);
+        Label lblSupplierName = dv.FindControl("lblSupplierName") as Label;
+        lblSupplierName.Text = supplier.Name;
+        if (!string.IsNullOrEmpty(supplier.NickName.Trim()))
+        {
+            lblSupplierName.Text += "  (" + supplier.NickName + ")";
+        }
+
     }
 }

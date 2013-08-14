@@ -39,6 +39,7 @@ namespace NModel
            this.Address = newSupplier.Address;
            this.ContactPerson = newSupplier.ContactPerson;
            this.EnglishName = newSupplier.EnglishName;
+           this.NickName = newSupplier.NickName;
        }
     }
 }

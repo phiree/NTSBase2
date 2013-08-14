@@ -123,7 +123,9 @@ namespace NDAL
 
             if (!string.IsNullOrEmpty(supplierName))
             {
-                where += "  p.SupplierCode in (select s.Code from Supplier as s where s.EnglishName like '%" + supplierName + "%' or  s.Name like '%" + supplierName + "%') ";
+                where += "  p.SupplierCode in (select s.Code from Supplier as s where s.EnglishName like '%" + supplierName 
+                            + "%' or  s.Name like '%" + supplierName 
+                            + "%' or s.NickName like '%"+supplierName+"%') ";
             }
             else
             {
