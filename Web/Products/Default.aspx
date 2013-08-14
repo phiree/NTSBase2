@@ -86,7 +86,7 @@
                 <ItemTemplate>
                 <span><%#Eval("ImageState") %></span>  
                     <asp:Repeater runat="server" ID="rptImages" OnItemDataBound="rptImages_ItemDataBound">
-                        <ItemTemplate>
+                        <ItemTemplate> 
                             <%-- <img style="width:200px" src='/ProductImages/<%# Container.DataItem.ToString()%>'  alt=""/>--%>
                             <!--"/ProductImages/<%# Container.DataItem.ToString()%> "
    "/ImageHandler.ashx?imagename=<%# Container.DataItem.ToString()%>&width=50&height=50&tt=2" 
