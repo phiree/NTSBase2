@@ -51,7 +51,7 @@ public partial class Products_ProductDetail : System.Web.UI.Page
         Supplier supplier = bizSupplier.GetByCode(p.SupplierCode);
         Label lblSupplierName = dv.FindControl("lblSupplierName") as Label;
         lblSupplierName.Text = supplier.Name;
-        if (!string.IsNullOrEmpty(supplier.NickName.Trim()))
+        if (!string.IsNullOrEmpty(supplier.NickName))
         {
             lblSupplierName.Text += "  (" + supplier.NickName + ")";
         }

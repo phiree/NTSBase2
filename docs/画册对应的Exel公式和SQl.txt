@@ -5,6 +5,7 @@ CREATE TABLE tempMN
 (
  colindex INT AUTO_INCREMENT ,
  modelnumber VARCHAR(50),
+ tag varchar(50),
  PRIMARY KEY (colindex)
 );
 
