@@ -6,6 +6,7 @@ using NModel;
 using NDAL;
 using NLibrary;
 using System.Data;
+using System.IO.Compression;
 namespace NBiz
 {
     /// <summary>
@@ -69,6 +70,18 @@ namespace NBiz
             IDataTableConverter<Product> productReader = new ProductDataTableConverter();
             ImportToDatabaseFromExcel<Product> importor = new ImportToDatabaseFromExcel<Product>(productReader, this);
             return importor.ImportXslData(stream, out  errMsg);
+        }
+        /// <summary>
+        /// 压缩包
+        /// </summary>
+        /// <param name="stream"></param>
+        /// <param name="errMsg"></param>
+        /// <returns></returns>
+        public IList<Product> ImportProductFromZip(System.IO.Stream stream, out string errMsg)
+        {
+            errMsg = string.Empty;
+            GZipStream gs = new GZipStream(stream, CompressionMode.Decompress);
+            return null;
         }
         /// <summary> 从excel文件中读取产品信息
         ///
