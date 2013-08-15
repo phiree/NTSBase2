@@ -1,12 +1,40 @@
 DELETE
 -- select
-pl  FROM productlanguage pl, product p
+pl.*  FROM productlanguage pl, product p
 WHERE p.id=pl.product_id
-AND p.suppliercode='00134' 
-AND p.modelnumber LIKE '%$%'
+AND p.ntscode IN 
+(
+'04.003.0014200065',
+'04.003.0014200066',
+'04.003.0014200063',
+'04.004.0013100106',
+'06.001.0012800006',
+'08.008.0011700112'
+)
 
 DELETE
 -- select
-p  FROM  product p
-WHERE p.suppliercode='00134' 
-AND p.modelnumber LIKE '%$%'
+pim.*  FROM productimage pim, product p
+WHERE p.id=pim.product_id
+AND p.ntscode IN 
+(
+'04.003.0014200065',
+'04.003.0014200066',
+'04.003.0014200063',
+'04.004.0013100106',
+'06.001.0012800006',
+'08.008.0011700112'
+)
+
+DELETE
+-- select
+p.*  FROM product p
+WHERE  p.ntscode IN 
+(
+'04.003.0014200065',
+'04.003.0014200066',
+'04.003.0014200063',
+'04.004.0013100106',
+'06.001.0012800006',
+'08.008.0011700112'
+)
