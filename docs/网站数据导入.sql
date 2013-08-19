@@ -28,6 +28,7 @@ NAME,            -- 2
 	attribute_set, 
 	weight,
 	parameter)
+
 	
 	
 SELECT DISTINCT p.ntscode AS sku
@@ -46,6 +47,11 @@ SELECT DISTINCT p.ntscode AS sku
 ,CONCAT('/', i.ImageName)
 ,CONCAT('/', i.ImageName)
 ,CONCAT('/',i.ImageName)
+/* 型号名称
+,CONCAT('/', i.ImageName)
+,CONCAT('/', i.ImageName)
+,CONCAT('/',i.ImageName)
+*/
 
 ,1,10000,1,0,'Catalog,Search'
 ,CONCAT('/', i.ImageName)
@@ -57,14 +63,15 @@ SELECT DISTINCT p.ntscode AS sku
 ,0
  ,CONCAT( pa.Parameter,';',pa.Material)  -- 3
 FROM   ntsbase2.product p 
-  INNER JOIN  ntsbase2.product_asia pa
-	ON pa.NTSCODE=p.NTSCode
+  RIGHT JOIN  ntsbase2.product_asia pa
+	ON pa.NTSCODE=p.NTSCode AND pa.tag='kalina20130819'
+	AND pa.供应商编码 <> '00077'
 	
    INNER JOIN  ntsbase2.productlanguage l
 	ON p.Id=l.Product_id  AND l.language='en'
-   INNER JOIN CategoryMap m1
+   RIGHT JOIN CategoryMap m1
         ON p.categorycode=m1.cateid_ntsbase
- INNER JOIN CategoryMap m2
+ RIGHT JOIN CategoryMap m2
         ON LEFT(p.categorycode,2)=m2.cateid_ntsbase
     
    INNER JOIN ntsbase2.supplier s

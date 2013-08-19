@@ -54,7 +54,7 @@ namespace NBiz
                 throw new Exception(errmsg);
             }
             p.CategoryCode = categoryCode;
-            //产品型号:特殊符号用美元符号代替
+            //产品型号:特殊符号用美元符号代替,删除所有空格
             string modelNumber = row["产品型号"].ToString();
             modelNumber = StringHelper.ReplaceInvalidChaInFileName(modelNumber, "$");
 

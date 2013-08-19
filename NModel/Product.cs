@@ -263,12 +263,13 @@ namespace NModel
                         nameee = Guid.NewGuid().ToString();
                     imagesToExport.Push(nameee + imageExtension);//文件名称
                     imagesToExport.Push(this.CategoryCode);
-
                     break;
                 case ImageOutPutStratage.SupplierName_ModelNumber:
                     imagesToExport.Push(this.ModelNumber + imageExtension);//文件名称
                     imagesToExport.Push(this.SupplierCode);
-                    break;
+
+                    break;   
+
                 case  ImageOutPutStratage.Supplier_OriginalName:
                      imagesToExport.Push(imageUrl);//文件名称
                     imagesToExport.Push(this.SupplierCode);
