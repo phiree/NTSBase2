@@ -27,5 +27,10 @@ namespace NTest.NLibraryTest
             "));
 
         }
+        public void ReplaceInvalidChaInFileName()
+        {
+            var modelnumber = "  A102 golden ";
+            Assert.AreEqual("A102$golden",StringHelper.ReplaceInvalidChaInFileName(modelnumber,"$"));
+        }
     }
 }
