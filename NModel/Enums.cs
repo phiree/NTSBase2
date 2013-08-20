@@ -59,4 +59,14 @@ namespace NModel.Enums
         Category_NTsCode,//分类/ntscode.扩展名
         Supplier_OriginalName// 供应商/原始文件名
     }
+
+    public enum StockStatus
+    {
+        Normal, //正常, 
+        Broken,//已损坏
+        Missing,//已遗失
+        Borrowed,//已借出
+        Returned //已归还给供应商
+          
+    }
 }
