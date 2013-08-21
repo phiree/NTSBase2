@@ -30,7 +30,7 @@ namespace NBiz
             Product p = new Product();
             ProductLanguage pl = new ProductLanguage();
             pl.Name = row["产品名称"].ToString();
-            pl.Language = StringHelper.LanguageTypeDetermine(pl.Name);
+         
             pl.PlaceOfOrigin = row["产地"].ToString();
             pl.PlaceOfDelivery = row["交货地"].ToString();
             p.ImageState = row["图片"].ToString();
@@ -64,6 +64,8 @@ namespace NBiz
             pl.Unit = row["单位"].ToString();
             pl.ProductDescription = row["产品描述"].ToString();
             p.MoneyType = row["币别"].ToString();
+            pl.Language = StringHelper.LanguageTypeDetermine(pl.Name + pl.ProductDescription + pl.ProductParameters + pl.Memo);
+
             //nts编码
             //已删除,该类不负责nts编码的创建
 
@@ -142,7 +144,7 @@ namespace NBiz
             pl.PlaceOfOrigin = row["备注"].ToString();
             // p.PlaceOfDelivery = row["交货地"].ToString();
             pl.Name = row["名称"].ToString();
-            pl.Language = StringHelper.LanguageTypeDetermine(pl.Name);
+          
             string categoryCode = StringHelper.ReplaceSpace(row["代码"].ToString());
 
             if (string.IsNullOrEmpty(pl.PlaceOfOrigin) && string.IsNullOrEmpty(pl.Name)
@@ -166,6 +168,7 @@ namespace NBiz
             pl.Unit = row["计量单位组_FName"].ToString();
             p.SupplierCode = row["来源_FNumber"].ToString();
             pl.ProductDescription = row["描述/卖点"].ToString();
+            pl.Language = StringHelper.LanguageTypeDetermine(pl.Name+pl.ProductDescription+pl.ProductParameters+pl.Memo);
             //nts编码
             //已删除,该类不负责nts编码的创建
 
