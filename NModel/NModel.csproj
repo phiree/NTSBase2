@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BillBase.cs" />
     <Compile Include="Category.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="FormatSerialNo.cs" />
@@ -68,7 +69,7 @@
     <Compile Include="NTSMember.cs" />
     <Compile Include="ProductImage.cs" />
     <Compile Include="ProductLanguage.cs" />
-    <Compile Include="Product.cs" />
+    <Compile Include="ProductStock.cs" />
     <Compile Include="ProductTag.cs" />
     <Compile Include="ProductTag_Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -76,9 +77,9 @@
     <Compile Include="Supplier.cs" />
     <Compile Include="UserRole.cs" />
     <Compile Include="Variables.cs" />
+    <Compile Include="Product.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

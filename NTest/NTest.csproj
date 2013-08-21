@@ -72,6 +72,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NBizTest\InvoicingTDD\InitImportTest.cs" />
     <Compile Include="NBizTest\ProductImageImportorTest.cs" />
     <Compile Include="NBizTest\ImportFromExcelTest.cs" />
     <Compile Include="NBizTest\MakeThumbnailTest.cs" />
