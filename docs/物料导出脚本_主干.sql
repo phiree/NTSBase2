@@ -2,13 +2,13 @@ SELECT
 -- 
 p.ntscode AS 代码,
 -- 
-pl.name AS 名称,
+CASE WHEN  plZh.Name IS NULL THEN  pl.name ELSE plZh.Name END AS 名称,
 'TRUE' AS 明细,
 '' AS 审核人_FName,
 -- 
-pl.name  AS 物料全名,
+CASE WHEN  plZh.Name IS NULL THEN  pl.name ELSE plZh.Name END  AS 物料全名,
 '' AS 助记码,
-pl.ProductParameters AS 规格型号,
+LEFT(CASE WHEN plZH.ProductParameters IS NULL THEN pl.ProductParameters   ELSE plZH.ProductParameters END ,128) AS 规格型号,
 '' AS 辅助属性类别_FName,
 '' AS 辅助属性类别_FNumber,
 '外购' AS 物料属性_FName,
@@ -16,18 +16,18 @@ pl.ProductParameters AS 规格型号,
 -- 
 'general' AS 计量单位组_FName,
 --  
- pl.Unit AS 基本计量单位_FName,
+'pcs' AS 基本计量单位_FName,
  -- 
 'general' AS 基本计量单位_FGroupName,
 -- 
-pl.unit AS 采购计量单位_FName,
+'pcs' AS 采购计量单位_FName,
 -- 
 'general' AS 采购计量单位_FGroupName,
-pl.unit AS 销售计量单位_FName,
+'pcs' AS 销售计量单位_FName,
 'general' AS 销售计量单位_FGroupName,
-pl.unit AS 生产计量单位_FName,
+'pcs' AS 生产计量单位_FName,
 'general' AS 生产计量单位_FGroupName,
-pl.unit AS 库存计量单位_FName,
+'pcs' AS 库存计量单位_FName,
 'general' AS 库存计量单位_FGroupName,
 '' AS 辅助计量单位_FName,
 '' AS 辅助计量单位_FGroupName,
@@ -104,7 +104,7 @@ PriceOfFactory AS 采购单价,
 '*' AS 成本项目_FNumber,
 'FALSE' AS 是否进行序列号管理,
 'FALSE' AS 参与结转式成本还原,
-'佛山需要确定来自哪一列' AS 备注,
+'' AS 备注,
 '物料需求计划(MRP)' AS 计划策略_FName,
 'MTS计划模式' AS 计划模式_FName,
 '批对批(LFL)' AS 订货策略_FName,
@@ -196,8 +196,8 @@ PriceOfFactory AS 采购单价,
 '' AS 检验方案_FBrNo,
 '*' AS 检验员_FName,
 '*' AS 检验员_FNumber,
-'' AS 英文名称,
-'' AS 英文规格,
+CASE WHEN pl.Name IS NULL THEN plZh.Name ELSE pl.Name END AS 英文名称,
+LEFT(CASE WHEN pl.ProductParameters IS NULL THEN plZh.ProductParameters ELSE pl.ProductParameters END,128) AS 英文规格,
 '' AS HS编码_FHSCode,
 '' AS HS编码_FNumber,
 '0' AS 外销税率,
@@ -228,11 +228,67 @@ p.modelnumber AS 物料型号,
 '0' AS 是否禁用,
 '{C81E92A1-3B20-4E49-B904-299B1B412FC8}' AS 全球唯一标识内码
 
+FROM product  p
+INNER JOIN supplier s ON p.SupplierCode=s.Code
+LEFT JOIN 
+ productlanguage pl
+ ON p.id=pl.Product_id AND pl.Language="en"
+LEFT JOIN productlanguage plZh
+ ON plZh.Product_id=p.Id AND plZh.Language="zh"
+ WHERE (pl.Name IS NOT NULL OR plZh.Name IS NOT NULL)
+ 
 
-FROM product  p, productlanguage pl,supplier s
+/*
+select left(pl.productparameters,255) as pp,
+length(left(pl.productparameters,255))
+,substring(pl.productparameters,1,255)
+,length(substr(pl.productparameters,1,255))
+,char_length(left(pl.productparameters,255))
+,char_length(pl.productparameters)  from product p,productlanguage pl 
+where p.id=pl.product_id
+order by char_length(pp) desc
+limit 100
+CHARACTER SET utf-8
+where   p.ntscode='06.005.0013400009'
 
-WHERE  pl.product_id=p.id
-AND pl.language="en"
-AND s.code=p.suppliercode
+select * from productlanguage where product_id='ff3681a8-ba09-4b84-afd1-a1dd00e71738' order by product_id 
 
--- LIMIT 1
+select pl.* from product p
+left join productlanguage pl
+on p.id=pl.product_id
+where pl.name is null
+order by pl.name
+select * from product where ntscode='06.005.0013400009'
+
+ LIMIT 1
+ 
+  SELECT COUNT(*) FROM product -- 19555
+ select count(*) from productlanguage where language="en" ;-- 19555
+  SELECT COUNT(*) FROM productlanguage WHERE LANGUAGE="zh" ;-- 19555
+
+select s.name,p.NTSCode, case when  pl.Name is null  then pl2.name  end as plname
+	,CASE WHEN  pl2.Name IS NULL  THEN pl.name ELSE pl2.Name END AS pl2name,pl2.name
+	from product p
+	inner join supplier s
+		on s.code=p.suppliercode
+	inner join  productlanguage pl
+	on pl.Language="en" and pl.Product_id=p.Id 
+	left join productlanguage pl2
+ on p.id=pl2.product_id 
+and  pl2.language="zh"
+where p.suppliercode=s.code
+	
+	limit 10
+	
+	select * from productlanguage 
+	
+	select * from productlanguage 
+	where language="en" and (
+	length(ProductDescription) != character_length(ProductDescription)
+	or 	LENGTH(ProductParameters) != CHARACTER_LENGTH(ProductParameters)
+	OR 	LENGTH(memo) != CHARACTER_LENGTH(memo) )
+	
+	select LENGTH(null) != CHARACTER_LENGTH(null) 
+	select left("汉字a",2),length(left("汉字a",2)),char_length(left("汉字a",2)),bit_length("汉字a"),bit_length("a")
+	select mb_substr("aaa")
+	*/
