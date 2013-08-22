@@ -5,7 +5,7 @@ p.ntscode AS 代码,
 pl.name AS 名称,
 'TRUE' AS 明细,
 '' AS 审核人_FName,
--- 
+--  
 pl.name  AS 物料全名,
 '' AS 助记码,
 pl.ProductParameters AS 规格型号,
