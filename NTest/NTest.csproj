@@ -18,7 +18,8 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>
+    </DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -150,12 +151,10 @@
     <None Include="TestFiles\供应商196.xls">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="TestFiles\分类表.xls">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="TestFiles\NTS 产品报价单   哈慈 20130306_English.xls">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="TestFiles\分类表.xls" />
     <None Include="TestFiles\吧台设备及用具.XLS">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -239,6 +238,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="TestFiles\NBizTest\MakeThumbnail\thumbnail\" />
+    <Folder Include="TestFiles\NewFolder1\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
