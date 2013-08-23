@@ -52,7 +52,7 @@ public partial class Admin_Products_ascxProductEdit : System.Web.UI.UserControl
         CurrentProduct.LastUpdateTime = DateTime.Now;
         CurrentProduct.MoneyType = tbxMoneyType.Text;
         CurrentProduct.PriceOfFactory = tbxPrice.Text;
-
+        CurrentProduct.PriceValidPeriod = tbxPriceValidPeriod.Text;
         CurrentProduct.ProductionCycle = decimal.Parse(tbxProductCycle.Text);
         CurrentProduct.TaxRate = decimal.Parse(tbxTax.Text);
         UpdateList();
@@ -73,6 +73,7 @@ public partial class Admin_Products_ascxProductEdit : System.Web.UI.UserControl
             pl.ProductDescription = ((TextBox)item.FindControl("tbxDescription")).Text;
             pl.ProductParameters = ((TextBox)item.FindControl("tbxParameters")).Text;
             pl.Unit = ((TextBox)item.FindControl("tbxUnit")).Text;
+
             bizPL.SaveOrUpdate(pl);
 
         }
@@ -93,6 +94,7 @@ public partial class Admin_Products_ascxProductEdit : System.Web.UI.UserControl
         tbxPrice.Text = CurrentProduct.PriceOfFactory.ToString();
         tbxProductCycle.Text = CurrentProduct.ProductionCycle.ToString();
         tbxTax.Text = CurrentProduct.TaxRate.ToString();
+        tbxPriceValidPeriod.Text = CurrentProduct.PriceValidPeriod;
         rptProductLanguages.DataSource = CurrentProduct.ProductMultiLangues;
         rptProductLanguages.DataBind();
 

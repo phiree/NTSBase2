@@ -177,6 +177,14 @@
             </tr>
             <tr>
                 <th>
+                    报价有效期
+                </th>
+                <td>
+                    <asp:TextBox runat="server"  CssClass="pPriceValidPeriod"  ID="tbxPriceValidPeriod"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <th>
                     税率
                 </th>
                 <td>

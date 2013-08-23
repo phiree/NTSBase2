@@ -16,6 +16,8 @@
 <asp:BoundField  HeaderStyle-Wrap="false"  HeaderText="型号" DataField="ModelNumber"/>
  <asp:BoundField  HeaderStyle-Wrap="false" ItemStyle-Font-Bold="true"  HeaderText="出厂价" DataField="PriceOfFactory"/>
  <asp:BoundField  HeaderStyle-Wrap="false" ItemStyle-Font-Bold="true"  HeaderText="币别" DataField="MoneyType"/>
+ <asp:BoundField  HeaderStyle-Wrap="false" ItemStyle-Font-Bold="true"  HeaderText="报价有效期" DataField="PriceValidPeriod"/>
+
 <asp:BoundField   HeaderStyle-Wrap="false"  HeaderText="NTS编码" DataField="NTSCode"/>
 <asp:BoundField   HeaderStyle-Wrap="false"  HeaderText="分类编码" DataField="CategoryCode"/> 
 <asp:TemplateField HeaderStyle-Wrap="false"  HeaderText="供应商">
