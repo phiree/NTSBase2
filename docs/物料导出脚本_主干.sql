@@ -4,7 +4,7 @@ p.ntscode AS 代码,
 -- 
 CASE WHEN  plZh.Name IS NULL THEN  pl.name ELSE plZh.Name END AS 名称,
 'TRUE' AS 明细,
-'' AS 审核人_FName,
+'' AS 审核人_FName, 
 -- 
 CASE WHEN  plZh.Name IS NULL THEN  pl.name ELSE plZh.Name END  AS 物料全名,
 '' AS 助记码,
