@@ -51,7 +51,7 @@ namespace NBiz
             {
                 string errmsg = string.Format("分类编码格式有误.名称:{0},编码:{1}", pl.Name, categoryCode);
                 NLibrary.NLogger.Logger.Error(errmsg);
-                throw new Exception(errmsg);
+                throw new Exception(errmsg); 
             }
             p.CategoryCode = categoryCode;
             //产品型号:特殊符号用美元符号代替,删除所有空格
