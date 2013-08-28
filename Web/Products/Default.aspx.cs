@@ -51,7 +51,7 @@ public partial class Products_Default : System.Web.UI.Page
         tbxDelivery.Text = Request["delivery"];
         tbxOriginal.Text = Request["original"];
         ddlImageQuanlity.SelectedValue = Request["imagequality"];
-
+        
         string cateCode = Request["categoryCode"];
         if (!string.IsNullOrEmpty(cateCode))
         {
@@ -59,19 +59,23 @@ public partial class Products_Default : System.Web.UI.Page
             if (!string.IsNullOrEmpty(topCate))
             {
                 ddlCate.SelectedValue = topCate;
-               ddlCateChild.DataSource = bizCate.GetChildren(topCate);
+                ddlCateChild.DataSource = bizCate.GetChildren(topCate);
                 ddlCateChild.DataBind();
                 ddlCateChild.Items.Insert(0, new ListItem { Text = "全部", Value = "-1" });
             }
             if (cateCode.Length == 6)
             {
                 string childCate = cateCode.Substring(3, 3);
-               
-                    ddlCateChild.SelectedValue = childCate;
-                
+
+                ddlCateChild.SelectedValue = childCate;
+                hiCateChildValue.Value = childCate;
             }
-            
-            
+
+
+        }
+        else
+        {
+            hiCateChildValue.Value = string.Empty;
         }
     }
 
@@ -96,7 +100,7 @@ public partial class Products_Default : System.Web.UI.Page
         {
            // cateCode += "." + ddlCateChild.SelectedValue;
         }
-        if (!string.IsNullOrEmpty(hiCateChildValue.Value))
+        if (!string.IsNullOrEmpty(hiCateChildValue.Value)&&hiCateChildValue.Value!="-1")
         {
             cateCode += "." + hiCateChildValue.Value;
         }
