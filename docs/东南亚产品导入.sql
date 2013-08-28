@@ -5,7 +5,7 @@ FROM ntsbase2.product p
 ,ntsbase2.product_asia pa
 WHERE pi.Product_id=p.Id
 AND pa.NTSCODE=p.NTSCode
-
+ 
 
 SELECT SUBSTRING_INDEX('http://www.example.com/dev/archive/examples/test.htm','/',-1)
 SELECT SUBSTRING( 'aserearewrewr.jpg',1,LOCATE('.','aserearewrewr.jpg')-1)
