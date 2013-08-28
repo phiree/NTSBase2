@@ -16,6 +16,7 @@ public partial class Products_Default : System.Web.UI.Page
         
         if (!IsPostBack)
         {
+            InitBind();
             LoadParameters();
             if (Membership.GetUser() != null)
             {
@@ -25,6 +26,16 @@ public partial class Products_Default : System.Web.UI.Page
            
         }
         
+    }
+    BizCategory bizCate = new BizCategory();
+    public void InitBind()
+    {
+        ddlCate.DataSource = bizCate.GetChildren("0");
+        
+        ddlCate.DataBind();
+       
+        ddlCate.Items.Insert(0, new ListItem {Text="全部",Value="-1" });
+       
     }
     //搜索关键字回显
     private void LoadParameters()
@@ -40,7 +51,30 @@ public partial class Products_Default : System.Web.UI.Page
         tbxDelivery.Text = Request["delivery"];
         tbxOriginal.Text = Request["original"];
         ddlImageQuanlity.SelectedValue = Request["imagequality"];
+
+        string cateCode = Request["categoryCode"];
+        if (!string.IsNullOrEmpty(cateCode))
+        {
+            string topCate = cateCode.Substring(0, 2);
+            if (!string.IsNullOrEmpty(topCate))
+            {
+                ddlCate.SelectedValue = topCate;
+               ddlCateChild.DataSource = bizCate.GetChildren(topCate);
+                ddlCateChild.DataBind();
+                ddlCateChild.Items.Insert(0, new ListItem { Text = "全部", Value = "-1" });
+            }
+            if (cateCode.Length == 6)
+            {
+                string childCate = cateCode.Substring(3, 3);
+               
+                    ddlCateChild.SelectedValue = childCate;
+                
+            }
+            
+            
+        }
     }
+
     private int GetPageIndex()
     {
         int pageIndex=0;
@@ -53,12 +87,25 @@ public partial class Products_Default : System.Web.UI.Page
     }
     protected void btnSearch_Click(object sender, EventArgs e)
     {
+        string cateCode = string.Empty;
+        if (ddlCate.SelectedValue != "-1")
+        {
+            cateCode = ddlCate.SelectedValue;
+        }
+        if (ddlCateChild.SelectedValue != "-1")
+        {
+           // cateCode += "." + ddlCateChild.SelectedValue;
+        }
+        if (!string.IsNullOrEmpty(hiCateChildValue.Value))
+        {
+            cateCode += "." + hiCateChildValue.Value;
+        }
         string targetUrl =string.Format( "Default.aspx?sname={0}&model={1}&hasphoto={2}&name={3}&categorycode={4}&ntscode={5}&imagequality={6}&original={7}&delivery={8}"
             , Server.UrlEncode(tbxSupplierName.Text)
             ,Server.UrlDecode(tbxModel.Text)
             ,ddlHasPhoto.SelectedValue
             ,tbxName.Text.Trim()
-            ,tbxCode.Text.Trim()
+            , cateCode
             ,tbxNTSCode.Text.Trim()
             ,ddlImageQuanlity.SelectedValue
             ,tbxOriginal.Text.Trim()
@@ -69,6 +116,19 @@ public partial class Products_Default : System.Web.UI.Page
     }
     private void BindProduct()
     {
+        string cateCode = string.Empty;
+        if (ddlCate.SelectedValue != "-1")
+        {
+            cateCode = ddlCate.SelectedValue;
+        }
+        if (!string.IsNullOrEmpty(ddlCateChild.SelectedValue)&& ddlCateChild.SelectedValue != "-1")
+        {
+            cateCode += "." + ddlCateChild.SelectedValue;
+        }
+        //if (!string.IsNullOrEmpty(hiCateChildValue.Value))
+        //{
+        //    cateCode += "." + hiCateChildValue.Value;
+        //}
         bool? hasPhoto=null;
         string strHasPhotoValue = ddlHasPhoto.SelectedValue;
         if (strHasPhotoValue == "yes") hasPhoto = true;
@@ -82,7 +142,7 @@ public partial class Products_Default : System.Web.UI.Page
             ,tbxModel.Text.Trim()
             , hasPhoto
             ,tbxName.Text.Trim()
-            ,tbxCode.Text.Trim()
+            , cateCode
             ,tbxNTSCode.Text.Trim()
             ,imageQuality
             ,tbxDelivery.Text.Trim()
@@ -93,10 +153,23 @@ public partial class Products_Default : System.Web.UI.Page
         pager.RecordCount = totalRecords;
         dgProduct.DataSource = product;
         dgProduct.DataBind();
-
-      
        
     }
+
+    protected void ddlCate_SelectedChanged(object sender, EventArgs e)
+    {
+        if (ddlCate.SelectedValue == "-1")
+        {
+            ddlCateChild.Items.Clear();
+        }
+        else {
+            ddlCateChild.DataSource = bizCate.GetChildren(ddlCate.SelectedValue);
+            ddlCateChild.DataBind();
+            ddlCateChild.Items.Insert(0, new ListItem { Text="全部",Value="-1"});
+        }
+
+    }
+
     protected void dgProduct_RowDataBound(object sender, GridViewRowEventArgs e)
     {
         if (e.Row.RowType == DataControlRowType.DataRow)

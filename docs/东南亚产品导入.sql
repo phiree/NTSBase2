@@ -1,4 +1,5 @@
-SELECT CONCAT(p.NTSCode,'---', pi.ImageName)-- SUBSTRING( pi.ImageName,1,length(pi.ImageName)-4) )-- substring(pi.ImageName, )
+SELECT CONCAT(p.NTSCode,'---', pi.ImageName)
+-- SUBSTRING( pi.ImageName,1,length(pi.ImageName)-4) )-- substring(pi.ImageName, )
 FROM ntsbase2.product p
 ,ntsbase2.productimage PI
 ,ntsbase2.product_asia pa

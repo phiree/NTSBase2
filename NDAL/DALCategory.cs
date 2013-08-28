@@ -43,5 +43,10 @@ namespace NDAL
                 + code + "' and c.ParentCode='"+parentCode+"'";
             return GetOneByQuery(query);
         }
+        public IList<Category> GetChildren(string parentCode)
+        {
+            string query = "select c from Category c where c.ParentCode='" + parentCode + "'";
+            return GetList(query);
+        }
     }
 }

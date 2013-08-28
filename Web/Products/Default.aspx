@@ -1,6 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/site_leftmenu.master" AutoEventWireup="true"
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/site_leftmenu.master" AutoEventWireup="true"  EnableEventValidation="false" 
     CodeFile="Default.aspx.cs" Inherits="Products_Default" %>
-
 <%@ Register Src="~/Products/ascxProductList.ascx" TagName="ProList" TagPrefix="UC" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
       <script src="/Scripts/InlineTip.js" type="text/javascript"></script>
@@ -27,6 +26,31 @@
                 }
             }
             );
+
+        //类别
+        $("#<%=ddlCate.ClientID%>").change(function (e) {
+            var filteredValue = $(this).find(":selected");
+
+            $.get("/services/CategoryList.ashx?parentCode=" + filteredValue[0].value
+            , function (data) {
+                $('#<%=ddlCateChild.ClientID%>').find('option')
+                                                .remove()
+                                                .end()
+                                                .append('<option value="-1">全部</option>')
+                // .val('-1')
+                                                ;
+                $.each(data, function (key, value) {
+                    $('#<%=ddlCateChild.ClientID%>')
+         .append($("<option></option>")
+         .attr("value", value.Code)
+         .text(value.Name));
+                });
+            });
+            //alert(data);
+        });
+        $('#<%=ddlCateChild.ClientID%>').change(function (e) {
+            $('#<%=hiCateChildValue.ClientID%>').val($(this).find(":selected")[0].value);
+        });
     });
   
     </script>
@@ -41,9 +65,11 @@
           <div>
             <span>NTS编码:</span>
             <asp:TextBox CssClass="text" Width="150" runat="server" ID="tbxNTSCode"></asp:TextBox>
-            <span>分类编码:</span>
-            <asp:TextBox CssClass="text" Width="150" runat="server" ID="tbxCode"></asp:TextBox>
-        
+            <span>分类:</span>
+            <asp:TextBox Visible="false" CssClass="text" Width="150" runat="server" ID="tbxCode"></asp:TextBox>
+           <asp:DropDownList runat="server" Width="80" ID="ddlCate"   AutoPostBack="false"  DataTextField="Name" DataValueField="Code" OnSelectedIndexChanged="ddlCate_SelectedChanged"></asp:DropDownList>
+           <asp:DropDownList runat="server"  Width="80"  DataTextField="Name" DataValueField="Code" ID="ddlCateChild"></asp:DropDownList>
+           <asp:HiddenField  ID="hiCateChildValue"  runat="server"/>
             <span>产地:</span>
             <asp:TextBox CssClass="text" Width="80" runat="server" ID="tbxOriginal"></asp:TextBox>
             <span>发货地:</span>

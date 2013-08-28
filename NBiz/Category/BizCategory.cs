@@ -92,5 +92,10 @@ namespace NBiz
                 parentName = parentCate.Name;
             return parentName + "." + name;
         }
+        
+        public IList<Category> GetChildren (string parentCode)
+        {
+            return DalCategory.GetChildren(parentCode);
+        }
     }
 }
