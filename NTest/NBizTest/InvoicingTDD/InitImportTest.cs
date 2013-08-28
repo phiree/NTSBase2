@@ -16,8 +16,8 @@ namespace NTest.NBizTest.InvoicingTDD
        {
            string excelPath = string.Empty;
           // IList<ProductStock> stockList;
-           StockManager stockmgr = new StockManager();
-           IList<ProductStock> initStock= ExcelReader(excelPath);
+          // StockManager stockmgr = new StockManager();
+          // IList<ProductStock> initStock= ExcelReader(excelPath);
 
 
        }

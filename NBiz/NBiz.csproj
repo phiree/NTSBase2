@@ -59,6 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bill\BizBill.cs" />
     <Compile Include="Category\BizCategory.cs" />
     <Compile Include="Category\CategoryExcelReader.cs" />
     <Compile Include="NTSMemberShip\NTSMembershipProvider.cs" />
@@ -71,6 +72,9 @@
     <Compile Include="Product\ProductImageImporter.cs" />
     <Compile Include="ImportLog\BizImportLog.cs" />
     <Compile Include="Product\BizProduct.cs" />
+    <Compile Include="Stock\BizStock.cs" />
+    <Compile Include="Stock\ProuductStockDataTableConverter.cs" />
+    <Compile Include="Stock\RowPolulate_Stock.cs" />
     <Compile Include="TourRoleProvider.cs" />
     <Compile Include="_BLLBase.cs" />
     <Compile Include="ImageExtractor.cs" />
@@ -106,6 +110,7 @@
       <Name>NModel</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

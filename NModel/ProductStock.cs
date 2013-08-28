@@ -15,6 +15,7 @@ namespace NModel
     {
         public ProductStock()
         { }
+        public virtual Guid Id { get; set; }
         //产品
         public virtual Product Product { get; set; }
 
@@ -23,7 +24,7 @@ namespace NModel
         //库存
         public virtual  decimal Stock { get; set; }
         //单位
-        public virtual  string StockUnit { get { return Product.Unit; } private set; }
+        public virtual string StockUnit { get; set; }
         //该库存状态的更新时间
         public virtual DateTime UpdateTime { get; set; }
         //此操作对应的单据

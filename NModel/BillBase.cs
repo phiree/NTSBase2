@@ -9,11 +9,10 @@ namespace NModel
     public abstract class BillBase
     {
         public Guid Id { get; set; }
+        public string BillType { get; set; }
         public string BillNo { get; set; }
         public string CreatedDate { get; set; }
         //创建者
         public string CreateMemberName { get; set; }
-        
-        
     }
 }

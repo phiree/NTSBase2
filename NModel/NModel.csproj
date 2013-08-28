@@ -66,6 +66,8 @@
     <Compile Include="Mapping\NTSMemberMap.cs" />
     <Compile Include="Mapping\ProductLanguageMap.cs" />
     <Compile Include="Mapping\ProductImageMap.cs" />
+    <Compile Include="Mapping\ProductStockMap.cs" />
+    <Compile Include="Mapping\BillBaseMap.cs" />
     <Compile Include="NTSMember.cs" />
     <Compile Include="ProductImage.cs" />
     <Compile Include="ProductLanguage.cs" />
