@@ -5,7 +5,7 @@
 <head runat="server">
     <title>NTS产品信息中心</title>
     <script src="/Scripts/jquery-1.6.4.min.js" type="text/javascript"></script>
-       <script src="/Scripts/json2.min.js" type="text/javascript"></script>
+    <script src="/Scripts/json2.min.js" type="text/javascript"></script>
     <script src="/Scripts/jquery-ui-1.10.3.min.js" type="text/javascript"></script>
     <script src="/Scripts/jquery.cookie.js" type="text/javascript"></script>
     <script src="/Scripts/Cart.js" type="text/javascript"></script>
@@ -16,30 +16,51 @@
     <!--[if lt IE 8]><link rel="stylesheet" href="/Content/blueprint/ie.css" type="text/css" media="screen, projection"/><![endif]-->
     <link href="/Content/css/pager.css" rel="stylesheet" type="text/css" />
     <link href="/Content/css/site.css" rel="stylesheet" type="text/css" />
-    
+    <script language="javascript" type="text/javascript">
+        $(function () {
+            //show upgrade notice
+            var upgradeversion = "20130829";
+            var cookie_name = "upgrade_notice";
+            var closedVersion = $.cookie(cookie_name);
+            if (closedVersion==upgradeversion) {
+                $("#dvUpgradeNotice").hide();
+            }
+            $("#spCloseNotice").click(function () {
+                $("#dvUpgradeNotice").hide();
+                $.cookie(cookie_name, upgradeversion);
+            });
+
+        });
+    </script>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
     <form id="form1" runat="server">
     <div class="container">
+     <div class="info" id="dvUpgradeNotice">
+                0828升级:搜索条件增加产品类别下拉框;供应商增加"别名"属性  <a href="/upgrade.aspx">查看详情</a>
+                <span id="spCloseNotice" style="cursor:pointer">[关闭]</span>
+            </div>
         <div class="span-24 last" id="header">
+           
             <h1 class="span-12">
                 NTS产品信息中心</h1>
             <div class="span-12 last loginstatus">
-            <!--
+                <!--
                 <asp:LoginName runat="server" />
                 <asp:LoginStatus  TabIndex="999"  LoginImageUrl="~/Content/images/login.jpg" runat="server" />
                 -->
-                <div><span>共<span id="sumCart"></span>件</span><a href="/products/cart.aspx">查看全部</a></div>
+                <div>
+                    <span>共<span id="sumCart"></span>件</span><a href="/products/cart.aspx">查看全部</a></div>
             </div>
         </div>
         <div class="clear span-24 last" id="body">
-                <asp:ContentPlaceHolder runat="server" ID="cph_body">
-                </asp:ContentPlaceHolder>
+            <asp:ContentPlaceHolder runat="server" ID="cph_body">
+            </asp:ContentPlaceHolder>
         </div>
         <div class="clear span-24 last" id="footer">
-            NTS
+            NTS <a href="/upgrade.aspx">升级日志</a>
         </div>
     </div>
     </form>

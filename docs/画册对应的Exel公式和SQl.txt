@@ -1,5 +1,4 @@
-="INSERT INTO tempMN (modelnumber,tag) VALUES('"&F11&"','ifans20130812');"
-
+s
 
 CREATE TABLE tempMN
 (
