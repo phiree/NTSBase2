@@ -8,7 +8,7 @@
         onload="dv_Load"   >
  <Fields>
  <asp:BoundField  HeaderStyle-Wrap="false"  ItemStyle-Font-Size="Medium"  ItemStyle-Font-Bold="true"  HtmlEncode="false"  HeaderText="名称" DataField="Name"/>
- <asp:TemplateField >
+ <asp:TemplateField > 
  <ItemTemplate>
  <!--<input type="button" id="btnAddToCart" value="加入选单" pid='<%#Eval("id") %>' /> -->
  </ItemTemplate>

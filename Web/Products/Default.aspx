@@ -26,7 +26,7 @@
                     $("#<%=tbxName.ClientID%>").val("");
                 }
             }
-            );
+            ); 
     });
   
     </script>
