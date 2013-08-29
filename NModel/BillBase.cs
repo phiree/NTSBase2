@@ -8,11 +8,11 @@ namespace NModel
     //单据抽象基类
     public abstract class BillBase
     {
-        public Guid Id { get; set; }
-        public string BillType { get; set; }
-        public string BillNo { get; set; }
-        public string CreatedDate { get; set; }
+        public virtual Guid Id { get; set; }
+        public virtual string BillType { get; set; }
+        public virtual string BillNo { get; set; }
+        public virtual string CreatedDate { get; set; }
         //创建者
-        public string CreateMemberName { get; set; }
+        public virtual string CreateMemberName { get; set; }
     }
 }

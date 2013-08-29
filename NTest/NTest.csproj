@@ -138,6 +138,9 @@
     <None Include="TestFiles\FormatCheck\潮州市金源利陶瓷制作有限公司\英文版——金源利硅胶.xls">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="TestFiles\NBizTest\InvoicingTDD\库存清单模板.xls">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="TestFiles\ProductImages2\江门市新 会区司前镇金得利实业有限公司\Thumbs.db" />
     <None Include="TestFiles\NBizTest\联丰报价单 20130108 --餐厨部.xls">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -240,6 +243,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="TestFiles\NBizTest\MakeThumbnail\thumbnail\" />
+    <Folder Include="TestFiles\StockExcel\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

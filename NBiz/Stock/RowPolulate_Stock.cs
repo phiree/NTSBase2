@@ -20,11 +20,14 @@ namespace NBiz
             ProductStock stock = new ProductStock();
             Product p = populate.PopulateFromRow(row);
             stock.Product = p;
-            string billNo = row["billRelative"].ToString();
-            stock.BillRelative = new BizBill().GetOne(billNo);
-            stock.Location = row["Location"].ToString();
-            stock.StockUnit = row["StockUnit"].ToString();
-            stock.Stock = decimal.Parse(row["Stock"].ToString());
+            //if (row["BillNo"] != null)
+            //{
+            //    string billNo = row["BillNo"].ToString();
+            //    stock.BillRelative = new BizBill().GetOne(billNo);
+            //}
+            stock.Location = row["库位号"].ToString();
+            stock.StockUnit = row["库存单位"].ToString();
+            stock.Stock = decimal.Parse(row["库存数"].ToString());
             stock.UpdateTime = DateTime.Now;
             return stock;
         }
