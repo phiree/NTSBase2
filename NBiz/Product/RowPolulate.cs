@@ -30,7 +30,7 @@ namespace NBiz
             Product p = new Product();
             ProductLanguage pl = new ProductLanguage();
             pl.Name = row["产品名称"].ToString();
-            pl.Language = StringHelper.LanguageTypeDetermine(pl.Name);
+            pl.Language = StringHelper.LanguageTypeDetermine(pl.Name+pl.ProductDescription+pl.ProductParameters);
             pl.PlaceOfOrigin = row["产地"].ToString();
             pl.PlaceOfDelivery = row["交货地"].ToString();
             p.ImageState = row["图片"].ToString();
