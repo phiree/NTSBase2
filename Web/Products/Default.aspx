@@ -116,8 +116,6 @@
             </asp:TemplateField>
             <asp:TemplateField HeaderText="图片">
                 <ItemTemplate>
-                    <span>
-                        <%#Eval("ImageState") %></span>
                     <asp:Repeater runat="server" ID="rptImages" OnItemDataBound="rptImages_ItemDataBound">
                         <ItemTemplate>
                             <%-- <img style="width:200px" src='/ProductImages/<%# Container.DataItem.ToString()%>'  alt=""/>--%>
@@ -148,7 +146,7 @@
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:HyperLinkField DataNavigateUrlFields="id" DataNavigateUrlFormatString="/admin/products/productedit.aspx?id={0}"
-                Text="修改" Visible="false" />
+              
         </Columns>
         <EmptyDataTemplate>
             <div class="notice">

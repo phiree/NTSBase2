@@ -1,0 +1,18 @@
+﻿#mainContent
+{
+    position: relative;
+    left: -1px;
+    border-left: solid 1px #aaa;
+    padding-left: 10px;
+}
+#leftMenu
+{
+    border-right: 1px solid #aaa;
+}
+#adminFoot
+{
+    margin: 50px 0px;
+   text-align:center;
+   padding:20px;
+    border-top:1px solid #aaa;
+}

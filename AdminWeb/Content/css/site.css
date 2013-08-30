@@ -1,0 +1,52 @@
+﻿body
+{
+     background-color:#ddd;
+    }
+.container
+{
+   
+    border: solid 1px #4277A9;
+   
+   
+}
+
+#header
+{
+    /*
+    margin: 2px 0;
+    width: 946px;
+    border: solid 1px #2693C9;
+*/
+margin-bottom:5px;
+    text-align: center;
+    background-color: #9AD4EC;
+    background: url(../images/headerbg.jpg) repeat-x top left;
+}
+#header h1
+{
+    padding: 15px 0;
+    margin: 0;
+    color: White;
+    font-weight: 900;
+}
+.loginstatus
+{
+    padding: 15px 0;
+    text-align: right;
+    color: White;
+    font-size: large;
+    font-weight: bold;
+}
+.loginBtn
+{
+    float: right;
+}
+#body
+{ 
+    background-color: #fff;
+}
+
+#footer
+{
+     text-align:center;
+    }

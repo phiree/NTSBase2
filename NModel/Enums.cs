@@ -59,4 +59,22 @@ namespace NModel.Enums
         Category_NTsCode,//分类/ntscode.扩展名
         Supplier_OriginalName// 供应商/原始文件名
     }
+
+    public enum StockStatus
+    {
+        Normal, //正常, 
+        Broken,//已损坏
+        Missing,//已遗失
+        Borrowed,//已借出
+        Returned //已归还给供应商
+          
+    }
+    /// <summary>
+    /// 单据类型.需要审核/历史记录的数据处理以单据形式反映.
+    /// </summary>
+    public enum BillType
+    { 
+       //产品报价单 上传 
+       //导入单
+    }
 }

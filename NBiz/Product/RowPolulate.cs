@@ -30,7 +30,7 @@ namespace NBiz
             Product p = new Product();
             ProductLanguage pl = new ProductLanguage();
             pl.Name = row["产品名称"].ToString();
-         
+           
             pl.PlaceOfOrigin = row["产地"].ToString();
             pl.PlaceOfDelivery = row["交货地"].ToString();
             p.ImageState = row["图片"].ToString();
@@ -144,7 +144,7 @@ namespace NBiz
             pl.PlaceOfOrigin = row["备注"].ToString();
             // p.PlaceOfDelivery = row["交货地"].ToString();
             pl.Name = row["名称"].ToString();
-          
+           
             string categoryCode = StringHelper.ReplaceSpace(row["代码"].ToString());
 
             if (string.IsNullOrEmpty(pl.PlaceOfOrigin) && string.IsNullOrEmpty(pl.Name)

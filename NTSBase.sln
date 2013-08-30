@@ -53,6 +53,29 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{2CF8815D-7
 		docs\网站数据导入.sql = docs\网站数据导入.sql
 	EndProjectSection
 EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "AdminWeb", "AdminWeb\", "{F0D63C45-1598-422C-9EF6-FD78E66DCC4C}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		ProjectReferences = "{5F8D1640-EA2F-4E84-BF40-922ED389D3AF}|NBiz.dll;{B63398DF-8B0D-4BF6-AD17-71003F9BFC13}|NLibrary.dll;{B3CE5460-8541-4CF5-9708-8E8D85FDF4C2}|NModel.dll;{FED9E70E-AB59-4987-A7B1-0BAF8BE78951}|NDAL.dll;"
+		Debug.AspNetCompiler.VirtualPath = "/AdminWeb"
+		Debug.AspNetCompiler.PhysicalPath = "AdminWeb\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\AdminWeb\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/AdminWeb"
+		Release.AspNetCompiler.PhysicalPath = "AdminWeb\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\AdminWeb\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "2596"
+		VWDVirtualPath = "/"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -133,6 +156,16 @@ Global
 		{890BCD8A-B2DB-4DCD-8ED6-E2426B1F95E9}.Release|Mixed Platforms.Build.0 = Release|x86
 		{890BCD8A-B2DB-4DCD-8ED6-E2426B1F95E9}.Release|x86.ActiveCfg = Release|x86
 		{890BCD8A-B2DB-4DCD-8ED6-E2426B1F95E9}.Release|x86.Build.0 = Release|x86
+		{F0D63C45-1598-422C-9EF6-FD78E66DCC4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0D63C45-1598-422C-9EF6-FD78E66DCC4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0D63C45-1598-422C-9EF6-FD78E66DCC4C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{F0D63C45-1598-422C-9EF6-FD78E66DCC4C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{F0D63C45-1598-422C-9EF6-FD78E66DCC4C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F0D63C45-1598-422C-9EF6-FD78E66DCC4C}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0D63C45-1598-422C-9EF6-FD78E66DCC4C}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{F0D63C45-1598-422C-9EF6-FD78E66DCC4C}.Release|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{F0D63C45-1598-422C-9EF6-FD78E66DCC4C}.Release|Mixed Platforms.Build.0 = Debug|Any CPU
+		{F0D63C45-1598-422C-9EF6-FD78E66DCC4C}.Release|x86.ActiveCfg = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
