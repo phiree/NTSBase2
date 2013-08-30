@@ -1,4 +1,4 @@
-SELECT 
+ SELECT 
 -- 
 p.ntscode AS 代码,
 -- 

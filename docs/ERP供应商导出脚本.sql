@@ -1,4 +1,4 @@
-SELECT 
+ SELECT 
 CODE AS '代码',
 NAME AS '名称',
 'TRUE' AS '明细',
