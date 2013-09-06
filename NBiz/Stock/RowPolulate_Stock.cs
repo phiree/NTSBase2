@@ -18,6 +18,7 @@ namespace NBiz
         {
             IRowPopulate populate = new RowPolulateBaojiandan();
             ProductStock stock = new ProductStock();
+            //此处的product不能用
             Product p = populate.PopulateFromRow(row);
             stock.Product = p;
             //if (row["BillNo"] != null)

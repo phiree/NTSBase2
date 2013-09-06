@@ -16,10 +16,7 @@ namespace Tools
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            new FrmExtractImage().Show();
-        }
+       
 
         private void btnCheck_Click(object sender, EventArgs e)
         {

@@ -77,7 +77,6 @@
     <Compile Include="Stock\RowPolulate_Stock.cs" />
     <Compile Include="TourRoleProvider.cs" />
     <Compile Include="_BLLBase.cs" />
-    <Compile Include="ImageExtractor.cs" />
     <Compile Include="_ImportFromExcel.cs" />
     <Compile Include="Product\RowPolulate.cs" />
     <Compile Include="Product\SingleFolderImport.cs" />
@@ -91,7 +90,6 @@
     <Compile Include="ThumbnailMaker.cs" />
     <Compile Include="TransferInDatatable.cs" />
     <Compile Include="Variables.cs" />
-    <Compile Include="ImportFromExcel2.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

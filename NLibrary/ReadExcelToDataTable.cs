@@ -19,10 +19,7 @@ namespace NLibrary
     /// </summary>
     public class ReadExcelToDataTable
     {
-        /// <summary>
-        /// 是否需要获取excel文件内的所有图片
-        /// </summary>
-        public bool NeedGetAllPictures { get; set; }
+    
         /// <summary>
         /// 只创建表结构,不填充数据
         /// </summary>
@@ -46,7 +43,7 @@ namespace NLibrary
         public ReadExcelToDataTable(Stream inputStream)
         {
             InputStream = inputStream;
-            NeedGetAllPictures = false;
+         
             OnlyCreateSchemar = false;
             RowNumberBegin = 1;
             SheetIndex = 0;
@@ -54,7 +51,7 @@ namespace NLibrary
         public ReadExcelToDataTable(Stream inputStream,bool needAllPictures
             ,bool onlyCreateSchemar,int rowNumberBegin):this(inputStream)
         {
-            NeedGetAllPictures = needAllPictures;
+          
             OnlyCreateSchemar = onlyCreateSchemar;
             RowNumberBegin = rowNumberBegin;
         }
@@ -62,10 +59,9 @@ namespace NLibrary
         {
             StringBuilder sbErrMsg = new StringBuilder();
             HSSFWorkbook book = new HSSFWorkbook(InputStream);
-            if (NeedGetAllPictures)
-            {
+           
                  AllPictures = book.GetAllPictures();
-            }
+           
             var sheet = book.GetSheetAt(SheetIndex);
             DataTable dt = new DataTable();
             //起始行单元格内的值作为datatable的列名.

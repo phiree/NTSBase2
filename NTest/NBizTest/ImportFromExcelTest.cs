@@ -21,11 +21,28 @@ namespace NTest.NBizTest
              文件末尾有空白行
              */
             string filePath = Environment.CurrentDirectory + @"\TestFiles\NTS 产品报价单   哈慈 20130306.xls";
-        
+                                
             IList<Product> products = bizProduct.ReadListFromExcel(new System.IO.FileStream(filePath, System.IO.FileMode.Open)
                 ,out errMsg);
 
             Assert.AreEqual(19,products.Count);
+            Assert.AreEqual("zh", products[0].ProductMultiLangues[0].Language);
+            Assert.AreEqual("en", products[0].ProductMultiLangues[1].Language);
+            Assert.AreEqual("zh", products[1].ProductMultiLangues[0].Language);
+
+        }
+        [Test]
+        public void ReadProductFromExcel_供应商名称异常Test()
+        {
+            /*
+             文件末尾有空白行
+             */
+            string filePath = Environment.CurrentDirectory + @"\TestFiles\FormatCheck\俊能\NTS产品报价单俊能08-30.xls";
+
+            IList<Product> products = bizProduct.ReadListFromExcel(new System.IO.FileStream(filePath, System.IO.FileMode.Open)
+                , out errMsg);
+
+            Assert.AreEqual(19, products.Count);
             Assert.AreEqual("zh", products[0].ProductMultiLangues[0].Language);
             Assert.AreEqual("en", products[0].ProductMultiLangues[1].Language);
             Assert.AreEqual("zh", products[1].ProductMultiLangues[0].Language);
@@ -61,20 +78,7 @@ namespace NTest.NBizTest
             Assert.AreEqual(193, Supplier.Count);
         }
 
-        /// <summary>
-        /// 提取excel里的图片
-        /// </summary>
-        [Test]
-        public void ReadProductWithImageFromExcelTest()
-        {
-
-            string filePath = Environment.CurrentDirectory + @"\TestFiles\图片提取20130306.xls";
-            string savePath = Environment.CurrentDirectory + @"\TestFiles\图片提取20130306\";
-            ImageExtractor ie = new ImageExtractor();
-            ie.Excute(filePath, savePath);
-            Assert.AreEqual(3, System.IO.Directory.GetFiles(savePath).Length);
-           // Assert.AreEqual(19, products.Count);
-        }
+       
         //导入Erp格式
         [Test]
         public void ReadProductFromErpExcelTest()

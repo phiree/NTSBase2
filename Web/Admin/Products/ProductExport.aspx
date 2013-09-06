@@ -38,7 +38,7 @@
         <legend>导出特定供应商的产品</legend>
         <div>
             导出Excel的文件名:<asp:TextBox runat="server" ID="tbxExportName_Supplier"></asp:TextBox>
-            供应商列表(格式:供应商名称(代码)---型号):
+            供应商列表(格式:供应商名称):
             <asp:TextBox runat="server" TextMode="MultiLine" ID="tbxSupplierNames"></asp:TextBox>
             <asp:CheckBox runat="server" ID="cbxWithImage"  Checked="true"/>
         </div>

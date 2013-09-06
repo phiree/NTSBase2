@@ -10,17 +10,24 @@ namespace NLibrary
     /// </summary>
     public class FormatSerialNoUnit
     {
+        Dictionary<string, int> serialList;
         /// <summary>
         /// 需要增加流水号的序列对象.
         /// </summary>
-        Dictionary<string, int> SerialList = new Dictionary<string, int>();
+        Dictionary<string, int> SerialList {
+            get {
+                if(serialList==null)
+                serialList= persistent.GetAll();
+                return serialList;
+            }
+        }//new Dictionary<string, int>();
         IFormatSerialNoPersistent persistent;
         
        
         public FormatSerialNoUnit(IFormatSerialNoPersistent persistent)
         {
             this.persistent = persistent;
-            SerialList = persistent.GetAll();
+            //SerialList = persistent.GetAll();
         }
         /// <summary>
         /// 获取某序列对象的流水号

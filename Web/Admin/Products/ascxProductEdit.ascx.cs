@@ -55,6 +55,7 @@ public partial class Admin_Products_ascxProductEdit : System.Web.UI.UserControl
         CurrentProduct.PriceValidPeriod = tbxPriceValidPeriod.Text;
         CurrentProduct.ProductionCycle = decimal.Parse(tbxProductCycle.Text);
         CurrentProduct.TaxRate = decimal.Parse(tbxTax.Text);
+        CurrentProduct.OrderAmountMin = decimal.Parse(tbxMinOrder.Text);
         UpdateList();
     }
     private void UpdateList()

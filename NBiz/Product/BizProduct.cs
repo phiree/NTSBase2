@@ -106,7 +106,7 @@ namespace NBiz
         {
             IDataTableConverter<Product> productReader = new ProductDataTableConverter();
             ImportToDatabaseFromExcel<Product> importor = new ImportToDatabaseFromExcel<Product>(productReader, this);
-            return importor.ReadListWithAllPictures(stream, out  errMsg, out allPictures);
+            return importor.ReadList(stream, out  errMsg, out allPictures);
         }
         /// <summary>
         /// 保存产品列表至数据库

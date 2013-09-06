@@ -1,4 +1,4 @@
- SELECT 
+﻿ SELECT 
 -- 
 p.ntscode AS 代码,
 -- 
@@ -226,7 +226,7 @@ p.modelnumber AS 物料型号,
 
 '0' AS 控制,
 '0' AS 是否禁用,
-'{C81E92A1-3B20-4E49-B904-299B1B412FC8}' AS 全球唯一标识内码
+concat('{',p.id,'}') AS 全球唯一标识内码
 
 FROM product  p
 INNER JOIN supplier s ON p.SupplierCode=s.Code

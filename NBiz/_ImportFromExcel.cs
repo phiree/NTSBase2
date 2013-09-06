@@ -35,10 +35,9 @@ namespace NBiz
         public IList<T> ReadList(Stream stream, out string msg)
         {
 
-            ReadExcelToDataTable excelToDatatableReader = new ReadExcelToDataTable(stream);
-            DataTable dt = excelToDatatableReader.Read(out msg);
-            IList<T> list = datatableConverter.Convert(dt);
-            return list;
+            IList pics;
+
+            return ReadList(stream, out msg, out pics);
         }
         /// <summary>
         /// 读取对象列表的同时 读取图片信息
@@ -47,7 +46,7 @@ namespace NBiz
         /// <param name="msg"></param>
         /// <param name="allPictures"></param>
         /// <returns></returns>
-        public IList<T> ReadListWithAllPictures(Stream stream, out string msg, out IList allPictures)
+        public IList<T> ReadList(Stream stream, out string msg, out IList allPictures)
         {
 
             ReadExcelToDataTable excelToDatatableReader = new ReadExcelToDataTable(stream, true, false, 1);

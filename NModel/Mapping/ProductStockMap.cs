@@ -10,9 +10,9 @@ namespace NModel.Mapping
         public ProductStockMap()
         {
             Id(x => x.Id);
-            References<BillBase>(x => x.BillRelative);
+            References<BillBase>(x => x.BillRelative).Cascade.None();
             Map(x => x.Location);
-            References<Product>(x => x.Product);
+            References<Product>(x => x.Product).Cascade.None();
             Map(x => x.Stock);
             Map(x => x.StockUnit);
             Map(x => x.UpdateTime);

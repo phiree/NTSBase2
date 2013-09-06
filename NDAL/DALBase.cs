@@ -48,7 +48,11 @@ namespace NDAL
         {
 
             session.SaveOrUpdate(o);
-            session.Flush();
+            if (!session.Transaction.IsActive)
+            {
+                session.Flush();
+            }
+            
 
         }
         public T GetOne(object id)

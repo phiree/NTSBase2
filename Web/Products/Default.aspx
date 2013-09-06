@@ -146,7 +146,7 @@
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:HyperLinkField DataNavigateUrlFields="id" DataNavigateUrlFormatString="/admin/products/productedit.aspx?id={0}"
-              
+              />
         </Columns>
         <EmptyDataTemplate>
             <div class="notice">

@@ -82,7 +82,15 @@ namespace NTest.NBizTest
 
         }
 
+        /// <summary>
+        ///
+        /// </summary>
+        [Test]
+        public void CheckFormat_供应商名称异常()
+        {
+            CheckSingleFolderTest("俊能", 14, 0, 0, 0, false, null, null);
 
+        }
         /// <summary>
 
         /// 2 支持多种图片格式

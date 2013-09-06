@@ -124,6 +124,9 @@
     </None>
     <None Include="NMock3\NMock3 Cheat Sheet.pdf" />
     <None Include="packages.config" />
+    <None Include="TestFiles\FormatCheck\俊能\NTS产品报价单俊能08-30.xls">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="TestFiles\FormatCheck\巴非\巴菲 报价单.xls">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -139,12 +142,10 @@
     <None Include="TestFiles\FormatCheck\潮州市金源利陶瓷制作有限公司\英文版——金源利硅胶.xls">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-
-<None Include="TestFiles\NBizTest\InvoicingTDD\库存清单模板.xls">
+    <None Include="TestFiles\NBizTest\InvoicingTDD\库存清单模板.xls">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-
-       <None Include="TestFiles\NBizTest\联丰报价单 20130108 --餐厨部.xls">
+    <None Include="TestFiles\NBizTest\联丰报价单 20130108 --餐厨部.xls">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="TestFiles\NTS 产品报价单   哈慈 20130306.xls">
@@ -159,7 +160,6 @@
     <None Include="TestFiles\NTS 产品报价单   哈慈 20130306_English.xls">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-
     <None Include="TestFiles\吧台设备及用具.XLS">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -243,6 +243,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="TestFiles\NBizTest\MakeThumbnail\thumbnail\" />
+    <Folder Include="TestFiles\NewFolder2\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
