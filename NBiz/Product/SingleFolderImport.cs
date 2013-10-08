@@ -196,7 +196,7 @@ namespace NBiz
             string outputFolder, string WebProductImagesPath)
         {
             DirectoryInfo dirRoot = new DirectoryInfo(outputFolder);
-            TransferInDatatable transfer = new TransferInDatatable();
+            DataExport transfer = new DataExport();
             //如果没有合格数据 则不需要创建
             if (ProductsPassedDBCheck.Count > 0)
             {
@@ -220,7 +220,8 @@ namespace NBiz
 
 
                 DataTable dtProductsHasImage = ObjectConvertor.ToDataTable<Product>(ProductsPassedDBCheck);
-                transfer.CreateXslFromDataTable(dtProductsHasImage, 1, dirSupplierQuanlified.FullName + "\\" + supplierName + ".xls");
+                transfer.DataToExport = dtProductsHasImage;
+                transfer.SaveWorkBook( dirSupplierQuanlified.FullName + "\\" + supplierName + ".xls");
             }
 
             //没有图片的产品
@@ -230,7 +231,8 @@ namespace NBiz
             {
                 DirectoryInfo dirSupplierNotQuanlified = IOHelper.EnsureDirectory(dirPathSupplierNotQuanlified);
                 DataTable dtProductsNotHasImage = ObjectConvertor.ToDataTable<Product>(ProductsNotHasImage);
-                transfer.CreateXslFromDataTable(dtProductsNotHasImage, 1, dirSupplierNotQuanlified + "没有图片的数据_" + supplierName + ".xls");
+                transfer.DataToExport = dtProductsNotHasImage;
+                transfer.SaveWorkBook( dirSupplierNotQuanlified + "没有图片的数据_" + supplierName + ".xls");
 
             }
             //没有产品的图片
@@ -253,7 +255,8 @@ namespace NBiz
                 DirectoryInfo dirSupplierRepeated = IOHelper.EnsureDirectory(dirPathSupplierRepeated);
 
                 DataTable dtProductsRepeated = ObjectConvertor.ToDataTable<Product>(ProductsExistedInDB);
-                transfer.CreateXslFromDataTable(dtProductsRepeated, 1, dirSupplierRepeated.FullName + "\\" + supplierName + ".xls");
+                transfer.DataToExport = dtProductsRepeated;
+                transfer.SaveWorkBook(dirSupplierRepeated.FullName + "\\" + supplierName + ".xls");
             }
         }
     }
