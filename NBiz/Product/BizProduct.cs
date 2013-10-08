@@ -14,6 +14,7 @@ namespace NBiz
     /// </summary>
     public class BizProduct : BLLBase<NModel.Product>
     {
+       
         //NTS编码维护类.
         FormatSerialNoUnit serialNoUnit;
         public FormatSerialNoUnit SerialNoUnit
@@ -58,8 +59,12 @@ namespace NBiz
                 dalProduct = value;
             }
         }
-
+        BizSupplier BizSp;
         public string ImportMsg { get; set; }
+        public BizProduct()
+        {
+            if (BizSp == null) BizSp = new BizSupplier();
+        }
         /// <summary> 导入excel产品列表
 
         /// </summary>
@@ -155,7 +160,7 @@ namespace NBiz
 
             foreach (Product o in list)
             {
-                Supplier s = DalSupplier.GetOneByCode(o.SupplierCode);
+                Supplier s =  BizSp.GetByCode(o.SupplierCode);
                 if (s == null)
                 {
                     throw new Exception("供应商不存在:" + o.SupplierCode + ",请检查Excel的供应商列.");
@@ -193,7 +198,7 @@ namespace NBiz
 
         public Product GetOneBy_SupplierCode_ModelNumber(string supplierCode, string modelNumber)
         {
-            Supplier s = DalSupplier.GetOneByCode(supplierCode);
+            Supplier s = BizSp.GetByCode(supplierCode);
             if (s == null)
                 return null;
 
@@ -249,6 +254,85 @@ namespace NBiz
         public IList<Product> GetProductsNoImages()
         {
             return DalProduct.GetProductsNoImages();
+        }
+
+
+
+        internal  IList<Product> GetNotSyncProduct()
+        {
+            return DalProduct.GetNotSyncProduct();
+        }
+        internal DataSet ConvertToErpFormat(IList<Product> products)
+        {
+            DataTable dtForErp = new DataTable();
+            string[] columnNames = {"代码",	"名称",	"明细",	"审核人_FName",	"物料全名",
+                                   "助记码",	"规格型号",	"辅助属性类别_FName",
+                                   "辅助属性类别_FNumber",	"物料属性_FName",
+                                   "物料分类_FName",	"计量单位组_FName",	
+                                   "基本计量单位_FName",	"基本计量单位_FGroupName",
+                                   "采购计量单位_FName",	"采购计量单位_FGroupName",
+                                   "销售计量单位_FName",	"销售计量单位_FGroupName",
+                                   "生产计量单位_FName",	"生产计量单位_FGroupName",	
+                                   "库存计量单位_FName",	"库存计量单位_FGroupName",
+                                   "辅助计量单位_FName",	"辅助计量单位_FGroupName",	
+                                   "辅助计量单位换算率",	"默认仓库_FName",	"默认仓库_FNumber",	
+                                   "默认仓位_FName",	"默认仓位_FGroupName",	"来源_FName",
+                                   "来源_FNumber",	"数量精度",	"最低存量",	"最高存量",	"安全库存数量",	
+                                   "使用状态_FName",	"是否为设备",	"设备编码",	"是否为备件",	"批准文号",
+                                   "别名",	"物料对应特性",	"默认待检仓库_FName",	"默认待检仓库_FNumber",
+                                   "默认待检仓位_FName",	"默认待检仓位_FGroupName",	"币别_FName",	"币别_FNumber",
+                                   "采购最高价",	"采购最高价币别_FName",	"采购最高价币别_FNumber",	"委外加工最高价",	
+                                   "委外加工最高价币别_FName",	"委外加工最高价币别_FNumber",	"销售最低价",
+                                   "销售最低价币别_FName",	"销售最低价币别_FNumber",	"是否销售",	"采购负责人_FName",	
+                                   "采购负责人_FNumber",	"毛利率",	"采购单价",	"销售单价",	"是否农林计税",	
+                                   "是否进行保质期管理",	"保质期天",	"是否需要库龄管理",	"是否采用业务批次管理",	
+                                   "是否需要进行订补货计划的运算",	"失效提前期天",	"盘点周期单位_FName",
+                                   "盘点周期",	"每周月第天",	"上次盘点日期",	"外购超收比例",	"外购欠收比例",	
+                                   "销售超交比例",	"销售欠交比例",	"完工超收比例",	"完工欠收比例",	"领料超收比例",
+                                   "领料欠收比例",	"计价方法_FName",	"计划单价",	"单价精度",	"存货科目代码_FNumber",	
+                                   "销售收入科目代码_FNumber",	"销售成本科目代码_FNumber",	"成本差异科目代码_FNumber",
+                                   "代管物资科目_FNumber",	"税目代码_FName",	"税率",	"成本项目_FName",
+                                   "成本项目_FNumber",	"是否进行序列号管理",	"参与结转式成本还原",	"备注",
+                                   "计划策略_FName",	"计划模式_FName",	"订货策略_FName",	"固定提前期",
+                                   "变动提前期",	"累计提前期",	"订货间隔期天",	"最小订货量",	"最大订货量",
+                                   "批量增量",	"设置为固定再订货点",	"再订货点",	"固定经济批量",	"变动提前期批量",
+                                   "批量拆分间隔天数",	"拆分批量",	"需求时界天",	"计划时界天",	
+                                   "默认工艺路线_FInterID",	"默认工艺路线_FRoutingName",	"默认生产类型_FName",
+                                   "默认生产类型_FNumber",	"生产负责人_FName",	"生产负责人_FNumber",
+                                   "计划员_FName",	"计划员_FNumber",	"是否倒冲",	"倒冲仓库_FName",
+                                   "倒冲仓库_FNumber",	"倒冲仓位_FName",	"倒冲仓位_FGroupName",	
+                                   "投料自动取整",	"日消耗量",	"MRP计算是否合并需求",	"MRP计算是否产生采购申请",
+                                   "控制类型_FName",	"控制策略_FName",	"容器名称",	"看板容量",	"图号",	
+                                   "是否关键件",	"毛重",	"净重",	"重量单位_FName",	"重量单位_FGroupName",	
+                                   "长度",	"宽度",	"高度",	"体积",	"长度单位_FName",	"长度单位_FGroupName",	
+                                   "版本号",	"单位标准成本",	"附加费率",	"附加费所属成本项目_FNumber",	"成本BOM_FBOMNumber",
+                                   "成本工艺路线_FInterID",	"成本工艺路线_FRoutingName",	"标准加工批量",	"单位标准工时小时",	
+                                   "标准工资率",	"变动制造费用分配率",	"单位标准固定制造费用金额",	"单位委外加工费",
+                                   "委外加工费所属成本项目_FNumber",	"单位计件工资",	"采购订单差异科目代码_FNumber",
+                                   "采购发票差异科目代码_FNumber",	"材料成本差异科目代码_FNumber",
+                                   "加工费差异科目代码_FNumber",	"废品损失科目代码_FNumber",	"标准成本调整差异科目代码_FNumber",
+                                   "采购检验方式_FName",	"产品检验方式_FName",	"委外加工检验方式_FName",	"发货检验方式_FName",
+                                   "退货检验方式_FName",	"库存检验方式_FName",	"其他检验方式_FName",	"抽样标准致命_FName",
+                                   "抽样标准致命_FNumber",	"抽样标准严重_FName",	"抽样标准严重_FNumber",
+                                   "抽样标准轻微_FName",	"抽样标准轻微_FNumber",	"库存检验周期天",	"库存周期检验预警提前期天",
+                                   "检验方案_FInterID",	"检验方案_FBrNo",	"检验员_FName",	"检验员_FNumber",	"英文名称",	
+                                   "英文规格",	"HS编码_FHSCode",	"HS编码_FNumber",	"外销税率",	"HS第一法定单位",
+                                   "HS第二法定单位",	"进口关税率",	"进口消费税率",	"HS第一法定单位换算率",	"HS第二法定单位换算率",
+                                   "是否保税监管",	"物料监管类型_FName",	"物料监管类型_FNumber",	"长度精度",	"体积精度",	"重量精度",
+                                   "启用服务",	"生成产品档案",	"维修件",	"保修期限（月）",	"使用寿命（月）",	"物料型号",
+                                   "收税类型",	"描述卖点",	"FOB价",	"控制",	"是否禁用",	"全球唯一标识内码"};
+            foreach (string colName in columnNames)
+            {
+                DataColumn col = new DataColumn(colName, typeof(string));
+                dtForErp.Columns.Add(col);
+            }
+            foreach (Product p in products)
+            {
+                DataRow rowP = dtForErp.NewRow();
+               // rowP[
+            }
+
+            throw new NotImplementedException();
         }
     }
 }
