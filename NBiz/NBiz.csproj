@@ -72,6 +72,7 @@
     <Compile Include="Product\ProductImageImporter.cs" />
     <Compile Include="ImportLog\BizImportLog.cs" />
     <Compile Include="Product\BizProduct.cs" />
+    <Compile Include="Product\ProductSync.cs" />
     <Compile Include="Stock\BizStock.cs" />
     <Compile Include="Stock\ProuductStockDataTableConverter.cs" />
     <Compile Include="Stock\RowPolulate_Stock.cs" />
