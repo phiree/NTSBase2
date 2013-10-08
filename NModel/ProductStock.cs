@@ -20,16 +20,16 @@ namespace NModel
         public virtual Product Product { get; set; }
 
         //库位号
-        public virtual string Location{ get; set; }
+        public virtual string Location { get; set; }
         //库存
-        public virtual  decimal Stock { get; set; }
+        public virtual decimal Stock { get; set; }
         //单位
         public virtual string StockUnit { get; set; }
         //该库存状态的更新时间
         public virtual DateTime UpdateTime { get; set; }
         //此操作对应的单据
-        public virtual BillBase BillRelative { get; set; }
 
+        public virtual BillBase Bill { get; set; }
 
     }
 }

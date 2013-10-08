@@ -32,6 +32,8 @@ namespace NModel.Mapping
             Map(x => x.PriceValidPeriod);
             Map(x => x.MoneyType);
             Map(x => x.ImageState);
+            Map(x => x.SyncState).CustomType<int>();
+            Map(x => x.SyncTime).Nullable();
             References<ImportOperationLog>(x => x.ImportOperationLog);
             HasMany<ProductLanguage>(x => x.ProductMultiLangues).Cascade.AllDeleteOrphan();
         }
