@@ -67,14 +67,24 @@ namespace NModel.Enums
         Missing,//已遗失
         Borrowed,//已借出
         Returned //已归还给供应商
-          
+
     }
     /// <summary>
     /// 单据类型.需要审核/历史记录的数据处理以单据形式反映.
     /// </summary>
     public enum BillType
-    { 
-       //产品报价单 上传 
-       //导入单
+    {
+        //产品报价单 上传 
+        //导入单
+    }
+
+    /// <summary>
+    /// 产品和ERP同步状态
+    /// </summary>
+    public enum SyncState
+    {
+        Added,//已增加
+        Modified,//已修改
+        Synced//已同步
     }
 }
