@@ -81,6 +81,10 @@ namespace NBiz
             totalRecord = 13000;
             return listT;
         }
+        public  System.Data.DataSet ExecuteSql(string pureSqlStatement)
+        {
+            return DalBase.ExecuteSql(pureSqlStatement);
+        }
     }
   
 }

@@ -5,7 +5,7 @@ using System.Text;
 using NHibernate;
 using NHibernate.Hql;
 using System.Web.Security;
-
+using MySql.Data.MySqlClient;
 namespace NDAL
 {
     public class DalBase<T>
@@ -141,5 +141,20 @@ namespace NDAL
             return returnList;
         }
 
+        public System.Data.DataSet ExecuteSql(string pureSqlStatement)
+        {
+          //  ISQLQuery sqlQuery= session.CreateSQLQuery(pureSqlStatement);
+           // System.Collections.IList result = sqlQuery.List();
+            System.Data.DataSet ds = new System.Data.DataSet();
+            using (MySql.Data.MySqlClient.MySqlConnection conn = session.Connection as MySqlConnection)
+            {
+                //conn.Open();
+
+                var sqlDataAdapter = new MySqlDataAdapter(pureSqlStatement, conn);
+              
+                sqlDataAdapter.Fill(ds);
+            }
+            return ds;
+        }
     }
 }
