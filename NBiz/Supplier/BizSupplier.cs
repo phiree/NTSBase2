@@ -32,7 +32,8 @@ namespace NBiz
 
         public Supplier GetByCode(string supplierCode)
         {
-            
+            string temp = "00000" + supplierCode;
+            supplierCode = temp.Substring(temp.Length-5);
             return DalSupplier.GetOneByCode(supplierCode);
         }
         public Supplier GetByName(string supplierName)
