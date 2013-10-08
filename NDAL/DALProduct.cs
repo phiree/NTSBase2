@@ -250,5 +250,12 @@ namespace NDAL
             return GetList(queryover);
         }
 
+
+        public IList<Product> GetNotSyncProduct()
+        {
+            string query = "select p from Product p where p.SyncState=0 or p.SyncState=1";
+            int totalRecord;
+            return GetList(query, "NTSCode", false, 0, 99999, out totalRecord, string.Empty);
+        }
     }
 }
