@@ -69,9 +69,9 @@ public class ExcelExport
     }
     private void ExportProductExcel(DataSet ds)
     {
-        TransferInDatatable tt = new TransferInDatatable();
-        HSSFWorkbook book = tt.CreateXslWorkBookFromDataSet(ds);
-        DownLoadXslFile(book);
+        DataExport tt = new DataExport(ds.Tables[0]);
+        tt.CreateWorkBook();
+        DownLoadXslFile(tt.Book);
     }
     private void DownLoadXslFile(HSSFWorkbook workbook)
     {

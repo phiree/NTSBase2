@@ -5,8 +5,8 @@ using System.Text;
 
 namespace NModel
 {
-    //单据抽象基类
-    public abstract class BillBase
+    //单据基类
+    public  class BillBase
     {
         public virtual Guid Id { get; set; }
         public virtual string BillType { get; set; }
@@ -14,5 +14,7 @@ namespace NModel
         public virtual string CreatedDate { get; set; }
         //创建者
         public virtual string CreateMemberName { get; set; }
+        public virtual string Memo { get; set; }
+     
     }
 }

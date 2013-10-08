@@ -73,6 +73,7 @@
     <Compile Include="DALProduct.cs" />
     <Compile Include="DALRole.cs" />
     <Compile Include="DALSerialNo.cs" />
+    <Compile Include="DALSql.cs" />
     <Compile Include="DALSupplier.cs" />
     <Compile Include="HybridSessionBuilder.cs" />
     <Compile Include="MyAutoMappingConfiguration.cs" />

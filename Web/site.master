@@ -22,12 +22,13 @@
             var upgradeversion = "20130829";
             var cookie_name = "upgrade_notice";
             var closedVersion = $.cookie(cookie_name);
-            if (closedVersion==upgradeversion) {
+            if (closedVersion == upgradeversion) {
                 $("#dvUpgradeNotice").hide();
             }
             $("#spCloseNotice").click(function () {
                 $("#dvUpgradeNotice").hide();
-                $.cookie(cookie_name, upgradeversion);
+                $.cookie(cookie_name, upgradeversion, {expires:365});
+
             });
 
         });

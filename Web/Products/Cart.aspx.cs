@@ -27,7 +27,7 @@ public partial class Products_Cart : System.Web.UI.Page
         return productList;
 
     }
-    TransferInDatatable transfer = new TransferInDatatable();
+    DataExport transfer = new DataExport();
     protected void btnExport_Click(object sender, EventArgs e)
     {
         //DataTable dtProductsHasImage = ObjectConvertor.ToDataTable<Product>(GetFromCookies());

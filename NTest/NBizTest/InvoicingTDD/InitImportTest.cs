@@ -27,7 +27,9 @@ namespace NTest.NBizTest.InvoicingTDD
           // IList<ProductStock> initStock= ExcelReader(excelPath);
            FileStream fs=new FileStream(excelPath, FileMode.Open);
            string msg;
+           
           IList<ProductStock> stocks= bizStock.ImportProductFromExcel(fs, out msg);
+          Assert.AreEqual(19, stocks.Count);
        }
     }
 }

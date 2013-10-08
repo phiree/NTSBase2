@@ -122,6 +122,7 @@
     </None>
     <None Include="config\connectionStrings.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </None>
     <None Include="config\log4net.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

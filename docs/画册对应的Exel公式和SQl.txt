@@ -1,4 +1,4 @@
-s
+="insert into tempmn (modelnumber,tag) values('"&A415&"','vivi20130930441');"
 
 CREATE TABLE tempMN
 (

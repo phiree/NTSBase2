@@ -38,6 +38,9 @@
     <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <HintPath>..\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
     </Reference>
+    <Reference Include="Ionic.Zip, Version=1.9.1.5, Culture=neutral, PublicKeyToken=edbe51ad942a3f5c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.1.2.5\lib\net40\Ionic.Zip.dll</HintPath>
+    </Reference>
     <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.0\lib\net40-full\log4net.dll</HintPath>
     </Reference>
@@ -53,6 +56,9 @@
     </Reference>
     <Reference Include="NMock3">
       <HintPath>..\packages\NMock3.3.5.44\lib\net40\NMock3.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI, Version=1.2.5.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.1.2.5\lib\net40\NPOI.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
@@ -73,6 +79,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CodeSnippets\DataTableTest.cs" />
     <Compile Include="NBizTest\InvoicingTDD\InitImportTest.cs" />
     <Compile Include="NBizTest\ProductImageImportorTest.cs" />
     <Compile Include="NBizTest\ImportFromExcelTest.cs" />
@@ -80,6 +87,7 @@
     <Compile Include="NBizTest\SupplierTest.cs" />
     <Compile Include="NBizTest\CheckFormatTest.cs" />
     <Compile Include="NBizTest\BizProductTest.cs" />
+    <Compile Include="NBizTest\BizBaseTest.cs" />
     <Compile Include="NDALTest\DALBaseTest.cs" />
     <Compile Include="NDALTest\ProductDALTest.cs" />
     <Compile Include="NLibraryTest\FormatSerialNoTest.cs" />
@@ -143,6 +151,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="TestFiles\NBizTest\InvoicingTDD\库存清单模板.xls">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="TestFiles\NBizTest\物料导入模板.XLS">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="TestFiles\NBizTest\联丰报价单 20130108 --餐厨部.xls">

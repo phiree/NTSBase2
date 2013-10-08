@@ -1,14 +1,39 @@
-SELECT 
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using NModel;
+using System.Data;
+using NLibrary;
+using System.Text.RegularExpressions;
+namespace NBiz
+{
+    /// <summary>
+    /// ERP与产品中心数据同步
+    /// </summary>
+    public class ProductSync:BLLBase<Product>
+    {
+
+        BizProduct bizProduct;
+        public ProductSync()
+        {
+            bizProduct = new BizProduct();
+        }
+        public void CreatExcelForImport(string templateExcelFileFolderPath, string excelSaveFolderPath)
+        {
+
+            string sql = @"
+ SELECT 
 -- 
 p.ntscode AS 代码,
 -- 
-pl.name AS 名称,
+CASE WHEN  plZh.Name IS NULL THEN  pl.name ELSE plZh.Name END AS 名称,
 'TRUE' AS 明细,
-'' AS 审核人_FName,
+'' AS 审核人_FName, 
 -- 
-pl.name  AS 物料全名,
+CASE WHEN  plZh.Name IS NULL THEN  pl.name ELSE plZh.Name END  AS 物料全名,
 '' AS 助记码,
-pl.ProductParameters AS 规格型号,
+LEFT(CASE WHEN plZH.ProductParameters IS NULL THEN pl.ProductParameters   ELSE plZH.ProductParameters END ,128) AS 规格型号,
 '' AS 辅助属性类别_FName,
 '' AS 辅助属性类别_FNumber,
 '外购' AS 物料属性_FName,
@@ -16,18 +41,18 @@ pl.ProductParameters AS 规格型号,
 -- 
 'general' AS 计量单位组_FName,
 --  
- pl.Unit AS 基本计量单位_FName,
+'pcs' AS 基本计量单位_FName,
  -- 
 'general' AS 基本计量单位_FGroupName,
 -- 
-pl.unit AS 采购计量单位_FName,
+'pcs' AS 采购计量单位_FName,
 -- 
 'general' AS 采购计量单位_FGroupName,
-pl.unit AS 销售计量单位_FName,
+'pcs' AS 销售计量单位_FName,
 'general' AS 销售计量单位_FGroupName,
-pl.unit AS 生产计量单位_FName,
+'pcs' AS 生产计量单位_FName,
 'general' AS 生产计量单位_FGroupName,
-pl.unit AS 库存计量单位_FName,
+'pcs' AS 库存计量单位_FName,
 'general' AS 库存计量单位_FGroupName,
 '' AS 辅助计量单位_FName,
 '' AS 辅助计量单位_FGroupName,
@@ -59,7 +84,7 @@ p.moneyType AS 币别_FNumber,
 '*' AS 采购最高价币别_FName,
 '*' AS 采购最高价币别_FNumber,
 '0' AS 委外加工最高价,
-'*' AS 委外加工最高价币别_FName,
+'*' AS 委外加工最高价币别_FName, 
 '*' AS 委外加工最高价币别_FNumber,
 '0' AS 销售最低价,
 '*' AS 销售最低价币别_FName,
@@ -68,7 +93,7 @@ p.moneyType AS 币别_FNumber,
 '*' AS 采购负责人_FName,
 '*' AS 采购负责人_FNumber,
 '0' AS 毛利率,
---------------- 
+--  
 PriceOfFactory AS 采购单价,
 '0' AS 销售单价,
 'FALSE' AS 是否农林计税,
@@ -104,7 +129,7 @@ PriceOfFactory AS 采购单价,
 '*' AS 成本项目_FNumber,
 'FALSE' AS 是否进行序列号管理,
 'FALSE' AS 参与结转式成本还原,
-'佛山需要确定来自哪一列' AS 备注,
+'' AS 备注,
 '物料需求计划(MRP)' AS 计划策略_FName,
 'MTS计划模式' AS 计划模式_FName,
 '批对批(LFL)' AS 订货策略_FName,
@@ -196,8 +221,8 @@ PriceOfFactory AS 采购单价,
 '' AS 检验方案_FBrNo,
 '*' AS 检验员_FName,
 '*' AS 检验员_FNumber,
-'' AS 英文名称,
-'' AS 英文规格,
+CASE WHEN pl.Name IS NULL THEN plZh.Name ELSE pl.Name END AS 英文名称,
+LEFT(CASE WHEN pl.ProductParameters IS NULL THEN plZh.ProductParameters ELSE pl.ProductParameters END,128) AS 英文规格,
 '' AS HS编码_FHSCode,
 '' AS HS编码_FNumber,
 '0' AS 外销税率,
@@ -220,76 +245,45 @@ PriceOfFactory AS 采购单价,
 '0' AS 使用寿命（月）,
 
 p.modelnumber AS 物料型号,
-p.priceoffactory  AS 含税出厂价,
+'' AS 收税类型,
 '' AS 描述卖点,
 '0' AS FOB价,
 
 '0' AS 控制,
 '0' AS 是否禁用,
-'{C81E92A1-3B20-4E49-B904-299B1B412FC8}' AS 全球唯一标识内码
+concat('{',p.id,'}') AS 全球唯一标识内码
 
+FROM product  p
+INNER JOIN supplier s ON p.SupplierCode=s.Code
+LEFT JOIN 
+ productlanguage pl
+ ON p.id=pl.Product_id AND pl.Language='en'
+LEFT JOIN productlanguage plZh
+ ON plZh.Product_id=p.Id AND plZh.Language='zh'
+ WHERE (pl.Name IS NOT NULL OR plZh.Name IS NOT NULL)
+";
+            string sql_Added = sql + "and SyncState=" + (int)NModel.Enums.SyncState.Added + ";";
+            string sql_Modified = sql + "and SyncState=" + (int)NModel.Enums.SyncState.Modified + ";";
+            string wholeSql = sql_Added + sql_Modified;
+            System.Data.DataSet ds = ExecuteSql(wholeSql);
+            // Assert.AreEqual(19, ds.Tables[0].Rows.Count);
+            DataExport t = new DataExport();
+            t.HeaderRows = 0;
+            t.XSLFilePath = templateExcelFileFolderPath+"物料导入模板.xls";
+            t.DataToExport = ds.Tables[0];
+            t.CreateWorkBook();
+            string fileName = DateTime.Now.ToString("yyyyMMdd-hhmmss") + ".xls";
+            System.IO.FileStream fsAdded = new System.IO.FileStream(excelSaveFolderPath + "Added_" + fileName, System.IO.FileMode.CreateNew);
+            t.Book.Write(fsAdded);
 
-FROM product  p, productlanguage pl,supplier s
-
-WHERE  pl.product_id=p.id
-AND pl.language="en"
-AND s.code=p.suppliercode
-
-LIMIT 1
-
-
-/*
- 生成该语句主主体部分的 excel 公式
+            t.DataToExport = ds.Tables[1];
+            t.CreateWorkBook();
+            System.IO.FileStream fsModified = new System.IO.FileStream(excelSaveFolderPath + "Modified" + fileName, System.IO.FileMode.CreateNew);
+            t.Book.Write(fsModified);
+            var ds2 = ExecuteSql("update product set syncstate="+(int)NModel.Enums.SyncState.Synced+",synctime='"+DateTime.Now+"'");
+            
+        }
+        
+    }
  
-=CONCATENATE("'", B1,"'"," as ",SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(A1,"%",""),"(",""),")",""),"/",""),",")
-*/
-
-SELECT 'asdf' AS 'dd'
-/* 价格整理脚本*/
-
-SELECT  CONCAT( parentcode,'.', CODE),EnglishName,'FALSE','Administrator'   FROM category 
-
-SELECT DISTINCT unit FROM productlanguage
-
-SELECT *,LENGTH(ProductParameters) FROM productlanguage 
-
-SELECT PriceOfFactory FROM product WHERE PriceOfFactory =""
-SELECT  DISTINCT PriceOfFactory,  MoneyType FROM product 
-SELECT PriceOfFactory,
-   REPLACE(
-    REPLACE(
-     REPLACE(
-      REPLACE(
-       REPLACE(
-        REPLACE(
-   REPLACE(PriceOfFactory,"￥","")
-	,"¥","")
-	,",","")
-	,"*","")	
-	," ","")
-	,"US$","")
-	,"¥","")
-	AS price,
-	
-     REPLACE(
-    REPLACE(
-     REPLACE(
-      REPLACE(
-       REPLACE(
-        REPLACE(
-   REPLACE(PriceOfFactory,"￥","")
-	,"¥","")
-	,",","")
-	,"*","")	
-	," ","")
-	,"US$","")
-	,"¥","")
-		REGEXP '[0-9]+'
-	AS dd
- FROM product
- WHERE PriceOfFactory=0
- ORDER BY dd DESC 
-
-
-SELECT '1,123.000' REGEXP '^[0-9,\.]+$'
-SELECT '1123.000' REGEXP '^[0-9,\.]+$'
+}

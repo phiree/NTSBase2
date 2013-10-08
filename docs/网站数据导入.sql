@@ -44,9 +44,9 @@ SELECT DISTINCT p.ntscode AS sku
 ,'' -- seo
 ,''
 ,''
-,CONCAT('/', i.ImageName)
-,CONCAT('/', i.ImageName)
-,CONCAT('/',i.ImageName)
+,CONCAT('/', p.modelnumber,'.jpg')
+,CONCAT('/', p.modelnumber,'.jpg')
+,CONCAT('/',p.modelnumber,'.jpg')
 /* 型号名称
 ,CONCAT('/', i.ImageName)
 ,CONCAT('/', i.ImageName)
@@ -54,7 +54,7 @@ SELECT DISTINCT p.ntscode AS sku
 */
 
 ,1,10000,1,0,'Catalog,Search'
-,CONCAT('/', i.ImageName)
+,CONCAT('/',p.modelnumber,'.jpg')
 ,255
 ,'default'
 ,'asia'
@@ -64,8 +64,8 @@ SELECT DISTINCT p.ntscode AS sku
  ,CONCAT( pa.Parameter,';',pa.Material)  -- 3
 FROM   ntsbase2.product p 
   RIGHT JOIN  ntsbase2.product_asia pa
-	ON pa.NTSCODE=p.NTSCode AND pa.tag='kalina20130819'
-	AND pa.供应商编码 <> '00077'
+	ON pa.NTSCODE=p.NTSCode AND pa.tag='20130913_kalina'
+	
 	
    INNER JOIN  ntsbase2.productlanguage l
 	ON p.Id=l.Product_id  AND l.language='en'
