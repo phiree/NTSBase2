@@ -59,7 +59,8 @@ namespace NBiz
             modelNumber = StringHelper.ReplaceInvalidChaInFileName(modelNumber, "$");
 
             p.ModelNumber = modelNumber;
-            p.SupplierCode = row["供应商编码"].ToString();
+            
+            p.SupplierCode =NLibrary.StringHelper.FullFillWidth(row["供应商编码"].ToString(),"00000",5,true);
             pl.ProductParameters = row["规格参数"].ToString();
             pl.Unit = row["单位"].ToString();
             pl.ProductDescription = row["产品描述"].ToString();
@@ -127,10 +128,11 @@ namespace NBiz
             p.OrderAmountMin = 最小订货量;
           
             p.ProductMultiLangues.Add(pl);
+
             return p;
         }
 
-
+        
 
     }
     public class RowPolulateErp : IRowPopulate
@@ -166,7 +168,7 @@ namespace NBiz
             p.ModelNumber = modelNumber;
             pl.ProductParameters = row["规格型号"].ToString();
             pl.Unit = row["计量单位组_FName"].ToString();
-            p.SupplierCode = row["来源_FNumber"].ToString();
+            p.SupplierCode = NLibrary.StringHelper.FullFillWidth(row["来源_FNumber"].ToString(), "00000", 5, true);
             pl.ProductDescription = row["描述/卖点"].ToString();
             pl.Language = StringHelper.LanguageTypeDetermine(pl.Name+pl.ProductDescription+pl.ProductParameters+pl.Memo);
             //nts编码
