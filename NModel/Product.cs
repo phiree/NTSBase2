@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +13,7 @@ namespace NModel
         public Product()
         {
             State = ProductState.Normal;
+            SyncState = SyncState.Added;
             CreateTime = LastUpdateTime = DateTime.Now;
             ProductImageList = new List<ProductImage>();
             ProductMultiLangues = new List<ProductLanguage>();
@@ -190,6 +191,14 @@ namespace NModel
         public virtual ImportOperationLog ImportOperationLog { get; set; }
 
         public virtual IList<ProductLanguage> ProductMultiLangues { get; set; }
+        /// <summary>
+        /// 和ERP系统 的 同步状态
+        /// </summary>
+        public virtual Enums.SyncState SyncState { get; set; }
+/// <summary>
+/// 同步时间
+/// </summary>
+        public virtual DateTime SyncTime { get; set; }
         //获取某种
         public virtual Product GetProductOfSpecialLanguage(string language)
         {
