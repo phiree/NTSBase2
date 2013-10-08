@@ -161,5 +161,18 @@ namespace NLibrary
             }
             return "en";
         }
+        /// <summary>
+        /// 补全字符串
+        /// </summary>
+        /// <param name="original"></param>
+        /// <returns></returns>
+        public static string FullFillWidth(string original,string fillString,int width,bool prepend)
+        {
+            string s = fillString + original;
+            if (!prepend)
+                s = original + fillString;
+            return s.Substring(s.Length - width);
+        }
+        
     }
 }
