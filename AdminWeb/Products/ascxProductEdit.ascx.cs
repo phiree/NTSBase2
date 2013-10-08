@@ -55,6 +55,7 @@ public partial class Admin_Products_ascxProductEdit : System.Web.UI.UserControl
 
         CurrentProduct.ProductionCycle = decimal.Parse(tbxProductCycle.Text);
         CurrentProduct.TaxRate = decimal.Parse(tbxTax.Text);
+        CurrentProduct.SyncState = NModel.Enums.SyncState.Modified;
         UpdateList();
     }
     private void UpdateList()
