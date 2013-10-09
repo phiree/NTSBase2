@@ -3,6 +3,12 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="cph_maincontent" runat="Server">
     <h3>
+        2013.10.09</h3>
+    <ul>
+        <li>实现产品信息中心和ERP产品库半自动同步,产品详情页面可以查看同步状态.</li>
+        <li>供应商编码如果不足五位,则自动补齐.</li>
+    </ul> 
+      <h3>
         2013.08.28</h3>
     <ul>
         <li>搜索界面: 增加 产品分类 下拉菜单,替换原来的分类编码输入框</li>

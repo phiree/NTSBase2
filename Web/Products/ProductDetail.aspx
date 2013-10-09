@@ -37,7 +37,11 @@
 <asp:BoundField   HeaderStyle-Wrap="false"  HeaderText="产品描述" DataField="ProductDescription" HtmlEncode="false"/>
 <asp:BoundField   HeaderStyle-Wrap="false"  HeaderText="图片质量" DataField="ImageState" HtmlEncode="false"/>
 <asp:BoundField   HeaderStyle-Wrap="false"  HeaderText="备注" DataField="Memo" HtmlEncode="false"/>
-
+<asp:TemplateField  HeaderStyle-Wrap="false"  HeaderText="ERP同步状态">
+<ItemTemplate>
+    <%#Eval("SyncState").ToString() == "0" ? "新增加,未同步" : Eval("SyncState").ToString() == "1"?"新修改,未同步":"已同步"%>
+</ItemTemplate>
+</asp:TemplateField>
 <asp:TemplateField HeaderStyle-Wrap="false"  HeaderText="图片">
   <ItemTemplate>
     <asp:Repeater runat="server" ID="rptImages">
