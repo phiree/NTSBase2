@@ -334,5 +334,12 @@ namespace NBiz
 
             throw new NotImplementedException();
         }
+
+        public IList<Product> GetByProductIdList(string[] productIdList)
+        {
+            return DalProduct.GetListByIdList(productIdList);
+
+
+        }
     }
 }
