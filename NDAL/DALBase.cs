@@ -17,7 +17,7 @@ namespace NDAL
             session.Delete(o);
             session.Flush();
         }
-        public virtual void Save(T o)
+        public virtual void Save(T o)  
         {
             using (var t = session.BeginTransaction())
             {
