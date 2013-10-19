@@ -280,10 +280,19 @@ LEFT JOIN productlanguage plZh
             t.CreateWorkBook();
             System.IO.FileStream fsModified = new System.IO.FileStream(excelSaveFolderPath + "Modified" + fileName, System.IO.FileMode.CreateNew);
             t.Book.Write(fsModified);
-            var ds2 = ExecuteSql("update product set syncstate="+(int)NModel.Enums.SyncState.Synced+",synctime='"+DateTime.Now+"'");
+            var ds2 = ExecuteSql("update product set syncstate="+(int)NModel.Enums.SyncState.Synced+",synctime='"+DateTime.Now
+                + "' where syncstate in (" + (int)NModel.Enums.SyncState.Added + "," + (int)NModel.Enums.SyncState.Modified + ")");
             
         }
-        
+
+
+        public int GetTotalAmountToBeSync()
+        {
+            string sql = "select count(id) from product where syncstate in (" + (int)NModel.Enums.SyncState.Added
+                + "," + (int)NModel.Enums.SyncState.Added + ")";
+            DataSet ds= bizProduct.ExecuteSql(sql);
+            return Convert.ToInt32(ds.Tables[0].Rows[0][0]);
+        }
     }
  
 }
