@@ -39,14 +39,13 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{2CF8815D-7D5B-484C-B814-2C5289533EAA}"
 	ProjectSection(SolutionItems) = preProject
 		docs\Category新旧编码对照.sql = docs\Category新旧编码对照.sql
+		docs\ERP供应商导出脚本.sql = docs\ERP供应商导出脚本.sql
 		docs\erp帐套单据数据清理脚本.sql = docs\erp帐套单据数据清理脚本.sql
 		somescripts.sql = somescripts.sql
 		docs\东南亚产品导入.sql = docs\东南亚产品导入.sql
 		docs\东南亚数据导入--新旧编码对照.sql = docs\东南亚数据导入--新旧编码对照.sql
-		docs\供应商导出脚本.sql = docs\供应商导出脚本.sql
 		docs\删除产品.txt = docs\删除产品.txt
 		docs\替换型号里的特殊字符.sql = docs\替换型号里的特殊字符.sql
-		docs\物料导出脚本.sql = docs\物料导出脚本.sql
 		docs\物料导出脚本_主干.sql = docs\物料导出脚本_主干.sql
 		docs\画册对应的Exel公式和SQl.txt = docs\画册对应的Exel公式和SQl.txt
 		docs\网站分类对应表.txt = docs\网站分类对应表.txt

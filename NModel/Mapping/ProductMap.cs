@@ -36,6 +36,11 @@ namespace NModel.Mapping
             Map(x => x.SyncTime).Nullable();
             References<ImportOperationLog>(x => x.ImportOperationLog);
             HasMany<ProductLanguage>(x => x.ProductMultiLangues).Cascade.AllDeleteOrphan();
+            HasManyToMany<ProductCollection>(x => x.ProductCollections)
+                .Table("Product_Collection")
+                
+                ;
+
         }
     }
 }

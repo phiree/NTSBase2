@@ -11,6 +11,8 @@ public partial class Products_Default : System.Web.UI.Page
 {
     BizProduct bizProduct = new NBiz.BizProduct();
   protected  BizSupplier bizSupplier = new BizSupplier();
+  BizProductCollection bizPC = new BizProductCollection();
+  public string ProductIdListIndefaultCollection = string.Empty;
     protected void Page_Load(object sender, EventArgs e)
     {
         
@@ -23,8 +25,13 @@ public partial class Products_Default : System.Web.UI.Page
                 dgProduct.Columns[9].Visible = true;
             }    
             BindProduct();
-           
+            IEnumerable<Guid> ids= bizPC.GetDefaultCollection(GlobalVarible.GetUserId()).Products.Select(x => x.Id);
+            foreach (Guid id in ids)
+            {
+                ProductIdListIndefaultCollection += id;
+            }
         }
+
         
     }
     BizCategory bizCate = new BizCategory();

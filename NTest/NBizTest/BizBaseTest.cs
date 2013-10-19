@@ -279,7 +279,7 @@ LEFT JOIN productlanguage plZh
              System.IO.FileStream fsModified = new System.IO.FileStream(Environment.CurrentDirectory + "\\Modified" + fileName, System.IO.FileMode.CreateNew);
              t.Book.Write(fsModified);
 
-             var ds2 = bllBase.ExecuteSql("update product set syncstate=3,synctime=now();");
+          //   var ds2 = bllBase.ExecuteSql("updat  e product set syncstate=3,synctime=now();");
             
         }
     }

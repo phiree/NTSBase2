@@ -16,3 +16,15 @@ RIGHT JOIN tempMN t
 ON t.modelnumber=p.modelnumber
 AND p.suppliercode='00143'
 ORDER BY t.colindex
+
+//导出其他信息
+
+
+SELECT t.modelnumber,p.modelnumber, p.ntscode,pl.Name,pl.ProductDescription,pl.ProductParameters
+FROM product p
+RIGHT JOIN tempMN t
+ON   t.tag='james201301010' AND t.modelnumber=p.modelnumber AND p.SupplierCode='00026'
+LEFT JOIN productlanguage pl
+ON pl.Product_id=p.Id AND pl.Language="en"
+WHERE t.tag='james201301010'
+ORDER BY t.colindex

@@ -8,12 +8,24 @@ using NModel;
 using NBiz;
 using System.Data;
 using NLibrary;
+using System.Web.Security;
 public partial class Products_Cart : System.Web.UI.Page
 {
     BizProduct bizProduct = new BizProduct();
+
     protected void Page_Load(object sender, EventArgs e)
     {
-        ucProList.ProductList = GetFromCookies();
+        //获取集合列表
+       MembershipUser mu=  Membership.GetUser();
+       
+       Response.Write(Request.AnonymousID);
+      // ucProList.ProductList = GetFromCookies();
+        }
+    private string MemberId {
+        get { 
+          //if(Page.Request.IsAuthenticated
+            return string.Empty;
+        }
     }
     private IList<Product> GetFromCookies()
     {

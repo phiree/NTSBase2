@@ -53,7 +53,7 @@
                 <asp:LoginStatus  TabIndex="999"  LoginImageUrl="~/Content/images/login.jpg" runat="server" />
                 -->
                 <div>
-                    <span>共<span id="sumCart"></span>件</span><a href="/products/cart.aspx">查看全部</a></div>
+                    <span>共<span runat="server" id="sumCart"></span>件</span><a href="/productcollection">查看全部</a></div>
             </div>
         </div>
         <div class="clear span-24 last" id="body">
@@ -65,5 +65,21 @@
         </div>
     </div>
     </form>
+    <!-- Piwik -->
+<script type="text/javascript">
+    var _paq = _paq || [];
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function () {
+        var u = (("https:" == document.location.protocol) ? "https" : "http") + "://a.nts.com//";
+        _paq.push(['setTrackerUrl', u + 'piwik.php']);
+        _paq.push(['setSiteId', 1]);
+        var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0]; g.type = 'text/javascript';
+        g.defer = true; g.async = true; g.src = u + 'piwik.js'; s.parentNode.insertBefore(g, s);
+    })();
+
+</script>
+<noscript><p><img src="http://a.nts.com/piwik.php?idsite=1" style="border:0" alt="" /></p></noscript>
+<!-- End Piwik Code -->
 </body>
 </html>

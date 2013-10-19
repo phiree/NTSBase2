@@ -4,13 +4,14 @@
 <%@ Register Src="~/Products/ascxProductList.ascx" TagName="ProList" TagPrefix="UC" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <script src="/Scripts/InlineTip.js" type="text/javascript"></script>
+    <script src="/Scripts/Service/ProductCollectionService.js" type="text/javascript"></script>
     <script src="/Scripts/pages/products_default.js" type="text/javascript"></script>
     <link href="/Content/themes/base/jquery.ui.all.css" rel="stylesheet" type="text/css" />
     <link href="/Content/themes/base/minified/jquery.ui.autocomplete.min.css" rel="stylesheet"
         type="text/css" />
     <link href="/Content/css/productdefault.css" rel="stylesheet" type="text/css" />
     <script language="javascript" type="text/javascript">
-
+        var ProductIdListIndefaultCollection="<%=ProductIdListIndefaultCollection%>";
         var tip = "输入 名称 规格参数 描述备注,用空格隔开";
         $(function () {
 
@@ -52,9 +53,12 @@
             $('#<%=ddlCateChild.ClientID%>').change(function (e) {
                 $('#<%=hiCateChildValue.ClientID%>').val($(this).find(":selected")[0].value);
             });
+
+
         });
   
     </script>
+    
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cph_maincontent" runat="Server">
     <fieldset>
@@ -111,7 +115,7 @@
                         全选</label><input type="checkbox" id="cbxSelAll" />
                 </HeaderTemplate>
                 <ItemTemplate>
-                    <input style="height: 30px; width: 30px;" type="checkbox" class="cbxp" pid='<%#Eval("id") %>' />
+                    <input runat="server" style="height: 30px; width: 30px;" type="checkbox" class="cbxp" pid='<%#Eval("id") %>' />
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="图片">

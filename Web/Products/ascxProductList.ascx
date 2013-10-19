@@ -1,4 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="ascxProductList.ascx.cs" Inherits="Products_ascxProductList" %>
+<script src="/Scripts/Service/ProductCollectionService.js" type="text/javascript"></script>
 <script src="/Scripts/pages/ascxProductList.js" type="text/javascript"></script>
 <uc:AspNetPager runat="server" ID="AspNetPager1" CloneFrom="pager">
     </uc:AspNetPager>
@@ -38,7 +39,7 @@
             </asp:TemplateField>
             <asp:TemplateField>
             <ItemTemplate>
-            <input type="button" value="删除"  class="btnDeleteCart"  pid='<%#Eval("id") %>'/>
+            <input type="button"   onclick='ProquestProduct("<%#Eval("id") %>")' value="删除"  class="btnDeleteCart"  pid='<%#Eval("id") %>'/>
             </ItemTemplate>
             </asp:TemplateField>
         </Columns>

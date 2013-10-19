@@ -71,6 +71,7 @@
     <Compile Include="DALCategory.cs" />
     <Compile Include="DALMembership.cs" />
     <Compile Include="DALProduct.cs" />
+    <Compile Include="DALProductCollection.cs" />
     <Compile Include="DALRole.cs" />
     <Compile Include="DALSerialNo.cs" />
     <Compile Include="DALSql.cs" />

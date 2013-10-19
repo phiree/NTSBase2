@@ -17,7 +17,10 @@ namespace NModel
             CreateTime = LastUpdateTime = DateTime.Now;
             ProductImageList = new List<ProductImage>();
             ProductMultiLangues = new List<ProductLanguage>();
+          //  ProductCollections = new List<ProductCollection>();
         }
+       
+        #region 基本属性
         public virtual Guid Id { get; set; }
         private string name;
          [Description("产品名称")]
@@ -168,7 +171,10 @@ namespace NModel
         [Description("生产周期")]
         public virtual decimal ProductionCycle { get; set; }
 
+        #endregion
 
+        #region 状态信息
+        
         /// <summary>
         /// 产品状态
         /// </summary>
@@ -191,14 +197,22 @@ namespace NModel
         public virtual ImportOperationLog ImportOperationLog { get; set; }
 
         public virtual IList<ProductLanguage> ProductMultiLangues { get; set; }
+     
         /// <summary>
         /// 和ERP系统 的 同步状态
         /// </summary>
         public virtual Enums.SyncState SyncState { get; set; }
+
+        //产品所属的自定义集合.
+        public virtual IList<ProductCollection> ProductCollections { get; set; }
+
 /// <summary>
 /// 同步时间
 /// </summary>
         public virtual DateTime SyncTime { get; set; }
+        #endregion
+
+        #region 方法
         //获取某种
         public virtual Product GetProductOfSpecialLanguage(string language)
         {
@@ -307,7 +321,7 @@ namespace NModel
             {
                 this.SupplierCode = newPro.SupplierCode;
                 this.NTSCode = null;
-            }
+            }            
             this.ImageState = newPro.ImageState;
             this.PriceDate = newPro.PriceDate;
             this.PriceOfFactory = newPro.PriceOfFactory;
@@ -363,5 +377,6 @@ namespace NModel
             }
            // return !isAllDiff;
         }
+        #endregion
     }
 }
