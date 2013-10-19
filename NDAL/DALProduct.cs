@@ -257,5 +257,19 @@ namespace NDAL
             int totalRecord;
             return GetList(query, "NTSCode", false, 0, 99999, out totalRecord, string.Empty);
         }
+
+        public IList<Product> GetListByIdList(string[] productIdlist)
+        {
+            int totalRecord;
+            string condition_In = string.Empty;
+            foreach (string id in productIdlist)
+            {
+                condition_In += id + ",";
+            }
+            condition_In =" ("+ condition_In.TrimEnd(',')+") ";
+            string query="select p from Product p where Id in "+condition_In;
+            return GetList(query, 0, 999, out totalRecord);
+            
+        }
     }
 }
