@@ -28,25 +28,27 @@ namespace NBiz
         /// <summary>
         /// 需要導出的數據
         /// </summary>
-        public DataTable DataToExport { get; set; }
-        public DataSet DsToExport { get; set; }
+     
 
         //excel内存对象
         public HSSFWorkbook Book { get; set; }
+
+        public DataSet DataToExport { get; set; }
         public DataExport()
         {
             HeaderRows = 1;
         }
-        public DataExport(DataTable datatable)
-            : this(datatable, 1)
+        public DataExport(DataSet ds)
+            : this(ds, 1)
         {
+            
         }
-        public DataExport(DataTable datatable, int headerRows)
+        public DataExport(DataSet ds, int headerRows)
         {
             if (headerRows < 0)
                 throw new Exception("dataStartRowNumber必须大于等于0");
             HeaderRows = headerRows;
-            DataToExport = datatable;
+            DataToExport = ds;
         }
         IDrawing patriarch;
         public void CreateWorkBook()
@@ -59,9 +61,9 @@ namespace NBiz
             {
                 Book = new HSSFWorkbook(new FileStream(XSLFilePath, FileMode.OpenOrCreate));
             }
-            for (int i = 0; i < DsToExport.Tables.Count; i++)
+            for (int i = 0; i < DataToExport.Tables.Count; i++)
             {
-                FillSheet(i,DsToExport.Tables[i]);
+                FillSheet(i, DataToExport.Tables[i]);
             }
             //   FillSheet(0);
         }
@@ -147,7 +149,7 @@ namespace NBiz
                     if (row != null) { cellValue = row[i].ToString(); }
 
                     //该地址是图片
-                    if (Regex.IsMatch(cellValue, @"\.[jpg|png|tiff]", RegexOptions.IgnoreCase))
+                    if (Regex.IsMatch(cellValue, @"\.jpg|\.png|\.tiff", RegexOptions.IgnoreCase))
                     {
                         string filePath = System.Web.HttpContext.Current.Server.MapPath("/ProductImages/original/" + cellValue);
                         if (File.Exists(filePath))

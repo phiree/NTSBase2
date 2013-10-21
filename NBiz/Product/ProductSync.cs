@@ -270,16 +270,17 @@ LEFT JOIN productlanguage plZh
             DataExport t = new DataExport();
             t.HeaderRows = 0;
             t.XSLFilePath = templateExcelFileFolderPath+"物料导入模板.xls";
-            t.DataToExport = ds.Tables[0];
+            t.DataToExport = ds;
             t.CreateWorkBook();
             string fileName = DateTime.Now.ToString("yyyyMMdd-hhmmss") + ".xls";
             System.IO.FileStream fsAdded = new System.IO.FileStream(excelSaveFolderPath + "Added_" + fileName, System.IO.FileMode.CreateNew);
             t.Book.Write(fsAdded);
 
-            t.DataToExport = ds.Tables[1];
+            t.DataToExport = ds;
             t.CreateWorkBook();
             System.IO.FileStream fsModified = new System.IO.FileStream(excelSaveFolderPath + "Modified" + fileName, System.IO.FileMode.CreateNew);
             t.Book.Write(fsModified);
+
             var ds2 = ExecuteSql("update product set syncstate="+(int)NModel.Enums.SyncState.Synced+",synctime='"+DateTime.Now
                 + "' where syncstate in (" + (int)NModel.Enums.SyncState.Added + "," + (int)NModel.Enums.SyncState.Modified + ")");
             

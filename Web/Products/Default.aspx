@@ -112,7 +112,7 @@
             <asp:TemplateField>
                 <HeaderTemplate>
                     <label for="cbxSelAll">
-                        全选</label><input type="checkbox" id="cbxSelAll" />
+                        全选</label><input type="checkbox"  style="display:none" id="cbxSelAll" />
                 </HeaderTemplate>
                 <ItemTemplate>
                     <input runat="server" style="height: 30px; width: 30px;" type="checkbox" class="cbxp" pid='<%#Eval("id") %>' />

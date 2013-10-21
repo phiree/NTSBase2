@@ -197,6 +197,7 @@ namespace NBiz
         {
             DirectoryInfo dirRoot = new DirectoryInfo(outputFolder);
             DataExport transfer = new DataExport();
+            DataSet ds = new DataSet();
             //如果没有合格数据 则不需要创建
             if (ProductsPassedDBCheck.Count > 0)
             {
@@ -218,9 +219,11 @@ namespace NBiz
                     }
                 }
 
-
+             
                 DataTable dtProductsHasImage = ObjectConvertor.ToDataTable<Product>(ProductsPassedDBCheck);
-                transfer.DataToExport = dtProductsHasImage;
+                ds.Clear();
+                ds.Tables.Add(dtProductsHasImage);
+                transfer.DataToExport = ds;
                 transfer.SaveWorkBook( dirSupplierQuanlified.FullName + "\\" + supplierName + ".xls");
             }
 
@@ -231,7 +234,10 @@ namespace NBiz
             {
                 DirectoryInfo dirSupplierNotQuanlified = IOHelper.EnsureDirectory(dirPathSupplierNotQuanlified);
                 DataTable dtProductsNotHasImage = ObjectConvertor.ToDataTable<Product>(ProductsNotHasImage);
-                transfer.DataToExport = dtProductsNotHasImage;
+
+                ds.Clear();
+                ds.Tables.Add(dtProductsNotHasImage);
+                transfer.DataToExport = ds;
                 transfer.SaveWorkBook( dirSupplierNotQuanlified + "没有图片的数据_" + supplierName + ".xls");
 
             }
@@ -255,7 +261,9 @@ namespace NBiz
                 DirectoryInfo dirSupplierRepeated = IOHelper.EnsureDirectory(dirPathSupplierRepeated);
 
                 DataTable dtProductsRepeated = ObjectConvertor.ToDataTable<Product>(ProductsExistedInDB);
-                transfer.DataToExport = dtProductsRepeated;
+                ds.Clear();
+                ds.Tables.Add(dtProductsRepeated);
+                transfer.DataToExport = ds;
                 transfer.SaveWorkBook(dirSupplierRepeated.FullName + "\\" + supplierName + ".xls");
             }
         }

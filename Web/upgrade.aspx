@@ -2,6 +2,14 @@
     CodeFile="upgrade.aspx.cs" Inherits="upgrade" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="cph_maincontent" runat="Server">
+   <h3>
+        2013.10.21 产品集功能改进</h3>
+    <ul>
+        <li>导出的Excel中包含产品图片.</li>
+        <li>选择的产品数量不再有限制.</li>
+        
+    </ul> 
+   
     <h3>
         2013.10.09</h3>
     <ul>
