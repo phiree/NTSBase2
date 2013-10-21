@@ -10,25 +10,24 @@ namespace NBiz
         NDAL.DALProductCollection dal = new NDAL.DALProductCollection();
         public BizProductCollection()
         { }
-        public BizProductCollection(string userId)
-        {
-            ProductCollection pc = GetDefaultCollection(userId);
-            if (pc==null)
-            {
-                pc = new ProductCollection();
-                pc.UserId =new Guid(userId);
-                pc.IsDefault = true;
-                dal.Save(pc);
-            }
-        }
         public ProductCollection GetOneByUserAndName(string userId,string name)
         {
-            return dal.GetOneByUserAndName(userId, name);
-
+            ProductCollection pc= dal.GetOneByUserAndName(userId, name);
+          
+            return pc;
         }
         public ProductCollection GetDefaultCollection(string userId)
         {
-            return dal.GetDefaultCollection(userId);
+            ProductCollection pc = dal.GetDefaultCollection(userId);
+        
+            if (pc == null)
+            {
+                pc = new ProductCollection();
+                pc.UserId = new Guid(userId);
+                pc.IsDefault = true;
+                dal.Save(pc);
+            }
+            return pc;
         }
         public void AddToCollection(string[] productIdList, ProductCollection collection)
         { 

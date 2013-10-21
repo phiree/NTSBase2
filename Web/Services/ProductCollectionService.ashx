@@ -18,7 +18,7 @@ public class ProductCollectionService : IHttpHandler
         productid = request["pid"];
         string userId = GlobalVarible.GetUserId();
         string currentCollectionName = request["collectionName"];
-        BizProductCollection bizPC = new NBiz.BizProductCollection(userId);
+        BizProductCollection bizPC = new NBiz.BizProductCollection();
         ProductCollection pc = bizPC.GetDefaultCollection(userId);
 
         Product p = bizProduct.GetOne(new Guid(productid));

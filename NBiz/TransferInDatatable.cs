@@ -29,6 +29,7 @@ namespace NBiz
         /// 需要導出的數據
         /// </summary>
         public DataTable DataToExport { get; set; }
+        public DataSet DsToExport { get; set; }
 
         //excel内存对象
         public HSSFWorkbook Book { get; set; }
@@ -50,11 +51,6 @@ namespace NBiz
         IDrawing patriarch;
         public void CreateWorkBook()
         {
-            FillSheet(0);
-        }
-        private void FillSheet(int tableIndex)
-        {
-
             if (string.IsNullOrEmpty(XSLFilePath))
             {
                 Book = new HSSFWorkbook();
@@ -63,9 +59,19 @@ namespace NBiz
             {
                 Book = new HSSFWorkbook(new FileStream(XSLFilePath, FileMode.OpenOrCreate));
             }
-            if (string.IsNullOrEmpty(DataToExport.TableName))
+            for (int i = 0; i < DsToExport.Tables.Count; i++)
             {
-                DataToExport.TableName = "table" + tableIndex;
+                FillSheet(i,DsToExport.Tables[i]);
+            }
+            //   FillSheet(0);
+        }
+        private void FillSheet(int tableIndex,DataTable dataToFill)
+        {
+
+
+            if (string.IsNullOrEmpty(dataToFill.TableName))
+            {
+                dataToFill.TableName = "table" + tableIndex;
             }
             ISheet sheet;
             if (tableIndex < Book.NumberOfSheets)
@@ -74,10 +80,10 @@ namespace NBiz
             }
             else
             {
-                sheet = Book.CreateSheet(DataToExport.TableName);
+                sheet = Book.CreateSheet(dataToFill.TableName);
             }
-             patriarch = sheet.CreateDrawingPatriarch();
-            DataColumnCollection cols = DataToExport.Columns;
+            patriarch = sheet.CreateDrawingPatriarch();
+            DataColumnCollection cols = dataToFill.Columns;
             //创建表头
             for (int h = 0; h <= HeaderRows; h++)
             {
@@ -92,9 +98,9 @@ namespace NBiz
                 }
             }
             //填充内容
-            for (int i = 0; i < DataToExport.Rows.Count; i++)
+            for (int i = 0; i < dataToFill.Rows.Count; i++)
             {
-                var dataRow = DataToExport.Rows[i];
+                var dataRow = dataToFill.Rows[i];
                 var excelRow = sheet.CreateRow(HeaderRows + 1 + i);
                 CreateCellForRow(excelRow, cols, dataRow, false);
             }
@@ -126,8 +132,8 @@ namespace NBiz
         /// <param name="isHead">如果是true 则创建表头.</param>
         private void CreateCellForRow(IRow excelRow, DataColumnCollection columns, DataRow row, bool isHead)
         {
-           
-            
+
+
             for (int i = 0; i < columns.Count; i++)
             {
                 var cell = excelRow.CreateCell(i);
@@ -139,18 +145,21 @@ namespace NBiz
                 {
                     string cellValue = string.Empty;
                     if (row != null) { cellValue = row[i].ToString(); }
-                   
+
                     //该地址是图片
                     if (Regex.IsMatch(cellValue, @"\.[jpg|png|tiff]", RegexOptions.IgnoreCase))
                     {
-                        System.Drawing.Image image = System.Drawing.Image.FromFile(System.Web.HttpContext.Current.Server.MapPath("/ProductImages/original/"+ cellValue));
-                        System.Drawing.Bitmap targetImage = ThumbnailMaker.DrawThumbnail(image, ThumbnailType.GeometricScalingByWidth, 150, 0);
-                        excelRow.Sheet.SetColumnWidth(i, MSExcelUtil.pixel2WidthUnits(targetImage.Width));
-                        excelRow.HeightInPoints = (float)((targetImage.Height) * 0.75);
-                        MemoryStream ms = new MemoryStream();
-                        targetImage.Save(ms, image.RawFormat);
-                        InsertImageToCell(ms, i, excelRow.RowNum);
-
+                        string filePath = System.Web.HttpContext.Current.Server.MapPath("/ProductImages/original/" + cellValue);
+                        if (File.Exists(filePath))
+                        {
+                            System.Drawing.Image image = System.Drawing.Image.FromFile(filePath);
+                            System.Drawing.Bitmap targetImage = ThumbnailMaker.DrawThumbnail(image, ThumbnailType.GeometricScalingByWidth, 150, 0);
+                            excelRow.Sheet.SetColumnWidth(i, MSExcelUtil.pixel2WidthUnits(targetImage.Width - 2));
+                            excelRow.HeightInPoints = (float)((targetImage.Height - 2) * 0.75);
+                            MemoryStream ms = new MemoryStream();
+                            targetImage.Save(ms, image.RawFormat);
+                            InsertImageToCell(ms, i, excelRow.RowNum);
+                        }
                     }
                     else
                     {
@@ -162,11 +171,11 @@ namespace NBiz
 
         private void InsertImageToCell(MemoryStream imageStream, int left, int top)
         {
-           
+
             //store the coordinates of which cell and where in the cell the image goes
-            HSSFClientAnchor anchor = new HSSFClientAnchor(0, 0, 0, 0, left, top, left+1, top+1);
+            HSSFClientAnchor anchor = new HSSFClientAnchor(1, 1, 0, 0, left, top, left + 1, top + 1);
             //types are 0, 2, and 3. 0 resizes within the cell, 2 doesn't
-             anchor.AnchorType = 2;
+            anchor.AnchorType = 2;
             //add the byte array and encode it for the excel file
             int index = Book.AddPicture(imageStream.ToArray(), PictureType.PNG);
             IPicture signaturePicture = patriarch.CreatePicture(anchor, index);
