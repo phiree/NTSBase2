@@ -62,6 +62,7 @@
     <Compile Include="Bill\BizBill.cs" />
     <Compile Include="Category\BizCategory.cs" />
     <Compile Include="Category\CategoryExcelReader.cs" />
+    <Compile Include="MSExcelUtil.cs" />
     <Compile Include="NTSMemberShip\NTSMembershipProvider.cs" />
     <Compile Include="ProductCollection\BizProductCollection.cs" />
     <Compile Include="Product\BizProductLanguage.cs" />

@@ -16,7 +16,8 @@ public partial class ProductCollection_Default : System.Web.UI.Page
         }
     }
     protected void btnExport_Click(object sender, EventArgs e)
-    { 
-    
+    {
+        ExcelExport export = new ExcelExport("产品导出_" + DateTime.Now.ToString("yyyyMMdd-HHmmss"));
+        export.ExportProductExcel(bizPC.GetDefaultCollection(GlobalVarible.GetUserId()).Products);
     }
 }

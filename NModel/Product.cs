@@ -148,8 +148,14 @@ namespace NModel
           [Description("供应商编码")]
  
         public virtual string SupplierCode { get; set; }
-        [Description("图片")]
+        [Description("图片类型")]
         public virtual string ImageState { get; set; }
+        string defaultImageName = string.Empty;
+        [Description("默认图片地址")]
+        public virtual string DefaultImageName { get {
+            if (ProductImageList.Count == 0) return string.Empty;
+            else return ProductImageList[0].ImageName;
+        } protected internal set { name = value; } }
         [Description("报价日期")]
         public virtual string PriceDate { get; set; }
         [Description("报价有效期")]

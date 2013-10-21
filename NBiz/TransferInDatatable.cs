@@ -47,6 +47,7 @@ namespace NBiz
             HeaderRows = headerRows;
             DataToExport = datatable;
         }
+        IDrawing patriarch;
         public void CreateWorkBook()
         {
             FillSheet(0);
@@ -75,7 +76,7 @@ namespace NBiz
             {
                 sheet = Book.CreateSheet(DataToExport.TableName);
             }
-
+             patriarch = sheet.CreateDrawingPatriarch();
             DataColumnCollection cols = DataToExport.Columns;
             //创建表头
             for (int h = 0; h <= HeaderRows; h++)
@@ -125,6 +126,8 @@ namespace NBiz
         /// <param name="isHead">如果是true 则创建表头.</param>
         private void CreateCellForRow(IRow excelRow, DataColumnCollection columns, DataRow row, bool isHead)
         {
+           
+            
             for (int i = 0; i < columns.Count; i++)
             {
                 var cell = excelRow.CreateCell(i);
@@ -136,9 +139,37 @@ namespace NBiz
                 {
                     string cellValue = string.Empty;
                     if (row != null) { cellValue = row[i].ToString(); }
-                    cell.SetCellValue(cellValue);
+                   
+                    //该地址是图片
+                    if (Regex.IsMatch(cellValue, @"\.[jpg|png|tiff]", RegexOptions.IgnoreCase))
+                    {
+                        System.Drawing.Image image = System.Drawing.Image.FromFile(System.Web.HttpContext.Current.Server.MapPath("/ProductImages/original/"+ cellValue));
+                        System.Drawing.Bitmap targetImage = ThumbnailMaker.DrawThumbnail(image, ThumbnailType.GeometricScalingByWidth, 150, 0);
+                        excelRow.Sheet.SetColumnWidth(i, MSExcelUtil.pixel2WidthUnits(targetImage.Width));
+                        excelRow.HeightInPoints = (float)((targetImage.Height) * 0.75);
+                        MemoryStream ms = new MemoryStream();
+                        targetImage.Save(ms, image.RawFormat);
+                        InsertImageToCell(ms, i, excelRow.RowNum);
+
+                    }
+                    else
+                    {
+                        cell.SetCellValue(cellValue);
+                    }
                 }
             }
+        }
+
+        private void InsertImageToCell(MemoryStream imageStream, int left, int top)
+        {
+           
+            //store the coordinates of which cell and where in the cell the image goes
+            HSSFClientAnchor anchor = new HSSFClientAnchor(0, 0, 0, 0, left, top, left+1, top+1);
+            //types are 0, 2, and 3. 0 resizes within the cell, 2 doesn't
+             anchor.AnchorType = 2;
+            //add the byte array and encode it for the excel file
+            int index = Book.AddPicture(imageStream.ToArray(), PictureType.PNG);
+            IPicture signaturePicture = patriarch.CreatePicture(anchor, index);
         }
     }
 }

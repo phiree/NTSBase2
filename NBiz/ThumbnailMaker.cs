@@ -36,6 +36,28 @@ namespace NBiz
             
             System.Drawing.Image originalImage = System.Drawing.Image.FromFile(originalImagePath);
 
+            Bitmap bitmap = DrawThumbnail(originalImage, tt, width, height);
+            try
+            {
+                //以jpg格式保存缩略图 
+                bitmap.Save(thumbnailPath, System.Drawing.Imaging.ImageFormat.Jpeg); 
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                originalImage.Dispose();
+                bitmap.Dispose();
+                //bitmap. g.Dispose();
+            } 
+
+        }
+
+        public static Bitmap DrawThumbnail(Image originalImage, ThumbnailType tt, int width, int height)
+        {
+
             int towidth = width;
             int toheight = height;
 
@@ -73,7 +95,7 @@ namespace NBiz
 
             }
             //新建一个bmp图片 
-            System.Drawing.Image bitmap = new System.Drawing.Bitmap(towidth, toheight);
+            System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap(towidth, toheight);
 
             //新建一个画板 
             Graphics g = System.Drawing.Graphics.FromImage(bitmap);
@@ -92,35 +114,8 @@ namespace NBiz
              new Rectangle(x, y, ow, oh),
              GraphicsUnit.Pixel);
 
-            try
-            {
-                //以jpg格式保存缩略图 
-                bitmap.Save(thumbnailPath, System.Drawing.Imaging.ImageFormat.Jpeg); 
-            }
-            catch (System.Exception e)
-            {
-                throw e;
-            }
-            finally
-            {
-                originalImage.Dispose();
-                bitmap.Dispose();
-                g.Dispose();
-            } 
+            return bitmap;
 
-        }
-
-        private Bitmap DrawThumbnail(Image photo, int resizeToWidth, int resizeToHeight)
-        {
-
-            Bitmap bmp = new Bitmap(resizeToWidth, resizeToHeight);
-            Graphics graphic = Graphics.FromImage(bmp);
-            graphic.InterpolationMode = InterpolationMode.HighQualityBicubic;
-            graphic.SmoothingMode = SmoothingMode.HighQuality;
-            graphic.PixelOffsetMode = PixelOffsetMode.HighQuality;
-            graphic.CompositingQuality = CompositingQuality.HighQuality;
-            graphic.DrawImage(photo, 0, 0, resizeToWidth, resizeToHeight);
-            return bmp;
         }
     }
     /// <summary>
