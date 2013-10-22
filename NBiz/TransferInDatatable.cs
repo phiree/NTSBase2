@@ -42,7 +42,7 @@ namespace NBiz
             : this(ds, 1)
         {
             
-        }
+        }  
         public DataExport(DataSet ds, int headerRows)
         {
             if (headerRows < 0)
