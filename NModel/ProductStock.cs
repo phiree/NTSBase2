@@ -18,7 +18,6 @@ namespace NModel
         public virtual Guid Id { get; set; }
         //产品
         public virtual Product Product { get; set; }
-
         //库位号
         public virtual string Location { get; set; }
         //库存

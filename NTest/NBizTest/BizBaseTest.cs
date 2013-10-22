@@ -7,6 +7,7 @@ using NBiz;
 using NUnit.Framework;
 using Rhino.Mocks;
 using FizzWare.NBuilder;
+using System.Data;
 namespace NTest.NBizTest
 {
     [TestFixture]
@@ -268,13 +269,19 @@ LEFT JOIN productlanguage plZh
             DataExport t = new DataExport();
             t.HeaderRows = 0;
             t.XSLFilePath = Environment.CurrentDirectory + "\\TestFiles\\NBizTest\\物料导入模板.XLS";
-            t.DataToExport = ds.Tables[0];
+
+            DataSet dsAd = ds.Copy();
+            dsAd.Tables.RemoveAt(1);
+            t.DataToExport = dsAd;
             t.CreateWorkBook();
             string fileName=DateTime.Now.ToString("yyyyMMdd-hhmmss")+".xls";
             System.IO.FileStream fsAdded = new System.IO.FileStream(Environment.CurrentDirectory + "\\Added_" + fileName, System.IO.FileMode.CreateNew);
             t.Book.Write(fsAdded);
 
-             t.DataToExport = ds.Tables[1];
+            DataSet dsMo = ds.Copy();
+            dsMo.Tables.RemoveAt(0);
+            t.DataToExport = dsMo;
+          
              t.CreateWorkBook();
              System.IO.FileStream fsModified = new System.IO.FileStream(Environment.CurrentDirectory + "\\Modified" + fileName, System.IO.FileMode.CreateNew);
              t.Book.Write(fsModified);

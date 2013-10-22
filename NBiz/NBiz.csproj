@@ -81,7 +81,6 @@
     <Compile Include="_ImportFromExcel.cs" />
     <Compile Include="Product\RowPolulate.cs" />
     <Compile Include="Product\SingleFolderImport.cs" />
-    <Compile Include="Product\BizProductTag.cs" />
     <Compile Include="Product\StringPopulate.cs" />
     <Compile Include="Product\__ProductDataTableConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

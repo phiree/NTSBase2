@@ -69,7 +69,7 @@ public class ExcelExport
     }
     private void ExportProductExcel(DataSet ds)
     {
-        DataExport tt = new DataExport(ds.Tables[0]);
+        DataExport tt = new DataExport(ds);
        tt.CreateWorkBook();
         DownLoadXslFile(tt.Book);
     }
