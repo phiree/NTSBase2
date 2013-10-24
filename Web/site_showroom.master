@@ -1,0 +1,30 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/site.master" AutoEventWireup="true" CodeFile="site_showroom.master.cs" Inherits="site_showroom" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+<script src="/Scripts/HighLightLink.js" type="text/javascript"></script>
+    <link href="/Content/css/site_leftmenu.css" rel="stylesheet" type="text/css" />
+    <asp:ContentPlaceHolder runat="server" ID="head">
+    </asp:ContentPlaceHolder>
+    <script language="javascript" type="text/javascript">
+        $(function () {
+
+            $("#leftMenu ul li a").HighLightLink({ highLightClass: "leftmenu_on" });
+
+        });
+    </script>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="cph_body" runat="server">
+    <div class="span-4 last" id="leftMenu">
+        <ul >
+            <li class="leftmenu_on"><a href="/products/">展厅列表</a></li>
+          <%--  <li><a href="/products/ProductTag.aspx">产品集</a></li>--%>
+            <li><a href="/suppliers/">供应商列表</a></li>
+        </ul>
+    </div>
+    <div class="span-20 last" id="maincontent">
+   <div style="padding-left:10px; padding-top:10px;">
+        <asp:ContentPlaceHolder ID="cph_maincontent" runat="server">
+        </asp:ContentPlaceHolder></div>
+    </div>
+</asp:Content>
+

@@ -1,0 +1,22 @@
+﻿#dvContainerLv1
+{
+    width: 100%;
+    border: solid 3px #000;
+}
+#dvContainerLv1 div, #dvContainerLv2 div
+{
+    float: left;
+}
+.dvContainerLv2
+{
+    width: 330px;
+    border: solid 2px #555;
+}
+.dvContainerLv3
+{
+    border: solid 1px #aaa;
+}
+.dvAdd
+{
+    clear: both;
+}
