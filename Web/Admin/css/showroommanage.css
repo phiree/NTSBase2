@@ -1,16 +1,35 @@
-﻿#dvContainerLv1
+﻿.dvContainerLv1
 {
     width: 100%;
-    border: solid 3px #000;
+    border: solid 3px #888;
+    margin-bottom:30px;
 }
-#dvContainerLv1 div, #dvContainerLv2 div
+.posName
+{
+    background-color:#eee;
+    border-bottom:solid 1px #888;
+    padding:0 20px;
+    }
+    .posName:hover,.dvAdd:hover
+    {
+          background-color:Blue;
+          color:White;
+          cursor:pointer;
+        }
+    .dvContainerLv1
+    {
+        padding:0 10px 10px 10px;
+        }
+.dvContainerLv3,.dvContainerLv2 
 {
     float: left;
+    margin-left:5px;
 }
 .dvContainerLv2
 {
-    width: 330px;
-    border: solid 2px #555;
+    width: 360px;
+    border: solid 2px #888;
+    margin-bottom:5px;
 }
 .dvContainerLv3
 {
@@ -18,5 +37,7 @@
 }
 .dvAdd
 {
+    width:100%;
     clear: both;
+    color:#ccc;
 }

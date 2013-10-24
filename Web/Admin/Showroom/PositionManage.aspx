@@ -6,7 +6,8 @@
     <link href="/Admin/css/showroommanage.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript">
         $(function () {
-            $("#dvPositionForm").dialog({
+            var serviceUrl = "/services/showroomservice.ashx";
+           var diag=  $("#dvPositionForm").dialog({
                 width: 370,
                 autoOpen: false,
                 buttons: [
@@ -18,11 +19,13 @@
                                     var name = $("#name").val();
                                     var desc = $("#desc").val();
                                     var code = $("#code").val();
-                                    $.post("/services/showroomservice.ashx",
+                                    $.post(serviceUrl,
                                                 { "actiontype": "position_addmodify", "id": id, "parentId": parentId, "name": name, "code": code, "desc": desc }
-                                                , function (data) {
+                                                , function (returnId) {
+                                                    $("#hiId").val(returnId);
                                                     $("#spMsg").show();
                                                     $("#spMsg").fadeOut(3000);
+                                                    window.location = window.location;
                                                 }
                                                 );
                                 }
@@ -39,26 +42,37 @@
                                 id: "dialog_button_delete",
                                 text: "删除",
                                 click: function () {
-
+                                    var name = $("#name").val();
+                                    var id = $("#hiId").val();
+                                    if (!confirm("确定要删除:  \"" + name + "\" 么?")) return false;
+                                    $.get(serviceUrl, { actiontype: "position_delete", id: id }
+                                        , function (data) {
+                                            if (data != "")
+                                            { alert(data); }
+                                            else {
+                                                $("[posid=" + id + "]").parent().remove();
+                                            }
+                                        }
+                                        );
                                 }
                             }
                 ]
             });
             $(".dvAdd")
-             .button()
+
               .click(function () {
                   $("#dialog_button_delete").hide();
                   $("#hiId").val("");
                   $("#name").val("");
                   $("#desc").val("");
                   $("#code").val("");
-                  var parentId = $(this).parent().siblings("h3").attr("posId");
+                  var parentId = $(this).siblings("h3").attr("posId");
                   $("#hiParentId").val(parentId);
                   $("#dvPositionForm").dialog("open");
               });
             //修改
-              $(".posName").click(function () {
-                  $("#dialog_button_delete").show();
+            $(".posName").click(function () {
+                $("#dialog_button_delete").show();
                 var posId = $(this).attr("posId");
                 $.get("/services/showroomservice.ashx",
                  { "actiontype": "position_get", "id": posId }
@@ -72,17 +86,7 @@
             );
 
             });
-            $("#btnSave").click(function () {
-                var id = $("#hiId").val();
-                var name = $("#name").val();
-                var desc = $("#desc").val();
-                var code = $("#code").val();
 
-                $.post("/services/showroomservice.ashx",
-             { "actiontype": "position_addmodify", "id": id, "name": name, "code": code, "desc": desc }
-             , function (data) { }
-             );
-            });
 
         });
     </script>
@@ -91,40 +95,40 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <asp:Repeater runat="server" ID="rpLv1">
-        <HeaderTemplate><div id="dvContainerLv1">
+        <HeaderTemplate>
         </HeaderTemplate>
         <ItemTemplate>
-            <div>
-                <h3 class="posName" posid='<%#Eval("id") %>'>
-                    <%#Eval("Name") %></h3>
+           <div class="dvContainerLv1">
+                <h2 class="posName" posid='<%#Eval("id") %>'>
+                    <%#Eval("Name") %></h2>
                     <asp:Repeater runat="server" ID="rpgLv2">
-                        <HeaderTemplate><div class="dvContainerLv2">
+                        <HeaderTemplate>
                         </HeaderTemplate>
                         <ItemTemplate>
-                            <div>
+                          <div class="dvContainerLv2">
                                  <h3 class="posName" posid='<%#Eval("id")%>'>
                                     <%#Eval("Name") %></h3>
                              
                                     <asp:Repeater runat="server" ID="rpgLv3">
                                     <HeaderTemplate> 
-                                      <div class="dvContainerLv3""></HeaderTemplate>
+                                    </HeaderTemplate>
                                         <ItemTemplate>
-                                            <div>
+                                             <div class="dvContainerLv3"">
                                                <span class="posName" posid='<%#Eval("id") %>'><%#Eval("Name") %></span> 
                                             </div>
                                         </ItemTemplate>
                                         <FooterTemplate>
-                                            </div>
+                                            
                                         </FooterTemplate>
                                     </asp:Repeater>
                                      <div class="dvAdd">
-                                                <span>增加展位</span></div>
+                                                <span>增加展区</span></div>
                                
                             </div>
                         </ItemTemplate>
                         <FooterTemplate>
                            
-                         </div>
+                        
                         </FooterTemplate>
                     </asp:Repeater>
                  <div class="dvAdd">
@@ -132,7 +136,7 @@
             </div>
         </ItemTemplate>
         <FooterTemplate>
-           </div>
+           
         </FooterTemplate>
             
     </asp:Repeater> 
@@ -142,9 +146,7 @@
     <div id="dvPositionForm">
      <input type="hidden" id="hiId" />
      <input type="hidden" id="hiParentId" />
-        <p>
-            All form fields are required.</p>
-        <fieldset>
+         <fieldset>
             <label for="name">
                 名称</label>
            

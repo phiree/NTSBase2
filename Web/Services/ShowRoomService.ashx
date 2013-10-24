@@ -21,8 +21,8 @@ public class ShowRoomService : IHttpHandler {
                 string code = context.Request["code"];
                 string desc = context.Request["desc"];
                 
-                SaveUpdatePosition(id,parentId, name, code, desc);
-                context.Response.Write("OK");
+              SR_Position posR=  SaveUpdatePosition(id,parentId, name, code, desc);
+                context.Response.Write(posR.Id);
                 break;
             case "position_get":
               SR_Position pos=  bizPos.GetOne(new Guid(id));
@@ -30,11 +30,23 @@ public class ShowRoomService : IHttpHandler {
               context.Response.ContentType = "application/json";
               context.Response.Write(jsonPos);
                 break;
+            case "position_delete":
+
+                SR_Position posToDelete=bizPos.GetOne(new Guid(id));
+                if(posToDelete.ChildrenPosition.Count>0)
+                {
+                context.Response.Write("删除失败.请先删除子项.");
+                }
+                else
+                {
+                bizPos.Delete(posToDelete);
+                }
+                break;
                 
         }
     }
     
-    public void SaveUpdatePosition(string id,string parentId,string name,string code,string desc)
+    public SR_Position SaveUpdatePosition(string id,string parentId,string name,string code,string desc)
     {
         SR_Position pos = null;
         if (!string.IsNullOrEmpty(id))
@@ -64,6 +76,7 @@ public class ShowRoomService : IHttpHandler {
         }
         
         bizPos.SaveOrUpdate(pos);
+        return pos;
     }
     public bool IsReusable {
         get {

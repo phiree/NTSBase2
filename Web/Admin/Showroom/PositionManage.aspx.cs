@@ -15,17 +15,7 @@ public partial class Admin_Showroom_PositionManage : System.Web.UI.Page
     }
     private void BindList()
     { 
-        IList<SR_Position> positions=new List<SR_Position>();
-
-        SR_Position p1 = new SR_Position { Name="展馆1"};
-        SR_Position p11 = new SR_Position { Name="展厅1",ParentPosition=p1 };
-        SR_Position p111 = new SR_Position { Name = "展位1", ParentPosition = p11 };
-
-        p11.ChildrenPosition.Add(p111);
-        p1.ChildrenPosition.Add(p11);
-        positions.Add(p1);
-
-        rpLv1.DataSource = bizPos.GetAll<SR_Position>();// positions;
+        rpLv1.DataSource = bizPos.GetAll<SR_Position>().Where(x=>x.ParentPosition==null);// positions;
         rpLv1.ItemDataBound += new RepeaterItemEventHandler(rpLv1_ItemDataBound);
         rpLv1.DataBind();
     }

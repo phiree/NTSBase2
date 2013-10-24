@@ -14,7 +14,7 @@ namespace NModel.Mapping
             Map(x => x.Name);
             Map(x => x.Description);
             Map(x => x.PositionCode);
-            HasMany<SR_Position>(x => x.ChildrenPosition);
+            HasMany<SR_Position>(x => x.ChildrenPosition).Cascade.All();
             References<SR_Position>(x => x.ParentPosition);
           
         }
