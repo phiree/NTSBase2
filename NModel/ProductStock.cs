@@ -14,16 +14,24 @@ namespace NModel
     public class ProductStock
     {
         public ProductStock()
-        { }
+        {
+            ProductName = Product.Name;
+        }
         public virtual Guid Id { get; set; }
         //产品
         public virtual Product Product { get; set; }
+        //数据冗余
+        public virtual string ProductName { get; set; }
         //库位号
         public virtual string Location { get; set; }
         //库存
         public virtual decimal Stock { get; set; }
         //单位
         public virtual string StockUnit { get; set; }
+        //入库价格
+        public virtual decimal Price_Import { get; set; }
+        //展示价
+        public virtual decimal Price_Display { get; set; }
         //该库存状态的更新时间
         public virtual DateTime UpdateTime { get; set; }
         //此操作对应的单据

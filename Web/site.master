@@ -53,7 +53,7 @@
                 <asp:LoginStatus  TabIndex="999"  LoginImageUrl="~/Content/images/login.jpg" runat="server" />
                 -->
                 <div>
-                    <span>共<span runat="server" id="sumCart"></span>件</span><a href="/productcollection">查看全部</a></div>
+             <asp:LoginName runat="server" /><asp:LoginStatus runat="server" />       <span>共<span runat="server" id="sumCart"></span>件</span><a href="/productcollection">查看全部</a></div>
             </div>
         </div>
         <div class="clear span-24 last" id="body">

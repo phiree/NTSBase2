@@ -86,7 +86,6 @@
     <Compile Include="UserRole.cs" />
     <Compile Include="Variables.cs" />
     <Compile Include="Product.cs" />
-    <Compile Include="Bill\BillProduct.cs" />
     <Compile Include="Bill\BillProductStock.cs" />
   </ItemGroup>
   <ItemGroup>

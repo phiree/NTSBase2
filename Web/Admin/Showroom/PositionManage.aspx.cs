@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using NModel;
-public partial class Admin_Showroom_PositionManage : System.Web.UI.Page
+public partial class Admin_Showroom_PositionManage : AuthPage
 {
 
     NBiz.BizPosition bizPos = new NBiz.BizPosition();

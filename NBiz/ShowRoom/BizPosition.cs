@@ -7,6 +7,6 @@ namespace NBiz
 {
     public class BizPosition:BLLBase<SR_Position>
     {
-        
+                
     }
 }

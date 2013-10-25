@@ -74,6 +74,7 @@
     <Compile Include="Product\BizProduct.cs" />
     <Compile Include="Product\ProductSync.cs" />
     <Compile Include="ShowRoom\BizPosition.cs" />
+    <Compile Include="ShowRoom\BizStock.cs" />
     <Compile Include="Stock\BizStock.cs" />
     <Compile Include="Stock\ProuductStockDataTableConverter.cs" />
     <Compile Include="Stock\RowPolulate_Stock.cs" />
