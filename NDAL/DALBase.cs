@@ -22,9 +22,10 @@ namespace NDAL
             using (var t = session.BeginTransaction())
             {
                 session.Save(o);
-                session.Flush();
+              
                 t.Commit();
             }
+            session.Flush();
         }
 
         public virtual void SaveList(IList<T> list)

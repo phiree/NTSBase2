@@ -49,6 +49,8 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -86,7 +88,7 @@
     <Compile Include="UserRole.cs" />
     <Compile Include="Variables.cs" />
     <Compile Include="Product.cs" />
-    <Compile Include="Bill\BillProductStock.cs" />
+    <Compile Include="Bill\BillStock.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

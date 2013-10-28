@@ -11,7 +11,7 @@ namespace NModel
         public virtual Guid Id { get; set; }
         public virtual string BillType { get; set; }
         public virtual string BillNo { get; set; }
-        public virtual string CreatedDate { get; set; }
+        public virtual DateTime CreatedDate { get; set; }
         //创建者
         public virtual NTSMember CreateMember { get; set; }
         public virtual string Memo { get; set; }

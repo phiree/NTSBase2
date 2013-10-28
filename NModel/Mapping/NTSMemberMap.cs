@@ -9,8 +9,7 @@ namespace NModel.Mapping
     {
         public NTSMemberMap()
         {
-            Id(x=>x.Id);
-          
+            Id(x => x.Id);
             Map(x => x.Address);
             Map(x => x.Email);
             Map(x => x.IdCard);

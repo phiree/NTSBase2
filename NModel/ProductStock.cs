@@ -15,7 +15,7 @@ namespace NModel
     {
         public ProductStock()
         {
-            ProductName = Product.Name;
+            
         }
         public virtual Guid Id { get; set; }
         //产品

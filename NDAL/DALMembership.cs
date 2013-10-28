@@ -9,12 +9,16 @@ namespace NDAL
     {
         public NModel.NTSMember GetByUserName(string username)
         {
+            return GetByUserName(username, false);
+            
+        }
+        public NModel.NTSMember GetByUserName(string username,bool setOnlineStatus)
+        {
             string query = "select m from NTSMember m where m.Name='" + username + "'";
-                 
+
             NModel.NTSMember member = GetOneByQuery(query);
             return member;
         }
-
         public bool ValidateUser(string username, string encryptedPwd)
         {
             string query = "select m from NTSMember m where m.Name='" + username

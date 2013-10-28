@@ -63,6 +63,7 @@
     <Compile Include="Category\BizCategory.cs" />
     <Compile Include="Category\CategoryExcelReader.cs" />
     <Compile Include="MSExcelUtil.cs" />
+    <Compile Include="NTSMemberShip\BizNtsMember.cs" />
     <Compile Include="NTSMemberShip\NTSMembershipProvider.cs" />
     <Compile Include="ProductCollection\BizProductCollection.cs" />
     <Compile Include="Product\BizProductLanguage.cs" />
@@ -74,7 +75,6 @@
     <Compile Include="Product\BizProduct.cs" />
     <Compile Include="Product\ProductSync.cs" />
     <Compile Include="ShowRoom\BizPosition.cs" />
-    <Compile Include="ShowRoom\BizStock.cs" />
     <Compile Include="Stock\BizStock.cs" />
     <Compile Include="Stock\ProuductStockDataTableConverter.cs" />
     <Compile Include="Stock\RowPolulate_Stock.cs" />

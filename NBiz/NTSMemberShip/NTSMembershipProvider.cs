@@ -25,6 +25,8 @@ namespace NBiz
             }
 
         }
+        #region override methoeds
+
 
         public override string ApplicationName
         {
@@ -189,5 +191,15 @@ namespace NBiz
 
             return DalMember.ValidateUser(username, encryptedPwd);
         }
+        #endregion
+
+        #region ExtendedMethod for NTsMember
+
+        public NTSMember NM_GetUser(string name)
+        {
+            return DalMember.GetByUserName(name);
+        }
+
+        #endregion
     }
 }

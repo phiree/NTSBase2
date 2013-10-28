@@ -14,22 +14,15 @@ namespace NModel.Mapping
             Map(x => x.BillNo);
             Map(x => x.BillType);
             Map(x => x.CreatedDate);
-            Map(x => x.CreateMemberName);
+            References<NTSMember>(x => x.CreateMember);
           
         }
     }
-    public class BillProductStockMap : SubclassMap<BillProductStock>
+    public class BillStockMap : SubclassMap<BillStock>
     {
-        public BillProductStockMap()
+        public BillStockMap()
         {
-            HasMany(x => x.Detail);
-        }
-    }
-    public class BillProductMap : SubclassMap<BillProduct>
-    {
-        public BillProductMap()
-        {
-            HasMany(x => x.Detail);
+            HasMany(x => x.Detail).Cascade.All();
         }
     }
 }

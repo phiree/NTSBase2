@@ -7,7 +7,7 @@
     <script type="text/javascript">
         $(function () {
             var serviceUrl = "/services/showroomservice.ashx";
-           var diag=  $("#dvPositionForm").dialog({
+            var diag = $("#dvPositionForm").dialog({
                 width: 370,
                 autoOpen: false,
                 buttons: [
@@ -52,23 +52,24 @@
                                             else {
                                                 $("[posid=" + id + "]").parent().remove();
                                             }
-                                        }
+                                           
+                                                     }
                                         );
+                                        $(this).dialog("close");
                                 }
                             }
                 ]
             });
             $(".dvAdd")
-
               .click(function () {
                   $("#dialog_button_delete").hide();
                   $("#hiId").val("");
                   $("#name").val("");
                   $("#desc").val("");
                   $("#code").val("");
-                  var parentId = $(this).siblings("h3").attr("posId");
+                  var parentId = $(this).siblings(".posName").attr("posId");
                   $("#hiParentId").val(parentId);
-                  $("#dvPositionForm").dialog("open");
+                 diag= $("#dvPositionForm").dialog("open");
               });
             //修改
             $(".posName").click(function () {

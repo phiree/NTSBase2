@@ -13,9 +13,15 @@ public class AuthPage:Page
 	public AuthPage()
 	{
         CurrentMember = Membership.GetUser();
+        
+       
+	}
+    protected override void OnPreLoad(EventArgs e)
+    {
         if (CurrentMember == null)
         {
             FormsAuthentication.RedirectToLoginPage();
+            Response.End();
         }
-	}
+    }
 }

@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
 namespace NModel
 {
-   public class NTSMember
+   public class NTSMember                   
     {
        public NTSMember()
        {
           LastLogin= RegistDate = DateTime.Now;
           LoginCount = 0;
        }
+       
         public virtual Guid Id { get; set; }
         public virtual string Name { get; set; }
         public virtual string Password { get; set; }
