@@ -5,9 +5,9 @@ using System.Text;
 
 namespace NModel
 {
-   public class Supplier
+   public class Supplier:SettleTarget
     {
-       public virtual Guid Id { get; set; }
+      
        /// <summary>
        /// 名称
        /// </summary>

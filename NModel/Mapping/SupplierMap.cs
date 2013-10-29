@@ -5,11 +5,11 @@ using System.Text;
 using FluentNHibernate.Mapping;
 namespace NModel.Mapping
 {
-    public class SupplierMap : ClassMap<Supplier>
+    public class SupplierMap : SubclassMap<Supplier>
     {
         public SupplierMap()
         {
-            Id(x=>x.Id);
+           
             Map(x => x.NickName);
             Map(x => x.Address);
             Map(x => x.Code).Unique();

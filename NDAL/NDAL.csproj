@@ -69,10 +69,12 @@
   <ItemGroup>
     <Compile Include="App_Start\NHibernateProfilerBootstrapper.cs" />
     <Compile Include="DALBase.cs" />
+    <Compile Include="DALBillBase.cs" />
     <Compile Include="DALCategory.cs" />
     <Compile Include="DALMembership.cs" />
     <Compile Include="DALProduct.cs" />
     <Compile Include="DALProductCollection.cs" />
+    <Compile Include="DALProductStock.cs" />
     <Compile Include="DALRole.cs" />
     <Compile Include="DALSerialNo.cs" />
     <Compile Include="DALSql.cs" />

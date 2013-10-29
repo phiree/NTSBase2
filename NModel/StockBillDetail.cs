@@ -2,21 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using NModel.Enums;
-using System.IO;
-using System.ComponentModel;
-using NLibrary;
+
 namespace NModel
 {
-    /// <summary>
-    /// 库存快照.
-    /// </summary>
-    public class ProductStock
+
+    //出入库 产品列表中的条目.
+    public class StockBillDetail
     {
-        public ProductStock()
-        {
-            
-        }
         public virtual Guid Id { get; set; }
         //产品
         public virtual Product Product { get; set; }
@@ -34,8 +26,10 @@ namespace NModel
         public virtual decimal Price_Display { get; set; }
         //该库存状态的更新时间
         public virtual DateTime UpdateTime { get; set; }
+        //此操作对应的单据
 
-       
-
+        public virtual BillBase Bill { get; set; }
+        //该单据的总价格 默认等于 数量*单价.
+        public virtual decimal TotalMoney { get; set; }
     }
 }
