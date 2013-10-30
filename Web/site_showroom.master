@@ -1,6 +1,7 @@
 ﻿<%@ Master Language="C#" MasterPageFile="~/site.master" AutoEventWireup="true" CodeFile="site_showroom.master.cs" Inherits="site_showroom" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+<title>展厅库存管理系统</title>
 <script src="/Scripts/HighLightLink.js" type="text/javascript"></script>
     <link href="/Content/css/site_leftmenu.css" rel="stylesheet" type="text/css" />
     <asp:ContentPlaceHolder runat="server" ID="head">
@@ -12,13 +13,19 @@
 
         });
     </script>
+</asp:Content><asp:Content ID="Content3" ContentPlaceHolderID="pageHeadTitle" runat="server">
+NTS展厅库存管理
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cph_body" runat="server">
     <div class="span-4 last" id="leftMenu">
         <ul >
-            <li class="leftmenu_on"><a href="/products/">展厅列表</a></li>
-          <%--  <li><a href="/products/ProductTag.aspx">产品集</a></li>--%>
-            <li><a href="/suppliers/">供应商列表</a></li>
+            <li class="leftmenu_on"><a href="/stock/positionmanage.aspx/">仓位管理</a></li>
+            <%--  <li><a href="/products/ProductTag.aspx">产品集</a></li>--%>
+             <li><a href="/stock/stocklist.aspx">当前库存列表</a></li>
+             <li><a href="/stock/StockBillList.aspx?type=0">入库单列表</a></li>
+             <li><a href="/stock/stockaddedit.aspx?type=0">新建入库单</a></li>
+             <li><a href="/stock/StockBillList.aspx?type=1">出库单列表</a></li>
+               <li><a href="/stock/stockaddedit.aspx?type=1">新建出库单</a></li>
         </ul>
     </div>
     <div class="span-20 last" id="maincontent">

@@ -15,6 +15,9 @@
         });
     </script>
 </asp:Content>
+<asp:Content ContentPlaceHolderID="pageHeadTitle" runat="server">
+NTS产品信息中心
+</asp:Content>
 <asp:Content ContentPlaceHolderID="cph_body" runat="server">
     <div class="span-4 last" id="leftMenu">
         <ul >

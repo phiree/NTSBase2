@@ -10,7 +10,7 @@
     <link href="/Content/themes/base/minified/jquery.ui.autocomplete.min.css" rel="stylesheet"
         type="text/css" />
     <link href="/Content/css/productdefault.css" rel="stylesheet" type="text/css" />
-    <script language="javascript" type="text/javascript">
+    <script  type="text/javascript">
         var ProductIdListIndefaultCollection="<%=ProductIdListIndefaultCollection%>";
         var tip = "输入 名称 规格参数 描述备注,用空格隔开";
         $(function () {

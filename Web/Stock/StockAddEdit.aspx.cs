@@ -17,6 +17,16 @@ public partial class Admin_Showroom_StockIn_StockAddEdit : AuthPage
     BizStock bizStock = new BizStock();
     BizStockBillDetail bizBillDetail = new BizStockBillDetail();
     NTSMembershipProvider bizNtsMember = new NTSMembershipProvider();
+    protected override void  OnLoadComplete(EventArgs e)
+{
+ 	
+    
+        if (billStock.BillState != BillState.Draft)
+        {
+            dvAddProduct.Visible = btnAddProduct.Visible = btnSave.Visible = btnApplyCheck.Visible = false;
+        }
+        base.OnPreLoad(e);
+    }
     protected void Page_Load(object sender, EventArgs e)
     {
         //入库 还是出库
@@ -47,10 +57,7 @@ public partial class Admin_Showroom_StockIn_StockAddEdit : AuthPage
             {
                 throw new Exception("没有找到对应的单据,可能是传入参数有误");
             }
-            if (billStock.BillState != BillState.Draft)
-            {
-                dvAddProduct.Visible= btnAddProduct.Visible = btnSave.Visible= btnApplyCheck.Visible = false;
-            }
+           
         }
         if (!IsPostBack)
         {
@@ -58,6 +65,7 @@ public partial class Admin_Showroom_StockIn_StockAddEdit : AuthPage
             LoadForm();
         }
     }
+    
     private void BindReson()
     {
         foreach (StockActivityReason r in Enum.GetValues(typeof(StockActivityReason)))
@@ -117,16 +125,13 @@ public partial class Admin_Showroom_StockIn_StockAddEdit : AuthPage
              ps.UpdateTime = DateTime.Now;
         }
         billStock.BillNo = tbxBillNo.Text;
-        billStock.BillType = stockActivityType.ToString();
+        billStock.StockActivityType = stockActivityType;
         billStock.CreatedDate = DateTime.Now;
         //billStock.CreateMember = CurrentMember;
         billStock.Memo = tbxMemo.Text;
         billStock.Reason = (StockActivityReason)(Convert.ToInt32(ddlResonType.SelectedValue));
         }
-    private void UpdateDetail()
-    { 
-        
-    }
+    
     protected void btnAddProduct_Click(object sender, EventArgs e)
     {
         UpdateForm();
@@ -144,6 +149,9 @@ public partial class Admin_Showroom_StockIn_StockAddEdit : AuthPage
        billStock.Detail.Add(ps);
        bizBill.Save(billStock);
        LoadForm();
+    }
+    private void ClearAddPanel() { 
+     
     }
     protected void btnApplyCheck_Click(object sender,EventArgs e) {
     //提交审核

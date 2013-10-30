@@ -74,11 +74,11 @@ namespace NBiz
         {
             return DalBase.GetList(where);
         }
-        protected IList<T> GetList(string where, int pageIndex, int pageSize, out int totalRecord)
+        public IList<T> GetList(string where, int pageIndex, int pageSize, out int totalRecord)
         {
             //设置总条数
             IList<T> listT= DalBase.GetList(where, pageIndex, pageSize, out totalRecord);
-            totalRecord = 13000;
+          
             return listT;
         }
         public  System.Data.DataSet ExecuteSql(string pureSqlStatement)

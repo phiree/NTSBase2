@@ -21,6 +21,7 @@ namespace NModel
                     BillNo = "RK" + BillNo;
                     break;
             }
+            this.StockActivityType = type;
         }
         //入库 还是出库
         public virtual StockActivityType StockActivityType { get; set; }
@@ -31,6 +32,11 @@ namespace NModel
         {
             get;
             set;
+        }
+        public virtual decimal TotalAmount {
+            get {
+                return Detail.Sum(x => x.Price_Import);
+            }
         }
         //public Dictionary<Guid, decimal> CalculateMoney()
         //{

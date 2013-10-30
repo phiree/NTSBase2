@@ -13,10 +13,11 @@
     <!-- Framework CSS -->
     <link rel="stylesheet" href="/Content/blueprint/screen.css" type="text/css" media="screen, projection" />
     <link rel="stylesheet" href="/Content/blueprint/print.css" type="text/css" media="print" />
+    <link href="/Content/themes/base/jquery.ui.all.css" rel="stylesheet" type="text/css" />
     <!--[if lt IE 8]><link rel="stylesheet" href="/Content/blueprint/ie.css" type="text/css" media="screen, projection"/><![endif]-->
     <link href="/Content/css/pager.css" rel="stylesheet" type="text/css" />
     <link href="/Content/css/site.css" rel="stylesheet" type="text/css" />
-    <script language="javascript" type="text/javascript">
+    <script type="text/javascript">
         $(function () {
             //show upgrade notice
             var upgradeversion = "20131021";
@@ -27,7 +28,7 @@
             }
             $("#spCloseNotice").click(function () {
                 $("#dvUpgradeNotice").hide();
-                $.cookie(cookie_name, upgradeversion, {expires:365});
+                $.cookie(cookie_name, upgradeversion, { expires: 365 });
 
             });
 
@@ -39,21 +40,24 @@
 <body>
     <form id="form1" runat="server">
     <div class="container">
-     <div class="info" id="dvUpgradeNotice">
-                 升级日志: 2013.10.21 导出的excel中包含产品图片. <a href="/upgrade.aspx">查看详情</a>
-                <span id="spCloseNotice" style="cursor:pointer">[关闭]</span>
-            </div>
+        <div class="info" id="dvUpgradeNotice">
+            升级日志: 2013.10.21 导出的excel中包含产品图片. <a href="/upgrade.aspx">查看详情</a> <span id="spCloseNotice"
+                style="cursor: pointer">[关闭]</span>
+        </div>
         <div class="span-24 last" id="header">
-           
             <h1 class="span-12">
-                NTS产品信息中心</h1>
+                <asp:ContentPlaceHolder ID="pageHeadTitle" runat="server">
+                </asp:ContentPlaceHolder>
+            </h1>
             <div class="span-12 last loginstatus">
                 <!--
                 <asp:LoginName runat="server" />
                 <asp:LoginStatus  TabIndex="999"  LoginImageUrl="~/Content/images/login.jpg" runat="server" />
                 -->
                 <div>
-             <asp:LoginName runat="server" /><asp:LoginStatus runat="server" />       <span>共<span runat="server" id="sumCart"></span>件</span><a href="/productcollection">查看全部</a></div>
+                    <asp:LoginName runat="server" />
+                    <asp:LoginStatus runat="server" />
+                    <span>共<span runat="server" id="sumCart"></span>件</span><a href="/productcollection">查看全部</a></div>
             </div>
         </div>
         <div class="clear span-24 last" id="body">
@@ -66,20 +70,23 @@
     </div>
     </form>
     <!-- Piwik -->
-<script type="text/javascript">
-    var _paq = _paq || [];
-    _paq.push(['trackPageView']);
-    _paq.push(['enableLinkTracking']);
-    (function () {
-        var u = (("https:" == document.location.protocol) ? "https" : "http") + "://a.nts.com//";
-        _paq.push(['setTrackerUrl', u + 'piwik.php']);
-        _paq.push(['setSiteId', 1]);
-        var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0]; g.type = 'text/javascript';
-        g.defer = true; g.async = true; g.src = u + 'piwik.js'; s.parentNode.insertBefore(g, s);
-    })();
+    <script type="text/javascript">
+        var _paq = _paq || [];
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function () {
+            var u = (("https:" == document.location.protocol) ? "https" : "http") + "://a.nts.com//";
+            _paq.push(['setTrackerUrl', u + 'piwik.php']);
+            _paq.push(['setSiteId', 1]);
+            var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0]; g.type = 'text/javascript';
+            g.defer = true; g.async = true; g.src = u + 'piwik.js'; s.parentNode.insertBefore(g, s);
+        })();
 
-</script>
-<noscript><p><img src="http://a.nts.com/piwik.php?idsite=1" style="border:0" alt="" /></p></noscript>
-<!-- End Piwik Code -->
+    </script>
+    <noscript>
+        <p>
+            <img src="http://a.nts.com/piwik.php?idsite=1" style="border: 0" alt="" /></p>
+    </noscript>
+    <!-- End Piwik Code -->
 </body>
 </html>
