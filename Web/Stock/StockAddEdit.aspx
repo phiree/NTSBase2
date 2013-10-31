@@ -149,4 +149,9 @@
         <asp:Button runat="server" ID="btnSave" Text="保存" OnClick="btnSave_Click" />
         <asp:Button runat="server" ID="btnApplyCheck" Text="提交审核" OnClick="btnApplyCheck_Click" />
     </div>
+    <div id="dvCheck">
+        <asp:Button runat="server" ID="btnCheck" Text="审核通过" OnClick="btnCheck_Click" />
+        <asp:TextBox runat="server" ID="tbxRefuseReason"></asp:TextBox>
+        <asp:Button runat="server" ID="btnRefuse" Text="驳回" OnClick="btnRefuse_Click" />
+    </div>
 </asp:Content>

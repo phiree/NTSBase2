@@ -30,7 +30,7 @@
         <ItemTemplate>
             <tr>
                 <td>
-                    <%#Eval("BillNo") %>
+                   <a href='stockaddedit.aspx?type=<%#Convert.ToInt32(Eval("StockActivityType")) %>&id=<%#Eval("id") %>'><%#Eval("BillNo") %></a> 
                 </td>
                 <td>
                     <%#Eval("CreateMember.Name")%>

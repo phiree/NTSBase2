@@ -21,7 +21,7 @@ NTS展厅库存管理
         <ul >
             <li class="leftmenu_on"><a href="/stock/positionmanage.aspx/">仓位管理</a></li>
             <%--  <li><a href="/products/ProductTag.aspx">产品集</a></li>--%>
-             <li><a href="/stock/stocklist.aspx">当前库存列表</a></li>
+             <li><a href="/stock/">库存列表</a></li>
              <li><a href="/stock/StockBillList.aspx?type=0">入库单列表</a></li>
              <li><a href="/stock/stockaddedit.aspx?type=0">新建入库单</a></li>
              <li><a href="/stock/StockBillList.aspx?type=1">出库单列表</a></li>

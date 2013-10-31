@@ -20,7 +20,7 @@ public partial class Stock_StockList : System.Web.UI.Page
 
     private void BindList(IList<ProductStock> stocks)
     {
-        rpt.DataSource = stocks;
+        rpt.DataSource = stocks.OrderByDescending(x=>x.UpdateTime);
         rpt.DataBind();
     }
 }

@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using NModel;
 using NBiz;
+using NLibrary;
 public partial class Admin_Showroom_StockIn_StockAddEdit : AuthPage
 {
 
@@ -19,9 +20,12 @@ public partial class Admin_Showroom_StockIn_StockAddEdit : AuthPage
     NTSMembershipProvider bizNtsMember = new NTSMembershipProvider();
     protected override void  OnLoadComplete(EventArgs e)
 {
- 	
-    
-        if (billStock.BillState != BillState.Draft)
+    if (isNew)
+    {
+        btnApplyCheck.Visible =btnApplyCheck.Visible = false;
+    }
+    else
+         if (billStock.BillState != BillState.Draft)
         {
             dvAddProduct.Visible = btnAddProduct.Visible = btnSave.Visible = btnApplyCheck.Visible = false;
         }
@@ -157,5 +161,38 @@ public partial class Admin_Showroom_StockIn_StockAddEdit : AuthPage
     //提交审核
         billStock.BillState = BillState.UnCheck;
         btnSave_Click(sender, e);
+    }
+
+    protected void btnCheck_Click(object sender, EventArgs e)
+    {
+        string errMsg;
+        QuantityChangeDirecrion direction;
+       bool isValid= bizBill.StockBillStateChange(billStock, BillState.Checked,out errMsg,out direction);
+       if (!isValid)
+       {
+           Notification.Show(this, "错误", errMsg, string.Empty);
+       }
+           else{
+        bizBill.ApplyStockChange(billStock,direction);
+        billStock.BillState = BillState.Checked;
+        bizBill.Save(billStock);
+           }
+    }
+    protected void btnRefuse_Click(object sender, EventArgs e)
+    {
+        string errMsg; QuantityChangeDirecrion direction;
+        bool isValid = bizBill.StockBillStateChange(billStock, BillState.Draft, out errMsg, out direction);
+       if (!isValid)
+       {
+           Notification.Show(this, "错误", errMsg, string.Empty);
+       }
+       else
+       {
+           billStock.Memo += DateTime.Now + "驳回:" + tbxRefuseReason.Text + Environment.NewLine;
+
+           bizBill.ApplyStockChange(billStock, direction);
+           billStock.BillState = BillState.Draft;
+           bizBill.Save(billStock);
+       }
     }
 }
