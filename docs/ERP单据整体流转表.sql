@@ -6,13 +6,17 @@
 		,'----销售分支----'
 		,'出运通知单',chuyun.fbillno
 		,'销售出库',xiaoshouchuku.fbillno
+		,'销售发票'
+		,'收款单'
 		,'----采购分支----'
 		,'采购申请单',caigoushenqing.fbillno
 		,'合同应付',hetongyingfu.fContractNo
 		,'采购订单',caigoudingdan.fbillno
 		,'验货通知单',yanhuotongzhi.fbillno
 		,'外购入库单',waigouruku.fbillno
-		,'----采购财务分支----'
+		,'采购发票',caigoufapiao.fbillno
+		,'付款单'
+		,'-----流程完成-----'
 
 		 from porfq as  baojia
    	left join t_user as yonghu
@@ -58,6 +62,11 @@
 		on waigourukumingxi.fsourcebillno=yanhuotongzhi.fbillno
 		left join icstockbill as waigouruku
 			on waigouruku.finterid=waigourukumingxi.finterid
+	--采购发票
+	left join ICPurchaseEntry as caigoufapiaomingxi
+		on caigoufapiaomingxi.fsourcebillno=waigouruku.fbillno
+		left join ICPurchase as caigoufapiao
+			on caigoufapiao.finterid=caigoufapiaomingxi.finterid
 	/***采购财务分支**/
 		
 /**/                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                

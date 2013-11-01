@@ -90,6 +90,7 @@
     <Compile Include="SR_Position.cs" />
     <Compile Include="Finance\RuningAccount.cs" />
     <Compile Include="StockBillDetail.cs" />
+    <Compile Include="StockTrace.cs" />
     <Compile Include="Supplier.cs" />
     <Compile Include="UserRole.cs" />
     <Compile Include="Variables.cs" />

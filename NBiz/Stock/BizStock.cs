@@ -13,6 +13,7 @@ namespace NBiz
         NDAL.DALProductStock dalPs = new NDAL.DALProductStock();
         BizProduct bizProduct = new BizProduct();
         NDAL.DALBillBase dalBill = new NDAL.DALBillBase();
+        BizStockBillDetail bizStockBillDetail = new BizStockBillDetail();
         
         //通过excel导入初始库存
         public IList<ProductStock> ImportProductFromExcel(System.IO.Stream stream, out string errMsg)
@@ -46,5 +47,6 @@ namespace NBiz
         {
             return dalPs.GetByProductId(ProductId);
         }
+        
     }
 }

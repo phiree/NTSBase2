@@ -65,6 +65,7 @@
     <Compile Include="Finance\BizSettleTarget.cs" />
     <Compile Include="MSExcelUtil.cs" />
     <Compile Include="NTSMemberShip\BizNtsMember.cs" />
+    <Compile Include="NTSMemberShip\BizRole.cs" />
     <Compile Include="NTSMemberShip\NTSMembershipProvider.cs" />
     <Compile Include="ProductCollection\BizProductCollection.cs" />
     <Compile Include="Product\BizProductLanguage.cs" />

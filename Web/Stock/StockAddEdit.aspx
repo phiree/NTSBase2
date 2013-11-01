@@ -43,7 +43,8 @@
                         });
         if (isNew) {
              $("#tabs").tabs(
-             {"disabled":[1],
+             {
+              //"disabled":[1],
                active:0
              });
         }

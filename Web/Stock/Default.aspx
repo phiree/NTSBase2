@@ -30,7 +30,8 @@
         <ItemTemplate>
             <tr>
                 <td>
-                    <%#Eval("Product.Name") %>
+            <a target="_blank" href='StockTrace.aspx?id=<%#Eval("Product.Id") %>'>
+            <%#Eval("Product.Name") %></a>  
                 </td>
                 <td>
                     <%#Eval("Product.NTSCode") %>

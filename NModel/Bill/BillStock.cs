@@ -9,8 +9,10 @@ namespace NModel
     public class BillStock : BillBase
     {
         public BillStock()
-        { }
-        public BillStock(StockActivityType type)
+        {
+            Detail = new List<StockBillDetail>();
+        }
+        public BillStock(StockActivityType type):this()
         {
             switch (type)
             {

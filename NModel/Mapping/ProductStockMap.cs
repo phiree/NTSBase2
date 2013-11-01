@@ -12,7 +12,7 @@ namespace NModel.Mapping
             Id(x => x.Id);
          
             Map(x => x.Location);
-            References<Product>(x => x.Product);
+            References<Product>(x => x.Product).Unique();
             Map(x => x.Stock);
             Map(x => x.StockUnit);
             Map(x => x.UpdateTime);

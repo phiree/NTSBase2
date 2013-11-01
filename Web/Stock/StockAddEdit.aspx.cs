@@ -139,20 +139,13 @@ public partial class Admin_Showroom_StockIn_StockAddEdit : AuthPage
     protected void btnAddProduct_Click(object sender, EventArgs e)
     {
         UpdateForm();
-
-       Product p=  bizProduct.GetOneBy_NtsCode(tbxNtsCode.Text);
-       StockBillDetail ps = new StockBillDetail();
- 
-       ps.Bill = billStock;
-       ps.Location = tbxLocation.Text;
-       ps.Price_Display =Convert.ToDecimal( tbxDisplayPrice.Text);
-       ps.Price_Import = Convert.ToDecimal(tbxImportPrice.Text);
-       ps.Stock = Convert.ToDecimal(tbxQuantity.Text);
-       ps.UpdateTime = DateTime.Now;
-       ps.Product = p;
-       billStock.Detail.Add(ps);
-       bizBill.Save(billStock);
-       LoadForm();
+       string errMsg;
+       bizBill.AddStockDetail(billStock, tbxNtsCode.Text, tbxLocation.Text, Convert.ToDecimal(tbxQuantity.Text)
+           , Convert.ToDecimal(tbxDisplayPrice.Text), Convert.ToDecimal(tbxImportPrice.Text), out errMsg);
+       if (isNew)
+       {
+           Response.Redirect(Request.RawUrl + "&id=" + billStock.Id, true);
+       }
     }
     private void ClearAddPanel() { 
      
