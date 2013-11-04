@@ -11,7 +11,8 @@ namespace NDAL
        { 
         string query=@"select detail from StockBillDetail as detail 
                         inner join detail.Product as p 
-                        where p.Id='"+productId+"'";
+
+                       where p.Id='"+productId+"'";
         return GetList(query);
        }
     }

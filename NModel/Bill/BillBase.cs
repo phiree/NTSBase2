@@ -10,7 +10,9 @@ namespace NModel
     {
         public BillBase()
         {
-            BillNo = DateTime.Now.ToString("yyyyMMddhhmmss");
+            CreatedDate = DateTime.Now;
+            BillNo = CreatedDate.ToString("yyyyMMddhhmmss");
+
         }
         public virtual Guid Id { get; set; }
         public virtual string BillType { get; set; }
@@ -29,9 +31,9 @@ namespace NModel
     }
     public enum BillState
     {
-      Draft,//草稿
-      UnCheck,//未审核
-        Checked//已审核
-
+        草稿,//草稿
+        未审核,//未审核
+        已审核,//已审核
+        已撤销/
     }
 }

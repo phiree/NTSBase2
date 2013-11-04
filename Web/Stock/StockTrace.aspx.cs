@@ -20,4 +20,5 @@ public partial class Stock_StockTrace : System.Web.UI.Page
         gv.DataSource = bizDetail.GetListByProduct(productId).OrderByDescending(x => x.UpdateTime);
         gv.DataBind();
     }
+  
 }

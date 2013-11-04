@@ -25,7 +25,7 @@ public partial class Admin_Showroom_StockIn_StockAddEdit : AuthPage
         btnApplyCheck.Visible =btnApplyCheck.Visible = false;
     }
     else
-         if (billStock.BillState != BillState.Draft)
+         if (billStock.BillState != BillState.草稿)
         {
             dvAddProduct.Visible = btnAddProduct.Visible = btnSave.Visible = btnApplyCheck.Visible = false;
         }
@@ -34,22 +34,20 @@ public partial class Admin_Showroom_StockIn_StockAddEdit : AuthPage
     protected void Page_Load(object sender, EventArgs e)
     {
         //入库 还是出库
-        string paramType = Request["type"];
-        if (string.IsNullOrEmpty(paramType))
-        {
-            throw new Exception("错误.请传入单据类型");
-        }
-         stockActivityType = (StockActivityType)Enum.Parse(typeof(StockActivityType), paramType);
-        switch (stockActivityType)
-        {
-            case StockActivityType.Export: lblBillTitle.Text = "出库单"; break;
-            case StockActivityType.Import: lblBillTitle.Text = "入库单"; break;
-        }
+        
         //单据id,为空则是新建
         string paramId = Request["Id"];
         if (string.IsNullOrEmpty(paramId))
         {
             isNew = true;
+
+            string paramType = Request["type"];
+            if (string.IsNullOrEmpty(paramType))
+            {
+                throw new Exception("错误.请传入单据类型");
+            }
+            stockActivityType = (StockActivityType)Enum.Parse(typeof(StockActivityType), paramType);
+           
             billStock = new BillStock(stockActivityType);
             billStock.CreateMember = bizNtsMember.NM_GetUser(CurrentMember.UserName);
         }
@@ -62,7 +60,14 @@ public partial class Admin_Showroom_StockIn_StockAddEdit : AuthPage
                 throw new Exception("没有找到对应的单据,可能是传入参数有误");
             }
            
+           
         }
+        switch (billStock.StockActivityType)
+        {
+            case StockActivityType.Export: lblBillTitle.Text = "出库单"; break;
+            case StockActivityType.Import: lblBillTitle.Text = "入库单"; break;
+        }
+
         if (!IsPostBack)
         {
             BindReson();
@@ -152,7 +157,7 @@ public partial class Admin_Showroom_StockIn_StockAddEdit : AuthPage
     }
     protected void btnApplyCheck_Click(object sender,EventArgs e) {
     //提交审核
-        billStock.BillState = BillState.UnCheck;
+        billStock.BillState = BillState.未审核;
         btnSave_Click(sender, e);
     }
 
@@ -160,21 +165,21 @@ public partial class Admin_Showroom_StockIn_StockAddEdit : AuthPage
     {
         string errMsg;
         QuantityChangeDirecrion direction;
-       bool isValid= bizBill.StockBillStateChange(billStock, BillState.Checked,out errMsg,out direction);
+       bool isValid= bizBill.StockBillStateChange(billStock, BillState.已审核,out errMsg,out direction);
        if (!isValid)
        {
            Notification.Show(this, "错误", errMsg, string.Empty);
        }
            else{
         bizBill.ApplyStockChange(billStock,direction);
-        billStock.BillState = BillState.Checked;
+        billStock.BillState = BillState.已审核;
         bizBill.Save(billStock);
            }
     }
     protected void btnRefuse_Click(object sender, EventArgs e)
     {
         string errMsg; QuantityChangeDirecrion direction;
-        bool isValid = bizBill.StockBillStateChange(billStock, BillState.Draft, out errMsg, out direction);
+        bool isValid = bizBill.StockBillStateChange(billStock, BillState.草稿, out errMsg, out direction);
        if (!isValid)
        {
            Notification.Show(this, "错误", errMsg, string.Empty);
@@ -184,7 +189,7 @@ public partial class Admin_Showroom_StockIn_StockAddEdit : AuthPage
            billStock.Memo += DateTime.Now + "驳回:" + tbxRefuseReason.Text + Environment.NewLine;
 
            bizBill.ApplyStockChange(billStock, direction);
-           billStock.BillState = BillState.Draft;
+           billStock.BillState = BillState.草稿;
            bizBill.Save(billStock);
        }
     }

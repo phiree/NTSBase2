@@ -23,40 +23,40 @@ namespace NBiz
             errMsg = "禁止的操作:" + bill.BillState + "-->" + targetState;
             switch (bill.BillState)
             {
-                case BillState.Checked:
+                case BillState.已审核:
                     //已经审核的状态下,只能进行驳回操作
-                    isValidOperation = targetState == BillState.Draft;
+                    isValidOperation = targetState == BillState.草稿;
 
                     break;
-                case BillState.Draft:
+                case BillState.草稿:
                     //草稿状态下,可以申请审核
-                    isValidOperation = targetState == BillState.UnCheck;
+                    isValidOperation = targetState == BillState.未审核;
                     break;
                 //待审核状态下,可以驳回 也可以通过审核.
-                case BillState.UnCheck:
-                    isValidOperation = targetState == BillState.Draft || targetState == BillState.Checked;
+                case BillState.未审核:
+                    isValidOperation = targetState == BillState.草稿 || targetState == BillState.已审核;
                     break;
 
 
             }
             if (bill.StockActivityType == StockActivityType.Export)
             {
-                if (bill.BillState == BillState.Checked && targetState == BillState.Draft)
+                if (bill.BillState == BillState.已审核 && targetState == BillState.草稿)
                 {
                     changeDirection = QuantityChangeDirecrion.Add;
                 }
-                else if (bill.BillState == BillState.UnCheck && targetState == BillState.Checked)
+                else if (bill.BillState == BillState.未审核 && targetState == BillState.已审核)
                 {
                     changeDirection = QuantityChangeDirecrion.Minus;
                 }
             }
             else
             {
-                if (bill.BillState == BillState.Checked && targetState == BillState.Draft)
+                if (bill.BillState == BillState.已审核 && targetState == BillState.草稿)
                 {
                     changeDirection = QuantityChangeDirecrion.Minus;
                 }
-                else if (bill.BillState == BillState.UnCheck && targetState == BillState.Checked)
+                else if (bill.BillState == BillState.未审核 && targetState == BillState.已审核)
                 {
                     changeDirection = QuantityChangeDirecrion.Add;
                 }

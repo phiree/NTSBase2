@@ -31,7 +31,7 @@ namespace NModel
         public virtual BillBase Bill { get; set; }
         //该单据的总价格 默认等于 数量*单价.
         public virtual decimal TotalMoney { get; set; }
-        //产品初始化入库:如果此细节中的产品还没有入库.
+        //产品初始化入库:如果此单据细节中的产品还没有入库.
         public virtual ProductStock InitProductStock()
         {
             ProductStock newStock = new ProductStock();

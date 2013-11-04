@@ -23,4 +23,8 @@ public partial class Stock_StockList : System.Web.UI.Page
         rpt.DataSource = stocks.OrderByDescending(x=>x.UpdateTime);
         rpt.DataBind();
     }
+    protected void btnSearch_Click(object sender, EventArgs e)
+    {
+
+    }
 }
