@@ -71,7 +71,14 @@ namespace NBiz
             foreach (ImageExportModel iem in images)
             {
                 IOHelper.EnsureFileDirectory(iem.TargetImageFullName);
-                System.IO.File.Copy(iem.ImageName, iem.TargetImageFullName, true);
+                if (System.IO.File.Exists(iem.ImageName))
+                {
+                    System.IO.File.Copy(iem.ImageName, iem.TargetImageFullName, true);
+                }
+                else
+                {
+                    NLogger.Logger.Debug("图片不存在:"+iem.ImageName);
+                }
             }
 
         }
