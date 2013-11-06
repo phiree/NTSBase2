@@ -2,7 +2,7 @@
     CodeFile="PositionManage.aspx.cs" Inherits="Admin_Showroom_PositionManage" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
-    <link href="/Content/themes/base/jquery.ui.all.css" rel="stylesheet" type="text/css" />
+   
     <link href="/Admin/css/showroommanage.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript">
         $(function () {
