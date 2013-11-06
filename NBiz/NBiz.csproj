@@ -81,6 +81,7 @@
     <Compile Include="Stock\ProuductStockDataTableConverter.cs" />
     <Compile Include="Stock\RowPolulate_Stock.cs" />
     <Compile Include="Stock\BizStockBillDetail.cs" />
+    <Compile Include="Stock\BizInventory.cs" />
     <Compile Include="TourRoleProvider.cs" />
     <Compile Include="_BLLBase.cs" />
     <Compile Include="_ImportFromExcel.cs" />

@@ -34,19 +34,19 @@ public partial class Admin_Showroom_StockIn_StockAddEdit : AuthPage
     protected void Page_Load(object sender, EventArgs e)
     {
         //入库 还是出库
-        
+        string paramType = Request["type"];
+        if (string.IsNullOrEmpty(paramType))
+        {
+            throw new Exception("错误.请传入单据类型");
+        }
+        stockActivityType = (StockActivityType)Enum.Parse(typeof(StockActivityType), paramType);
+           
         //单据id,为空则是新建
         string paramId = Request["Id"];
         if (string.IsNullOrEmpty(paramId))
         {
             isNew = true;
 
-            string paramType = Request["type"];
-            if (string.IsNullOrEmpty(paramType))
-            {
-                throw new Exception("错误.请传入单据类型");
-            }
-            stockActivityType = (StockActivityType)Enum.Parse(typeof(StockActivityType), paramType);
            
             billStock = new BillStock(stockActivityType);
             billStock.CreateMember = bizNtsMember.NM_GetUser(CurrentMember.UserName);
@@ -150,6 +150,11 @@ public partial class Admin_Showroom_StockIn_StockAddEdit : AuthPage
        if (isNew)
        {
            Response.Redirect(Request.RawUrl + "&id=" + billStock.Id, true);
+       }
+       else
+       {
+           rpt.DataSource = billStock.Detail;
+           rpt.DataBind();
        }
     }
     private void ClearAddPanel() { 

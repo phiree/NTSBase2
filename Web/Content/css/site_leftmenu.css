@@ -17,17 +17,22 @@
 
 #leftMenu ul li
 {
-    padding: 5px 0 5px 10px;
+    padding: 5px 0 5px 20px;
     font-size: 13px;
     font-weight: bold;
     border-bottom: solid 1px #DADADA;
     background-color: #FAFAFA;
 }
+
 #leftMenu ul li a, #leftMenu ul li a:hover, #leftMenu ul li a:link, #leftMenu ul li a:visited, #leftMenu ul li a:active
 {
     color: #666;
     text-decoration: none;
 }
+#leftMenu ul li span
+{
+     padding-left:5px;
+    }
 .leftmenu_on
 {
      background:url(../images/leftmenu_on.jpg);

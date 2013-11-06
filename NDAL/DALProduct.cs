@@ -225,7 +225,7 @@ namespace NDAL
         /// <returns></returns>
         public IList<Product> GetProducts_English(DateTime beginDate)
         {
-            string query = "select p from Product p where p.Language='en' and lastupdatetime>'" + beginDate + "'";
+            string query = "select p from Product p inner join p.ProductMultiLangues as pl where pl.Language='en' and lastupdatetime>'" + beginDate + "'";
             int totalRecord;
             return GetList(query, "NTSCode", false, 0, 99999, out totalRecord, string.Empty);
         }
@@ -270,6 +270,19 @@ namespace NDAL
             string query="select p from Product p where Id in "+condition_In;
             return GetList(query, 0, 999, out totalRecord);
             
+        }
+        public IList<Product> GetListByNTSCodeList(string[] ntsCodeList)
+        {
+            int totalRecord;
+            string condition_In = string.Empty;
+            foreach (string ntsCode in ntsCodeList)
+            {
+                condition_In +="'" +ntsCode + "',";
+            }
+            condition_In = " (" + condition_In.TrimEnd(',') + ") ";
+            string query = "select p from Product p where NTSCode in " + condition_In;
+            return GetList(query, 0, 999, out totalRecord);
+
         }
     }
 }

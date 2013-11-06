@@ -19,5 +19,19 @@ namespace NDAL
                                 where p.NTSCode='" + ntsCode + "'";
             return GetOneByQuery(query);
         }
+        public IList<ProductStock> GetListByNtsCodeList(string[] ntsCodeList)
+        {
+            int totalRecord;
+            string condition_In = string.Empty;
+            foreach (string ntsCode in ntsCodeList)
+            {
+                condition_In +="'"+ntsCode + "',";
+            }
+            condition_In = " (" + condition_In.TrimEnd(',') + ") ";
+            string query = @"select ps from ProductStock ps 
+                                    inner join ps.Product p 
+                                where p.NTSCode in " + condition_In;
+            return GetList(query, 0, 999, out totalRecord);
+        }
     }
 }

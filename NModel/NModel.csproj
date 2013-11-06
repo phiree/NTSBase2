@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bill\BillBase.cs" />
+    <Compile Include="Bill\BillInventory.cs" />
     <Compile Include="Category.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Finance\GeneralAccount.cs" />
@@ -80,6 +81,8 @@
     <Compile Include="Mapping\SR_PositionMap.cs" />
     <Compile Include="Mapping\StockBillDetailMap.cs" />
     <Compile Include="Mapping\SettleTargetMap.cs" />
+    <Compile Include="Mapping\InventoryMap.cs" />
+    <Compile Include="Mapping\BillInventoryMap.cs" />
     <Compile Include="NTSMember.cs" />
     <Compile Include="ProductCollection.cs" />
     <Compile Include="ProductImage.cs" />
@@ -96,6 +99,7 @@
     <Compile Include="Variables.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="Bill\BillStock.cs" />
+    <Compile Include="Inventory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

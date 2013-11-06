@@ -10,11 +10,15 @@ using System.Web.UI;
 public class AuthPage:Page
 {
     public MembershipUser CurrentMember { get; private set; }
+    NBiz.NTSMembershipProvider bizNtsMember = new     NBiz.NTSMembershipProvider ();
+    protected NModel.NTSMember NtsMember=null;
 	public AuthPage()
 	{
         CurrentMember = Membership.GetUser();
-        
-       
+        if (CurrentMember != null)
+        {
+          NtsMember=  bizNtsMember.NM_GetUser(CurrentMember.UserName);
+        }
 	}
     protected override void OnPreLoad(EventArgs e)
     {

@@ -38,6 +38,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tools", "Tools\Tools.csproj
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{2CF8815D-7D5B-484C-B814-2C5289533EAA}"
 	ProjectSection(SolutionItems) = preProject
+		C:\Documents and Settings\Administrator\桌面\2013-11-06东南亚--剩余产品.sql = C:\Documents and Settings\Administrator\桌面\2013-11-06东南亚--剩余产品.sql
 		docs\Category新旧编码对照.sql = docs\Category新旧编码对照.sql
 		docs\ERP供应商导出脚本.sql = docs\ERP供应商导出脚本.sql
 		docs\ERP单据整体流转表.sql = docs\ERP单据整体流转表.sql
