@@ -93,6 +93,7 @@
     <Compile Include="NDALTest\DALBaseTest.cs" />
     <Compile Include="NDALTest\ProductDALTest.cs" />
     <Compile Include="NDALTest\NHibernateMappingTest.cs" />
+    <Compile Include="NLibraryTest\DatasetToJsonTest.cs" />
     <Compile Include="NLibraryTest\FormatSerialNoTest.cs" />
     <Compile Include="NLibraryTest\StringHelperTest.cs" />
     <Compile Include="NMock3\NMockTest.cs" />
