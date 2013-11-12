@@ -17,8 +17,16 @@ namespace NModel
         public virtual IList<Inventory> InventoryList { get; set; }
         //如果系统库存和实际盘点数量有出入,会自动创建出入库单据
         public virtual IList<BillBase> StockBillList { get; set; }
-        
-        
+
+        public virtual EnumInventoryStatus Status { get; set; }
+
+
+    }
+    public enum EnumInventoryStatus
+    {
+        未开始,
+        已开始,
+        已结束
     }
 
 }

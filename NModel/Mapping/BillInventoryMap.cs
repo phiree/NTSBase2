@@ -10,7 +10,7 @@ namespace NModel.Mapping
         public BillInventoryMap()
         {
             HasMany<Inventory>(x => x.InventoryList).Cascade.All();
-         
+            Map(x => x.Status).CustomType<int>();
 
         }
     }

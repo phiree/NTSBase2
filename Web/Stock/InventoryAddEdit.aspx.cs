@@ -55,6 +55,11 @@ public partial class Stock_InventoryList :  AuthPage
         rptProduct.DataSource = billInventory.InventoryList;
         rptProduct.DataBind();
     }
+    protected void btnBeginCheck_Click(object sender, EventArgs e)
+    {
+        billInventory.Status = EnumInventoryStatus.已开始;
+        
+    }
     protected void btnApply_Click(object sender, EventArgs e)
     { }
     protected void btnRefuse_Click(object sender, EventArgs e)

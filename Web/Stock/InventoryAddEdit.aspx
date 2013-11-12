@@ -64,7 +64,8 @@
                 </table>
             </FooterTemplate>
         </asp:Repeater>
-         <asp:Button runat="server"  ID="btnApply" OnClick="btnApply_Click" Text="提交审核"/>
+         <asp:Button runat="server"  ID="btnBeginCheck" OnClick="btnBeginCheck_Click" Text="开始盘点"/>
+         <asp:Button runat="server"  ID="btnApply" OnClick="btnApply_Click" Text="盘点结束,提交审核"/>
          <asp:Button runat="server"  ID="btnCheck" OnClick="btnCheck_Click" Text="审核通过"/>
     驳回原因:<asp:TextBox runat="server" ID="tbxReason"></asp:TextBox><asp:Button runat="server"  ID="btnRefuse" OnClick="btnRefuse_Click" Text="驳回"/>
     
