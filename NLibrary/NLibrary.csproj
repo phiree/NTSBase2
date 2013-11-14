@@ -67,6 +67,7 @@
     <Compile Include="ButtonExt.cs" />
     <Compile Include="Convertor.cs" />
     <Compile Include="DataSetToJson.cs" />
+    <Compile Include="GlobalHelper.cs" />
     <Compile Include="GlobalVariables.cs" />
     <Compile Include="ImageCompare.cs" />
     <Compile Include="IOHelper.cs" />

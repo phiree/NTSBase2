@@ -149,18 +149,33 @@ namespace NBiz
                     if (row != null) { cellValue = row[i].ToString(); }
 
                     //该地址是图片
-                    if (Regex.IsMatch(cellValue, @"\.jpg|\.png|\.tiff", RegexOptions.IgnoreCase))
+                    if (Regex.IsMatch(cellValue, @"\.jpg|\.png|\.tiff|\.tif", RegexOptions.IgnoreCase))
                     {
                         string filePath = System.Web.HttpContext.Current.Server.MapPath("/ProductImages/original/" + cellValue);
                         if (File.Exists(filePath))
                         {
-                            System.Drawing.Image image = System.Drawing.Image.FromFile(filePath);
-                            System.Drawing.Bitmap targetImage = ThumbnailMaker.DrawThumbnail(image, ThumbnailType.GeometricScalingByWidth, 150, 0);
-                            excelRow.Sheet.SetColumnWidth(i, MSExcelUtil.pixel2WidthUnits(targetImage.Width - 2));
-                            excelRow.HeightInPoints = (float)((targetImage.Height - 2) * 0.75);
-                            MemoryStream ms = new MemoryStream();
-                            targetImage.Save(ms, image.RawFormat);
-                            InsertImageToCell(ms, i, excelRow.RowNum);
+                            
+                            try
+                            {
+                                System.Drawing.Image image = System.Drawing.Image.FromFile(filePath);
+
+                                System.Drawing.Bitmap targetImage = ThumbnailMaker.DrawThumbnail(image, ThumbnailType.GeometricScalingByWidth, 150, 0);
+                                excelRow.Sheet.SetColumnWidth(i, MSExcelUtil.pixel2WidthUnits(targetImage.Width - 2));
+                                excelRow.HeightInPoints = (float)((targetImage.Height - 2) * 0.75);
+                                using (MemoryStream ms = new MemoryStream())
+                                {
+                                    targetImage.Save(ms, image.RawFormat);
+
+                                    InsertImageToCell(ms, i, excelRow.RowNum);
+                                }
+                                targetImage.Dispose();
+                                image.Dispose();
+                            }
+                            catch (Exception ex)
+                            {
+                                NLogger.Logger.Debug(filePath+ex.Message);
+                            }
+                            
                         }
                     }
                     else

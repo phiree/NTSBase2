@@ -5,7 +5,7 @@ using System.Text;
 
 namespace NLibrary
 {
-    public class TypeHelper<T>
+    public class Ge<T>
     {
        
     }

@@ -135,6 +135,7 @@ namespace NBiz
                 if (string.IsNullOrEmpty(p.NTSCode))
                 {
                     p.NTSCode = SerialNoUnit.GetFormatedSerialNo(p.CategoryCode + "." + p.SupplierCode);
+
                 }
             }
             DalProduct.SaveList(listToBeSaved);
@@ -213,7 +214,10 @@ namespace NBiz
         {
             return DalProduct.GetListBySupplierCode(supplierCode);
         }
-
+        public IList<Product> GetListByNTSCodeList(string[] ntsCodeList)
+        {
+            return DalProduct.GetListByNTSCodeList(ntsCodeList);
+        }
         /// <summary>
         /// 从字符串提取产品关键信息,进而从数据库中提取相关信息
         /// </summary>

@@ -92,7 +92,7 @@ namespace NModel
             protected internal set { placeOfOrigin = value; }
 
         }
-           private string placeOfDelivery;
+           private string placeOfDelivery=string.Empty;
          [Description("交货地")]
         public virtual string PlaceOfDelivery
         {
@@ -102,9 +102,13 @@ namespace NModel
                     return ProductMultiLangues[0].PlaceOfDelivery;
                 foreach (ProductLanguage pl in ProductMultiLangues)
                 {
-                    placeOfDelivery += "(" + pl.Language + ")" + pl.PlaceOfDelivery + "<br/>";
+                    if (string.IsNullOrEmpty(pl.PlaceOfDelivery))
+                        continue;
+
+                    placeOfDelivery += "(" + pl.Language + ")" + pl.PlaceOfDelivery + "";
                 }
-                return placeOfDelivery.TrimEnd("<br/>".ToCharArray());
+                
+                return placeOfDelivery;
             }
             protected internal set { placeOfDelivery = value; }
 
@@ -165,7 +169,8 @@ namespace NModel
 
         [Description("分类编码")]
         public virtual string CategoryCode { get; set; }
-
+        //短编码(六位数)
+        public virtual int ShortCode { get; set; }
         [Description("出厂价")]
         public virtual string PriceOfFactory { get; set; }
         [Description("币别")]

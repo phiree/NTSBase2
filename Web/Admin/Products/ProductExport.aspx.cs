@@ -73,7 +73,7 @@ public partial class Admin_Products_ProductExport : System.Web.UI.Page
   
     }
     protected void btnCustomListImage_Click(object sender, EventArgs e) {
-        NLogger.Logger.Debug("--开始导出图片--产品数量" + ProductsCustomList.Count);
+        NLogger.Logger.Debug("--开始导出图片--产品数量-->");
 
         imageExporter.Export(ProductsCustomList, Server.MapPath("/productImagesExport/") + DateTime.Now.ToString("yyyyMMdd-HHmmss") + "\\",
 
@@ -112,13 +112,49 @@ public partial class Admin_Products_ProductExport : System.Web.UI.Page
         lblMsg.Text = "操作完成";
        
     }
+    IList<Product> productFromNtsCodeList {
+        get {
+            return  bizProduct.GetListByNTSCodeList(tbxCodeList.Text.Split(Environment.NewLine.ToCharArray()));
+      
+        }
+    }
+    protected void btnExportCodeListExcel_Click(object sender, EventArgs e)
+    {
+        ExportExcel(productFromNtsCodeList);
+      
+    }
+    private void ExportExcel(IList<Product> productList)
+    {
+        ExcelExport export = new ExcelExport("NTS_" + DateTime.Now.ToString("yyyyMMdd-HHmmss"));
+        IList<Product> pss = bizProduct.GetListByNTSCodeList(tbxCodeList.Text.Split(Environment.NewLine.ToCharArray()));
+        export.ExportProductExcel(pss);
+        NLibrary.Notification.Show(this, "操作完成", "操作已经完成", string.Empty);
+    }
+    private void ExportImage(IList<Product> productList)
+    {
+        string msg = "--开始导出图片--产品数量"+productList.Count+"-->";
+        NLogger.Logger.Debug("--开始导出图片--产品数量" + productList.Count);
 
+        imageExporter.Export(productList, Server.MapPath("/productImagesExport/") + DateTime.Now.ToString("yyyyMMdd-HHmmss") + "\\",
+
+      Server.MapPath("/ProductImages/original/"), NModel.Enums.ImageOutPutStratage.Category_NTsCode);
+
+        msg += "操作完成. 产品图片已保存于[192.168.1.44-导出图片-]";
+        NLogger.Logger.Debug("--导出结束--");
+        NLibrary.Notification.Show(this, "", msg, string.Empty);
+    }
+    protected void btnExportCodeListImage_Click(object sender, EventArgs e)
+    {
+        ExportImage(productFromNtsCodeList);
+    }
     protected void btnSupplierExportExcel_Click(object sender, EventArgs e)
     {
         ExcelExport export = new ExcelExport("供应商产品" + DateTime.Now.ToString("yyyyMMdd-HHmmss"));
         export.ExportProductExcel(SupplierProducts);
         lblMsg.Text = "操作完成";
     }
+
+    
     protected void btnSupplierExportImage_Click(object sender, EventArgs e)
     {
 

@@ -174,7 +174,8 @@ namespace NLibrary
             DataRowConverter converter = new DataRowConverter();
 
             writer.WriteStartObject();
-
+            writer.WritePropertyName("TableName");
+            writer.WriteValue(table.TableName);
             writer.WritePropertyName("Rows");
             writer.WriteStartArray();
 

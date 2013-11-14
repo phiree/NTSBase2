@@ -21,6 +21,17 @@
             <uc:ButtonExt runat="server" ID="btnExport_NoImage" Text="导出Excel" OnClick="btnExport_NoImage_Click" />
         </div>
     </fieldset>
+      <fieldset>
+        <legend>根据nts代码导出</legend>
+        <div>
+           每个代码一行.<br />
+            <asp:TextBox runat="server" TextMode="MultiLine" ID="tbxCodeList"></asp:TextBox>
+        </div>
+        <div>
+            <uc:ButtonExt runat="server" ID="btnExportCodeListExcel" Text="导出Excel" OnClick="btnExportCodeListExcel_Click" />
+            <uc:ButtonExt runat="server" ID="btnExportCodeListImage" Text="导出图片" OnClick="btnExportCodeListImage_Click" />
+        </div>
+    </fieldset>
     <fieldset>
         <legend>导出自定义产品</legend>
         <div>

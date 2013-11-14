@@ -25,12 +25,12 @@ namespace NTest.NLibraryTest
         }
         private DataSet BuildTestDataset()
         {
-            DataTable dt1 = new DataTable("dt1");
+            DataTable dt1 = new DataTable("表格1");
            // DataColumn col11 = new DataColumn("col11");
             dt1.Columns.Add(new DataColumn("表格1列名1"));
             dt1.Rows.Add("表格1列1行1的值");
 
-            DataTable dt2 = new DataTable("dt2");
+            DataTable dt2 = new DataTable("表格2");
             // DataColumn col11 = new DataColumn("col11");
             dt2.Columns.Add(new DataColumn("表格2列名1"));
             dt2.Columns.Add(new DataColumn("表格2列名2"));
