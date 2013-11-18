@@ -29,7 +29,8 @@ namespace NTest.NLibraryTest
            //Assert.AreEqual("200001", fu.GetFormatedSerialNo("2"));
             fu.GetFormatedSerialNo("01.032.00003");
             fu.GetFormatedSerialNo("1");
-           fu.Save();
+           
+         
         }
     }
 }

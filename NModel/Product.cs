@@ -149,6 +149,9 @@ namespace NModel
         }
         [Description("NTS编码")]
         public virtual string NTSCode { get; set; }
+        //纯数字 大类编码两位小类编码两位流水码五位
+        [Description("产品编码")]
+        public virtual string ProductCode { get; set; }
           [Description("供应商编码")]
  
         public virtual string SupplierCode { get; set; }
@@ -169,8 +172,6 @@ namespace NModel
 
         [Description("分类编码")]
         public virtual string CategoryCode { get; set; }
-        //短编码(六位数)
-        public virtual int ShortCode { get; set; }
         [Description("出厂价")]
         public virtual string PriceOfFactory { get; set; }
         [Description("币别")]

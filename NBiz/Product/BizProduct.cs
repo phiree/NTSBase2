@@ -135,7 +135,7 @@ namespace NBiz
                 if (string.IsNullOrEmpty(p.NTSCode))
                 {
                     p.NTSCode = SerialNoUnit.GetFormatedSerialNo(p.CategoryCode + "." + p.SupplierCode);
-
+                   
                 }
             }
             DalProduct.SaveList(listToBeSaved);

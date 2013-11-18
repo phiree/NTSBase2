@@ -51,7 +51,7 @@ namespace NLibrary
         {
             return GetFormatedSerialNo(serialKey, "00000");
         }
-        private string GetFormatedSerialNo(string serialKey, string format)
+        public string GetFormatedSerialNo(string serialKey, string format)
         {
             int newNo = GetSerialNo(serialKey);
             string rawNo = format + newNo;
