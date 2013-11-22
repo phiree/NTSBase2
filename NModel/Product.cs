@@ -152,9 +152,9 @@ namespace NModel
         //纯数字 大类编码两位小类编码两位流水码五位
         [Description("产品编码")]
         public virtual string ProductCode { get; set; }
-          [Description("供应商编码")]
- 
+        [Description("供应商编码")]
         public virtual string SupplierCode { get; set; }
+        
         [Description("图片类型")]
         public virtual string ImageState { get; set; }
         string defaultImageName = string.Empty;
@@ -169,7 +169,8 @@ namespace NModel
         public virtual string PriceValidPeriod { get; set; }
         [Description("产品型号")]
         public virtual string ModelNumber { get; set; }
-
+        [Description("供应商原始型号")]
+        public virtual string ModelNumber_Original { get; set; }
         [Description("分类编码")]
         public virtual string CategoryCode { get; set; }
         [Description("出厂价")]

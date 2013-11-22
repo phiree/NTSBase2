@@ -16,6 +16,7 @@ namespace NModel.Mapping
             Map(x => x.ProductCode);
             Map(x => x.ModelNumber).UniqueKey("UN_Product");
             Map(x => x.SupplierCode).UniqueKey("UN_Product");
+            Map(x => x.ModelNumber_Original);
             Map(x => x.NTSCode).Unique();
 
             Map(x => x.OrderAmountMin);

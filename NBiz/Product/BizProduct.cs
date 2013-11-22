@@ -135,7 +135,9 @@ namespace NBiz
                 if (string.IsNullOrEmpty(p.NTSCode))
                 {
                     p.NTSCode = SerialNoUnit.GetFormatedSerialNo(p.CategoryCode + "." + p.SupplierCode);
-                   
+                    string proCate = p.CategoryCode;
+                    string topCateForProductCode = BizHelper.GetFirstCateCode(proCate);
+                    p.ProductCode = SerialNoUnit.GetFormatedSerialNo(topCateForProductCode);
                 }
             }
             DalProduct.SaveList(listToBeSaved);

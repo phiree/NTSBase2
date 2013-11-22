@@ -32,7 +32,7 @@ namespace NBiz
 
         //excel内存对象
         public HSSFWorkbook Book { get; set; }
-
+        private bool NeedInsertImage { get; set; }
         public DataSet DataToExport { get; set; }
         public DataExport()
         {
@@ -43,12 +43,17 @@ namespace NBiz
         {
             
         }  
-        public DataExport(DataSet ds, int headerRows)
+        public DataExport(DataSet ds, int headerRows):this(ds,headerRows,true)
+        {
+          
+        }
+        public DataExport(DataSet ds, int headerRows,bool needInsertImage)
         {
             if (headerRows < 0)
                 throw new Exception("dataStartRowNumber必须大于等于0");
             HeaderRows = headerRows;
             DataToExport = ds;
+            NeedInsertImage = needInsertImage;
         }
         IDrawing patriarch;
         public void CreateWorkBook()
@@ -149,7 +154,7 @@ namespace NBiz
                     if (row != null) { cellValue = row[i].ToString(); }
 
                     //该地址是图片
-                    if (Regex.IsMatch(cellValue, @"\.jpg|\.png|\.tiff|\.tif", RegexOptions.IgnoreCase))
+                    if (NeedInsertImage&& Regex.IsMatch(cellValue, @"\.jpg|\.png|\.tiff|\.tif", RegexOptions.IgnoreCase))
                     {
                         string filePath = System.Web.HttpContext.Current.Server.MapPath("/ProductImages/original/" + cellValue);
                         if (File.Exists(filePath))

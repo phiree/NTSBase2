@@ -70,9 +70,9 @@ namespace NBiz
             NLibrary.NLogger.Logger.Debug("待拷贝图片数量" + images.Count);
             foreach (ImageExportModel iem in images)
             {
-                IOHelper.EnsureFileDirectory(iem.TargetImageFullName);
+               
                 if (System.IO.File.Exists(iem.ImageName))
-                {
+                { IOHelper.EnsureFileDirectory(iem.TargetImageFullName);
                     System.IO.File.Copy(iem.ImageName, iem.TargetImageFullName, true);
                 }
                 else

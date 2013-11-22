@@ -174,5 +174,6 @@ namespace NLibrary
             return s.Substring(s.Length - width);
         }
         
+        
     }
 }

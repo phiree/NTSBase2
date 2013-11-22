@@ -57,8 +57,10 @@ namespace NBiz
             //产品型号:特殊符号用美元符号代替,删除所有空格
             string modelNumber = row["产品型号"].ToString();
             modelNumber = StringHelper.ReplaceInvalidChaInFileName(modelNumber, "$");
-
+            string originalModelNumber = row["产品原始型号"] ==null?modelNumber: row["产品原始型号"].ToString();
             p.ModelNumber = modelNumber;
+            p.ModelNumber_Original = originalModelNumber;
+            
             
             p.SupplierCode =NLibrary.StringHelper.FullFillWidth(row["供应商编码"].ToString(),"00000",5,true);
             pl.ProductParameters = row["规格参数"].ToString();
