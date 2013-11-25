@@ -14,10 +14,15 @@ using System.IO;
 public class ExcelExport
 {
     string saveFileName;
-	public ExcelExport(string saveFileName)
+    bool needInsertImage = true;
+	public ExcelExport(string saveFileName):this(saveFileName,true)
 	{
-        this.saveFileName=saveFileName;
 	}
+    public ExcelExport(string saveFileName,bool needInsertImage)
+    {
+        this.saveFileName = saveFileName;
+        this.needInsertImage = needInsertImage;
+    }
     string[] languages = {"zh","en"};
     private IList<Product> BuildProductsByLanguage(IList<Product> originalProductList)
     {
@@ -61,19 +66,24 @@ public class ExcelExport
         }
         return ds_Products;
     }
-    public void ExportProductExcel(IList<Product> products)
+    public void ExportProductExcel(IList<Product> products,bool needInsertImage)
     {
      //   DataTable dt = ObjectConvertor.ToDataTable<Product>(BuildProductsByLanguage(products));
         DataSet ds_products = ObjectConvertor.ToDataSet<Product>(BuildProductsDictByLanguage(products));
         ExportProductExcel(ds_products);
     }
+    public void ExportProductExcel(IList<Product> products)
+    { 
+     
+    }
     private void ExportProductExcel(DataSet ds)
-    {
-        DataExport tt = new DataExport(ds);
-    
+    { 
+        DataExport tt = new DataExport(ds,1,needInsertImage);
+        
         tt.CreateWorkBook();
         DownLoadXslFile(tt.Book);
     }
+ 
     private void DownLoadXslFile(HSSFWorkbook workbook)
     {
         // Save the Excel spreadsheet to a MemoryStream and return it to the client

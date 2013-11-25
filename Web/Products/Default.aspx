@@ -109,13 +109,14 @@
     <asp:GridView AutoGenerateColumns="false" RowStyle-BorderWidth="1" RowStyle-BorderColor="#cccccc"
         runat="server" ID="dgProduct" OnRowDataBound="dgProduct_RowDataBound" RowStyle-Height="60">
         <Columns>
-            <asp:TemplateField>
+            <asp:TemplateField  >
                 <HeaderTemplate>
-                    <label for="cbxSelAll">
+                    <label for="cbxSelAll" style="display:none">
                         全选</label><input type="checkbox"  style="display:none" id="cbxSelAll" />
                 </HeaderTemplate>
                 <ItemTemplate>
                     <input runat="server" style="height: 30px; width: 30px;" type="checkbox" class="cbxp" pid='<%#Eval("id") %>' />
+                 
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="图片">

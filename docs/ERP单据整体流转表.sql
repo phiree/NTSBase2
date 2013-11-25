@@ -15,7 +15,7 @@
 		,'验货通知单',yanhuotongzhi.fbillno
 		,'外购入库单',waigouruku.fbillno
 		,'采购发票',caigoufapiao.fbillno
-		,'付款单'
+		,'付款单',fukuandan.fnumber
 		,'-----流程完成-----'
 
 		 from porfq as  baojia
@@ -67,6 +67,11 @@
 		on caigoufapiaomingxi.fsourcebillno=waigouruku.fbillno
 		left join ICPurchase as caigoufapiao
 			on caigoufapiao.finterid=caigoufapiaomingxi.finterid
+	--付款单
+	left join t_rp_ARBillOfSH as fukuanmingxi
+		on fukuanmingxi.fbillno_src=caigoufapiao.fbillno
+		left join t_RP_NewReceiveBill as fukuandan
+			on fukuanmingxi.fbillid=fukuandan.fbillid
 	/***采购财务分支**/
 		
 /**/                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                

@@ -68,7 +68,7 @@ public partial class Admin_Products_ProductExport : System.Web.UI.Page
     protected void btnExportExcel_Click(object sender, EventArgs e)
     {
 
-        ExcelExport export = new ExcelExport("产品资料" + DateTime.Now.ToString("yyyyMMdd-HHmmss"));
+        ExcelExport export = new ExcelExport("产品资料" + DateTime.Now.ToString("yyyyMMdd-HHmmss"), cbxNeedInertImage.Checked);
         export.ExportProductExcel(ProductsWithEnglish);
   
     }
@@ -89,7 +89,7 @@ public partial class Admin_Products_ProductExport : System.Web.UI.Page
         {
             name = DateTime.Now.ToString("yyyyMMdd-hh-ss-mm");
         }
-        new ExcelExport(name).ExportProductExcel(ProductsCustomList);
+        new ExcelExport(name).ExportProductExcel(ProductsCustomList,cbxNeedInertImage.Checked);
     }
   
     protected void btnExportImage_Click(object sender, EventArgs e)
@@ -107,7 +107,7 @@ public partial class Admin_Products_ProductExport : System.Web.UI.Page
 
     protected void btnExport_NoImage_Click(object sender, EventArgs e)
     {
-        ExcelExport export = new ExcelExport("没有图片的产品" + DateTime.Now.ToString("yyyyMMdd-HHmmss"));
+        ExcelExport export = new ExcelExport("没有图片的产品" + DateTime.Now.ToString("yyyyMMdd-HHmmss"), cbxNeedInertImage.Checked);
         export.ExportProductExcel(ProductsNoImages);
         lblMsg.Text = "操作完成";
        
@@ -125,7 +125,7 @@ public partial class Admin_Products_ProductExport : System.Web.UI.Page
     }
     private void ExportExcel(IList<Product> productList)
     {
-        ExcelExport export = new ExcelExport("NTS_" + DateTime.Now.ToString("yyyyMMdd-HHmmss"));
+        ExcelExport export = new ExcelExport("NTS_" + DateTime.Now.ToString("yyyyMMdd-HHmmss"), cbxNeedInertImage.Checked);
         IList<Product> pss = bizProduct.GetListByNTSCodeList(tbxCodeList.Text.Split(Environment.NewLine.ToCharArray()));
         export.ExportProductExcel(pss);
         NLibrary.Notification.Show(this, "操作完成", "操作已经完成", string.Empty);

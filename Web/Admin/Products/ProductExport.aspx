@@ -4,9 +4,10 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="pageDesc" runat="Server">
-    导出所有产品的英文资料
+    产品导出
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+<asp:CheckBox runat="server" ID="cbxNeedInertImage" Text="包含图片" Checked="true" />
     <fieldset>
         <legend>英文产品资料</legend>
         <div>

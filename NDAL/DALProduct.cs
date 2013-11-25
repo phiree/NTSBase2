@@ -152,7 +152,7 @@ namespace NDAL
 
             if (!string.IsNullOrEmpty(model))
             {
-                where += "and p.ModelNumber like '%" + model + "%'";
+                where += "and p.ModelNumber like '%" + model + "%' or p.ModelNumber_Original like '%"+model+"%'";
             }
             if (hasphoto.HasValue)
             {
