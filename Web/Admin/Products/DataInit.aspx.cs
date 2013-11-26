@@ -17,7 +17,7 @@ public partial class Admin_Products_DataInit : System.Web.UI.Page
     protected void btnCreateProductCode_Click(object sender, EventArgs e)
     {
         NBiz.BizProduct bizProduct = new BizProduct();
-        IList<Product> product_all = bizProduct.GetAll<Product>();
+        IList<Product> product_all = bizProduct.GetAll<Product>().OrderBy(x=>x.NTSCode).ToList();
 
         foreach (Product p in product_all)
         {
@@ -29,6 +29,6 @@ public partial class Admin_Products_DataInit : System.Web.UI.Page
                 bizProduct.SaveOrUpdate(p);
             }
         }
-        Notification.Show(this, "", "done", string.Empty);
+        Notification.Show(this, "", "done",this.Request.RawUrl);
     }
 }
