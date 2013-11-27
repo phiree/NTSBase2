@@ -2,6 +2,17 @@
     CodeFile="upgrade.aspx.cs" Inherits="upgrade" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="cph_maincontent" runat="Server">
+    <h3>
+        2013.11.26</h3>
+    <ul>
+       
+        <li>增加短编码.规则为产品所属大类(2位)+流水码(5位)</li>
+        <li>保留供应商原始型号.</li>
+        <li>展厅管理预览版.</li>
+        
+    </ul> 
+   
+    
    <h3>
         2013.10.21 产品集功能改进</h3>
     <ul>

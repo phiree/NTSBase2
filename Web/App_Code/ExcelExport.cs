@@ -66,16 +66,13 @@ public class ExcelExport
         }
         return ds_Products;
     }
-    public void ExportProductExcel(IList<Product> products,bool needInsertImage)
+    public void ExportProductExcel(IList<Product> products)
     {
      //   DataTable dt = ObjectConvertor.ToDataTable<Product>(BuildProductsByLanguage(products));
         DataSet ds_products = ObjectConvertor.ToDataSet<Product>(BuildProductsDictByLanguage(products));
         ExportProductExcel(ds_products);
     }
-    public void ExportProductExcel(IList<Product> products)
-    { 
-     
-    }
+   
     private void ExportProductExcel(DataSet ds)
     { 
         DataExport tt = new DataExport(ds,1,needInsertImage);

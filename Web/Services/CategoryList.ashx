@@ -17,7 +17,7 @@ public class ProductCollectionService : IHttpHandler
         var request = context.Request;
         string userid = request["userid"];
 
-        string parentCode = request["productid"];
+        string parentCode = request["parentCode"];
         IList<Category> cates = bizCate.GetChildren(parentCode);
         string json = NLibrary.JosnHelper.GetJson<IList<Category>>(cates);
         context.Response.ContentType = "application/json";

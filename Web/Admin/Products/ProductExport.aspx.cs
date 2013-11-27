@@ -14,10 +14,6 @@ public partial class Admin_Products_ProductExport : System.Web.UI.Page
     IList<Product> productToExport;
     
     string message;
-    protected void Page_Load(object sender, EventArgs e)
-    {
-
-    }
     private IList<Product> ProductsWithEnglish
     {
         get {
@@ -65,12 +61,21 @@ public partial class Admin_Products_ProductExport : System.Web.UI.Page
 
         }
     }
+    IList<Product> productFromNtsCodeList
+    {
+        get
+        {
+            return bizProduct.GetListByNTSCodeList(tbxCodeList.Text.Split(Environment.NewLine.ToCharArray()));
+
+        }
+    }
     protected void btnExportExcel_Click(object sender, EventArgs e)
     {
 
         ExcelExport export = new ExcelExport("产品资料" + DateTime.Now.ToString("yyyyMMdd-HHmmss"), cbxNeedInertImage.Checked);
         export.ExportProductExcel(ProductsWithEnglish);
-  
+
+        
     }
     protected void btnCustomListImage_Click(object sender, EventArgs e) {
         NLogger.Logger.Debug("--开始导出图片--产品数量-->");
@@ -84,12 +89,14 @@ public partial class Admin_Products_ProductExport : System.Web.UI.Page
     }
     protected void btnCustomListExcel_Click(object sender, EventArgs e)
     {
-        string name = tbxExportName.Text.Trim();
-        if (string.IsNullOrEmpty(name))
-        {
-            name = DateTime.Now.ToString("yyyyMMdd-hh-ss-mm");
-        }
-        new ExcelExport(name).ExportProductExcel(ProductsCustomList,cbxNeedInertImage.Checked);
+        //string name = tbxExportName.Text.Trim();
+        //if (string.IsNullOrEmpty(name))
+        //{
+        //    name = DateTime.Now.ToString("yyyyMMdd-hh-ss-mm");
+        //}
+       // ExcelExport export = new ExcelExport("产品资料" + DateTime.Now.ToString("yyyyMMdd-HHmmss"), cbxNeedInertImage.Checked);
+        ExportExcel(ProductsCustomList);
+      //  new ExcelExport(name).ExportProductExcel(ProductsCustomList,cbxNeedInertImage.Checked);
     }
   
     protected void btnExportImage_Click(object sender, EventArgs e)
@@ -107,21 +114,43 @@ public partial class Admin_Products_ProductExport : System.Web.UI.Page
 
     protected void btnExport_NoImage_Click(object sender, EventArgs e)
     {
-        ExcelExport export = new ExcelExport("没有图片的产品" + DateTime.Now.ToString("yyyyMMdd-HHmmss"), cbxNeedInertImage.Checked);
-        export.ExportProductExcel(ProductsNoImages);
-        lblMsg.Text = "操作完成";
+        //ExcelExport export = new ExcelExport("没有图片的产品" + DateTime.Now.ToString("yyyyMMdd-HHmmss"), cbxNeedInertImage.Checked);
+        //export.ExportProductExcel(ProductsNoImages);
+        //lblMsg.Text = "操作完成";
+        ExportExcel(ProductsNoImages);
        
     }
-    IList<Product> productFromNtsCodeList {
-        get {
-            return  bizProduct.GetListByNTSCodeList(tbxCodeList.Text.Split(Environment.NewLine.ToCharArray()));
-      
-        }
-    }
+ 
     protected void btnExportCodeListExcel_Click(object sender, EventArgs e)
     {
         ExportExcel(productFromNtsCodeList);
       
+    }
+    protected void btnExportCodeListImage_Click(object sender, EventArgs e)
+    {
+        ExportImage(productFromNtsCodeList);
+    }
+    protected void btnSupplierExportExcel_Click(object sender, EventArgs e)
+    {
+        //ExcelExport export = new ExcelExport("供应商产品" + DateTime.Now.ToString("yyyyMMdd-HHmmss"));
+        //export.ExportProductExcel(SupplierProducts);
+        //lblMsg.Text = "操作完成";
+        ExportExcel(SupplierProducts);
+    }
+
+
+    protected void btnSupplierExportImage_Click(object sender, EventArgs e)
+    {
+
+        //  NLogger.Logger.Debug("--开始导出图片--产品数量" + SupplierProducts.Count);
+
+        //  imageExporter.Export(SupplierProducts, Server.MapPath("/productImagesExport/") + DateTime.Now.ToString("yyyyMMdd-HHmmss") + "\\",
+
+        //Server.MapPath("/ProductImages/original/"), NModel.Enums.ImageOutPutStratage.Supplier_OriginalName);
+
+        //  lblMsg.Text = "操作完成. 产品图片已保存于 \\192.168.1.44\\导出图片\\ ";
+        //  NLogger.Logger.Debug("--导出结束--");
+        ExportImage(SupplierProducts);
     }
     private void ExportExcel(IList<Product> productList)
     {
@@ -141,30 +170,8 @@ public partial class Admin_Products_ProductExport : System.Web.UI.Page
 
         msg += "操作完成. 产品图片已保存于[192.168.1.44-导出图片-]";
         NLogger.Logger.Debug("--导出结束--");
+      //  lblMsg.Text = msg;
         NLibrary.Notification.Show(this, "", msg, string.Empty);
     }
-    protected void btnExportCodeListImage_Click(object sender, EventArgs e)
-    {
-        ExportImage(productFromNtsCodeList);
-    }
-    protected void btnSupplierExportExcel_Click(object sender, EventArgs e)
-    {
-        ExcelExport export = new ExcelExport("供应商产品" + DateTime.Now.ToString("yyyyMMdd-HHmmss"));
-        export.ExportProductExcel(SupplierProducts);
-        lblMsg.Text = "操作完成";
-    }
-
-    
-    protected void btnSupplierExportImage_Click(object sender, EventArgs e)
-    {
-
-        NLogger.Logger.Debug("--开始导出图片--产品数量" + SupplierProducts.Count);
-
-        imageExporter.Export(SupplierProducts, Server.MapPath("/productImagesExport/") + DateTime.Now.ToString("yyyyMMdd-HHmmss") + "\\",
-
-      Server.MapPath("/ProductImages/original/"), NModel.Enums.ImageOutPutStratage.Supplier_OriginalName);
-
-        lblMsg.Text = "操作完成. 产品图片已保存于 \\192.168.1.44\\导出图片\\ ";
-        NLogger.Logger.Debug("--导出结束--");
-    }
+  
 }
