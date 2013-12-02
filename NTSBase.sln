@@ -84,6 +84,27 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{90A696
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebERPService", "WebERPService\", "{26A466D5-7CA2-4DD2-B507-FA80D685B084}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/WebERPService"
+		Debug.AspNetCompiler.PhysicalPath = "WebERPService\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\WebERPService\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/WebERPService"
+		Release.AspNetCompiler.PhysicalPath = "WebERPService\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\WebERPService\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "5701"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -174,6 +195,16 @@ Global
 		{F0D63C45-1598-422C-9EF6-FD78E66DCC4C}.Release|Mixed Platforms.ActiveCfg = Debug|Any CPU
 		{F0D63C45-1598-422C-9EF6-FD78E66DCC4C}.Release|Mixed Platforms.Build.0 = Debug|Any CPU
 		{F0D63C45-1598-422C-9EF6-FD78E66DCC4C}.Release|x86.ActiveCfg = Debug|Any CPU
+		{26A466D5-7CA2-4DD2-B507-FA80D685B084}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26A466D5-7CA2-4DD2-B507-FA80D685B084}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26A466D5-7CA2-4DD2-B507-FA80D685B084}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{26A466D5-7CA2-4DD2-B507-FA80D685B084}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{26A466D5-7CA2-4DD2-B507-FA80D685B084}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{26A466D5-7CA2-4DD2-B507-FA80D685B084}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{26A466D5-7CA2-4DD2-B507-FA80D685B084}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{26A466D5-7CA2-4DD2-B507-FA80D685B084}.Release|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{26A466D5-7CA2-4DD2-B507-FA80D685B084}.Release|Mixed Platforms.Build.0 = Debug|Any CPU
+		{26A466D5-7CA2-4DD2-B507-FA80D685B084}.Release|x86.ActiveCfg = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
