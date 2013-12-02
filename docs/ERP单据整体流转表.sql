@@ -1,4 +1,7 @@
-﻿select distinct 
+﻿create procedure ERPService_BillProcess
+as
+begin
+select distinct 
 			'销售报报价单',baojia.fBillNo,baojia.FInterID
 			,'制单人',yonghu.fname
 		,'合同应收',hetongyingshou.fContractNo,hetongyingshou.fcontractid
@@ -87,4 +90,5 @@
 select * 
 --fbillid,fcheckname,fcheckdate,fcheckto_name
  from ICClassMCRecord1007006 order by fbillid,fcheckdate
-*/                                                                                                                                                                                                                                                                                                                                
+*/                                                                                                                          
+end                                                                                                                                                                                                      
