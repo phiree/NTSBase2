@@ -36,24 +36,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NTest", "NTest\NTest.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tools", "Tools\Tools.csproj", "{890BCD8A-B2DB-4DCD-8ED6-E2426B1F95E9}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{2CF8815D-7D5B-484C-B814-2C5289533EAA}"
-	ProjectSection(SolutionItems) = preProject
-		C:\Documents and Settings\Administrator\桌面\2013-11-06东南亚--剩余产品.sql = C:\Documents and Settings\Administrator\桌面\2013-11-06东南亚--剩余产品.sql
-		docs\Category新旧编码对照.sql = docs\Category新旧编码对照.sql
-		docs\ERP供应商导出脚本.sql = docs\ERP供应商导出脚本.sql
-		docs\ERP单据整体流转表.sql = docs\ERP单据整体流转表.sql
-		docs\erp帐套单据数据清理脚本.sql = docs\erp帐套单据数据清理脚本.sql
-		somescripts.sql = somescripts.sql
-		docs\东南亚产品导入.sql = docs\东南亚产品导入.sql
-		docs\东南亚数据导入--新旧编码对照.sql = docs\东南亚数据导入--新旧编码对照.sql
-		docs\删除产品.txt = docs\删除产品.txt
-		docs\替换型号里的特殊字符.sql = docs\替换型号里的特殊字符.sql
-		docs\物料导出脚本_主干.sql = docs\物料导出脚本_主干.sql
-		docs\画册对应的Exel公式和SQl.txt = docs\画册对应的Exel公式和SQl.txt
-		docs\网站分类对应表.txt = docs\网站分类对应表.txt
-		docs\网站数据导入.sql = docs\网站数据导入.sql
-	EndProjectSection
-EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "AdminWeb", "AdminWeb\", "{F0D63C45-1598-422C-9EF6-FD78E66DCC4C}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
@@ -104,6 +86,8 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebERPService", "WebERPServ
 		VWDPort = "5701"
 		DefaultWebSiteLanguage = "Visual C#"
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Doc", "Doc\Doc.csproj", "{BCE824F5-0523-40B4-BE75-6CF9B8840B2B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -205,6 +189,15 @@ Global
 		{26A466D5-7CA2-4DD2-B507-FA80D685B084}.Release|Mixed Platforms.ActiveCfg = Debug|Any CPU
 		{26A466D5-7CA2-4DD2-B507-FA80D685B084}.Release|Mixed Platforms.Build.0 = Debug|Any CPU
 		{26A466D5-7CA2-4DD2-B507-FA80D685B084}.Release|x86.ActiveCfg = Debug|Any CPU
+		{BCE824F5-0523-40B4-BE75-6CF9B8840B2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCE824F5-0523-40B4-BE75-6CF9B8840B2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCE824F5-0523-40B4-BE75-6CF9B8840B2B}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{BCE824F5-0523-40B4-BE75-6CF9B8840B2B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BCE824F5-0523-40B4-BE75-6CF9B8840B2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCE824F5-0523-40B4-BE75-6CF9B8840B2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCE824F5-0523-40B4-BE75-6CF9B8840B2B}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{BCE824F5-0523-40B4-BE75-6CF9B8840B2B}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{BCE824F5-0523-40B4-BE75-6CF9B8840B2B}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

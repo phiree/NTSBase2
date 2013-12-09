@@ -23,12 +23,13 @@ public partial class Admin_Products_DataInit : System.Web.UI.Page
         {
             if (string.IsNullOrEmpty(p.ProductCode))
             {
-                string proCate = p.CategoryCode;
-                string topCateForProductCode = BizHelper.GetFirstCateCode(proCate);
-                p.ProductCode = bizProduct.SerialNoUnit.GetFormatedSerialNo(topCateForProductCode);
+                string proCate = p.CategoryCode.Replace(".",string.Empty);
+              //  string topCateForProductCode = BizHelper.GetFirstCateCode(proCate);
+                p.ProductCode = bizProduct.SerialNoUnit.GetFormatedSerialNo(proCate);
                 bizProduct.SaveOrUpdate(p);
             }
         }
+        bizProduct.SerialNoUnit.Save();
         Notification.Show(this, "", "done",this.Request.RawUrl);
     }
 }

@@ -152,9 +152,9 @@ namespace NBiz
                 if (string.IsNullOrEmpty(p.NTSCode))
                 {
                     p.NTSCode = FSU.GetFormatedSerialNo(p.CategoryCode + "." + p.SupplierCode);
-                    string proCate = p.CategoryCode;
+                    string proCate = p.CategoryCode.Replace(".",string.Empty);
                     string topCateForProductCode = BizHelper.GetFirstCateCode(proCate);
-                    p.ProductCode = FSU.GetFormatedSerialNo(topCateForProductCode);
+                    p.ProductCode = FSU.GetFormatedSerialNo(proCate);
                 }
             }
             BizProduct.SaveList(productsHasPicture);

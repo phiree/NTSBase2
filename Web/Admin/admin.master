@@ -41,12 +41,13 @@
                     <li><span>------导出------</span></li>
                     <li><a href="/admin/products/ProductExport.aspx">产品信息导出</a></li>
                     <li><a href="/admin/products/ProductExport_ErpSync.aspx">Erp同步信息导出</a></li>
-                    <li><span>------展厅管理------</span></li>
+                  <!--  <li><span>------展厅管理------</span></li>
                     <li><a href="/admin/showroom/PositionManage.aspx">展位管理</a></li>
                     <li><a href="/admin/showroom/PositionManage.aspx">库存动态</a></li>
                     <li><a href="/admin/showroom/Stock/StockAddEdit.aspx?type=0">入库</a></li>
                     <li><a href="/admin/products/ProductExport_ErpSync.aspx">出库</a></li>
                     <li><a href="/admin/products/ProductExport_ErpSync.aspx">盘点</a></li>
+                    -->
 
                 </ul>
             </div>

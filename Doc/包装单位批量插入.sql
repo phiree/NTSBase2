@@ -1,8 +1,8 @@
 
-
 declare material_cursor cursor for
 select fitemid,FUnitID                                                                         
 from t_icitem 
+--where fnumber='08.007.0010401050'
 
 declare @fitemid int
 declare @FUnitID int
@@ -25,18 +25,18 @@ begin
     insert into ExpItemPackingEntry 
 (fclasstypeid,fid,findex,fnumber,fname,fpackingunit,fpackingmode,fgrossweight,fnetweight,flength,fwidth,fheight,fcubage,fismainpacking,funit)
 values
-(0,@init_fid+@q,'1','01','无包装','piece','1.0000000000','10.0000000000','9.0000000000','100.0000000000','50.0000000000','30.0000000000','25.0000000000',0,@FUnitID)
+(0,@init_fid+@q,'1','01','箱','CARTON','1.0000000000','10.0000000000','9.0000000000','100.0000000000','50.0000000000','30.0000000000','25.0000000000',0,@FUnitID)
 
   insert into ExpItemPackingEntry 
 (fclasstypeid,fid,findex,fnumber,fname,fpackingunit,fpackingmode,fgrossweight,fnetweight,flength,fwidth,fheight,fcubage,fismainpacking,funit)
 values
-(0,@init_fid+@q,'1','02','箱包','xiang','1.0000000000','10.0000000000','9.0000000000','100.0000000000','50.0000000000','30.0000000000','25.0000000000',0,@FUnitID)
+(0,@init_fid+@q,'1','02','包','BAG','1.0000000000','10.0000000000','9.0000000000','100.0000000000','50.0000000000','30.0000000000','25.0000000000',0,@FUnitID)
 
 
   insert into ExpItemPackingEntry 
 (fclasstypeid,fid,findex,fnumber,fname,fpackingunit,fpackingmode,fgrossweight,fnetweight,flength,fwidth,fheight,fcubage,fismainpacking,funit)
 values
-(0,@init_fid+@q,'1','03','打托','tuo','1.0000000000','10.0000000000','9.0000000000','100.0000000000','50.0000000000','30.0000000000','25.0000000000',0,@FUnitID)
+(0,@init_fid+@q,'1','03','其它','PACKAGE','1.0000000000','10.0000000000','9.0000000000','100.0000000000','50.0000000000','30.0000000000','25.0000000000',0,@FUnitID)
  
 
     SET @q = @q + 1;  

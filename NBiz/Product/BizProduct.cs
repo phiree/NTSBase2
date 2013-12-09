@@ -135,9 +135,10 @@ namespace NBiz
                 if (string.IsNullOrEmpty(p.NTSCode))
                 {
                     p.NTSCode = SerialNoUnit.GetFormatedSerialNo(p.CategoryCode + "." + p.SupplierCode);
-                    string proCate = p.CategoryCode;
-                    string topCateForProductCode = BizHelper.GetFirstCateCode(proCate);
-                    p.ProductCode = SerialNoUnit.GetFormatedSerialNo(topCateForProductCode);
+                    string proCate = p.CategoryCode.Replace(".", string.Empty);
+                    //修改条形码规则,增加三位小类
+                    //string topCateForProductCode = BizHelper.GetFirstCateCode(proCate);
+                    p.ProductCode = SerialNoUnit.GetFormatedSerialNo(proCate);
                 }
             }
             DalProduct.SaveList(listToBeSaved);

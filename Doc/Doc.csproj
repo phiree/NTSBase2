@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{BCE824F5-0523-40B4-BE75-6CF9B8840B2B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Doc</RootNamespace>
+    <AssemblyName>Doc</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="2013-11-06东南亚--剩余产品.sql" />
+    <Content Include="Design\产品管理中心JPG\01 导入报价单Excel和图片.jpg" />
+    <Content Include="Design\产品管理中心JPG\02 导入报价单Excel.jpg" />
+    <Content Include="Design\产品管理中心JPG\03 导入产品图片.jpg" />
+    <Content Include="Design\产品管理中心JPG\04 导入供应商Excel.jpg" />
+    <Content Include="Design\产品管理中心JPG\05 导入分类Excel.jpg" />
+    <Content Include="Design\产品管理中心JPG\06 导分类列表.jpg" />
+    <Content Include="Design\产品管理中心JPG\07 导入记录.jpg" />
+    <Content Include="Design\产品管理中心JPG\08 导入产品集.jpg" />
+    <Content Include="Design\产品管理中心JPG\09 导出产品信息.jpg" />
+    <Content Include="ERP供应商导出脚本.sql" />
+    <Content Include="ERP单据整体流转表--审核状态及流程.sql" />
+    <Content Include="ERP单据整体流转表.sql" />
+    <Content Include="erp帐套单据数据清理脚本.sql" />
+    <Content Include="leftjoin.sql" />
+    <Content Include="Myanmar\插入分类表.sql" />
+    <Content Include="东南亚产品导入.sql" />
+    <Content Include="删除产品.txt" />
+    <Content Include="包装单位批量插入.sql" />
+    <Content Include="替换型号里的特殊字符.sql" />
+    <Content Include="物料导出脚本_主干.sql" />
+    <Content Include="画册对应的Exel公式和SQl.txt" />
+    <Content Include="画册新旧编码对应.txt" />
+    <Content Include="网站分类对应表.txt" />
+    <Content Include="网站数据导入.sql" />
+    <Content Include="项目备注.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="autobackup.bat" />
+    <None Include="Design\Product.oob" />
+    <None Include="Design\Product.oom" />
+    <None Include="展厅系统\原型\draft\DisplayPrototype.rp" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -15,7 +15,7 @@ namespace NBiz
     {
         public static IRowPopulate CreatePopulator(DataTable dt)
         {
-            if (dt.Columns.Count > 25)
+            if (false)//dt.Columns.Count > 25)
                 return new RowPolulateErp();
             else return new RowPolulateBaojiandan();
         }
@@ -149,7 +149,7 @@ namespace NBiz
             // p.PlaceOfDelivery = row["交货地"].ToString();
             pl.Name = row["名称"].ToString();
            
-            string categoryCode = StringHelper.ReplaceSpace(row["代码"].ToString());
+            string categoryCode = StringHelper.ReplaceSpace(row["分类编码"].ToString());
 
             if (string.IsNullOrEmpty(pl.PlaceOfOrigin) && string.IsNullOrEmpty(pl.Name)
                 && string.IsNullOrEmpty(categoryCode))
@@ -168,7 +168,7 @@ namespace NBiz
             //产品型号:
             string modelNumber = row["产品型号"].ToString();
             p.ModelNumber = modelNumber;
-            pl.ProductParameters = row["规格型号"].ToString();
+            pl.ProductParameters = row["规格参数"].ToString();
             pl.Unit = row["计量单位组_FName"].ToString();
             p.SupplierCode = NLibrary.StringHelper.FullFillWidth(row["来源_FNumber"].ToString(), "00000", 5, true);
             pl.ProductDescription = row["描述/卖点"].ToString();
