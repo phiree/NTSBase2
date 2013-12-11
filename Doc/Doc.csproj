@@ -55,12 +55,12 @@
     <Content Include="Design\产品管理中心JPG\09 导出产品信息.jpg" />
     <Content Include="ERP供应商导出脚本.sql" />
     <Content Include="ERP单据整体流转表--审核状态及流程.sql" />
-    <Content Include="ERP单据整体流转表.sql" />
+    <Content Include="ERP单据整体流转表--业务.sql" />
     <Content Include="erp帐套单据数据清理脚本.sql" />
     <Content Include="leftjoin.sql" />
-    <Content Include="Myanmar\插入分类表.sql" />
     <Content Include="东南亚产品导入.sql" />
     <Content Include="删除产品.txt" />
+    <Content Include="副本 ERP单据整体流转表.sql" />
     <Content Include="包装单位批量插入.sql" />
     <Content Include="替换型号里的特殊字符.sql" />
     <Content Include="物料导出脚本_主干.sql" />
@@ -74,7 +74,11 @@
     <None Include="autobackup.bat" />
     <None Include="Design\Product.oob" />
     <None Include="Design\Product.oom" />
+    <Content Include="ERP单据整体流转表--财务.sql" />
     <None Include="展厅系统\原型\draft\DisplayPrototype.rp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Myanmar\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

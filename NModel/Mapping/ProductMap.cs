@@ -13,7 +13,7 @@ namespace NModel.Mapping
             Map(x => x.CategoryCode);
             Map(x => x.CreateTime);
             Map(x => x.LastUpdateTime);
-            Map(x => x.ProductCode);
+            Map(x => x.ProductCode).Unique();
             Map(x => x.ModelNumber).UniqueKey("UN_Product");
             Map(x => x.SupplierCode).UniqueKey("UN_Product");
             Map(x => x.ModelNumber_Original);

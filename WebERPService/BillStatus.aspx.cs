@@ -17,7 +17,9 @@ public partial class BillProcesing : System.Web.UI.Page
             procedure = "ERPService_BillProcess";
         else if(type=="2")
             procedure = "ERPService_BillCheckProcess";
-        
+        else if(type=="3")
+            procedure = "ERPService_BillProcess_Finance";
+
         if (procedure == string.Empty)
         {
             Response.Write("No Procedure");
@@ -33,7 +35,7 @@ public partial class BillProcesing : System.Web.UI.Page
         string cacheKey = "cache_" + type;
         object obj = Cache.Get(cacheKey);
         DataSet ds = new DataSet();
-        if (obj == null)
+        if (true)//obj == null)
         {
             ds = DataAccess.CommonSQL.ExcuteProcedureDataset(procedureName);
 

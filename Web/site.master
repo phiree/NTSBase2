@@ -21,7 +21,7 @@
     <script type="text/javascript">
         $(function () {
             //show upgrade notice
-            var upgradeversion = "20131126";
+            var upgradeversion = "20131211";
             var cookie_name = "upgrade_notice";
             var closedVersion = $.cookie(cookie_name);
             if (closedVersion == upgradeversion) {
@@ -42,7 +42,7 @@
     <form id="form1" runat="server">
     <div class="container">
         <div class="info" id="dvUpgradeNotice">
-            升级日志: 2013.11.26 增加产品短编码/保留产品原始型号. <a href="/upgrade.aspx">查看详情</a> <span id="spCloseNotice"
+            升级日志: 2013.12.11 ERP单据流转 分成业务和财务两部分,方便查看<a href="/upgrade.aspx">查看详情</a> <span id="spCloseNotice"
                 style="cursor: pointer">[关闭]</span>
         </div>
         <div class="span-24 last" id="header">

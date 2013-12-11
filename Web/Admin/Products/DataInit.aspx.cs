@@ -17,19 +17,18 @@ public partial class Admin_Products_DataInit : System.Web.UI.Page
     protected void btnCreateProductCode_Click(object sender, EventArgs e)
     {
         NBiz.BizProduct bizProduct = new BizProduct();
-        IList<Product> product_all = bizProduct.GetAll<Product>().OrderBy(x=>x.NTSCode).ToList();
+        IList<Product> product_all = bizProduct.GetAll<Product>().Where(x=>string.IsNullOrEmpty(x.ProductCode)).OrderBy(x=>x.NTSCode).ToList();
 
         foreach (Product p in product_all)
         {
-            if (string.IsNullOrEmpty(p.ProductCode))
-            {
+            
                 string proCate = p.CategoryCode.Replace(".",string.Empty);
               //  string topCateForProductCode = BizHelper.GetFirstCateCode(proCate);
                 p.ProductCode = bizProduct.SerialNoUnit.GetFormatedSerialNo(proCate);
                 bizProduct.SaveOrUpdate(p);
-            }
+                bizProduct.SerialNoUnit.Save();
         }
-        bizProduct.SerialNoUnit.Save();
+       
         Notification.Show(this, "", "done",this.Request.RawUrl);
     }
 }
