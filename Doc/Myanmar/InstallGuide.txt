@@ -1,0 +1,31 @@
+Setp 1:
+  install  dotnetfx (microsoft .net 2.0)
+step 2:
+  install sqlexpr  (microsoft sqlserver 2005 express)
+	keep everyting as default
+step3
+  install Setup(EN20120416)
+
+step 4
+   double click "Startnet Server" on the desktop,register it.
+
+step 5
+   database connection will failed at the firsttime,configue it in the main window
+
+  System Settings->Sql Server Setting. use ".\sqlexpress". it will success. otherwise, 
+ask your database administrator for help.
+
+step 6
+   click New . input  Acct Name , then click OK to complete the server side configuration.
+
+step 7
+   open the install directory("C:\Startnet_Serveren" by default),
+double click IsetUp to install client side.
+  User number:you can find it here: server side main form-->help -> about. user no.
+  Get host by: generally, use the first option:fixed ip....
+  IP address:the ip address of the computer with server side program installed.
+click next, choose  Client first. click next. 
+    the client side programm installed.
+
+step 8 
+ the same as step7, just choose POS instead of Client.

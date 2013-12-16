@@ -1,14 +1,25 @@
-﻿set ANSI_NULLS ON
+﻿
+set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
 
 ALTER procedure [dbo].[ERPService_BillProcess]
 as
 begin 
-/*
+/**********************************************
 	2013-12-11 
- 先删除发票, 和收款付款单.
-*/
+  删除发票, 和收款付款单.
+    2013-12-12
+  将业务单据的流程 和 财务单据 分开
+  增加采购订单制单人栏
+
+--------Support Scripts---------
+  select a.fname,b.fempid,b.* from t_user a ,poorder b
+where a.fempid=b.fempid
+select * from poorder
+select * from t_user  where fuserid=291
+
+*****************************************/
 -- icbillno :单据号前缀表
 select
   -- distinct
@@ -27,7 +38,7 @@ select
   ,'----采购分支----'  
   ,'采购申请单',caigoushenqing.fbillno  
   ,'合同应付',hetongyingfu.fContractNo,'合同名称',hetongyingfu.fContractName  
-  ,'采购订单',caigoudingdan.fbillno  
+  ,'采购订单',caigoudingdan.fbillno,yonghu2.fname
 
   --,case caigoudingdan.fcancellation when 1 then '已作废' else '' end  
   ,'验货通知单',yanhuotongzhi.fbillno  
@@ -38,7 +49,7 @@ select
  from  
 --报价单   
  porfq as  baojia  
-     inner join t_user as yonghu  
+ inner join t_user as yonghu  
 	 on yonghu.fempid=baojia.fempid  
 --合同应收  
 left join 
@@ -83,22 +94,11 @@ cross apply
 	)chuyunmingxi
 ) as chuyun 
 on chuyun.fbillno_src=waixiaodingdan.fbillno
--- ExpOutReqEntry as chuyunmingxi  
---   on chuyunmingxi.fbillno_src=waixiaodingdan.fbillno  
---  left join ExpoutreqMain as chuyun  
---   on chuyunmingxi.finterid=chuyun.finterid  
+ 
 --销售出库  
---select distinct fbillno  from  vwICBill_8
---select * from  vwICBill_8
-/*
 
-select l.fbilll fsourcebillno,fcontractbillno,forderbillno ,* from icstockbillentry d
-inner join icstockbill l 
-on d.finterid=l.finterid
-*/
 left join
 (
-
  select xiaoshouchukumingxi.*,fbillno 
  from  icstockbill 
  cross apply
@@ -109,42 +109,7 @@ left join
 	)xiaoshouchukumingxi
 ) as xiaoshouchuku 
 on xiaoshouchuku.fsourcebillno=chuyun.fbillno
---销售发票
-/*select * from ICSale 
-select * from ICSaleEntry 
- left join
-(
- select xiaoshoufapiaomingxi.*,fbillno 
- from  ICSale 
- cross apply
-	(
-	   select top 1 fcontractbillno
-       from ICSaleEntry
-		where finterid= ICSale.finterid
-	)xiaoshoufapiaomingxi
-) as xiaoshoufapiao 
-on xiaoshoufapiao.fcontractbillno=hetongyingshou.fcontractno
-*/
 
----收款单  收款单来源有两处:合同应收 和 销售发票.
--- 系统里的收款单 除了保存来源单据,还保存了对应的合同号.
-/*select * from t_RP_NewReceiveBill     
-select * from t_rp_ARBillOfSH
-
-left join
-(
- select shoukuandanmingxi.*,fnumber
- from  t_RP_NewReceiveBill 
- cross apply
-	(
-	   select top 1 fcontractno 
-       from t_rp_ARBillOfSH
-		where fbillid= t_RP_NewReceiveBill.fbillid
-	)shoukuandanmingxi
-) as shoukuandan 
-on shoukuandan.fcontractno=hetongyingshou.fcontractno
- */
- /***---------------采购分支-------------**/  
 --采购申请  
 
 left join
@@ -154,13 +119,14 @@ left join
  cross apply
 	(
 	   select top 1 fsourcebillno 
-       from PORequestEntry
+       from  PORequestEntry
 		where finterid= PORequest.finterid
 	)caigoushenqingmingxi
 ) as caigoushenqing 
 on caigoushenqing.fsourcebillno=waixiaodingdan.fbillno
  
--- 合同应付  
+-- 合同应付
+
 left join
 (
  select hetongyingfumingxi.*,fcontractno,fcontractname
@@ -177,20 +143,25 @@ on hetongyingfu.fbillno_src=caigoushenqing.fbillno
 /**采购订单 8s **/  
 left join
 (
---select * from poorder
- select caigoudingdanmingxi.*,fbillno ,fcancellation
+ select caigoudingdanmingxi.*,fbillno ,fcancellation,fempid
  from  poorder 
  cross apply
-	(
+	(-- select * from poorder
+-- select * from t_user
 	   select top 1 fsourcebillno
-       from poorderentry
+       from poorderentry a
 		where finterid= poorder.finterid
+        
 	)caigoudingdanmingxi
+
 ) as caigoudingdan 
 on caigoudingdan.fsourcebillno=hetongyingfu.fcontractno
 and caigoudingdan.fcancellation=0
+left join t_user yonghu2
+on yonghu2.fempid=caigoudingdan.fempid
 
- --(验货通知单)收料通知  
+
+ --(验货通知单)收料通知
 left join
 (
  select yanhuotongzhimingxi.*,fbillno 
@@ -203,8 +174,8 @@ left join
 	)yanhuotongzhimingxi
 ) as yanhuotongzhi 
 on yanhuotongzhi.fsourcebillno=caigoudingdan.fbillno
-----   
- --外购入库单  
+ 
+--外购入库单  
 
 left join
 (
@@ -219,40 +190,7 @@ left join
 ) as waigouruku 
 on waigouruku.fsourcebillno=yanhuotongzhi.fbillno
 
------
- 
- --采购发票  
-/*
-left join
-(
- select caigoufapiaomingxi.*,fbillno 
- from  ICPurchase 
- cross apply
-	(
-	   select top 1 fcontractbillno
-       from ICPurchaseEntry
-	   where finterid= ICPurchase.finterid
-	)caigoufapiaomingxi
-) as caigoufapiao 
-on caigoufapiao.fcontractbillno=hetongyingfu.fcontractno
 
-  
- --付款单  
-left join
-(
- select fukuanmingxi.*,fbillid ,fnumber
- from  t_RP_NewReceiveBill 
- cross apply
-	(
-	   select top 1 fcontractno
-       from t_rp_ARBillOfSH
-	   where fbillid= t_RP_NewReceiveBill.fbillid
-	)fukuanmingxi
-) as fukuandan 
-on fukuandan.fcontractno=hetongyingfu.fcontractno
-*/
---end--
-                                                                  
 end
 
 

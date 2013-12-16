@@ -9,15 +9,15 @@ begin
 财务单据流程
 
 */
-
+-- select * from t_user
 select
   -- distinct
 --baojia.* 
-  '合同',hetong.fContractNo
+  '合同',hetong.fContractNo,hetong.fcontractname
  ,'发票' ,fapiao.fbillno
  ,'收款/付款单' ,kuan.fnumber
 
-
+-- select * from t_rpContract
  from  
 --合同  
  t_rpContract as  hetong  

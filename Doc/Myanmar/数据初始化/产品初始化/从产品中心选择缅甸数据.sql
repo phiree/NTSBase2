@@ -4,9 +4,9 @@ ntscode AS CODE
 , Modelnumber AS Model -- 规格型号
 ,pl.Unit AS Unit
 ,productcode AS barcode
-,categorycode.replace('.','') AS goodSortCode
+,replace(categorycode,'.','') AS goodSortCode
 ,'' AS colorgroupcode
-,'' AS sex,
+,'' AS sex
 ,TaxRate AS taxrate
 ,'' AS authCode -- 批准文号
 ,0 AS RetailPrice
@@ -23,4 +23,4 @@ ntscode AS CODE
 INNER JOIN productlanguage pl
 ON p.id=pl.product_id
 AND pl.Language='en'
-LIMIT 10
+order by p.NTSCode
