@@ -1,5 +1,5 @@
 ﻿using System.Web;
-
+using System.Collections.Generic;
 using NHibernate;
 using NHibernate.Cfg;
 using FluentNHibernate.Cfg;
@@ -15,14 +15,30 @@ namespace NDAL
     {
 
         private static ISession _currentSession;
-        private static ISessionFactory _sessionFactory;
+      //  private static ISessionFactory _sessionFactory;
+        private Dictionary<string, IDictionary<string, string>> _databaseConfigStr;
+        private string[] _databaseIds = { "ntsbase","ntsmart_asia"};
+        private IDictionary<string, ISessionFactory> allFactories;
 
+        public HybridSessionBuilder()
+        {
+          //  _databaseConfigStr = new Dictionary<string, IDictionary<string, string>>();
+
+            /*db1*/
+
+
+           // allFactories = new Dictionary<string, ISessionFactory>();
+        }
         public ISession GetSession()
+        {
+            return GetSession("ntsbase");
+        }
+        public ISession GetSession(string dbid)
         {
 #if DEBUG
            HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
 #endif
-            ISessionFactory factory = getSessionFactory();
+           ISessionFactory factory = getSessionFactory(dbid);
             ISession session = getExistingOrNewSession(factory);
 
             return session;
@@ -35,41 +51,70 @@ namespace NDAL
             return configuration;
         }
 
-        private ISessionFactory getSessionFactory()
+        
+        private ISessionFactory getSessionFactory(string dbid)
         {
-            if (_sessionFactory == null)
+            if (allFactories == null)
             {
-                MyAutoMappingConfiguration mappingCfg = new MyAutoMappingConfiguration();
+                allFactories = new Dictionary<string, ISessionFactory>();
+                foreach (string databaseid in _databaseIds)
+                {
+                  
+                        allFactories.Add(databaseid, CreateOneFactory(databaseid));
+                }
+            }
+            return allFactories[dbid];
+        }
+
+        private ISessionFactory CreateOneFactory(string dbId)
+        {  ISessionFactory sessionFactory=null;
+            //NHibernate.Cfg.Environment.Dialect;
+               if(dbId=="ntsbase")
+               {
+           
+              //  MyAutoMappingConfiguration mappingCfg = new MyAutoMappingConfiguration();
                 MySQLConfiguration dataConfig = MySQLConfiguration.Standard
                     .ShowSql()
                     .ConnectionString(s => s.FromConnectionStringWithKey("conn"));
 
-                _sessionFactory = Fluently.Configure()
+                sessionFactory = Fluently.Configure()                 
                 .Database(dataConfig)
                 .Mappings(
-                /*automampping can't work with override
-                     m => m.AutoMappings.Add(AutoMap.AssemblyOf<NModel.Product>(mappingCfg)
-                         .Conventions.Setup(c=>{
-                             c.Add<DefaultStringLengthConvention>();
-                         })
-                         .Override<NModel.Product>(map =>
-                         {
-                             map.Map(x => x.NTSCode).Unique();
-                             map.Map(x => x.State).CustomType<int>();
-                         })
-                         //.Override<NModel.Supplier>(map =>
-                         //{
-                         //    map.Map(x => x.Code).Unique();
-                         //})
-                         )
-                     )*/
+                    /*automampping can't work with override
+                         m => m.AutoMappings.Add(AutoMap.AssemblyOf<NModel.Product>(mappingCfg)
+                             .Conventions.Setup(c=>{
+                                 c.Add<DefaultStringLengthConvention>();
+                             })
+                             .Override<NModel.Product>(map =>
+                             {
+                                 map.Map(x => x.NTSCode).Unique();
+                                 map.Map(x => x.State).CustomType<int>();
+                             })
+                             //.Override<NModel.Supplier>(map =>
+                             //{
+                             //    map.Map(x => x.Code).Unique();
+                             //})
+                             )
+                         )*/
                     m => m.FluentMappings.AddFromAssemblyOf<NModel.Mapping.ProductMap>())
                     .ExposeConfiguration(BuildSchema)
                     .BuildSessionFactory();
-            }
+               }
+               else if (dbId == "ntsmart_asia")
+               {
+                   //  MyAutoMappingConfiguration mappingCfg = new MyAutoMappingConfiguration();
+                   MySQLConfiguration dataConfig2 = MySQLConfiguration.Standard
+                       .ShowSql()
+                       .ConnectionString(s => s.FromConnectionStringWithKey("conn_ntsmart_asia"));
 
-            return _sessionFactory;
+                   sessionFactory = Fluently.Configure()
+                    .Database(dataConfig2)
+                    .BuildSessionFactory();
+               }
+               
+               return sessionFactory;
         }
+
         private static void BuildSchema(Configuration config)
         {
 
