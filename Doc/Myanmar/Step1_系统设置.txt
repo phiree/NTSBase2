@@ -1,9 +1,0 @@
-1 服务器端 建立帐套
-  填写帐套名称即可,其余参数暂时使用默认值.
-
-2 客户端
-  	登录
-  填写对应的帐套ID(100X),默认用户名为admin 密码 空.
-	设置机构.
-  Info->Branch and Department info
-  使用默认的机构 HeadOffice即可.

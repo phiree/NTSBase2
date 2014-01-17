@@ -266,6 +266,7 @@ namespace NModel
           p.ProductionCycle = this.ProductionCycle;
           p.SupplierCode = this.SupplierCode;
           p.TaxRate = this.TaxRate;
+          p.ProductCode = this.ProductCode;
             
             return p;
         }
