@@ -79,6 +79,7 @@
     <Compile Include="ReadExcelToDataTable.cs" />
     <Compile Include="SerialNumberManager.cs" />
     <Compile Include="StringHelper.cs" />
+    <Compile Include="ThumbnailMaker.cs" />
     <Compile Include="TypeHelper.cs" />
     <Compile Include="__FormatSerialNo.cs" />
   </ItemGroup>

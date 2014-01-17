@@ -31,7 +31,7 @@ public partial class Admin_Products_ProductExport : System.Web.UI.Page
         {
 
             productToExport = bizProduct.GetListByProvidedModelNumberSupplierNameList
-                (tbxPs.Text,out message);
+                (tbxPs.Text,out message).OrderBy(x=>x.SupplierCode).OrderBy(x=>x.ModelNumber).ToList();
 
             return productToExport;
         }
@@ -59,7 +59,8 @@ public partial class Admin_Products_ProductExport : System.Web.UI.Page
     {
         get
         {
-            return bizProduct.GetListByNTSCodeList(tbxCodeList.Text.Split(Environment.NewLine.ToCharArray())).OrderBy(x => x.ModelNumber).OrderBy(x => x.SupplierCode).ToList();
+            return bizProduct.GetListByNTSCodeList(tbxCodeList.Text.Split(Environment.NewLine.ToCharArray()))
+                .OrderBy(x => x.SupplierCode).OrderBy(x => x.ModelNumber).ToList();
 
         }
     }
@@ -108,7 +109,7 @@ public partial class Admin_Products_ProductExport : System.Web.UI.Page
     }
     protected void btnExportCodeListImage_Click(object sender, EventArgs e)
     {
-        ExportImage(productFromNtsCodeList.OrderBy(x=>x.ModelNumber).OrderBy(x=>x.SupplierCode).ToList());
+        ExportImage(productFromNtsCodeList);
     }
     protected void btnSupplierExportExcel_Click(object sender, EventArgs e)
     {

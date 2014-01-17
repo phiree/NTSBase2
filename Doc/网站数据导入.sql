@@ -44,9 +44,9 @@ SELECT DISTINCT p.ntscode AS sku
 ,'' -- seo
 ,''
 ,''
-,CONCAT('/', p.modelnumber,'.jpg')
-,CONCAT('/', p.modelnumber,'.jpg')
-,CONCAT('/',p.modelnumber,'.jpg')
+,CONCAT('/', p.ntscode,'.jpg')
+,CONCAT('/', p.ntscode,'.jpg')
+,CONCAT('/',p.ntscode,'.jpg')
 /* ÐÍºÅÃû³Æ
 ,CONCAT('/', i.ImageName)
 ,CONCAT('/', i.ImageName)
@@ -54,7 +54,7 @@ SELECT DISTINCT p.ntscode AS sku
 */
 
 ,1,10000,1,0,'Catalog,Search'
-,CONCAT('/',p.modelnumber,'.jpg')
+,CONCAT('/',p.ntscode,'.jpg')
 ,255
 ,'default'
 ,'asia'
@@ -64,7 +64,7 @@ SELECT DISTINCT p.ntscode AS sku
  ,CONCAT( pa.Parameter,';',pa.Material)  -- 3
 FROM   ntsbase2.product p 
   RIGHT JOIN  ntsbase2.product_asia pa
-	ON pa.NTSCODE=p.NTSCode AND pa.tag='20130913_kalina'
+	ON pa.NTSCODE=p.NTSCode AND pa.tag='tina20131220'
 	
 	
    INNER JOIN  ntsbase2.productlanguage l

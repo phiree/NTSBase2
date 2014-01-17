@@ -1,17 +1,28 @@
+/*
 
+select item.fnumber,item.fitemid,item.funitid,item.*,'---',pack.* from t_icitem item
+left join ExpItemPacking pack
+
+on item.fitemid=pack.fitemid
+where pack.fid is null
+and fnumber='05.001.0008600009'
+
+
+*/
 declare material_cursor cursor for
-select fitemid,FUnitID                                                                         
-from t_icitem 
---where fnumber='08.007.0010401050'
+select item.fitemid,item.funitid from t_icitem item
+left join ExpItemPacking pack
+
+on item.fitemid=pack.fitemid
+where pack.fid is null
 
 declare @fitemid int
 declare @FUnitID int
 DECLARE @q INT
-SET @q = 0;
+SET @q = 1;
 
 declare @init_fid int
-set @init_fid=1003
-
+select @init_fid=max(fid) from  ExpItemPacking
 
 open  material_cursor
 fetch Next from material_cursor
