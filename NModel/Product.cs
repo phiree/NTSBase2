@@ -257,6 +257,7 @@ namespace NModel
           p.ModelNumber = this.ModelNumber;
           p.MoneyType = this.MoneyType;
           p.NTSCode = this.NTSCode;
+          p.ProductCode = this.ProductCode;
           p.OrderAmountMin = this.OrderAmountMin;
           p.PriceDate = this.PriceDate;
           p.PriceOfFactory = this.PriceOfFactory;
