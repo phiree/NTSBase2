@@ -5,14 +5,14 @@ using System.Text;
 
 namespace NDAL
 {
-    public class DALMembership:DalBase<NModel.NTSMember>
+    public class DALMembership : DalBase<NModel.NTSMember>
     {
         public NModel.NTSMember GetByUserName(string username)
         {
             return GetByUserName(username, false);
-            
+
         }
-        public NModel.NTSMember GetByUserName(string username,bool setOnlineStatus)
+        public NModel.NTSMember GetByUserName(string username, bool setOnlineStatus)
         {
             string query = "select m from NTSMember m where m.Name='" + username + "'";
 
@@ -23,8 +23,13 @@ namespace NDAL
         {
             string query = "select m from NTSMember m where m.Name='" + username
                    + "' and  m.Password='" + encryptedPwd + "'";
-            NModel.NTSMember member= GetOneByQuery(query);
+            NModel.NTSMember member = GetOneByQuery(query);
             return member != null;
+        }
+        public IList<NModel.NTSMember> GetMemberList(int pageIndex, int pageSize, out int totalRecord)
+        {
+            string query = "select m from NTSMember m";
+            return GetList(query, pageIndex, pageSize, out totalRecord);
         }
     }
 }

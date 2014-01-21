@@ -96,7 +96,17 @@ namespace NBiz
 
         public override MembershipUserCollection GetAllUsers(int pageIndex, int pageSize, out int totalRecords)
         {
-            throw new NotImplementedException();
+            IList<NTSMember> ntsMemberList = DalMember.GetMemberList(pageIndex, pageSize, out totalRecords);
+            MembershipUserCollection muc = new MembershipUserCollection();
+            foreach (NTSMember member in ntsMemberList)
+            { 
+              MembershipUser mu = new MembershipUser("NTSMembershipProvider",
+               member.Name, member.Id, "", "", string.Empty,
+               true, true, DateTime.Now,
+               DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now);
+              muc.Add(mu);
+            }
+            return muc;
         }
 
         public override int GetNumberOfUsersOnline()
