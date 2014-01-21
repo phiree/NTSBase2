@@ -18,7 +18,7 @@ namespace NDAL
       //  private static ISessionFactory _sessionFactory;
         private Dictionary<string, IDictionary<string, string>> _databaseConfigStr;
         private string[] _databaseIds = { "ntsbase","ntsmart_asia"};
-        private IDictionary<string, ISessionFactory> allFactories;
+        private static IDictionary<string, ISessionFactory> allFactories=new Dictionary<string,ISessionFactory>();
 
         public HybridSessionBuilder()
         {
@@ -54,16 +54,18 @@ namespace NDAL
         
         private ISessionFactory getSessionFactory(string dbid)
         {
-            if (allFactories == null)
+            ISessionFactory sessionFactory = null;
+            if (allFactories.ContainsKey(dbid))
             {
-                allFactories = new Dictionary<string, ISessionFactory>();
-                foreach (string databaseid in _databaseIds)
-                {
-                  
-                        allFactories.Add(databaseid, CreateOneFactory(databaseid));
-                }
+                sessionFactory = allFactories[dbid];
             }
-            return allFactories[dbid];
+             
+            if(sessionFactory==null)
+            {
+                sessionFactory=CreateOneFactory(dbid);
+                allFactories.Add(dbid, sessionFactory); 
+            }
+            return sessionFactory;
         }
 
         private ISessionFactory CreateOneFactory(string dbId)
