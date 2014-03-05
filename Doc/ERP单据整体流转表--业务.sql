@@ -25,29 +25,30 @@ select
   -- distinct
 --baojia.*
 
- '销售报报价单',baojia.fBillNo  
+ '销售报报价单',baojia.fBillNo,baojia.fdate 
   ,'制单人',yonghu.fname  
- ,'合同应收',hetongyingshou.fContractNo,'合同名称'
-,hetongyingshou.fContractName,hetongyingshou.fcontractid  
+ ,'合同应收',hetongyingshou.fContractNo,'名称'
+,hetongyingshou.fContractName 
   ,'外销订单',waixiaodingdan.fbillno  
     ,'----销售分支----'  
   ,'出运通知单',chuyun.fbillno  
-  ,'销售出库',xiaoshouchuku.fbillno  
+  ,'销售出库',xiaoshouchuku.fbillno,xiaoshouchuku.fdate
 -- ,'销售发票' ,xiaoshoufapiao.fbillno
   --,'收款单' ,shoukuandan.fnumber
   ,'----采购分支----'  
-  ,'采购申请单',caigoushenqing.fbillno  
+  ,'采购申请单',caigoushenqing.fbillno,caigoushenqing.fdate  
   ,'合同应付',hetongyingfu.fContractNo,'合同名称',hetongyingfu.fContractName  
   ,'采购订单',caigoudingdan.fbillno,yonghu2.fname
 
   --,case caigoudingdan.fcancellation when 1 then '已作废' else '' end  
   ,'验货通知单',yanhuotongzhi.fbillno  
-  ,'外购入库单',waigouruku.fbillno  
+  ,'外购入库单',waigouruku.fbillno  ,waigouruku.fdate
  --  ,'采购发票',caigoufapiao.fbillno  
  -- ,'付款单',fukuandan.fnumber  
   ,'-----流程完成-----'  
  from  
 --报价单   
+--select * from porfq
  porfq as  baojia  
  inner join t_user as yonghu  
 	 on yonghu.fempid=baojia.fempid  
@@ -58,7 +59,7 @@ left join
 	select hetongyingshoumingxi.*,fcontractno,fcontractname
 	from t_rpContract 
 		CROSS APPLY(   
-		select top 1 fcontractid,fbillno_src
+		select distinct fcontractid,fbillno_src
 		from t_rpContractEntry  
 		where t_rpContractEntry.fcontractid=t_rpContract.fcontractid
 		)hetongyingshoumingxi
@@ -73,7 +74,7 @@ select waixiaodingdanmingxi.*,fbillno
 from seorder
 cross apply 
 	(
-		select top 1 fsourcebillno
+		select distinct fsourcebillno
 		from SeOrderEntry 
 		where SeOrderEntry.finterid=seorder.finterid
 	)waixiaodingdanmingxi
@@ -88,7 +89,7 @@ cross apply
  from  expoutreqmain 
  cross apply
 	(
-	   select top 1 fbillno_src 
+	   select distinct fbillno_src 
        from ExpOutReqEntry
 		where finterid= expoutreqmain.finterid
 	)chuyunmingxi
@@ -99,11 +100,11 @@ on chuyun.fbillno_src=waixiaodingdan.fbillno
 
 left join
 (
- select xiaoshouchukumingxi.*,fbillno 
+ select xiaoshouchukumingxi.*,fbillno ,fdate
  from  icstockbill 
  cross apply
 	(
-	   select  top 1 fsourcebillno
+	   select  distinct fsourcebillno
        from ICStockBillentry
 		where finterid= icstockbill.finterid
 	)xiaoshouchukumingxi
@@ -114,11 +115,11 @@ on xiaoshouchuku.fsourcebillno=chuyun.fbillno
 
 left join
 (
- select caigoushenqingmingxi.*,fbillno 
+ select caigoushenqingmingxi.*,fbillno,fdate
  from  PORequest 
  cross apply
 	(
-	   select top 1 fsourcebillno 
+	   select distinct fsourcebillno 
        from  PORequestEntry
 		where finterid= PORequest.finterid
 	)caigoushenqingmingxi
@@ -133,7 +134,7 @@ left join
  from  t_rpContract 
  cross apply
 	(
-	   select top 1 fbillno_src
+	   select distinct fbillno_src
        from t_rpContractEntry
 		where fContractid= t_rpContract.fContractid
 	)hetongyingfumingxi
@@ -148,7 +149,7 @@ left join
  cross apply
 	(-- select * from poorder
 -- select * from t_user
-	   select top 1 fsourcebillno
+	   select distinct fsourcebillno
        from poorderentry a
 		where finterid= poorder.finterid
         
@@ -168,7 +169,7 @@ left join
  from  poinstock 
  cross apply
 	(
-	   select  top 1 fsourcebillno
+	   select  distinct fsourcebillno
        from POInStockEntry
 		where finterid= poinstock.finterid
 	)yanhuotongzhimingxi
@@ -179,18 +180,18 @@ on yanhuotongzhi.fsourcebillno=caigoudingdan.fbillno
 
 left join
 (
- select waigourukumingxi.*,fbillno 
+ select waigourukumingxi.*,fbillno ,fdate
  from  icstockbill 
  cross apply
 	(
-	   select  top 1 fsourcebillno
+	   select  distinct fsourcebillno
        from ICStockBillentry
 		where finterid= icstockbill.finterid
 	)waigourukumingxi
 ) as waigouruku 
 on waigouruku.fsourcebillno=yanhuotongzhi.fbillno
 
-
+order by baojia.fBillNo
 end
 
 
