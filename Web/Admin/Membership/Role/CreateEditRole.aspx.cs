@@ -11,4 +11,8 @@ public partial class Admin_Membership_Role_ManageRole : System.Web.UI.Page
     {
 
     }
+    private void LoadForm()
+    {
+    
+    }
 }

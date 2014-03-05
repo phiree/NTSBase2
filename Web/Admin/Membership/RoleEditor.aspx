@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/RealAdmin.master" AutoEventWireup="true" CodeFile="RoleEditor.aspx.cs" Inherits="Admin_Membership_RoleEditor" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/SysAdmin.master" AutoEventWireup="true" CodeFile="RoleEditor.aspx.cs" Inherits="Admin_Membership_RoleEditor" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>

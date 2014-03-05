@@ -2,8 +2,8 @@
 之前的Admin里的内容应该属于业务范畴,而不是系统配置范畴.
 以后把它们移出去,开放给相关的业务人员.
 -->
-<%@ Master Language="C#" AutoEventWireup="true" CodeFile="RealAdmin.master.cs" Inherits="Admin_RealAdmin" %>
 
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="SysAdmin.master.cs" Inherits="Admin_RealAdmin" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -26,30 +26,28 @@
         <div class="span-24 last" id="adminHead">
             <h1>
                 NTS产品信息中心-后台管理</h1>
-         
             <hr />
         </div>
-       
         <div class="clear span-24 " id="adminBody">
             <div class="span-4 last" id="leftMenu">
                 <ul>
+                    <li><a href="/admin/Membership/">用户管理</a></li>
+                     <li><a href="/admin/Membership/CreateEditUser.aspx">用户创建</a></li>
                     <li><a href="/admin/Membership/role/">角色列表</a></li>
                     <li><a href="/admin/Membership/role/managerole.aspx">角色管理</a></li>
-                   
                 </ul>
             </div>
             <div class="span-19 last" id="mainContent">
-             <div class="info">
-        <asp:ContentPlaceHolder ID="pageDesc" runat="server">
-        
-        </asp:ContentPlaceHolder>
-        </div>
+                <div class="info">
+                    <asp:ContentPlaceHolder ID="pageDesc" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
                 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                 </asp:ContentPlaceHolder>
             </div>
         </div>
         <div class="clear span-24 last" id="adminFoot">
-           -----------NTS产品信息中心--后台管理 2013-----------
+            -----------NTS产品信息中心--后台管理 2013-----------
         </div>
     </div>
     </form>
