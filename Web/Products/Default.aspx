@@ -54,7 +54,16 @@
                 $('#<%=hiCateChildValue.ClientID%>').val($(this).find(":selected")[0].value);
             });
 
+            //$('#<%=tbxExpiredDate.ClientID%>').datepicker();
+            $('#<%=tbxExpiredDate.ClientID%>').datepicker({ "dateFormat": "yy-mm-dd" });
 
+            $(".hi_expired").each(function (e) {
+
+                is_expired = $(this).attr("is_expired").toLowerCase();
+                if (is_expired == "true") {
+                    $(this).closest('tr').children('td,th').css("background-color", "#FFCC66");
+                }
+            });
         });
   
     </script>
@@ -64,8 +73,9 @@
     <fieldset>
         <legend>搜索</legend>
         <div>
-            <span>关 键 字:</span>
+            <span>关键字:</span>
             <asp:TextBox CssClass="text" Width="380" runat="server" ID="tbxName"></asp:TextBox>
+            <span>过期日期:</span><asp:TextBox runat="server" ID="tbxExpiredDate"></asp:TextBox>
         </div>
         <div>
             <span>NTS编码:</span>
@@ -116,6 +126,7 @@
                 </HeaderTemplate>
                 <ItemTemplate>
                     <input runat="server" style="height: 30px; width: 30px;" type="checkbox" class="cbxp" pid='<%#Eval("id") %>' />
+                    <input id="hi_isexpired" type="hidden" runat="server" class="hi_expired" is_expired='<%#Eval("IsExpired") %>' />
                  
                 </ItemTemplate>
             </asp:TemplateField>
@@ -144,6 +155,7 @@
             <asp:BoundField HeaderText="NTS编码" DataField="NTSCode" />
             <asp:BoundField HeaderText="出厂价" DataField="PriceOfFactory" />
             <asp:BoundField HeaderText="币别" DataField="MoneyType" />
+            
             <asp:BoundField HeaderText="供应商代码" HeaderStyle-Wrap="false" DataField="SupplierCode" />
             <asp:TemplateField HeaderText="供应商名称">
                 <ItemTemplate>

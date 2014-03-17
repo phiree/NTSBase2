@@ -58,6 +58,7 @@ public partial class Products_Default : System.Web.UI.Page
         tbxDelivery.Text = Request["delivery"];
         tbxOriginal.Text = Request["original"];
         ddlImageQuanlity.SelectedValue = Request["imagequality"];
+        tbxExpiredDate.Text = Request["expireddate"];
         
         string cateCode = Request["categoryCode"];
         if (!string.IsNullOrEmpty(cateCode))
@@ -111,7 +112,7 @@ public partial class Products_Default : System.Web.UI.Page
         {
             cateCode += "." + hiCateChildValue.Value;
         }
-        string targetUrl =string.Format( "Default.aspx?sname={0}&model={1}&hasphoto={2}&name={3}&categorycode={4}&ntscode={5}&imagequality={6}&original={7}&delivery={8}"
+        string targetUrl =string.Format(@"Default.aspx?sname={0}&model={1}&hasphoto={2}&name={3}&categorycode={4}&ntscode={5}&imagequality={6}&original={7}&delivery={8}&expireddate={9}"
             , Server.UrlEncode(tbxSupplierName.Text)
             ,Server.UrlDecode(tbxModel.Text)
             ,ddlHasPhoto.SelectedValue
@@ -121,6 +122,7 @@ public partial class Products_Default : System.Web.UI.Page
             ,ddlImageQuanlity.SelectedValue
             ,tbxOriginal.Text.Trim()
             ,tbxDelivery.Text.Trim()
+            ,tbxExpiredDate.Text
             );
         Response.Redirect(targetUrl, true);
        // BindProduct();
@@ -158,6 +160,7 @@ public partial class Products_Default : System.Web.UI.Page
             ,imageQuality
             ,tbxDelivery.Text.Trim()
             ,tbxOriginal.Text.Trim()
+            ,tbxExpiredDate.Text.Trim()
             , pager.PageSize
             , pageIndex, out totalRecords)
             .OrderBy(x=>x.CategoryCode);  // bizProduct.GetAll<NModel.Product>();

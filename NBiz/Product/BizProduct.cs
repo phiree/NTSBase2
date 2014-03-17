@@ -189,6 +189,7 @@ namespace NBiz
             string imageQuality,
             string delivery,
             string original,
+            string expireddate,
             int pageSize, int pageIndex, out int totalRecord)
         {
             return DalProduct.Search(supplierName, model, hasPhoto,
@@ -197,6 +198,7 @@ namespace NBiz
                imageQuality,
                delivery,
                original,
+               expireddate,
                pageSize, pageIndex, out totalRecord);
         }
 

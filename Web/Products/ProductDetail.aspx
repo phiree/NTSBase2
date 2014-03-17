@@ -3,6 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cph_maincontent" Runat="Server">
+
  <asp:DetailsView  ID="dv" AutoGenerateRows="false" runat="server" 
         OnDataBound="dv_DataBound" OnItemCreated="dv_ItemCreated" 
         onload="dv_Load"   >
@@ -11,6 +12,7 @@
  <asp:TemplateField >
  <ItemTemplate>
  <!--<input type="button" id="btnAddToCart" value="加入选单" pid='<%#Eval("id") %>' /> -->
+ <span style="color:Red; font-size:large;"><%# Convert.ToBoolean(Eval("IsExpired"))?"已过期":"" %></span>
  </ItemTemplate>
  </asp:TemplateField>
 <asp:BoundField  HeaderStyle-Wrap="false"  HeaderText="型号" DataField="ModelNumber"/>

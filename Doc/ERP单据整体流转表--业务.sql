@@ -1,12 +1,17 @@
-﻿
-set ANSI_NULLS ON
-set QUOTED_IDENTIFIER ON
+﻿USE [AIS20130703114122]
+GO
+/****** Object:  StoredProcedure [dbo].[ERPService_BillProcess]    Script Date: 03/11/2014 17:33:21 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
 GO
 
 ALTER procedure [dbo].[ERPService_BillProcess]
 as
 begin 
 /**********************************************
+	2014-3-11
+ 返回列名
 	2013-12-11 
   删除发票, 和收款付款单.
     2013-12-12
@@ -25,27 +30,26 @@ select
   -- distinct
 --baojia.*
 
- '销售报报价单',baojia.fBillNo,baojia.fdate 
-  ,'制单人',yonghu.fname  
- ,'合同应收',hetongyingshou.fContractNo,'名称'
-,hetongyingshou.fContractName 
-  ,'外销订单',waixiaodingdan.fbillno  
-    ,'----销售分支----'  
-  ,'出运通知单',chuyun.fbillno  
-  ,'销售出库',xiaoshouchuku.fbillno,xiaoshouchuku.fdate
--- ,'销售发票' ,xiaoshoufapiao.fbillno
-  --,'收款单' ,shoukuandan.fnumber
-  ,'----采购分支----'  
-  ,'采购申请单',caigoushenqing.fbillno,caigoushenqing.fdate  
-  ,'合同应付',hetongyingfu.fContractNo,'合同名称',hetongyingfu.fContractName  
-  ,'采购订单',caigoudingdan.fbillno,yonghu2.fname
-
-  --,case caigoudingdan.fcancellation when 1 then '已作废' else '' end  
-  ,'验货通知单',yanhuotongzhi.fbillno  
-  ,'外购入库单',waigouruku.fbillno  ,waigouruku.fdate
- --  ,'采购发票',caigoufapiao.fbillno  
- -- ,'付款单',fukuandan.fnumber  
-  ,'-----流程完成-----'  
+ baojia.fBillNo as '报价单号',baojia.fdate as '销售报报价单',
+  yonghu.fname  as '制单人',
+ hetongyingshou.fContractNo as '合同应收',
+hetongyingshou.fContractName as '名称',
+  waixiaodingdan.fbillno as '外销订单',
+    '-销售分支-',  
+  chuyun.fbillno  as '出运通知单',
+  xiaoshouchuku.fbillno as '销售出库',
+  xiaoshouchuku.fdate as '出库日期',
+  '-采购分支-',
+  caigoushenqing.fbillno as '采购申请单',
+  caigoushenqing.fdate as '申请日期',
+  hetongyingfu.fContractNo as '合同应付',
+  hetongyingfu.fContractName  as '合同名称',
+  caigoudingdan.fbillno as '采购订单',
+  yonghu2.fname as '采购员',
+ yanhuotongzhi.fbillno  as '验货通知单',
+ waigouruku.fbillno as '外购入库单',
+ waigouruku.fdate as '入库日期'
+  
  from  
 --报价单   
 --select * from porfq

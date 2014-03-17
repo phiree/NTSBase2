@@ -19,7 +19,8 @@ public partial class BillProcesing : System.Web.UI.Page
             procedure = "ERPService_BillCheckProcess";
         else if(type=="3")
             procedure = "ERPService_BillProcess_Finance";
-
+        else if(type=="4")
+          procedure="ERP_CunHuoHeSuan";
         if (procedure == string.Empty)
         {
             Response.Write("No Procedure");
@@ -28,6 +29,7 @@ public partial class BillProcesing : System.Web.UI.Page
         {
             Bind(procedure);
         }
+        gv.HeaderRow.TableSection = TableRowSection.TableHeader;
     }
     
     private void Bind(string procedureName)
@@ -38,8 +40,8 @@ public partial class BillProcesing : System.Web.UI.Page
         if (true)//obj == null)
         {
             ds = DataAccess.CommonSQL.ExcuteProcedureDataset(procedureName);
-
-            Cache.Add(cacheKey, ds, null, System.Web.Caching.Cache.NoAbsoluteExpiration, TimeSpan.FromHours(1), CacheItemPriority.Default, null);
+            //Cache.Add(cacheKey, ds, null, System.Web.Caching.Cache.NoAbsoluteExpiration, TimeSpan.FromMinutes(1), CacheItemPriority.Default, null);
+Cache.Add(cacheKey, ds, null, DateTime.Now.AddMinutes(1d), System.Web.Caching.Cache.NoSlidingExpiration, CacheItemPriority.Default, null);
 
         }
         else

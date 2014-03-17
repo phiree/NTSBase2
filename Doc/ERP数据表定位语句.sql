@@ -1,0 +1,1 @@
+﻿select * from t_tabledescription where   fdescription like '%销售报价%'

@@ -2,6 +2,19 @@
     CodeFile="upgrade.aspx.cs" Inherits="upgrade" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="cph_maincontent" runat="Server">
+     <h3>
+        2014.03.17</h3>
+    <ul>
+       
+        <li>增加 过期产品的识别: </li>
+         <li> 1) 搜索条件增加 "过期日期", 检索 超过给定日期 的过期产品 </li>
+        <li>  2) 产品列表页面:如果产品相对当前日期已经过期,则背景设置为警告黄 </li>
+         <li> 3) 产品详情页面:如果产品相对当前日期已经过期,则在名称下面显示红色文字:"已过期"
+        </li>
+        
+        
+    </ul> 
+   
    <h3>
         2013.12.11</h3>
     <ul>

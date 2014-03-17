@@ -112,6 +112,7 @@ namespace NDAL
             string imageQuality,
             string delivery,
             string original,
+            string expireddate,
             int pageSize, int pageIndex, out int totalRecord)
         {
             
@@ -186,6 +187,22 @@ namespace NDAL
             {
                 //02 或者 02.001
                 where += string.Format(" and (p.CategoryCode='{0}' or substring(p.CategoryCode,1,2)='{0}')", categorycode);
+            }
+            if (!string.IsNullOrEmpty(expireddate))
+            {
+                where += string.Format(@" and '{0}'>=IF(
+	STR_TO_DATE(PriceValidPeriod, '%m/%d/%y'),
+	STR_TO_DATE(PriceValidPeriod, '%m/%d/%y'),
+	IF(
+		STR_TO_DATE(PriceValidPeriod, '%Y/%m/%d'),
+		STR_TO_DATE(PriceValidPeriod, '%Y/%m/%d'),
+		IF(
+			STR_TO_DATE(PriceValidPeriod, '%Y%m%d'),
+			STR_TO_DATE(PriceValidPeriod, '%Y%m%d'),
+			STR_TO_DATE(PriceValidPeriod, '%Y-%m-%d')
+		  )
+	))
+	", expireddate);
             }
             string query = select + from + where;
             string queryCount = selectCount + from + where;
