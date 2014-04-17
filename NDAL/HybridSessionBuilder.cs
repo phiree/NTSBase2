@@ -17,7 +17,7 @@ namespace NDAL
         private static ISession _currentSession;
       //  private static ISessionFactory _sessionFactory;
         private Dictionary<string, IDictionary<string, string>> _databaseConfigStr;
-        private string[] _databaseIds = { "ntsbase","ntsmart_asia"};
+        private string[] _databaseIds = { "ntsbase" };//,"ntsmart_asia"};
         private IDictionary<string, ISessionFactory> allFactories;
 
         public HybridSessionBuilder()

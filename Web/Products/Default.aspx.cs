@@ -187,7 +187,22 @@ public partial class Products_Default : System.Web.UI.Page
         {
             NModel.Product p = e.Row.DataItem as NModel.Product;
             Repeater rptImages = e.Row.FindControl("rptImages") as Repeater;
-            rptImages.DataSource = p.ProductImageList;
+
+            List<NModel.ProductImage> imagelist = new List<NModel.ProductImage>();
+            NModel.ProductImage mainImage = p.ProductImageList.SingleOrDefault(x => x.Tag == "main");
+            if (mainImage == null)
+            {
+                if (p.ProductImageList.Count > 0)
+                {
+                    imagelist.Add(p.ProductImageList[0]);
+                }
+            }
+            else
+             {
+                 imagelist.Add(mainImage);
+            }
+
+            rptImages.DataSource = imagelist;
             rptImages.DataBind();
 
             //供应商
