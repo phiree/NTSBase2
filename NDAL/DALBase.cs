@@ -14,14 +14,9 @@ namespace NDAL
         protected ISession session =null;// new HybridSessionBuilder().GetSession();
         public DalBase() 
         {
-            if (typeof(T).FullName.Contains("NModel"))
-            {
+           
                 session = new HybridSessionBuilder().GetSession();
-            }
-            else
-            {
-                session = new HybridSessionBuilder().GetSession("ntsmart_asia");
-            }
+           
         }
         public void Delete(T o)
         {

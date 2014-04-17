@@ -6,3 +6,4 @@ packages/
 PrecompiledWeb/
 *.csproj.user
 *Thumbs.db
+web/config/connectionString.config

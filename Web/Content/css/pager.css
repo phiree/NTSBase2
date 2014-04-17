@@ -1,4 +1,5 @@
 ﻿.paginator { line-height:20px; font: 11px Arial, Helvetica, sans-serif;padding:10px 20px 10px 0; margin: 0px;}
+.paginator div{width:100%;float:none;}
 .paginator a {padding: 1px 6px; border: solid 1px #ddd; background: #fff; text-decoration: none;margin-right:2px}
 a[disabled=disabled]{display:none; background:#ddd;cursor:wait;} 
 .paginator a:visited {padding: 1px 6px; border: solid 1px #ddd; background: #fff; text-decoration: none;}

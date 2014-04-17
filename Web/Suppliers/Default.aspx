@@ -14,8 +14,9 @@
             </div>
         </fieldset>
     </div>
+    <div style="width:100%">
     <uc:AspNetPager runat="server" ID="AspNetPager1" CloneFrom="pager">
-    </uc:AspNetPager>
+    </uc:AspNetPager></div>
     <asp:GridView runat="server" ID="dgSupplier"   AutoGenerateColumns="false" OnRowCreated="dg_SupplierRowCreated">
     <Columns>
     
@@ -37,7 +38,8 @@
             </div>
         </EmptyDataTemplate>
         </asp:GridView>
-        <uc:AspNetPager runat="server" ID="pager" UrlPaging="true" CssClass="paginator" CustomInfoHTML="Total:%RecordCount% Page %CurrentPageIndex% of %PageCount%"
+       <div style="width:100%">
+        <uc:AspNetPager runat="server" ID="pager" UrlPaging="true" CustomInfoSectionWidth="10%" CssClass="paginator" CustomInfoHTML="Total:%RecordCount% Page %CurrentPageIndex% of %PageCount%"
             EnableTheming="True" ShowCustomInfoSection="Left" ShowNavigationToolTip="True">
-        </uc:AspNetPager>
+        </uc:AspNetPager></div>
 </asp:Content>
