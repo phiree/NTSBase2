@@ -382,15 +382,38 @@ namespace NModel
             //    isAllDiff = !isSame && isAllDiff;
 
             //}
-            
-            if (ProductImageList.Count==0)// isAllDiff)
+            //modified 20140417 更新图片
+            if(true)// (ProductImageList.Count==0)// isAllDiff)
             {
                 string imageNewName = BuildImageName(Path.GetExtension(newImagePath));
-                ProductImage piNew = new ProductImage { ImageName = imageNewName, Tag = string.Empty };
+                ProductImage piNew = new ProductImage { ImageName = imageNewName, Tag = "main" };
                 System.IO.File.Copy(newImagePath, imageSavePath + imageNewName, true);
+                foreach (ProductImage i in ProductImageList)
+                {
+                    i.Tag = string.Empty; 
+                }
                 ProductImageList.Add(piNew);
             }
            // return !isAllDiff;
+        }
+        public virtual string GetMainImageName()
+        {
+            string mainImageName = string.Empty;
+
+            ProductImage mainImage = ProductImageList.SingleOrDefault(x => x.Tag == "main");
+            if (mainImage == null)
+            {
+                if (ProductImageList.Count > 0)
+                {
+                    mainImageName = ProductImageList[0].ImageName;
+                }
+
+            }
+            else {
+                mainImageName = mainImage.ImageName;
+            }
+            return mainImageName;
+            
         }
         #endregion
     }
