@@ -6,6 +6,7 @@ using NModel.Enums;
 using System.IO;
 using System.ComponentModel;
 using NLibrary;
+using System.Globalization;
 namespace NModel
 {
     public class Product
@@ -39,6 +40,27 @@ namespace NModel
             }
             protected internal set { name = value; }
         }
+         private bool isExpired;
+         public virtual bool IsExpired
+         {
+             get
+             {
+                 DateTime dt_expiredDate;
+                 string[] formats = { "MM/dd/yy", "yyyy/MM/dd", "yyyyMMdd", "yyyy-MM-DD" };
+                 CultureInfo enUS = new CultureInfo("en-US");
+                 foreach (string s in formats)
+                 {
+                     if (DateTime.TryParseExact(this.PriceValidPeriod, s, enUS, DateTimeStyles.None
+                          , out dt_expiredDate))
+                     {
+                         return DateTime.Now >= dt_expiredDate;
+                     }
+                 }
+                 return false;
+             }
+             protected internal set { isExpired = value; }
+         }
+
          private string unit;
            [Description("单位")]
         public virtual string Unit

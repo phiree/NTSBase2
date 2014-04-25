@@ -19,6 +19,8 @@ public partial class BillProcesing : System.Web.UI.Page
             procedure = "ERPService_BillCheckProcess";
         else if(type=="3")
             procedure = "ERPService_BillProcess_Finance";
+        else if (type == "4")
+            procedure = "ERP_CunHuoHeSuan";
 
         if (procedure == string.Empty)
         {
@@ -27,25 +29,17 @@ public partial class BillProcesing : System.Web.UI.Page
         else
         {
             Bind(procedure);
-        }
+        } gv.HeaderRow.TableSection = TableRowSection.TableHeader;
     }
     
     private void Bind(string procedureName)
     {
-        string cacheKey = "cache_" + type;
-        object obj = Cache.Get(cacheKey);
+       
         DataSet ds = new DataSet();
-        if (true)//obj == null)
-        {
+        
             ds = DataAccess.CommonSQL.ExcuteProcedureDataset(procedureName);
 
-            Cache.Add(cacheKey, ds, null, System.Web.Caching.Cache.NoAbsoluteExpiration, TimeSpan.FromHours(1), CacheItemPriority.Default, null);
-
-        }
-        else
-        {
-            ds = obj as DataSet;
-        }
+        
 
         gv.DataSource = ds;
         gv.DataBind();

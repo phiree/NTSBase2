@@ -112,9 +112,10 @@ namespace NDAL
             string imageQuality,
             string delivery,
             string original,
+            string expireddate,
             int pageSize, int pageIndex, out int totalRecord)
         {
-            
+
             //string query = "select p from Product as  p join p.ProductMultiLangues as pl where ";
             string select = "select distinct p ";
             string selectCount = "select count(distinct p) ";
@@ -123,16 +124,16 @@ namespace NDAL
 
             if (!string.IsNullOrEmpty(supplierName))
             {
-                where += "  p.SupplierCode in (select s.Code from Supplier as s where s.EnglishName like '%" + supplierName 
-                            + "%' or  s.Name like '%" + supplierName 
-                            + "%' or s.NickName like '%"+supplierName+"%') ";
+                where += "  p.SupplierCode in (select s.Code from Supplier as s where s.EnglishName like '%" + supplierName
+                            + "%' or  s.Name like '%" + supplierName
+                            + "%' or s.NickName like '%" + supplierName + "%') ";
             }
             else
             {
                 where += " 1=1  ";
             }
 
-            
+
             if (!string.IsNullOrEmpty(delivery))
             {
                 where += " and pl.PlaceOfDelivery like '%" + delivery + "%'";
@@ -152,7 +153,7 @@ namespace NDAL
 
             if (!string.IsNullOrEmpty(model))
             {
-                where += "and p.ModelNumber like '%" + model + "%' or p.ModelNumber_Original like '%"+model+"%'";
+                where += "and p.ModelNumber like '%" + model + "%' or p.ModelNumber_Original like '%" + model + "%'";
             }
             if (hasphoto.HasValue)
             {
@@ -167,10 +168,10 @@ namespace NDAL
             }
             if (!string.IsNullOrEmpty(name))
             {
-                string[] searchItems = name.Split(new string[]{" "}, StringSplitOptions.RemoveEmptyEntries);
+                string[] searchItems = name.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
 
                 foreach (string item in searchItems)
-                { 
+                {
                     where += string.Format(@" and ( pl.Name like '%{0}%' 
                                              or pl.ProductParameters like '%{0}%'
                                              or pl.ProductDescription like '%{0}%'
@@ -180,13 +181,30 @@ namespace NDAL
                 }
 
 
-              
+
             }
             if (!string.IsNullOrEmpty(categorycode))
             {
                 //02 或者 02.001
                 where += string.Format(" and (p.CategoryCode='{0}' or substring(p.CategoryCode,1,2)='{0}')", categorycode);
             }
+            if (!string.IsNullOrEmpty(expireddate))
+            {
+                where += string.Format(@" and '{0}'>=IF(
+	STR_TO_DATE(PriceValidPeriod, '%m/%d/%y'),
+	STR_TO_DATE(PriceValidPeriod, '%m/%d/%y'),
+	IF(
+		STR_TO_DATE(PriceValidPeriod, '%Y/%m/%d'),
+		STR_TO_DATE(PriceValidPeriod, '%Y/%m/%d'),
+		IF(
+			STR_TO_DATE(PriceValidPeriod, '%Y%m%d'),
+			STR_TO_DATE(PriceValidPeriod, '%Y%m%d'),
+			STR_TO_DATE(PriceValidPeriod, '%Y-%m-%d')
+		  )
+	))
+	", expireddate);
+            }
+
             string query = select + from + where;
             string queryCount = selectCount + from + where;
             string orderColumns = " p.LastUpdateTime ";
@@ -195,7 +213,7 @@ namespace NDAL
             return GetList(query, orderColumns, desc, pageIndex, pageSize, out totalRecord, queryCount);
         }
 
-       
+
         public virtual IList<Product> GetListBySupplierCode(string supplierCode)
         {
             NHibernate.IQueryOver<Product, Product> queryover = session.QueryOver<Product>()
@@ -207,7 +225,7 @@ namespace NDAL
 
             return GetList(queryover);
         }
-        public virtual IList<Product> GetListBySupplierCode(string supplierCode,string language)
+        public virtual IList<Product> GetListBySupplierCode(string supplierCode, string language)
         {
             NHibernate.IQueryOver<Product, Product> queryover = session.QueryOver<Product>()
                 .Where(x => x.SupplierCode == supplierCode);
@@ -266,10 +284,10 @@ namespace NDAL
             {
                 condition_In += id + ",";
             }
-            condition_In =" ("+ condition_In.TrimEnd(',')+") ";
-            string query="select p from Product p where Id in "+condition_In;
+            condition_In = " (" + condition_In.TrimEnd(',') + ") ";
+            string query = "select p from Product p where Id in " + condition_In;
             return GetList(query, 0, 999, out totalRecord);
-            
+
         }
         public IList<Product> GetListByNTSCodeList(string[] ntsCodeList)
         {
@@ -277,7 +295,7 @@ namespace NDAL
             string condition_In = string.Empty;
             foreach (string ntsCode in ntsCodeList)
             {
-                condition_In +="'" +ntsCode + "',";
+                condition_In += "'" + ntsCode + "',";
             }
             condition_In = " (" + condition_In.TrimEnd(',') + ") ";
             string query = "select p from Product p where NTSCode in " + condition_In;

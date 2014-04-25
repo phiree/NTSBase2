@@ -11,6 +11,7 @@
  <asp:TemplateField >
  <ItemTemplate>
  <!--<input type="button" id="btnAddToCart" value="加入选单" pid='<%#Eval("id") %>' /> -->
+ <span style="color:Red; font-size:large;"><%# Convert.ToBoolean(Eval("IsExpired"))?"已过期":"" %></span>
  </ItemTemplate>
  </asp:TemplateField>
 <asp:BoundField  HeaderStyle-Wrap="false"  HeaderText="型号" DataField="ModelNumber"/>
