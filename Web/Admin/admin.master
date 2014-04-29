@@ -42,6 +42,9 @@
                     <li><a href="/admin/products/ProductExport.aspx">产品信息导出</a></li>
                     <li><a href="/admin/products/ProductExport_ErpSync.aspx">Erp同步信息导出(产品)</a></li>
                     <li><a href="/admin/supplier/SupplierExport_SyncERP.aspx">Erp同步信息导出(供应商)</a></li>
+                     <li><span>------停用产品------</span></li>
+                      <li><a href="/admin/products/product_disabled_list.aspx">停用产品列表</a></li>
+                   
                   <!--  <li><span>------展厅管理------</span></li>
                     <li><a href="/admin/showroom/PositionManage.aspx">展位管理</a></li>
                     <li><a href="/admin/showroom/PositionManage.aspx">库存动态</a></li>

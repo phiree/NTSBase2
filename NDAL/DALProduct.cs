@@ -120,18 +120,15 @@ namespace NDAL
             string select = "select distinct p ";
             string selectCount = "select count(distinct p) ";
             string from = " from Product as p join p.ProductMultiLangues as pl ";
-            string where = " where ";
+            string where = " where p.State=0 ";
 
             if (!string.IsNullOrEmpty(supplierName))
             {
-                where += "  p.SupplierCode in (select s.Code from Supplier as s where s.EnglishName like '%" + supplierName
+                where += " and  p.SupplierCode in (select s.Code from Supplier as s where s.EnglishName like '%" + supplierName
                             + "%' or  s.Name like '%" + supplierName
                             + "%' or s.NickName like '%" + supplierName + "%') ";
             }
-            else
-            {
-                where += " 1=1  ";
-            }
+           
 
 
             if (!string.IsNullOrEmpty(delivery))
@@ -299,6 +296,15 @@ namespace NDAL
             }
             condition_In = " (" + condition_In.TrimEnd(',') + ") ";
             string query = "select p from Product p where NTSCode in " + condition_In;
+            return GetList(query, 0, 999, out totalRecord);
+
+        }
+        public IList<Product> GetListDiabledProducts()
+        {
+            int totalRecord;
+            string condition_In = string.Empty;
+          
+            string query = "select p from Product p where State =2";
             return GetList(query, 0, 999, out totalRecord);
 
         }

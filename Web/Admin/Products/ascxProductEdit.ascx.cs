@@ -56,6 +56,10 @@ public partial class Admin_Products_ascxProductEdit : System.Web.UI.UserControl
         CurrentProduct.ProductionCycle = decimal.Parse(tbxProductCycle.Text);
         CurrentProduct.TaxRate = decimal.Parse(tbxTax.Text);
         CurrentProduct.OrderAmountMin = decimal.Parse(tbxMinOrder.Text);
+
+        CurrentProduct.State = cbxDisable.Checked ? NModel.Enums.ProductState.Disabled : NModel.Enums.ProductState.Normal;
+        
+       
         UpdateList();
     }
     private void UpdateList()
@@ -98,6 +102,7 @@ public partial class Admin_Products_ascxProductEdit : System.Web.UI.UserControl
         tbxPriceValidPeriod.Text = CurrentProduct.PriceValidPeriod;
         rptProductLanguages.DataSource = CurrentProduct.ProductMultiLangues;
         rptProductLanguages.DataBind();
+        cbxDisable.Checked = CurrentProduct.State == NModel.Enums.ProductState.Disabled;
 
 
     }

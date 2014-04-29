@@ -162,8 +162,16 @@
                     <asp:Literal runat="server" ID="liSupplierName"></asp:Literal>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:HyperLinkField DataNavigateUrlFields="id" DataNavigateUrlFormatString="/admin/products/productedit.aspx?id={0}"
-              />
+            <asp:TemplateField>
+            <ItemTemplate>
+            
+             <a href='/admin/products/productedit.aspx?id=<%#Eval("ID") %>'
+             >
+             <%=Membership.GetUser()==null?"":"修改" %>
+             </a>
+            </ItemTemplate>
+            </asp:TemplateField>
+           
         </Columns>
         <EmptyDataTemplate>
             <div class="notice">

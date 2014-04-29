@@ -349,5 +349,12 @@ namespace NBiz
 
 
         }
+        public IList<Product> GetListDiabledProducts()
+        {
+            return DalProduct.GetListDiabledProducts();
+
+
+        }
+        
     }
 }

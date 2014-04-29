@@ -127,6 +127,14 @@
         <thead>
         </thead>
         <tbody>
+        <tr>
+                <th>
+                    停用
+                </th>
+                <td>
+                    <asp:CheckBox runat="server" ID="cbxDisable" />
+                </td>
+            </tr>
             <tr>
                 <th>
                     NTS编码
