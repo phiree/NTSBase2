@@ -2,7 +2,33 @@
     CodeFile="upgrade.aspx.cs" Inherits="upgrade" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="cph_maincontent" runat="Server">
-   <h3>
+<h3>
+        2014.6.13</h3>
+    <ul>
+       
+        <li>搜索条件增加"短编码"(十位数产品编码,目前NTSMyanmar在使用)。
+
+        <a href="http://p.nts.com:89/products/">http://p.nts.com:89/products/</a>
+        </li>
+        
+    </ul> 
+      
+<h3>
+        2014.4.25</h3>
+    <ul>
+       
+        <li>增加过期产品显示。 搜索条件增加 过期时间；过期产品背景设置为黄色，详情页面增加“已过期”标识。
+
+        <a href="http://p.nts.com:89/products/">http://p.nts.com:89/products/</a>
+        </li>
+         <li>ERP报表增加 存货核算 参考列表
+<a href="http://erp.nts.com:89/BillStatus.aspx?type=4">http://erp.nts.com:89/BillStatus.aspx?type=4</a>
+        
+        </li>
+        
+    </ul> 
+      
+<h3>
         2013.12.11</h3>
     <ul>
        
