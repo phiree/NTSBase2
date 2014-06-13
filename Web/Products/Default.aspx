@@ -78,6 +78,7 @@
             <span>关 键 字:</span>
             <asp:TextBox CssClass="text" Width="380" runat="server" ID="tbxName"></asp:TextBox>
                         <span>过期日期:</span><asp:TextBox runat="server" ID="tbxExpiredDate"></asp:TextBox>
+                                                
         </div>
         <div>
             <span>NTS编码:</span>
@@ -114,6 +115,9 @@
                 <asp:ListItem Value="a">A</asp:ListItem>
                 <asp:ListItem Value="b">B</asp:ListItem>
             </asp:DropDownList>
+            </div><div>
+            <span>短编码:</span><asp:TextBox runat="server" Width="150" CssClass="text" ID="tbxProCode"></asp:TextBox>
+
             <UC:ButtonExt runat="server" ID="btnSearch" OnClick="btnSearch_Click" Text="搜索" /></div>
     </fieldset>
     <UC:AspNetPager runat="server" ID="AspNetPager1" CloneFrom="pager">
