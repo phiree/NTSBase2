@@ -298,8 +298,9 @@ namespace NDAL
             {
                 condition_In += "'" + ntsCode + "',";
             }
-            condition_In = " (" + condition_In.TrimEnd(',') + ") ";
-            string query = "select p from Product p where NTSCode in " + condition_In;
+//condition_In = " (" + condition_In.TrimEnd(',') + ") ";
+            string query = @"select p from Product p where NTSCode in (" + condition_In.TrimEnd(',')+")"
+                    +" order by field(NTSCode,"+condition_In.TrimEnd(',')+")";
             return GetList(query, 0, 999, out totalRecord);
 
         }
