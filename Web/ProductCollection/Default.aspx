@@ -27,8 +27,8 @@
     </UC:ProList>
     <div>
         <div>
-            <asp:Button runat="server" ID="btnClear" OnClick="btnClear_Click" Text="清空" />
-            <asp:Button runat="server" ID="btnDelete" OnClick="btnDelete_Click" Text="删除集合" />
+            <asp:Button runat="server" OnClientClick="javascript:return confirm('Are You Sure??????')" ID="btnClear" OnClick="btnClear_Click" Text="清空" />
+            <asp:Button runat="server"  OnClientClick="javascript:return confirm('Are You Sure??????')" ID="btnDelete" OnClick="btnDelete_Click" Text="删除集合" />
              <asp:Button runat="server" ID="btnSetDefault" OnClick="btnSetDefault_Click" Text="设置为默认" />
             新名称:<asp:TextBox runat="server" ID="tbxCollectionName"></asp:TextBox>
             <asp:Button runat="server" ID="btnSaveName" OnClick="btnSaveName_Click" Text="保存新名称" />
