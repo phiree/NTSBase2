@@ -10,6 +10,27 @@ namespace NBiz
         NDAL.DALProductCollection dal = new NDAL.DALProductCollection();
         public BizProductCollection()
         { }
+        public void SetDefaultCollection(string collectionId,string userid)
+        {
+            var old = GetDefaultCollection(userid);
+            old.IsDefault = false;
+            var newd = GetOne(new Guid(collectionId));
+            newd.IsDefault = true;
+
+            dal.Save(old);
+            dal.Save(newd);
+            
+            
+            
+        }
+        public ProductCollection CreateNew(string name, string userid)
+        {
+            ProductCollection pc = new ProductCollection();
+            pc.UserId =new Guid(userid);
+            pc.CollectionName = name;
+            dal.Save(pc);
+            return pc;
+        }
         public ProductCollection GetOneByUserAndName(string userId,string name)
         {
             ProductCollection pc= dal.GetOneByUserAndName(userId, name);
@@ -28,6 +49,17 @@ namespace NBiz
                 dal.Save(pc);
             }
             return pc;
+        }
+        public void SaveCollectionWithName(Guid collectionid, string name)
+        {
+            
+                ProductCollection oc = dal.GetOne(collectionid);
+                oc.CollectionName = name;
+                dal.Save(oc);
+        }
+        public IList<ProductCollection> GetCollectionList(string userid)
+        {
+            return dal.GetListByUserId(userid);
         }
         public void AddToCollection(string[] productIdList, ProductCollection collection)
         { 

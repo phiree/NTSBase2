@@ -1,7 +1,19 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/site_leftmenu.master" AutoEventWireup="true"
     CodeFile="upgrade.aspx.cs" Inherits="upgrade" %>
 
+
 <asp:Content ID="Content2" ContentPlaceHolderID="cph_maincontent" runat="Server">
+
+<h3>
+        2014.6.27</h3>
+    <ul>
+       
+        <li>增强 "产品集合"功能. 增加  新增,删除,清空,修改名称等功能, 允许使用者同时保留多个产品集合.
+
+        <a href="http://p.nts.com:89/productcollection/">http://p.nts.com:89/productcollection/</a>
+        </li>
+        
+    </ul> 
 <h3>
         2014.6.13</h3>
     <ul>

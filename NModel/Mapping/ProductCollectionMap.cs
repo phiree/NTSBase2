@@ -10,11 +10,11 @@ namespace NModel.Mapping
         public ProductCollectionMap()
         {
             Id(x => x.Id);
-            Map(x => x.CollectionName).UniqueKey("UN_Uid_Name").Default(string.Empty);
+            Map(x => x.CollectionName);
             Map(x => x.CreateTime);
             Map(x => x.IsDefault);
             Map(x => x.LastUpdateTime);
-            Map(x => x.UserId).UniqueKey("UN_Uid_Name");
+            Map(x => x.UserId);
             HasManyToMany<Product>(x => x.Products)
 
                 .Table("Product_Collection")

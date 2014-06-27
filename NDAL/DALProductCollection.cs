@@ -22,5 +22,12 @@ namespace NDAL
                          + "' and c.IsDefault=1";
             return GetOneByQuery(query);
         }
+
+        public IList<ProductCollection> GetListByUserId(string userid)
+        {
+            string query = "select c from ProductCollection c where c.UserId='"+userid+"'";
+            return GetList(query);
+        }
+       
     }
 }
