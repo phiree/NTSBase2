@@ -6,23 +6,20 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cph_maincontent" runat="Server">
     <fieldset>
-    <legend>产品集合.红色字体:当前集合;**前缀:默认集合.</legend>
-    
+    <legend>产品集合</legend>
+    <div>红色字体表示当前集合. **前缀表示 默认集合[产品列表页面选择的产品会自动加入默认集合].</div>
     <div>
         <asp:Repeater runat="server" ID="rpt">
             <ItemTemplate>
-                <a style='<%# Request["id"] == Eval("Id").ToString()?"color:red;font-size:big;": "" %>' href='Default.aspx?id=<%# Eval("Id") %>'>
+                <a style='<%# ((string.IsNullOrEmpty(Request["Id"])&&(bool)Eval("IsDefault"))||Request["id"] == Eval("Id").ToString())?"color:red;font-size:big;": "" %>' href='Default.aspx?id=<%# Eval("Id") %>'>
                    <%# (bool)Eval("IsDefault")?"**":"" %> <%# string.IsNullOrEmpty(Eval("CollectionName").ToString()) ? "[无名称]" : Eval("CollectionName")%></a>
             </ItemTemplate>
-        </asp:Repeater></div>
-        </fieldset>
-        <fieldset>
-        <legend>创建产品集合</legend>
-        <div>
+           
+        </asp:Repeater>
         名称:<asp:TextBox runat="server" ID="tbxNewName"></asp:TextBox>
-        <asp:Button Text="创建新集合" OnClick="btnCreateNew_Click" runat="server" ID="btnCreateNew" />
-        </div>
-    </fieldset>
+        <asp:Button Text="创建新集合" OnClick="btnCreateNew_Click" runat="server" ID="btnCreateNew" /></div>
+        </fieldset>
+       
     <UC:ProList runat="server" id="ucProList">
     </UC:ProList>
     <div>

@@ -69,12 +69,32 @@ public partial class ProductCollection_Default : System.Web.UI.Page
     {
         CurrentCollection.Products.Clear();
         bizPC.Save(CurrentCollection);
-        NLibrary.Notification.Show(this, "", "清空完成", string.Empty);
+        NLibrary.Notification.Show(this, "", "清空完成",Request.Url.AbsoluteUri);
     }
     protected void btnDelete_Click(object sender, EventArgs e)
     {
         bizPC.Delete(CurrentCollection);
-        NLibrary.Notification.Show(this, "", "删除完成", "/productcollection/");
+        //需要指定一个默认集合
+        bool deleteDefault = CurrentCollection.IsDefault;
+        string  newDefault=string.Empty;
+        if (CurrentCollection.IsDefault)
+        {
+            var list = bizPC.GetCollectionList(GlobalVarible.GetUserId());
+            if (list.Count > 0)
+            {
+                list[0].IsDefault = true;
+                bizPC.Save(list[0]);
+                newDefault = list[0].CollectionName;
+            }
+            
+            
+        }
+        string msg = "删除完成";
+        if (deleteDefault&&!string.IsNullOrEmpty(newDefault))
+        {
+            msg += ",并且指定了新的默认集合:" + newDefault;
+        }
+        NLibrary.Notification.Show(this, "", msg, "/productcollection/");
     }
     protected void btnSaveName_Click(object sender, EventArgs e)
     {
