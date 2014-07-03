@@ -117,7 +117,12 @@
             </asp:DropDownList>
             </div><div>
             <span>短编码:</span><asp:TextBox runat="server" Width="150" CssClass="text" ID="tbxProCode"></asp:TextBox>
-
+            <span>语种:</span><asp:DropDownList runat="server" ID="ddlLang">
+            <asp:ListItem Selected="True" Text="不限" Value=""></asp:ListItem>
+            <asp:ListItem Text="中文(Chinese)" Value="zh"></asp:ListItem>
+            <asp:ListItem Text="英文(English)" Value="en"></asp:ListItem>
+            
+            </asp:DropDownList>
             <UC:ButtonExt runat="server" ID="btnSearch" OnClick="btnSearch_Click" Text="搜索" /></div>
     </fieldset>
     <UC:AspNetPager runat="server" ID="AspNetPager1" CloneFrom="pager">

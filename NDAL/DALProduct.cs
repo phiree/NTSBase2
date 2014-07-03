@@ -114,6 +114,7 @@ namespace NDAL
             string original,
             string expireddate,
             string procode,
+            string lang,
             int pageSize, int pageIndex, out int totalRecord)
         {
 
@@ -134,7 +135,11 @@ namespace NDAL
             { 
              where +=" and p.ProductCode like '%"+procode+"%'";
             }
-
+            if (!string.IsNullOrEmpty(lang))
+            {
+                where += " and pl.Language='"+lang+"'";
+            }
+            
             if (!string.IsNullOrEmpty(delivery))
             {
                 where += " and pl.PlaceOfDelivery like '%" + delivery + "%'";
