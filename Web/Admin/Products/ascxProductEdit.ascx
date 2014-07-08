@@ -229,14 +229,14 @@
                                             Text="删除" OnClientClick="javascript:return confirm('确定要删除这张图片?')" />
                                     </td>
                                     <td>
-                                        <img style="width:500px" src='/productimages/original/<%#Eval("ImageName") %>' />
+                                        <img style="width:400px" src='/productimages/original/<%#Eval("ImageName") %>' />
                                     </td>
                                 </tr>
                             </ItemTemplate>
                         </asp:Repeater>
                     </table>
                     <br />
-                    <asp:FileUpload runat="server" ID="fu_Pi" /><asp:Button runat="server" ID='btnUpload'
+                   增加新图片:<asp:FileUpload runat="server" ID="fu_Pi" /><asp:Button runat="server" ID='btnUpload'
                         OnClick="btnUpload_Click" Text="上传" />
                 </td>
             </tr>

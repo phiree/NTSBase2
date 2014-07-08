@@ -35,16 +35,8 @@ public partial class Products_ProductDetail : System.Web.UI.Page
     }
     protected void dv_DataBound(object sender, EventArgs e)
     {
-        
-    }
-    protected void dv_ItemCreated(object sender, EventArgs e)
-    {
-        
-    }
-    protected void dv_Load(object sender, EventArgs e)
-    {
         Product p = dv.DataItem as Product;
-        Repeater rpt= dv.FindControl("rptImages") as Repeater;
+        Repeater rpt = dv.FindControl("rptImages") as Repeater;
         rpt.DataSource = p.ProductImageList;
         rpt.DataBind();
 
@@ -55,6 +47,14 @@ public partial class Products_ProductDetail : System.Web.UI.Page
         {
             lblSupplierName.Text += "  (" + supplier.NickName + ")";
         }
+    }
+    protected void dv_ItemCreated(object sender, EventArgs e)
+    {
+        
+    }
+    protected void dv_Load(object sender, EventArgs e)
+    {
+        
 
     }
 }

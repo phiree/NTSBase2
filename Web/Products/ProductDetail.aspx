@@ -8,9 +8,14 @@
         onload="dv_Load"   >
  <Fields>
  <asp:BoundField  HeaderStyle-Wrap="false"  ItemStyle-Font-Size="Medium"  ItemStyle-Font-Bold="true"  HtmlEncode="false"  HeaderText="名称" DataField="Name"/>
+ 
  <asp:TemplateField >
  <ItemTemplate>
  <!--<input type="button" id="btnAddToCart" value="加入选单" pid='<%#Eval("id") %>' /> -->
+ <a href='/admin/products/productedit.aspx?id=<%#Eval("ID") %>'
+             >
+             <%=Membership.GetUser()==null?"":"修改" %>
+             </a>
  <span style="color:Red; font-size:large;"><%# Convert.ToBoolean(Eval("IsExpired"))?"已过期":"" %></span>
  </ItemTemplate>
  </asp:TemplateField>
