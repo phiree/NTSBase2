@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using NBiz;
 using NModel;
+using System.IO;
 
 public partial class Admin_Products_ascxProductEdit : System.Web.UI.UserControl
 {
@@ -13,9 +14,11 @@ public partial class Admin_Products_ascxProductEdit : System.Web.UI.UserControl
     BizProduct bizProduct = new BizProduct();
     BizSupplier bizSupplier = new BizSupplier();
     BizCategory bizCate = new BizCategory();
+    BizProductImage bizPI = new BizProductImage();
     private bool isNew = false;
     private string paramId = string.Empty;
     private Guid productId;
+    
     protected void Page_Load(object sender, EventArgs e)
     {
         paramId = Request["id"];
@@ -42,6 +45,12 @@ public partial class Admin_Products_ascxProductEdit : System.Web.UI.UserControl
     private void InitLoad()
     {
         LoadForm();
+        LoadImage();
+    }
+    private void LoadImage()
+    {
+        rptImgList.DataSource = CurrentProduct.ProductImageList;
+        rptImgList.DataBind();
     }
     BLLBase<ProductLanguage> bizPL = new BLLBase<ProductLanguage>(); 
     private void UpdateForm()
@@ -120,6 +129,39 @@ public partial class Admin_Products_ascxProductEdit : System.Web.UI.UserControl
         else
         {
             NLibrary.Notification.Show(this.Page, "", "保存成功", "");
+        }
+    }
+    protected void rpt_ImgList_Command(object sender, RepeaterCommandEventArgs e)
+    {
+        if (e.CommandName.ToLower() == "delete")
+        {
+            Guid piId = new Guid(e.CommandArgument.ToString());
+            //删除数据库 
+            ProductImage pi = bizPI.GetOne(piId);
+            //删除图片
+            bizPI.Delete(pi);
+
+            File.Delete(Server.MapPath("~/productimages/original/"+pi.ImageName));
+            NLibrary.Notification.Show(this.Page, "删除成功", "图片删除成功", Request.RawUrl);
+        }
+    }
+    protected void btnUpload_Click(object sender, EventArgs e)
+    {
+        if (fu_Pi.HasFile)
+        {
+            var img = fu_Pi.PostedFile;
+            
+            string tempDir=Server.MapPath("~/")+"uploaded_product_images\\";
+            string temp_image_name_full =tempDir+ Guid.NewGuid().ToString() + img.FileName;
+            NLibrary.IOHelper.EnsureDirectory(tempDir);
+            img.SaveAs(temp_image_name_full);
+            
+            CurrentProduct.UpdateImageList(temp_image_name_full, Server.MapPath("~/productimages/original/"));
+
+            bizProduct.SaveOrUpdate(CurrentProduct);
+            File.Delete(temp_image_name_full);
+            NLibrary.Notification.Show(this.Page, "上传成功", "图片上传成功", Request.RawUrl);
+           
         }
     }
 }

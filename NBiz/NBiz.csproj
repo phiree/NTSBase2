@@ -72,6 +72,7 @@
     <Compile Include="NTSMemberShip\BizRole.cs" />
     <Compile Include="NTSMemberShip\NTSMembershipProvider.cs" />
     <Compile Include="ProductCollection\BizProductCollection.cs" />
+    <Compile Include="Product\BizProductImage.cs" />
     <Compile Include="Product\BizProductLanguage.cs" />
     <Compile Include="Product\ProductImagesExport.cs" />
     <Compile Include="Product\ProductImportor.cs" />

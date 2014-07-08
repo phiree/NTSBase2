@@ -11,5 +11,7 @@
     <uc1:ascxProductEdit ID="ascxProductEdit1" runat="server" />
     <div>
         <asp:Button runat="server" ID="btnSave" Text="保存" OnClick="btnSave_Click" />
+        
+        <a target="_blank" href='/products/productdetail.aspx?id=<%=Request["id"] %>'>查看产品页面</a>
     </div>
 </asp:Content>

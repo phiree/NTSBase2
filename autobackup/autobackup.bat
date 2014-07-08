@@ -5,7 +5,7 @@ set totalrandom=%random1%%random2%
 set backupFilename=F:\\Backup\\code\\ntsbase\\%DATE:~0,10%-%totalrandom%
 echo %backupFilename%
 md %backupFilename%
-xcopy E:\\workspace\\code\\NTSBase2 /s %backupFilename%  /EXCLUDE:%cd%\excludedfileslist.txt /q
+xcopy E:\\workspace\\code\\NTSBase2 /s %backupFilename%  /EXCLUDE:E:\workspace\code\NTSBase2\autobackup\excludedfileslist.txt /q
 echo close after 10 seconds
 ping -n 2 localhost>nul
 echo close after 9 seconds

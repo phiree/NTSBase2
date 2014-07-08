@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 
 public partial class Admin_Products_ProductEdit :AuthPage
 {
+    
     protected void Page_Load(object sender, EventArgs e)
     {
 
