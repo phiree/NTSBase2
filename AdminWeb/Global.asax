@@ -5,7 +5,7 @@
     void Application_Start(object sender, EventArgs e) 
     {
         Timer t = new Timer();
-        
+        log4net.Config.XmlConfigurator.Configure();
 
     }
     

@@ -306,7 +306,7 @@ namespace NDAL
 //condition_In = " (" + condition_In.TrimEnd(',') + ") ";
             string query = @"select p from Product p where NTSCode in (" + condition_In.TrimEnd(',')+")"
                     +" order by field(NTSCode,"+condition_In.TrimEnd(',')+")";
-            return GetList(query, 0, 999, out totalRecord);
+            return GetList(query, 0, 9999999, out totalRecord);
 
         }
         public IList<Product> GetListDiabledProducts()
@@ -315,7 +315,7 @@ namespace NDAL
             string condition_In = string.Empty;
           
             string query = "select p from Product p where State =2";
-            return GetList(query, 0, 999, out totalRecord);
+            return GetList(query, 0, 99999, out totalRecord);
 
         }
     }

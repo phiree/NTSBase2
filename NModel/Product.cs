@@ -7,10 +7,15 @@ using System.IO;
 using System.ComponentModel;
 using NLibrary;
 using System.Globalization;
+using log4net;
 namespace NModel
 {
+    
     public class Product
+
     {
+        ILog log = log4net.LogManager.GetLogger("NTS.NModel.Product");
+        
         public Product()
         {
             State = ProductState.Normal;
@@ -255,10 +260,15 @@ namespace NModel
           int languageVersionCount=pl.Count();
             if (languageVersionCount>1)
             {
-                throw new Exception("产品信息的多语言版本有误:"+this.NTSCode+" 的"+language+" 版本有 " +languageVersionCount+" 种");
+                string msg1 = "产品信息的多语言版本有误:" + this.NTSCode + " 的" + language + " 版本有 " + languageVersionCount + " 种";
+
+
+                log.Error(msg1);  
+                throw new Exception(msg1);
             }
             else if (languageVersionCount == 0)
             {
+                //log.Error("该产品没有对应的语言版本:" + this.Id + "," + language);
                 return null;
             }
             Product p = new Product();

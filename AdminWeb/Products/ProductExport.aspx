@@ -38,13 +38,26 @@
         <legend>导出特定供应商的产品</legend>
         <div>
             导出Excel的文件名:<asp:TextBox runat="server" ID="tbxExportName_Supplier"></asp:TextBox>
-            供应商列表(格式:供应商名称(代码)---型号):
+            供应商列表(格式:供应商名称(代码)):
             <asp:TextBox runat="server" TextMode="MultiLine" ID="tbxSupplierNames"></asp:TextBox>
             <asp:CheckBox runat="server" ID="cbxWithImage"  Checked="true"/>
         </div>
         <div>
             <uc:ButtonExt runat="server" ID="btnSupplierExportExcel" Text="导出Excel" OnClick="btnSupplierExportExcel_Click" />
             <uc:ButtonExt runat="server" ID="btnSupplierExportImage" Text="导出图片" OnClick="btnSupplierExportImage_Click" />
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>按长编码导出产品</legend>
+        <div>
+            导出Excel的文件名:<asp:TextBox runat="server" ID="tbxName_NtsCodeList"></asp:TextBox>
+            供应商列表(格式:NtsCode):
+            <asp:TextBox runat="server" TextMode="MultiLine" ID="tbxNtscodeList"></asp:TextBox>
+            <asp:CheckBox runat="server" ID="cbxAll" Text="导出全部"  Checked="true"/>
+        </div>
+        <div>
+            <uc:ButtonExt runat="server" ID="btnNtscodeExportExcel" Text="导出Excel" OnClick="btnNtscodeExportExcel_Click" />
+            <uc:ButtonExt runat="server" ID="btnNtscodeExportImage" Text="导出图片" OnClick="btnNtscodeExportImage_Click" />
         </div>
     </fieldset>
 

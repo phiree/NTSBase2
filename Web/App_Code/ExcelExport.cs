@@ -13,6 +13,7 @@ using System.IO;
 /// </summary>
 public class ExcelExport
 {
+    log4net.ILog log = log4net.LogManager.GetLogger("NTS.ExcelExport");
     string saveFileName;
     bool needInsertImage = true;
 	public ExcelExport(string saveFileName):this(saveFileName,true)
@@ -48,9 +49,10 @@ public class ExcelExport
         Dictionary<string, IList<Product>> ds_Products = new Dictionary<string, IList<Product>>();
         foreach (Product p in originalProductList)
         {
+            bool hasLanguage = false;
             foreach (string lan in languages)
             {
-                Product pInLang = p.GetProductOfSpecialLanguage(lan);
+              Product  pInLang = p.GetProductOfSpecialLanguage(lan);
                 if (pInLang != null)
                 {
                     if (ds_Products.Keys.Contains(lan))
@@ -61,7 +63,12 @@ public class ExcelExport
                     {
                         ds_Products.Add(lan,new List<Product>(){pInLang});
                     }
+                    hasLanguage = true;
                 }
+            }
+            if (!hasLanguage)
+            {
+                log.Error("产品没有任何语言版本:" + p.Id);
             }
         }
         return ds_Products;

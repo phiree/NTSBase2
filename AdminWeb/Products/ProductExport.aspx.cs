@@ -12,7 +12,7 @@ public partial class Admin_Products_ProductExport : System.Web.UI.Page
     ProductImagesExport imageExporter = new ProductImagesExport();
     BizProduct bizProduct = new BizProduct();
     IList<Product> productToExport;
-    
+    log4net.ILog log = log4net.LogManager.GetLogger("NTS.Web");
     string message;
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -45,6 +45,25 @@ public partial class Admin_Products_ProductExport : System.Web.UI.Page
 
             productToExport = bizProduct.GetListByProvidedModelNumberSupplierNameList
                 (tbxPs.Text,out message);
+
+            return productToExport;
+        }
+    }
+    private IList<Product> ProductListForNtscodeList
+    {
+        get
+        {
+            if (cbxAll.Checked)
+            {
+                productToExport = bizProduct.GetAll<Product>() ;
+            }
+            else
+            { 
+            string[] ntsCodeList = tbxNtscodeList.Text.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+            log.Debug("ProductListForNtscodeList 总数:" + ntsCodeList.Length);
+            productToExport = bizProduct.GetListByNTSCodeList(ntsCodeList);
+            }
+            
 
             return productToExport;
         }
@@ -127,6 +146,30 @@ public partial class Admin_Products_ProductExport : System.Web.UI.Page
         imageExporter.Export(SupplierProducts, Server.MapPath("/productImagesExport/") + DateTime.Now.ToString("yyyyMMdd-HHmmss") + "\\",
 
       Server.MapPath("/ProductImages/original/"), NModel.Enums.ImageOutPutStratage.Supplier_OriginalName);
+
+        lblMsg.Text = "操作完成. 产品图片已保存于 \\192.168.1.44\\导出图片\\ ";
+        NLogger.Logger.Debug("--导出结束--");
+    }
+
+    protected void btnNtscodeExportExcel_Click(object sender, EventArgs e)
+    {
+        ExcelExport export = new ExcelExport("NTSCode列表" + DateTime.Now.ToString("yyyyMMdd-HHmmss"));
+        //foreach (Product p in ProductListForNtscodeList)
+        //{
+        //    tbxNtscodeList.Text += p.Name + Environment.NewLine;
+        //}
+       
+        export.ExportProductExcel(ProductListForNtscodeList);
+        lblMsg.Text = "操作完成";
+         
+    }
+    protected void btnNtscodeExportImage_Click(object sender, EventArgs e)
+    {
+        NLogger.Logger.Debug("--开始导出图片--产品数量" + ProductListForNtscodeList.Count);
+
+        imageExporter.Export(ProductListForNtscodeList, Server.MapPath("/productImagesExport/") + DateTime.Now.ToString("yyyyMMdd-HHmmss") + "\\",
+
+      Server.MapPath("/ProductImages/original/"), NModel.Enums.ImageOutPutStratage.Category_NTsCode);
 
         lblMsg.Text = "操作完成. 产品图片已保存于 \\192.168.1.44\\导出图片\\ ";
         NLogger.Logger.Debug("--导出结束--");

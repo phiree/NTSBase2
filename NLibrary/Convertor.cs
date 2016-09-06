@@ -27,7 +27,12 @@ namespace NLibrary
             foreach (PropertyDescriptor prop in properties)
             {
                 string colNameFromDesc = prop.Description;
-                if (string.IsNullOrEmpty(colNameFromDesc)) continue;
+                if (string.IsNullOrEmpty(colNameFromDesc))
+                {
+                    continue;
+
+                }
+
                 table.Columns.Add(colNameFromDesc, Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType);
             }
             foreach (T item in data)

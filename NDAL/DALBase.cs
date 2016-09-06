@@ -12,6 +12,7 @@ namespace NDAL
     {
 
         protected ISession session =null;// new HybridSessionBuilder().GetSession();
+        log4net.ILog log = log4net.LogManager.GetLogger("NTS.DALBase");
         public DalBase() 
         {
            
@@ -134,6 +135,7 @@ namespace NDAL
                 if (orderDesc)
                     strOrder += " desc ";
             }
+            
             IQuery qry = session.CreateQuery(query + strOrder);
             
 
